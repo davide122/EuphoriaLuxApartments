@@ -1,0 +1,29 @@
+{
+  "bookings": [
+    {
+      "id": "dbcfa76b-e2c9-4033-8798-3b910c7332cf",
+      "suite": "passion",
+      "checkIn": "2026-03-01",
+      "checkOut": "2026-03-26",
+      "guests": 0,
+      "fullName": "BLOCK",
+      "email": "block@noir.local",
+      "phone": "-",
+      "notes": "ADMIN BLOCK",
+      "status": "confirmed",
+      "createdAt": "2026-04-04T13:43:41.226Z"
+    },
+    {
+      "id": "8e1ac140-9673-45fe-836d-288ce5f3feca",
+      "suite": "infinity",
+      "checkIn": "2026-04-12",
+      "checkOut": "2026-04-13",
+      "guests": 2,
+      "fullName": "Davide Marchica",
+      "email": "davidemarchica277@gmail.com",
+      "phone": "+393923171968",
+      "status": "cancelled",
+      "createdAt": "2026-04-04T13:34:31.571Z"
+    }
+  ]
+}
