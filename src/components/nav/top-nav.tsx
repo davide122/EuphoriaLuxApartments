@@ -2,7 +2,6 @@ import { MessageCircle } from "lucide-react";
 import Link from "next/link";
 import { noir } from "@/lib/noir";
 import { NoirAnchor } from "@/components/ui/noir-anchor";
-import { NoirLink } from "@/components/ui/noir-link";
 
 export function TopNav() {
   return (
@@ -22,8 +21,8 @@ export function TopNav() {
             <Link href="/#galleria" className="transition hover:text-noir-mist">
               Galleria
             </Link>
-            <Link href="/prenota" className="transition hover:text-noir-mist">
-              Calendario
+            <Link href="/#contatti" className="transition hover:text-noir-mist">
+              Contatti
             </Link>
           </div>
           <div className="flex items-center gap-2">
@@ -42,9 +41,19 @@ export function TopNav() {
               <MessageCircle className="h-4 w-4 text-noir-aqua" />
               Disponibilità
             </NoirAnchor>
-            <NoirLink href="/prenota" className="rounded-full px-5 py-2.5">
-              Calendario
-            </NoirLink>
+            <NoirAnchor
+              href={
+                noir.contacts.whatsapp +
+                `?text=${encodeURIComponent(
+                  "Ciao, vorrei verificare disponibilità per Passion o Infinity. Date: __/__/__ → __/__/__. Siamo in __. Grazie."
+                )}`
+              }
+              target="_blank"
+              rel="noreferrer"
+              className="rounded-full px-5 py-2.5 md:hidden"
+            >
+              WhatsApp
+            </NoirAnchor>
           </div>
         </div>
       </div>

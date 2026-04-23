@@ -10,6 +10,7 @@ export const metadata: Metadata = {
   description:
     "Seleziona le date e verifica disponibilità. Prenotazione diretta via WhatsApp per Passion e Infinity a Porto Empedocle: jacuzzi privata e sauna interna.",
   alternates: { canonical: "/prenota" },
+  robots: { index: false, follow: false },
 };
 
 export default async function PrenotaPage({

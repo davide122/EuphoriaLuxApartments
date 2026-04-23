@@ -1,27 +1,12 @@
 import { ImageResponse } from "next/og";
-import { noir, suites } from "@/lib/noir";
+import { noir } from "@/lib/noir";
 
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
-export const alt = "Suite Euphoria — Jacuzzi privata e sauna";
+export const alt = "Suites — Passion e Infinity";
 
-const BY_SLUG: Record<string, (typeof suites)[number]> = Object.fromEntries(
-  suites.map((s) => [s.slug, s])
-);
-
-export default async function OpenGraphImage({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}) {
-  const { slug } = await params;
-  const suite = BY_SLUG[slug];
-
-  const title = suite ? `${suite.name} — ${noir.name}` : noir.name;
-  const subtitle = suite
-    ? "Suite con jacuzzi privata e sauna interna"
-    : "Jacuzzi privata · Sauna interna · Prenotazione diretta WhatsApp";
-
+export default function OpenGraphImage() {
+  const subline = `${noir.name} · ${noir.location} · Jacuzzi privata · Sauna interna`;
   return new ImageResponse(
     (
       <div
@@ -39,22 +24,18 @@ export default async function OpenGraphImage({
       >
         <div style={{ display: "flex", flexDirection: "column", gap: "18px" }}>
           <div style={{ color: "rgba(230,232,246,0.72)", letterSpacing: "0.28em", fontSize: 18 }}>
-            {noir.location.toUpperCase()}
+            SUITES
           </div>
           <div style={{ color: "rgba(248,250,252,0.92)", fontSize: 64, lineHeight: 1.04, fontWeight: 700 }}>
-            {title}
+            Passion · Infinity
           </div>
           <div style={{ color: "rgba(230,232,246,0.78)", fontSize: 26, lineHeight: 1.32, maxWidth: 1000 }}>
-            {subtitle}
+            {subline}
           </div>
         </div>
 
         <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
-          {[
-            `Da €${noir.startingFrom}/notte`,
-            noir.smartAccess,
-            "Prenotazione diretta WhatsApp",
-          ].map((t) => (
+          {[`Da €${noir.startingFrom}/notte`, noir.smartAccess, "Prenotazione diretta WhatsApp"].map((t) => (
             <div
               key={t}
               style={{

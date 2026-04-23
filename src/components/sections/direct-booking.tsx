@@ -1,7 +1,6 @@
 import { Sparkles } from "lucide-react";
 import { Reveal } from "@/components/motion/reveal";
 import { NoirAnchor } from "@/components/ui/noir-anchor";
-import { NoirLink } from "@/components/ui/noir-link";
 import { SectionHeader } from "@/components/ui/section-header";
 import { noir } from "@/lib/noir";
 
@@ -70,13 +69,9 @@ export function DirectBookingSection() {
             <NoirAnchor href={whatsappHref} target="_blank" rel="noreferrer" variant="primary">
               Verifica disponibilità su WhatsApp
             </NoirAnchor>
-            <NoirLink href="/prenota" variant="ghost">
-              Guarda il calendario
-            </NoirLink>
           </div>
         </Reveal>
       </div>
     </section>
   );
 }
-

@@ -1,7 +1,6 @@
 import { MapPin } from "lucide-react";
 import { Reveal } from "@/components/motion/reveal";
 import { NoirAnchor } from "@/components/ui/noir-anchor";
-import { NoirLink } from "@/components/ui/noir-link";
 import { SectionHeader } from "@/components/ui/section-header";
 import { noir } from "@/lib/noir";
 
@@ -104,12 +103,6 @@ export function LocationSection() {
                 >
                   Chiedi disponibilità su WhatsApp
                 </NoirAnchor>
-                <NoirLink href="/prenota" variant="ghost">
-                  Guarda il calendario
-                </NoirLink>
-                <NoirLink href="/#contatti" variant="ghost">
-                  Contatti & WhatsApp
-                </NoirLink>
               </div>
             </Reveal>
           </div>

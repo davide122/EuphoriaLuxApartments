@@ -1,7 +1,6 @@
 import { MessageCircle, Phone, Sparkles } from "lucide-react";
 import { Reveal } from "@/components/motion/reveal";
 import { NoirAnchor } from "@/components/ui/noir-anchor";
-import { NoirLink } from "@/components/ui/noir-link";
 import { noir } from "@/lib/noir";
 
 export function FinalCtaSection() {
@@ -61,13 +60,14 @@ export function FinalCtaSection() {
                   Apri WhatsApp e chiedi disponibilità
                   <MessageCircle className="h-4 w-4 text-noir-aqua transition group-hover:translate-x-0.5" />
                 </NoirAnchor>
-                <NoirLink href="/prenota" variant="ghost" className="group">
-                  Guarda il calendario
+                <NoirAnchor
+                  href={`tel:${noir.contacts.phone.replaceAll(" ", "")}`}
+                  variant="ghost"
+                  className="group"
+                >
+                  Chiama ora
                   <span className="h-1.5 w-1.5 rounded-full bg-white/50 transition group-hover:scale-125" />
-                </NoirLink>
-                <NoirLink href="/suites" variant="ghost">
-                  Vedi le suites
-                </NoirLink>
+                </NoirAnchor>
               </div>
             </div>
 

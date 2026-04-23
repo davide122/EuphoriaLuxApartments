@@ -54,7 +54,7 @@ export function IntroSection() {
               </Reveal>
               <Reveal delay={0.12}>
                 <MediaFrame
-                  label="Infinity — luce e design"
+                  label="Infinity — luci immersive (letto)"
                   tone="night"
                   src="/infinity-letto.jpg"
                   className="aspect-[7/5]"

@@ -4,6 +4,7 @@ import { SEO_LANDINGS_BY_SLUG } from "@/lib/seo-content";
 
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
+export const alt = "Landing Euphoria Luxury Suite";
 
 export default async function OpenGraphImage({
   params,
@@ -15,6 +16,7 @@ export default async function OpenGraphImage({
 
   const title = landing?.title ?? noir.name;
   const keyword = landing?.primaryKeyword ?? noir.location;
+  const subline = `${noir.name} · ${noir.location} · Jacuzzi privata · Sauna interna`;
 
   return new ImageResponse(
     (
@@ -39,7 +41,7 @@ export default async function OpenGraphImage({
             {title}
           </div>
           <div style={{ color: "rgba(230,232,246,0.78)", fontSize: 24, lineHeight: 1.35, maxWidth: 1000 }}>
-            {noir.name} · {noir.location} · Jacuzzi privata · Sauna interna
+            {subline}
           </div>
         </div>
 
@@ -71,4 +73,3 @@ export default async function OpenGraphImage({
     size
   );
 }
-

@@ -8,7 +8,7 @@ export type SeoMapEntry = {
   primaryKeyword: string;
   secondaryKeywords: string[];
   intent: SeoIntent;
-  primaryCta: "WhatsApp" | "Calendario" | "Suites";
+  primaryCta: "WhatsApp" | "Suites";
 };
 
 export const SEO_MAP: SeoMapEntry[] = [
@@ -31,13 +31,6 @@ export const SEO_MAP: SeoMapEntry[] = [
       "Passion suite",
       "Infinity suite",
     ],
-    intent: "transazionale",
-    primaryCta: "WhatsApp",
-  },
-  {
-    url: "/prenota",
-    primaryKeyword: "prenotazione diretta suite",
-    secondaryKeywords: ["calendario disponibilità", "richiesta prenotazione WhatsApp"],
     intent: "transazionale",
     primaryCta: "WhatsApp",
   },
@@ -83,4 +76,3 @@ export const SEO_MAP: SeoMapEntry[] = [
     primaryCta: "WhatsApp" as const,
   })),
 ];
-

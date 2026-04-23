@@ -10,7 +10,6 @@ import { Reveal } from "@/components/motion/reveal";
 import { SectionHeader } from "@/components/ui/section-header";
 import { experiencePillars, noir } from "@/lib/noir";
 import { NoirAnchor } from "@/components/ui/noir-anchor";
-import { NoirLink } from "@/components/ui/noir-link";
 
 const ICONS = [Droplets, Flame, Sparkles, Heart, Gem, MoonStar] as const;
 
@@ -77,9 +76,6 @@ export function ExperienceSection() {
 
         <Reveal delay={0.18}>
           <div className="mt-10 flex flex-col gap-3 sm:flex-row">
-            <NoirLink href="/prenota" variant="ghost">
-              Guarda il calendario
-            </NoirLink>
             <NoirAnchor href={whatsappHref} target="_blank" rel="noreferrer" variant="primary">
               Verifica disponibilità su WhatsApp
             </NoirAnchor>

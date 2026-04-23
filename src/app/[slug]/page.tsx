@@ -121,9 +121,6 @@ export default async function SeoLandingPage({ params }: { params: Promise<{ slu
                       <NoirAnchor href={whatsappHref} target="_blank" rel="noreferrer" variant="primary">
                         Verifica disponibilità su WhatsApp
                       </NoirAnchor>
-                      <NoirLink href="/prenota" variant="ghost">
-                        Guarda il calendario
-                      </NoirLink>
                       <NoirLink href="/suites" variant="ghost">
                         Vedi Passion e Infinity
                       </NoirLink>
@@ -226,9 +223,6 @@ export default async function SeoLandingPage({ params }: { params: Promise<{ slu
                       <div className="mt-6 grid gap-3">
                         <NoirLink href={suggestedSuiteHref} variant="primary" className="justify-center">
                           Vedi la suite consigliata
-                        </NoirLink>
-                        <NoirLink href="/prenota" variant="ghost" className="justify-center">
-                          Guarda il calendario
                         </NoirLink>
                       </div>
                     </div>

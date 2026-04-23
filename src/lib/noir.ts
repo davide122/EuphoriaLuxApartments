@@ -73,10 +73,10 @@ export const experiencePillars = [
 ] as const;
 
 export const galleryFrames = [
-  { label: "Passion — letto, jacuzzi e sauna", tone: "spa", src: "/passion-letto-jacuzzi-sauna.jpg" },
-  { label: "Infinity — letto", tone: "night", src: "/infinity-letto.jpg" },
-  { label: "Infinity — cucina completa", tone: "noir", src: "/infinity-cucina.jpg" },
-  { label: "Infinity — salotto", tone: "night", src: "/infinity-salotto.jpg" },
-  { label: "Passion — jacuzzi privata", tone: "spa", src: "/passion-jacuzzi.jpg" },
-  { label: "Infinity — jacuzzi e doccia a vista", tone: "spa", src: "/infinity-jacuzzi-doccia-vista.jpg" },
+  { label: "Passion — private spa (letto · jacuzzi · sauna)", tone: "spa", src: "/passion-letto-jacuzzi-sauna.jpg" },
+  { label: "Infinity — letto (luci immersive)", tone: "night", src: "/infinity-letto.jpg" },
+  { label: "Infinity — cucina completa + forno", tone: "noir", src: "/infinity-cucina.jpg" },
+  { label: "Infinity — salotto (design)", tone: "night", src: "/infinity-salotto.jpg" },
+  { label: "Passion — jacuzzi privata (LED)", tone: "spa", src: "/passion-jacuzzi.jpg" },
+  { label: "Infinity — jacuzzi + doccia a vista", tone: "spa", src: "/infinity-jacuzzi-doccia-vista.jpg" },
 ] as const;

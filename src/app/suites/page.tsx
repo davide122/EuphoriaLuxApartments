@@ -13,6 +13,20 @@ export const metadata: Metadata = {
   description:
     "Scopri Passion e Infinity: suites luxury a Porto Empedocle per coppie, con jacuzzi privata, sauna interna, cucina con forno, Wi‑Fi e condizionatori. Prenota via WhatsApp.",
   alternates: { canonical: "/suites" },
+  openGraph: {
+    type: "website",
+    url: "/suites",
+    siteName: noir.name,
+    title: `Suites | ${noir.name}`,
+    description:
+      "Scopri Passion e Infinity: suites luxury a Porto Empedocle per coppie, con jacuzzi privata, sauna interna, cucina con forno, Wi‑Fi e condizionatori. Prenota via WhatsApp.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `Suites | ${noir.name}`,
+    description:
+      "Scopri Passion e Infinity: suites luxury a Porto Empedocle per coppie, con jacuzzi privata, sauna interna, cucina con forno, Wi‑Fi e condizionatori.",
+  },
 };
 
 export default function SuitesPage() {

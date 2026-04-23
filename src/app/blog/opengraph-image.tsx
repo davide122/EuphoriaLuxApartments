@@ -1,27 +1,11 @@
 import { ImageResponse } from "next/og";
-import { noir, suites } from "@/lib/noir";
+import { noir } from "@/lib/noir";
 
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
-export const alt = "Suite Euphoria — Jacuzzi privata e sauna";
+export const alt = "Blog — Guide Euphoria Luxury Suite";
 
-const BY_SLUG: Record<string, (typeof suites)[number]> = Object.fromEntries(
-  suites.map((s) => [s.slug, s])
-);
-
-export default async function OpenGraphImage({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}) {
-  const { slug } = await params;
-  const suite = BY_SLUG[slug];
-
-  const title = suite ? `${suite.name} — ${noir.name}` : noir.name;
-  const subtitle = suite
-    ? "Suite con jacuzzi privata e sauna interna"
-    : "Jacuzzi privata · Sauna interna · Prenotazione diretta WhatsApp";
-
+export default function OpenGraphImage() {
   return new ImageResponse(
     (
       <div
@@ -34,27 +18,23 @@ export default async function OpenGraphImage({
           padding: "56px",
           backgroundColor: "#05060a",
           backgroundImage:
-            "radial-gradient(900px circle at 18% 18%, rgba(34,211,238,0.20), transparent 55%), radial-gradient(900px circle at 85% 20%, rgba(168,85,247,0.18), transparent 58%), linear-gradient(180deg, rgba(255,255,255,0.04), rgba(0,0,0,0.4))",
+            "radial-gradient(900px circle at 18% 18%, rgba(34,211,238,0.18), transparent 55%), radial-gradient(900px circle at 85% 20%, rgba(168,85,247,0.16), transparent 58%), linear-gradient(180deg, rgba(255,255,255,0.04), rgba(0,0,0,0.4))",
         }}
       >
         <div style={{ display: "flex", flexDirection: "column", gap: "18px" }}>
           <div style={{ color: "rgba(230,232,246,0.72)", letterSpacing: "0.28em", fontSize: 18 }}>
-            {noir.location.toUpperCase()}
+            GUIDE
           </div>
           <div style={{ color: "rgba(248,250,252,0.92)", fontSize: 64, lineHeight: 1.04, fontWeight: 700 }}>
-            {title}
+            {noir.name}
           </div>
           <div style={{ color: "rgba(230,232,246,0.78)", fontSize: 26, lineHeight: 1.32, maxWidth: 1000 }}>
-            {subtitle}
+            Weekend romantici · Jacuzzi privata · Sauna interna
           </div>
         </div>
 
         <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
-          {[
-            `Da €${noir.startingFrom}/notte`,
-            noir.smartAccess,
-            "Prenotazione diretta WhatsApp",
-          ].map((t) => (
+          {["Guide pratiche", "Local SEO", "Prenotazione diretta WhatsApp"].map((t) => (
             <div
               key={t}
               style={{
@@ -77,3 +57,4 @@ export default async function OpenGraphImage({
     size
   );
 }
+

@@ -47,8 +47,9 @@ export function MediaFrame({
             className="object-cover opacity-[0.92]"
           />
         ) : null}
-        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.25),rgba(0,0,0,0.65))]" />
-        <div className="absolute inset-0 opacity-[0.08] mix-blend-overlay bg-[radial-gradient(circle_at_10%_10%,rgba(255,255,255,0.55)_0.6px,transparent_0.7px)] bg-[length:10px_10px]" />
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.18),rgba(0,0,0,0.58))]" />
+        <div className="absolute inset-0 opacity-[0.06] mix-blend-overlay bg-[radial-gradient(circle_at_10%_10%,rgba(255,255,255,0.55)_0.6px,transparent_0.7px)] bg-[length:10px_10px]" />
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-[linear-gradient(180deg,rgba(0,0,0,0),rgba(0,0,0,0.55))]" />
         <div className="absolute inset-x-0 bottom-0 flex items-center justify-between px-6 py-5">
           <div className="text-xs tracking-[0.22em] uppercase text-noir-mist/70">
             {label}

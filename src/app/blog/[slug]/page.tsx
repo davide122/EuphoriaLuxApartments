@@ -128,9 +128,6 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                       <NoirAnchor href={whatsappHref} target="_blank" rel="noreferrer" variant="primary">
                         Verifica disponibilità su WhatsApp
                       </NoirAnchor>
-                      <NoirLink href="/prenota" variant="ghost">
-                        Guarda il calendario
-                      </NoirLink>
                       <NoirLink href="/blog" variant="ghost">
                         Tutte le guide
                       </NoirLink>

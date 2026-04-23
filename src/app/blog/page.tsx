@@ -12,6 +12,20 @@ export const metadata: Metadata = {
   description:
     "Guide concrete per coppie: weekend romantici, suite con jacuzzi privata e sauna, e consigli pratici per prenotare in modo diretto.",
   alternates: { canonical: "/blog" },
+  openGraph: {
+    type: "website",
+    url: "/blog",
+    siteName: noir.name,
+    title: `Guide & Idee — ${noir.name}`,
+    description:
+      "Guide concrete per coppie: weekend romantici, suite con jacuzzi privata e sauna, e consigli pratici per prenotare in modo diretto.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `Guide & Idee — ${noir.name}`,
+    description:
+      "Guide concrete per coppie: weekend romantici, suite con jacuzzi privata e sauna, e consigli pratici per prenotare in modo diretto.",
+  },
 };
 
 export default function BlogIndexPage() {

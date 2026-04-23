@@ -41,7 +41,6 @@ export function FooterSection() {
                       { href: "/#galleria", label: "Galleria" },
                       { href: "/#recensioni", label: "Recensioni" },
                       { href: "/#faq", label: "FAQ" },
-                      { href: "/prenota", label: "Calendario" },
                       ...landingLinks,
                     ].map((l) => (
                       <Link

@@ -1,7 +1,6 @@
 import { Reveal } from "@/components/motion/reveal";
 import { MediaFrame } from "@/components/ui/media-frame";
 import { NoirAnchor } from "@/components/ui/noir-anchor";
-import { NoirLink } from "@/components/ui/noir-link";
 import { SectionHeader } from "@/components/ui/section-header";
 import { noir } from "@/lib/noir";
 
@@ -82,9 +81,6 @@ export function FeatureFocusSection({
                 >
                   Verifica disponibilità su WhatsApp
                 </NoirAnchor>
-                <NoirLink href="/prenota" variant="ghost">
-                  Apri calendario
-                </NoirLink>
               </div>
             </Reveal>
           </div>

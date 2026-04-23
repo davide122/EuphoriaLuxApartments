@@ -1,7 +1,6 @@
 import { Reveal } from "@/components/motion/reveal";
 import { MediaFrame } from "@/components/ui/media-frame";
 import { NoirAnchor } from "@/components/ui/noir-anchor";
-import { NoirLink } from "@/components/ui/noir-link";
 import { SectionHeader } from "@/components/ui/section-header";
 import { galleryFrames, noir } from "@/lib/noir";
 
@@ -16,11 +15,11 @@ export function GallerySection() {
         <Reveal>
           <SectionHeader
             eyebrow="Galleria"
-            title="Immagini che respirano. Sì. Ma soprattutto: è reale."
+            title="Ogni foto è un dettaglio reale. Zero “effetto catalogo”."
             description={
               <>
-                Quello che vedi è ciò che vivi: ambienti privati, luci notturne, spa interna
-                e dettagli scenografici. Se ti immagini già qui, verifica subito la disponibilità.
+                Quello che vedi è ciò che trovi: privacy totale, spa interna, luci notturne e
+                materiali che fanno scena. Se ti ci vedi già, scrivi ora: ti diciamo cosa è libero.
               </>
             }
           />
@@ -115,9 +114,6 @@ export function GallerySection() {
             >
               Scrivi su WhatsApp
             </NoirAnchor>
-            <NoirLink href="/prenota" variant="ghost">
-              Guarda il calendario
-            </NoirLink>
           </div>
         </Reveal>
       </div>

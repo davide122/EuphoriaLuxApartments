@@ -8,6 +8,7 @@ export type SeoLanding = {
   metaDescription: string;
   ogTitle: string;
   ogDescription: string;
+  dateModifiedISO?: string;
   suggestedSuite?: "passion" | "infinity";
   relatedBlogSlugs?: string[];
   hero: {
@@ -29,6 +30,7 @@ export const SEO_LANDINGS = [
     slug: "suite-romantica-porto-empedocle",
     primaryKeyword: "suite romantica Porto Empedocle",
     title: "Suite romantica a Porto Empedocle",
+    dateModifiedISO: "2026-04-24",
     suggestedSuite: "passion",
     relatedBlogSlugs: ["suite-romantica-sicilia-cosa-conta-davvero"],
     metaTitle: `Suite romantica a Porto Empedocle con jacuzzi e sauna | ${noir.name}`,
@@ -83,6 +85,7 @@ export const SEO_LANDINGS = [
     slug: "jacuzzi-privata-porto-empedocle",
     primaryKeyword: "jacuzzi privata Porto Empedocle",
     title: "Jacuzzi privata a Porto Empedocle",
+    dateModifiedISO: "2026-04-24",
     suggestedSuite: "passion",
     relatedBlogSlugs: ["suite-romantica-sicilia-cosa-conta-davvero"],
     metaTitle: `Jacuzzi privata a Porto Empedocle | Suite luxury ${noir.name}`,
@@ -123,6 +126,7 @@ export const SEO_LANDINGS = [
     slug: "weekend-romantico-agrigento",
     primaryKeyword: "weekend romantico Agrigento",
     title: "Weekend romantico ad Agrigento (zona)",
+    dateModifiedISO: "2026-04-24",
     suggestedSuite: "infinity",
     relatedBlogSlugs: ["weekend-romantico-agrigento-itinerario-sera-notte"],
     metaTitle: `Weekend romantico Agrigento: suite con jacuzzi e sauna | ${noir.name}`,
@@ -162,6 +166,7 @@ export const SEO_LANDINGS = [
     slug: "suite-con-sauna-sicilia",
     primaryKeyword: "suite con sauna Sicilia",
     title: "Suite con sauna in Sicilia",
+    dateModifiedISO: "2026-04-24",
     suggestedSuite: "passion",
     relatedBlogSlugs: ["suite-romantica-sicilia-cosa-conta-davvero"],
     metaTitle: `Suite con sauna in Sicilia | Jacuzzi privata e luxury mood | ${noir.name}`,
@@ -202,6 +207,7 @@ export const SEO_LANDINGS = [
     slug: "suite-vicino-scala-dei-turchi",
     primaryKeyword: "suite vicino Scala dei Turchi",
     title: "Suite vicino Scala dei Turchi",
+    dateModifiedISO: "2026-04-24",
     suggestedSuite: "infinity",
     relatedBlogSlugs: ["weekend-romantico-agrigento-itinerario-sera-notte"],
     metaTitle: `Suite vicino Scala dei Turchi con jacuzzi privata | ${noir.name}`,
@@ -242,6 +248,7 @@ export const SEO_LANDINGS = [
     slug: "suite-vicino-valle-dei-templi",
     primaryKeyword: "suite vicino Valle dei Templi",
     title: "Suite vicino Valle dei Templi",
+    dateModifiedISO: "2026-04-24",
     suggestedSuite: "infinity",
     relatedBlogSlugs: ["weekend-romantico-agrigento-itinerario-sera-notte"],
     metaTitle: `Suite vicino Valle dei Templi: weekend romantico (zona Agrigento) | ${noir.name}`,
@@ -282,6 +289,7 @@ export const SEO_LANDINGS = [
     slug: "weekend-romantico-porto-empedocle",
     primaryKeyword: "weekend romantico Porto Empedocle",
     title: "Weekend romantico a Porto Empedocle",
+    dateModifiedISO: "2026-04-24",
     suggestedSuite: "passion",
     relatedBlogSlugs: ["suite-romantica-sicilia-cosa-conta-davvero"],
     metaTitle: `Weekend romantico a Porto Empedocle: suite con jacuzzi privata | ${noir.name}`,
