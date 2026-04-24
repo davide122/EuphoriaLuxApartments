@@ -16,8 +16,72 @@ import { FooterSection } from "@/components/sections/footer";
 import { StickyCta } from "@/components/sticky-cta";
 import { noir } from "@/lib/noir";
 
+const homeFaqs = [
+  {
+    q: "La jacuzzi è privata?",
+    a: "Sì. È interna alla suite ed è ad uso esclusivo: zero condivisione, zero spazi comuni.",
+  },
+  {
+    q: "La sauna è nella suite?",
+    a: "Sì, interna. Completa l’esperienza wellness senza uscire dalla tua privacy.",
+  },
+  {
+    q: "È adatto a coppie?",
+    a: "Sì. Euphoria è pensata per fughe romantiche, anniversari e notti speciali.",
+  },
+  {
+    q: "Ci sono cucina e forno?",
+    a: "Sì: cucina completa + forno, per vivere la suite con totale libertà.",
+  },
+  {
+    q: "Wi‑Fi e condizionatori?",
+    a: "Sì: Wi‑Fi e aria condizionata sono inclusi in entrambe le suite.",
+  },
+  {
+    q: "Come prenoto più velocemente?",
+    a: "WhatsApp: ti confermiamo disponibilità e dettagli in modo rapido e diretto.",
+  },
+  {
+    q: "Smart check-in e smart check-out?",
+    a: "Sì: accesso tramite tastierino. Arrivi e parti completamente da soli, senza attese.",
+  },
+  {
+    q: "Posso organizzare una sorpresa (anniversario/proposta)?",
+    a: "Sì: scrivici su WhatsApp e prepariamo l’esperienza in base alla tua occasione.",
+  },
+] as const;
+
+function jsonLdOrganization() {
+  const logoUrl = `${noir.siteUrl}/android-chrome-512x512.png`;
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "@id": `${noir.siteUrl}#org`,
+    name: `${noir.name} Luxury Suite`,
+    url: noir.siteUrl,
+    logo: { "@type": "ImageObject", url: logoUrl },
+    email: noir.contacts.email,
+    telephone: noir.contacts.phone,
+  };
+}
+
+function jsonLdFaqPage(args: { pageUrl: string; faqs: Array<{ q: string; a: string }> }) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "@id": `${args.pageUrl}#faq`,
+    mainEntity: args.faqs.map((f) => ({
+      "@type": "Question",
+      name: f.q,
+      acceptedAnswer: { "@type": "Answer", text: f.a },
+    })),
+  };
+}
+
 function jsonLdHome() {
   return [
+    jsonLdOrganization(),
     {
       "@context": "https://schema.org",
       "@type": "WebSite",
@@ -27,6 +91,7 @@ function jsonLdHome() {
     {
       "@context": "https://schema.org",
       "@type": "LodgingBusiness",
+      "@id": `${noir.siteUrl}#business`,
       name: `${noir.name} Luxury Suite`,
       url: noir.siteUrl,
       priceRange: `€${noir.startingFrom}+`,
@@ -44,7 +109,9 @@ function jsonLdHome() {
         { "@type": "LocationFeatureSpecification", name: "Wi‑Fi", value: true },
         { "@type": "LocationFeatureSpecification", name: "Aria condizionata", value: true },
       ],
+      isPartOf: { "@id": `${noir.siteUrl}#org` },
     },
+    jsonLdFaqPage({ pageUrl: noir.siteUrl, faqs: [...homeFaqs] }),
   ];
 }
 

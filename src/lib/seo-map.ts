@@ -48,12 +48,21 @@ export const SEO_MAP: SeoMapEntry[] = [
   ...SEO_LANDINGS.map((l) => ({
     url: `/${l.slug}`,
     primaryKeyword: l.primaryKeyword,
-    secondaryKeywords: [
-      `${noir.name} ${noir.location}`,
-      "jacuzzi privata",
-      "sauna interna",
-      "prenotazione diretta WhatsApp",
-    ],
+    secondaryKeywords:
+      l.slug === "spa-porto-empedocle"
+        ? [
+            "spa privata Porto Empedocle",
+            "spa privata Agrigento",
+            "suite spa privata",
+            "jacuzzi idromassaggio privata",
+            "sauna interna privata",
+            "centro benessere privato Porto Empedocle",
+            "suite con idromassaggio Porto Empedocle",
+            "Scala dei Turchi",
+            "Valle dei Templi",
+            "prenotazione diretta WhatsApp",
+          ]
+        : [`${noir.name} ${noir.location}`, "jacuzzi privata", "sauna interna", "prenotazione diretta WhatsApp"],
     intent: "locale" as const,
     primaryCta: "WhatsApp" as const,
   })),

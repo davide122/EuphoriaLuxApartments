@@ -56,12 +56,32 @@ export async function generateMetadata({
       siteName: noir.name,
       title,
       description,
+      locale: "it_IT",
+      images: [
+        { url: `/suites/${suite.slug}/opengraph-image`, width: 1200, height: 630, alt: `${suite.name} — ${noir.name}` },
+      ],
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
+      images: [`/suites/${suite.slug}/opengraph-image`],
     },
+  };
+}
+
+function jsonLdOrganization() {
+  const logoUrl = `${noir.siteUrl}/android-chrome-512x512.png`;
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "@id": `${noir.siteUrl}#org`,
+    name: `${noir.name} Luxury Suite`,
+    url: noir.siteUrl,
+    logo: { "@type": "ImageObject", url: logoUrl },
+    email: noir.contacts.email,
+    telephone: noir.contacts.phone,
   };
 }
 
@@ -69,6 +89,7 @@ function jsonLdForSuite(args: { url: string; imageUrl: string; suiteName: string
   return {
     "@context": "https://schema.org",
     "@type": "LodgingBusiness",
+    "@id": `${args.url}#business`,
     name: `${noir.name} — ${args.suiteName}`,
     url: args.url,
     image: [args.imageUrl],
@@ -87,6 +108,27 @@ function jsonLdForSuite(args: { url: string; imageUrl: string; suiteName: string
       { "@type": "LocationFeatureSpecification", name: "Wi‑Fi", value: true },
       { "@type": "LocationFeatureSpecification", name: "Aria condizionata", value: true },
     ],
+    makesOffer: {
+      "@type": "Offer",
+      priceCurrency: "EUR",
+      price: noir.startingFrom,
+      url: args.url,
+      availability: "https://schema.org/InStock",
+    },
+    isPartOf: { "@id": `${noir.siteUrl}#org` },
+  };
+}
+
+function jsonLdFaqPage(args: { pageUrl: string; faqs: Array<{ q: string; a: string }> }) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "@id": `${args.pageUrl}#faq`,
+    mainEntity: args.faqs.map((f) => ({
+      "@type": "Question",
+      name: f.q,
+      acceptedAnswer: { "@type": "Answer", text: f.a },
+    })),
   };
 }
 
@@ -163,19 +205,18 @@ function ServiceMatrix({
             Una suite non si giudica solo dalle foto. Conta ciò che trovi davvero: benessere privato,
             comfort e privacy, senza frizioni. {suiteName} è pronta quando lo sei tu.
           </p>
-          <div className="mt-7 flex flex-wrap gap-2">
-            {[
-              `Da €${noir.startingFrom}/notte`,
-              "Jacuzzi privata",
-              "Sauna interna",
-              "Cucina completa + forno",
-              "Wi‑Fi + condizionatori",
-              noir.smartAccess,
-            ].map((k) => (
-              <span key={k} className="noir-chip text-noir-mist/80">
-                {k}
-              </span>
-            ))}
+          <div className="mt-7 text-sm text-noir-mist/70">
+            <span className="font-medium text-noir-mist/85">Da €{noir.startingFrom}/notte</span>
+            <span className="mx-2 text-white/25">•</span>
+            Jacuzzi privata
+            <span className="mx-2 text-white/25">•</span>
+            Sauna interna
+            <span className="mx-2 text-white/25">•</span>
+            Cucina completa + forno
+            <span className="mx-2 text-white/25">•</span>
+            Wi‑Fi + condizionatori
+            <span className="mx-2 text-white/25">•</span>
+            {noir.smartAccess}
           </div>
         </div>
       </div>
@@ -255,11 +296,7 @@ function ExperienceFlow() {
               momenti.
             </p>
           </div>
-          <div className="hidden md:inline-flex items-center gap-2">
-            <span className="noir-chip text-noir-mist/80">
-              Private ritual
-            </span>
-          </div>
+          <div className="hidden md:inline-flex items-center gap-2" />
         </div>
         <div className="relative mt-10 grid gap-4 md:grid-cols-4">
           <div className="pointer-events-none absolute left-6 right-6 top-6 hidden h-px bg-white/10 md:block" />
@@ -304,6 +341,11 @@ export default async function SuiteDetailPage({
     `?text=${encodeURIComponent(
       `Ciao, vorrei verificare disponibilità per ${suite.name}. Date: __/__/__ → __/__/__. Siamo in __. Grazie.`
     )}`;
+  const suiteFaqs = [
+    { q: "Smart check-in/out", a: noir.smartAccess, Icon: DoorClosed },
+    { q: "Privacy", a: "Zero spazi condivisi. Solo voi.", Icon: Shield },
+    { q: "Comfort", a: "Cucina completa + forno, Wi‑Fi, condizionatori.", Icon: ChefHat },
+  ] as const;
 
   return (
     <div className="relative flex min-h-[100svh] flex-col">
@@ -313,7 +355,9 @@ export default async function SuiteDetailPage({
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify([
+              jsonLdOrganization(),
               jsonLdForSuite({ url: pageUrl, imageUrl, suiteName: suite.name }),
+              jsonLdFaqPage({ pageUrl, faqs: suiteFaqs.map(({ q, a }) => ({ q, a })) }),
               breadcrumbJsonLd({ baseUrl: noir.siteUrl, items: crumbs }),
             ]),
           }}
@@ -334,19 +378,18 @@ export default async function SuiteDetailPage({
                 </p>
                 <div className="mt-7 grid gap-4 lg:grid-cols-12 lg:items-end">
                   <div className="lg:col-span-8">
-                    <div className="flex flex-wrap gap-2">
-                      {[
-                        `Da €${noir.startingFrom}/notte`,
-                        "Jacuzzi privata",
-                        "Sauna interna",
-                        "Cucina completa + forno",
-                        "Wi‑Fi + condizionatori",
-                        noir.smartAccess,
-                      ].map((k) => (
-                        <span key={k} className="noir-chip text-noir-mist/80">
-                          {k}
-                        </span>
-                      ))}
+                    <div className="text-sm text-noir-mist/70">
+                      <span className="font-medium text-noir-mist/85">Da €{noir.startingFrom}/notte</span>
+                      <span className="mx-2 text-white/25">•</span>
+                      Jacuzzi privata
+                      <span className="mx-2 text-white/25">•</span>
+                      Sauna interna
+                      <span className="mx-2 text-white/25">•</span>
+                      Cucina completa + forno
+                      <span className="mx-2 text-white/25">•</span>
+                      Wi‑Fi + condizionatori
+                      <span className="mx-2 text-white/25">•</span>
+                      {noir.smartAccess}
                     </div>
                   </div>
                   <div className="lg:col-span-4">
@@ -404,23 +447,7 @@ export default async function SuiteDetailPage({
                       ))}
                     </div>
                     <div className="mt-8 grid gap-3">
-                      {[
-                        {
-                          q: "Smart check-in/out",
-                          a: noir.smartAccess,
-                          Icon: DoorClosed,
-                        },
-                        {
-                          q: "Privacy",
-                          a: "Zero spazi condivisi. Solo voi.",
-                          Icon: Shield,
-                        },
-                        {
-                          q: "Comfort",
-                          a: "Cucina completa + forno, Wi‑Fi, condizionatori.",
-                          Icon: ChefHat,
-                        },
-                      ].map((f) => (
+                      {suiteFaqs.map((f) => (
                         <details key={f.q} className="rounded-2xl border border-white/10 bg-white/5 px-6 py-5">
                           <summary className="cursor-pointer list-none text-sm font-medium text-noir-mist/85 [&::-webkit-details-marker]:hidden">
                             <div className="flex items-center justify-between gap-6">

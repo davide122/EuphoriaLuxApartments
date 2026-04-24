@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     "Euphoria Luxury Suite a Porto Empedocle: jacuzzi privata, sauna interna, luci immersive e atmosfera romantica. Da 135€ a notte. Smart check-in e smart check-out completamente da soli (tastierino). Prenotazione diretta via WhatsApp.",
   applicationName: "Euphoria",
   alternates: { canonical: "/" },
-  robots: { index: true, follow: true },
+  robots: "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1",
   manifest: "/site.webmanifest",
   icons: {
     icon: [
@@ -45,15 +45,18 @@ export const metadata: Metadata = {
     type: "website",
     url: "/",
     siteName: "Euphoria",
+    locale: "it_IT",
     title: "Euphoria — Dove il lusso incontra la notte",
     description:
       "Jacuzzi privata, sauna, luci e design. Da 135€ a notte. Smart check-in e smart check-out completamente da soli (tastierino) e prenotazione diretta via WhatsApp a Porto Empedocle.",
+    images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: "Euphoria Luxury Suite" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Euphoria",
     description:
       "Private luxury experience a Porto Empedocle: jacuzzi spa, sauna e atmosfera notturna.",
+    images: ["/opengraph-image"],
   },
 };
 

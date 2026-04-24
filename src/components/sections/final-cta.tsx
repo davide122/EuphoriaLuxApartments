@@ -32,16 +32,12 @@ export function FinalCtaSection() {
                   Se vuoi una notte privata con jacuzzi, sauna e atmosfera notturna da ricordare,
                   fai la cosa più semplice: scrivici ora. Risposta rapida, prenotazione diretta.
                 </p>
-                <div className="mt-8 flex flex-wrap gap-2">
-                  {[
-                    `Da €${noir.startingFrom}/notte`,
-                    noir.smartAccess,
-                    "Zero spazi condivisi",
-                  ].map((k) => (
-                    <span key={k} className="noir-chip text-noir-mist/80">
-                      {k}
-                    </span>
-                  ))}
+                <div className="mt-8 text-sm text-noir-mist/70">
+                  <span className="font-medium text-noir-mist/85">Da €{noir.startingFrom}/notte</span>
+                  <span className="mx-2 text-white/25">•</span>
+                  {noir.smartAccess}
+                  <span className="mx-2 text-white/25">•</span>
+                  Zero spazi condivisi
                 </div>
               </div>
               <div className="flex flex-col gap-3 sm:flex-row">

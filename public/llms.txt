@@ -1,0 +1,21 @@
+Euphoria Luxury Suite (Porto Empedocle, Sicilia)
+Base URL: https://euphorialuxurysuites.it
+
+Sitemap: https://euphorialuxurysuites.it/sitemap.xml
+Robots: https://euphorialuxurysuites.it/robots.txt
+
+Pagine principali
+- https://euphorialuxurysuites.it/
+- https://euphorialuxurysuites.it/suites
+- https://euphorialuxurysuites.it/suites/passion
+- https://euphorialuxurysuites.it/suites/infinity
+- https://euphorialuxurysuites.it/blog
+- https://euphorialuxurysuites.it/prenota
+
+Contatti
+- WhatsApp: https://wa.me/393792810506
+- Telefono: +39 379 281 0506
+- Email: info@noirsuites.it
+
+Descrizione breve
+Euphoria è un’esperienza luxury per coppie: jacuzzi privata, sauna interna, luci immersive, cucina completa con forno, Wi‑Fi e condizionatori. Prenotazione diretta via WhatsApp.

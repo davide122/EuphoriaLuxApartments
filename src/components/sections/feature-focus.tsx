@@ -45,13 +45,7 @@ export function FeatureFocusSection({
                 eyebrow={eyebrow}
                 title={title}
                 description={description}
-                right={
-                  <div className="hidden md:block">
-                    <span className="noir-chip text-noir-mist/80">
-                      Private ritual
-                    </span>
-                  </div>
-                }
+                right={<div className="hidden md:block" />}
               />
             </Reveal>
             <div className="mt-10 grid gap-2">

@@ -26,9 +26,27 @@ export async function generateMetadata({
   const post = BLOG_POSTS_BY_SLUG[slug];
   if (!post) return { robots: { index: false, follow: false } };
 
+  const landingKeywords = (post.relatedLandingSlugs ?? [])
+    .map((s) => SEO_LANDINGS_BY_SLUG[s])
+    .filter(Boolean)
+    .flatMap((l) => [l.primaryKeyword, l.title]);
+  const keywords = Array.from(
+    new Set([
+      post.primaryKeyword,
+      "SPA privata",
+      "jacuzzi privata",
+      "sauna interna",
+      "Porto Empedocle",
+      "Agrigento",
+      noir.location,
+      ...landingKeywords,
+    ])
+  ).slice(0, 14);
+
   return {
     title: post.metaTitle,
     description: post.metaDescription,
+    keywords,
     alternates: { canonical: `/blog/${post.slug}` },
     openGraph: {
       type: "article",
@@ -36,11 +54,16 @@ export async function generateMetadata({
       title: post.title,
       description: post.metaDescription,
       siteName: noir.name,
+      locale: "it_IT",
+      images: [
+        { url: `/blog/${post.slug}/opengraph-image`, width: 1200, height: 630, alt: post.heroImage.alt },
+      ],
     },
     twitter: {
       card: "summary_large_image",
       title: post.title,
       description: post.metaDescription,
+      images: [`/blog/${post.slug}/opengraph-image`],
     },
   };
 }
@@ -52,7 +75,11 @@ function jsonLdForArticle(args: {
   description: string;
   datePublishedISO: string;
   dateModifiedISO?: string;
+  keywords?: string[];
 }) {
+  const orgName = `${noir.name} Luxury Suite`;
+  const logoUrl = `${noir.siteUrl}/android-chrome-512x512.png`;
+
   return {
     "@context": "https://schema.org",
     "@type": "Article",
@@ -62,11 +89,13 @@ function jsonLdForArticle(args: {
     },
     headline: args.headline,
     description: args.description,
+    inLanguage: "it-IT",
     image: [args.imageUrl],
     datePublished: args.datePublishedISO,
     dateModified: args.dateModifiedISO ?? args.datePublishedISO,
-    author: { "@type": "Organization", name: `${noir.name} Luxury Suite` },
-    publisher: { "@type": "Organization", name: `${noir.name} Luxury Suite` },
+    keywords: args.keywords?.join(", "),
+    author: { "@type": "Organization", name: orgName, url: noir.siteUrl, logo: { "@type": "ImageObject", url: logoUrl } },
+    publisher: { "@type": "Organization", name: orgName, url: noir.siteUrl, logo: { "@type": "ImageObject", url: logoUrl } },
   };
 }
 
@@ -85,6 +114,32 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   const relatedLandings = (post.relatedLandingSlugs ?? [])
     .map((s) => SEO_LANDINGS_BY_SLUG[s])
     .filter(Boolean);
+  const landingSlugSet = new Set(post.relatedLandingSlugs ?? []);
+  const relatedPosts = BLOG_POSTS.filter((p) => p.slug !== post.slug)
+    .map((p) => {
+      const overlap = (p.relatedLandingSlugs ?? []).reduce((acc, s) => acc + (landingSlugSet.has(s) ? 1 : 0), 0);
+      const score = overlap + (p.primaryKeyword === post.primaryKeyword ? 1 : 0);
+      return { p, score };
+    })
+    .filter((x) => x.score > 0)
+    .sort((a, b) => {
+      if (b.score !== a.score) return b.score - a.score;
+      return b.p.datePublishedISO.localeCompare(a.p.datePublishedISO);
+    })
+    .map((x) => x.p);
+  const landingKeywords = relatedLandings.flatMap((l) => [l.primaryKeyword, l.title]);
+  const keywords = Array.from(
+    new Set([
+      post.primaryKeyword,
+      "SPA privata",
+      "jacuzzi privata",
+      "sauna interna",
+      "Porto Empedocle",
+      "Agrigento",
+      noir.location,
+      ...landingKeywords,
+    ])
+  ).slice(0, 14);
   const whatsappHref =
     noir.contacts.whatsapp +
     `?text=${encodeURIComponent(
@@ -106,6 +161,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                 description: post.metaDescription,
                 datePublishedISO: post.datePublishedISO,
                 dateModifiedISO: post.dateModifiedISO,
+                keywords,
               }),
               breadcrumbJsonLd({ baseUrl: noir.siteUrl, items: crumbs }),
             ]),
@@ -182,6 +238,23 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                     </NoirLink>
                   </div>
                 </Reveal>
+
+                {relatedPosts.length ? (
+                  <Reveal delay={0.20}>
+                    <div className="mt-6 noir-panel p-8 sm:p-9">
+                      <div className="text-xs tracking-[0.26em] uppercase text-noir-mist/55">
+                        Guide correlate
+                      </div>
+                      <div className="mt-6 grid gap-3">
+                        {relatedPosts.slice(0, 5).map((p) => (
+                          <NoirLink key={p.slug} href={`/blog/${p.slug}`} variant="ghost" className="justify-center sm:justify-start">
+                            {p.title}
+                          </NoirLink>
+                        ))}
+                      </div>
+                    </div>
+                  </Reveal>
+                ) : null}
               </div>
 
               <div className="lg:col-span-4">

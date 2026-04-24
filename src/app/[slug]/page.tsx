@@ -36,12 +36,32 @@ export async function generateMetadata({
       title: landing.ogTitle,
       description: landing.ogDescription,
       siteName: noir.name,
+      locale: "it_IT",
+      images: [
+        { url: `/${landing.slug}/opengraph-image`, width: 1200, height: 630, alt: landing.hero.image.alt },
+      ],
     },
     twitter: {
       card: "summary_large_image",
       title: landing.ogTitle,
       description: landing.ogDescription,
+      images: [`/${landing.slug}/opengraph-image`],
     },
+  };
+}
+
+function jsonLdOrganization() {
+  const logoUrl = `${noir.siteUrl}/android-chrome-512x512.png`;
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "@id": `${noir.siteUrl}#org`,
+    name: `${noir.name} Luxury Suite`,
+    url: noir.siteUrl,
+    logo: { "@type": "ImageObject", url: logoUrl },
+    email: noir.contacts.email,
+    telephone: noir.contacts.phone,
   };
 }
 
@@ -49,6 +69,7 @@ function jsonLdForLanding(args: { landingUrl: string; imageUrl: string }) {
   return {
     "@context": "https://schema.org",
     "@type": "LodgingBusiness",
+    "@id": `${args.landingUrl}#business`,
     name: `${noir.name} Luxury Suite`,
     url: args.landingUrl,
     image: [args.imageUrl],
@@ -67,6 +88,20 @@ function jsonLdForLanding(args: { landingUrl: string; imageUrl: string }) {
       url: args.landingUrl,
       availability: "https://schema.org/InStock",
     },
+    isPartOf: { "@id": `${noir.siteUrl}#org` },
+  };
+}
+
+function jsonLdFaqPage(args: { pageUrl: string; faqs: Array<{ q: string; a: string }> }) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "@id": `${args.pageUrl}#faq`,
+    mainEntity: args.faqs.map((f) => ({
+      "@type": "Question",
+      name: f.q,
+      acceptedAnswer: { "@type": "Answer", text: f.a },
+    })),
   };
 }
 
@@ -99,7 +134,9 @@ export default async function SeoLandingPage({ params }: { params: Promise<{ slu
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify([
+              jsonLdOrganization(),
               jsonLdForLanding({ landingUrl: pageUrl, imageUrl }),
+              jsonLdFaqPage({ pageUrl, faqs: landing.faqs }),
               breadcrumbJsonLd({ baseUrl: noir.siteUrl, items: crumbs }),
             ]),
           }}
@@ -167,12 +204,14 @@ export default async function SeoLandingPage({ params }: { params: Promise<{ slu
             </div>
 
             <Reveal delay={0.14}>
-              <div className="mt-10 flex flex-wrap gap-2">
-                {[`Da €${noir.startingFrom}/notte`, noir.smartAccess, "Jacuzzi privata", "Sauna interna"].map((k) => (
-                  <span key={k} className="noir-chip text-noir-mist/80">
-                    {k}
-                  </span>
-                ))}
+              <div className="mt-10 text-sm text-noir-mist/70">
+                <span className="font-medium text-noir-mist/85">Da €{noir.startingFrom}/notte</span>
+                <span className="mx-2 text-white/25">•</span>
+                Jacuzzi privata
+                <span className="mx-2 text-white/25">•</span>
+                Sauna interna
+                <span className="mx-2 text-white/25">•</span>
+                {noir.smartAccess}
               </div>
             </Reveal>
 
@@ -207,7 +246,7 @@ export default async function SeoLandingPage({ params }: { params: Promise<{ slu
                         Una guida utile prima di prenotare.
                       </div>
                       <div className="mt-5 grid gap-3">
-                        {relatedPosts.slice(0, 2).map((p) => (
+                        {relatedPosts.slice(0, 5).map((p) => (
                           <NoirLink key={p.slug} href={`/blog/${p.slug}`} variant="ghost" className="justify-center sm:justify-start">
                             {p.title}
                           </NoirLink>

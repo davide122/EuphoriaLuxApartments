@@ -75,7 +75,7 @@ export function HeroSection() {
       </div>
 
       <div className="relative z-10 noir-container flex min-h-[100svh] flex-col justify-end pb-14 pt-28 sm:pb-16">
-        <div className="noir-chip w-fit text-[11px] text-noir-mist/90">
+        <div className="inline-flex items-center gap-2 text-[11px] tracking-[0.22em] uppercase text-noir-mist/60">
           <Sparkles className="h-4 w-4 text-noir-aqua" />
           Private luxury experience — Porto Empedocle
         </div>
@@ -123,23 +123,18 @@ export function HeroSection() {
         </motion.div>
 
         <motion.div
-          className="mt-7 flex flex-wrap gap-2"
+          className="mt-7 text-sm text-noir-mist/70"
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.44 }}
         >
-          {[
-            `Da €${noir.startingFrom}/notte`,
-            "Jacuzzi privata",
-            "Sauna interna",
-            "Cucina completa + forno",
-            "Wi‑Fi + condizionatori",
-            noir.smartAccess,
-          ].map((k) => (
-            <span key={k} className="noir-chip text-noir-mist/80">
-              {k}
-            </span>
-          ))}
+          <span className="font-medium text-noir-mist/85">Da €{noir.startingFrom}/notte</span>
+          <span className="mx-2 text-white/25">•</span>
+          Jacuzzi privata
+          <span className="mx-2 text-white/25">•</span>
+          Sauna interna
+          <span className="mx-2 text-white/25">•</span>
+          {noir.smartAccess}
         </motion.div>
 
         <div className="mt-14 flex items-center gap-3 text-xs tracking-[0.22em] uppercase text-noir-mist/55">

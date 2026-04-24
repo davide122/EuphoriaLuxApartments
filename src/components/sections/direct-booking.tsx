@@ -1,4 +1,3 @@
-import { Sparkles } from "lucide-react";
 import { Reveal } from "@/components/motion/reveal";
 import { NoirAnchor } from "@/components/ui/noir-anchor";
 import { SectionHeader } from "@/components/ui/section-header";
@@ -24,14 +23,7 @@ export function DirectBookingSection() {
                 Passion e Infinity. Da €{noir.startingFrom}/notte. {noir.smartAccess}.
               </>
             }
-            right={
-              <div className="hidden items-center gap-2 md:inline-flex">
-                <span className="noir-chip text-noir-mist/80">
-                  <Sparkles className="h-4 w-4 text-noir-aqua" />
-                  Risposta rapida
-                </span>
-              </div>
-            }
+            right={<div className="hidden items-center gap-2 md:inline-flex" />}
           />
         </Reveal>
 

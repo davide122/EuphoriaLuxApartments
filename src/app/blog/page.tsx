@@ -7,6 +7,25 @@ import { NoirLink } from "@/components/ui/noir-link";
 import { noir } from "@/lib/noir";
 import { BLOG_POSTS } from "@/lib/seo-content";
 
+function jsonLdBlogIndex() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "@id": `${noir.siteUrl}/blog#collection`,
+    name: `Guide & Idee — ${noir.name}`,
+    url: `${noir.siteUrl}/blog`,
+    mainEntity: {
+      "@type": "ItemList",
+      itemListElement: BLOG_POSTS.map((p, idx) => ({
+        "@type": "ListItem",
+        position: idx + 1,
+        url: `${noir.siteUrl}/blog/${p.slug}`,
+        name: p.title,
+      })),
+    },
+  };
+}
+
 export const metadata: Metadata = {
   title: `Guide & Idee — ${noir.name}`,
   description:
@@ -16,15 +35,18 @@ export const metadata: Metadata = {
     type: "website",
     url: "/blog",
     siteName: noir.name,
+    locale: "it_IT",
     title: `Guide & Idee — ${noir.name}`,
     description:
       "Guide concrete per coppie: weekend romantici, suite con jacuzzi privata e sauna, e consigli pratici per prenotare in modo diretto.",
+    images: [{ url: "/blog/opengraph-image", width: 1200, height: 630, alt: `Guide & Idee — ${noir.name}` }],
   },
   twitter: {
     card: "summary_large_image",
     title: `Guide & Idee — ${noir.name}`,
     description:
       "Guide concrete per coppie: weekend romantici, suite con jacuzzi privata e sauna, e consigli pratici per prenotare in modo diretto.",
+    images: ["/blog/opengraph-image"],
   },
 };
 
@@ -33,6 +55,10 @@ export default function BlogIndexPage() {
     <div className="relative flex min-h-[100svh] flex-col">
       <TopNav />
       <main className="relative flex-1 pt-28">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdBlogIndex()) }}
+        />
         <section data-ambient="noir" className="relative z-10 py-16 sm:py-20">
           <div className="noir-container">
             <Reveal>

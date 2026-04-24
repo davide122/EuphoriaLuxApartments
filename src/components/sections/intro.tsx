@@ -23,20 +23,26 @@ export function IntroSection() {
                   notturna fuori dall’ordinario. Jacuzzi privata, sauna interna e luci immersive
                   trasformano anche una sola notte in un ricordo. Prenotazione diretta, veloce.
                 </p>
-                <div className="mt-8 flex flex-wrap gap-2">
-                  {[
-                    `Da €${noir.startingFrom}/notte`,
-                    "Private Spa",
-                    "Sauna interna",
-                    "Lights experience",
-                    noir.smartAccess,
-                    "Cucina completa + forno",
-                    "Wi‑Fi + condizionatori",
-                  ].map((k) => (
-                    <span key={k} className="noir-chip text-noir-mist/80">
-                      {k}
-                    </span>
-                  ))}
+                <div className="mt-8">
+                  <div className="text-sm text-noir-mist/70">
+                    <span className="font-medium text-noir-mist/85">Da €{noir.startingFrom}/notte</span>
+                    <span className="mx-2 text-white/25">•</span>
+                    Jacuzzi privata
+                    <span className="mx-2 text-white/25">•</span>
+                    Sauna interna
+                    <span className="mx-2 text-white/25">•</span>
+                    Luci immersive
+                    <span className="mx-2 text-white/25">•</span>
+                    {noir.smartAccess}
+                  </div>
+                  <div className="mt-5 grid gap-2 sm:grid-cols-2">
+                    {["Cucina completa + forno", "Wi‑Fi + condizionatori"].map((t) => (
+                      <div key={t} className="flex items-start gap-3 text-sm leading-6 text-noir-mist/80">
+                        <span className="mt-2 inline-block h-1.5 w-1.5 rounded-full bg-white/45" />
+                        <span>{t}</span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
             </Reveal>

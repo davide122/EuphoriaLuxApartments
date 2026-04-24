@@ -8,6 +8,25 @@ import { NoirLink } from "@/components/ui/noir-link";
 import { MediaFrame } from "@/components/ui/media-frame";
 import { noir, suites } from "@/lib/noir";
 
+function jsonLdSuitesIndex() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "@id": `${noir.siteUrl}/suites#collection`,
+    name: `Suites — ${noir.name}`,
+    url: `${noir.siteUrl}/suites`,
+    mainEntity: {
+      "@type": "ItemList",
+      itemListElement: suites.map((s, idx) => ({
+        "@type": "ListItem",
+        position: idx + 1,
+        url: `${noir.siteUrl}/suites/${s.slug}`,
+        name: s.name,
+      })),
+    },
+  };
+}
+
 export const metadata: Metadata = {
   title: `Suites | ${noir.name}`,
   description:
@@ -17,15 +36,18 @@ export const metadata: Metadata = {
     type: "website",
     url: "/suites",
     siteName: noir.name,
+    locale: "it_IT",
     title: `Suites | ${noir.name}`,
     description:
       "Scopri Passion e Infinity: suites luxury a Porto Empedocle per coppie, con jacuzzi privata, sauna interna, cucina con forno, Wi‑Fi e condizionatori. Prenota via WhatsApp.",
+    images: [{ url: "/suites/opengraph-image", width: 1200, height: 630, alt: `Suites — ${noir.name}` }],
   },
   twitter: {
     card: "summary_large_image",
     title: `Suites | ${noir.name}`,
     description:
       "Scopri Passion e Infinity: suites luxury a Porto Empedocle per coppie, con jacuzzi privata, sauna interna, cucina con forno, Wi‑Fi e condizionatori.",
+    images: ["/suites/opengraph-image"],
   },
 };
 
@@ -34,6 +56,10 @@ export default function SuitesPage() {
     <div className="relative flex min-h-[100svh] flex-col">
       <TopNav />
       <main className="relative flex-1 pt-28">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdSuitesIndex()) }}
+        />
         <section data-ambient="noir" className="relative z-10 py-16 sm:py-20">
           <div className="noir-container">
             <Reveal>
