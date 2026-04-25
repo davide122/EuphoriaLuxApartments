@@ -45,27 +45,118 @@ export const SEO_MAP: SeoMapEntry[] = [
     intent: "transazionale" as const,
     primaryCta: "WhatsApp" as const,
   })),
-  ...SEO_LANDINGS.map((l) => ({
-    url: `/${l.slug}`,
-    primaryKeyword: l.primaryKeyword,
-    secondaryKeywords:
-      l.slug === "spa-porto-empedocle"
-        ? [
-            "spa privata Porto Empedocle",
-            "spa privata Agrigento",
-            "suite spa privata",
-            "jacuzzi idromassaggio privata",
-            "sauna interna privata",
-            "centro benessere privato Porto Empedocle",
-            "suite con idromassaggio Porto Empedocle",
-            "Scala dei Turchi",
-            "Valle dei Templi",
-            "prenotazione diretta WhatsApp",
-          ]
-        : [`${noir.name} ${noir.location}`, "jacuzzi privata", "sauna interna", "prenotazione diretta WhatsApp"],
-    intent: "locale" as const,
-    primaryCta: "WhatsApp" as const,
-  })),
+  ...SEO_LANDINGS.map((l) => {
+    const defaultSecondary = [`${noir.name} ${noir.location}`, "jacuzzi privata", "sauna interna", "prenotazione diretta WhatsApp"];
+
+    if (l.slug === "spa-porto-empedocle") {
+      return {
+        url: `/${l.slug}`,
+        primaryKeyword: l.primaryKeyword,
+        secondaryKeywords: [
+          "spa privata Porto Empedocle",
+          "suite spa Porto Empedocle",
+          "spa privata Agrigento",
+          "suite spa privata",
+          "jacuzzi idromassaggio privata",
+          "sauna interna privata",
+          "centro benessere privato Porto Empedocle",
+          "appartamento con jacuzzi Porto Empedocle",
+          "casa vacanze Porto Empedocle con jacuzzi",
+          "Scala dei Turchi",
+          "Valle dei Templi",
+          "prenotazione diretta WhatsApp",
+        ],
+        intent: "locale" as const,
+        primaryCta: "WhatsApp" as const,
+      };
+    }
+
+    if (l.slug === "suite-porto-empedocle") {
+      return {
+        url: `/${l.slug}`,
+        primaryKeyword: l.primaryKeyword,
+        secondaryKeywords: [
+          "suite Porto Empedocle",
+          "dove dormire a Porto Empedocle",
+          "alloggio romantico Porto Empedocle",
+          "suite con jacuzzi Porto Empedocle",
+          "suite spa Porto Empedocle",
+          "jacuzzi privata",
+          "sauna interna",
+          "weekend romantico Porto Empedocle",
+          "prenotazione diretta WhatsApp",
+        ],
+        intent: "locale" as const,
+        primaryCta: "WhatsApp" as const,
+      };
+    }
+
+    if (l.slug === "suite-spa-porto-empedocle") {
+      return {
+        url: `/${l.slug}`,
+        primaryKeyword: l.primaryKeyword,
+        secondaryKeywords: [
+          "suite spa Porto Empedocle",
+          "spa privata Porto Empedocle",
+          "suite con jacuzzi Porto Empedocle",
+          "suite con jacuzzi in camera",
+          "jacuzzi privata in camera",
+          "sauna privata",
+          "hotel con spa Porto Empedocle",
+          "prenotazione diretta WhatsApp",
+        ],
+        intent: "locale" as const,
+        primaryCta: "WhatsApp" as const,
+      };
+    }
+
+    if (l.slug === "suite-romantica-agrigento") {
+      return {
+        url: `/${l.slug}`,
+        primaryKeyword: l.primaryKeyword,
+        secondaryKeywords: [
+          "suite romantica Agrigento",
+          "dove alloggiare Agrigento coppia",
+          "suite con jacuzzi Agrigento",
+          "suite spa Agrigento",
+          "weekend romantico Agrigento",
+          "spa privata Agrigento",
+          "Valle dei Templi",
+          "prenotazione diretta WhatsApp",
+        ],
+        intent: "locale" as const,
+        primaryCta: "WhatsApp" as const,
+      };
+    }
+
+    if (l.slug === "spa-privata-sicilia") {
+      return {
+        url: `/${l.slug}`,
+        primaryKeyword: l.primaryKeyword,
+        secondaryKeywords: [
+          "spa privata Sicilia",
+          "suite spa Sicilia",
+          "jacuzzi privata Sicilia",
+          "suite con jacuzzi in camera",
+          "suite romantica Sicilia",
+          "weekend romantico Sicilia",
+          "fuga romantica Sicilia",
+          "suite di lusso Sicilia",
+          "prenotazione diretta WhatsApp",
+        ],
+        intent: "locale" as const,
+        primaryCta: "WhatsApp" as const,
+      };
+    }
+
+    return {
+      url: `/${l.slug}`,
+      primaryKeyword: l.primaryKeyword,
+      secondaryKeywords: defaultSecondary,
+      intent: "locale" as const,
+      primaryCta: "WhatsApp" as const,
+    };
+  }),
   {
     url: "/blog",
     primaryKeyword: "guide weekend romantico e suite",

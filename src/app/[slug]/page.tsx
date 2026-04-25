@@ -26,9 +26,32 @@ export async function generateMetadata({
   const landing = SEO_LANDINGS_BY_SLUG[slug];
   if (!landing) return { robots: { index: false, follow: false } };
 
+  const keywords = Array.from(
+    new Set([
+      landing.primaryKeyword,
+      landing.title,
+      noir.location,
+      "suite",
+      "suite per coppie",
+      "suite romantica",
+      "suite con jacuzzi",
+      "suite spa",
+      "spa privata",
+      "jacuzzi privata",
+      "vasca idromassaggio",
+      "sauna interna",
+      "sauna privata",
+      "Agrigento",
+      "Scala dei Turchi",
+      "Valle dei Templi",
+      "prenotazione diretta WhatsApp",
+    ])
+  ).slice(0, 16);
+
   return {
     title: landing.metaTitle,
     description: landing.metaDescription,
+    keywords,
     alternates: { canonical: `/${landing.slug}` },
     openGraph: {
       type: "website",

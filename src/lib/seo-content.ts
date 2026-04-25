@@ -132,7 +132,10 @@ export const SEO_LANDINGS = [
       "spa-privata-porto-empedocle-coppie",
       "spa-privata-agrigento-dove-andare",
       "suite-con-idromassaggio-porto-empedocle",
+      "appartamento-con-jacuzzi-porto-empedocle",
+      "casa-vacanze-porto-empedocle-con-jacuzzi",
       "weekend-scala-dei-turchi-suite-spa",
+      "jacuzzi-in-camera-sicilia-come-scegliere",
       "prenotare-suite-spa-whatsapp",
     ],
     metaTitle: `SPA privata a Porto Empedocle con jacuzzi e sauna | ${noir.name}`,
@@ -338,7 +341,7 @@ export const SEO_LANDINGS = [
     title: "Weekend romantico a Porto Empedocle",
     dateModifiedISO: "2026-04-24",
     suggestedSuite: "passion",
-    relatedBlogSlugs: ["suite-romantica-sicilia-cosa-conta-davvero"],
+    relatedBlogSlugs: ["suite-romantica-sicilia-cosa-conta-davvero", "anniversario-sorpresa-romantica-jacuzzi"],
     metaTitle: `Weekend romantico a Porto Empedocle: suite con jacuzzi privata | ${noir.name}`,
     metaDescription:
       "Weekend romantico a Porto Empedocle: scegli una suite luxury con jacuzzi privata e sauna interna. Da 135€/notte. Prenotazione diretta via WhatsApp.",
@@ -371,6 +374,191 @@ export const SEO_LANDINGS = [
       { q: "È adatto a coppie?", a: "Sì: Euphoria è pensata per fughe romantiche e notti speciali." },
       { q: "Le suite sono indipendenti?", a: "Sì: zero spazi condivisi." },
       { q: "Arrivo e partenza?", a: noir.smartAccess },
+    ],
+  },
+  {
+    slug: "suite-porto-empedocle",
+    primaryKeyword: "suite Porto Empedocle",
+    title: "Suite a Porto Empedocle per coppie (jacuzzi e sauna)",
+    dateModifiedISO: "2026-04-24",
+    suggestedSuite: "passion",
+    relatedBlogSlugs: [
+      "dove-dormire-porto-empedocle-coppia",
+      "appartamento-con-jacuzzi-porto-empedocle",
+      "casa-vacanze-porto-empedocle-con-jacuzzi",
+      "anniversario-sorpresa-romantica-jacuzzi",
+      "prenotare-suite-spa-whatsapp",
+    ],
+    metaTitle: `Suite Porto Empedocle: jacuzzi privata e sauna | ${noir.name}`,
+    metaDescription:
+      "Suite a Porto Empedocle per coppie: jacuzzi privata e sauna interna ad uso esclusivo, comfort completo e zero spazi condivisi. Zona Agrigento. Da 135€/notte. Prenotazione diretta su WhatsApp.",
+    ogTitle: "Suite a Porto Empedocle — Jacuzzi privata & Sauna interna",
+    ogDescription:
+      "Due suite per coppie: Passion (più intima) e Infinity (più scenografica). Wellness privato, privacy totale, prenotazione diretta via WhatsApp.",
+    hero: {
+      eyebrow: "Suite Porto Empedocle",
+      h1: "Suite a Porto Empedocle: la tua notte privata con jacuzzi e sauna.",
+      sub: `Per coppie: zero spazi condivisi, benessere privato e comfort reale. Da €${noir.startingFrom}/notte. ${noir.smartAccess}.`,
+      image: { src: "/passion-letto-jacuzzi-sauna.jpg", alt: "Suite a Porto Empedocle con jacuzzi privata e sauna interna" },
+    },
+    blocks: [
+      {
+        title: "Per coppie (senza interruzioni)",
+        body: "Se cerchi una suite a Porto Empedocle romantica, qui il punto è semplice: privacy totale. Entri, chiudi la porta e l’esperienza resta solo vostra.",
+        bullets: ["Zero spazi condivisi", "Atmosfera notturna", "Perfetta per anniversari e sorprese"],
+      },
+      {
+        title: "Jacuzzi privata + sauna interna",
+        body: "Benessere completo dentro la suite: idromassaggio e calore, senza uscire e senza turni.",
+        bullets: ["Jacuzzi privata ad uso esclusivo", "Sauna interna moderna", "Percorso wellness in privacy"],
+      },
+      {
+        title: "Zona Agrigento: dormi a Porto Empedocle",
+        body: "Base comoda per muoversi tra mare e luoghi iconici. Il valore è rientrare e continuare la serata in wellness privato.",
+        bullets: ["Scala dei Turchi", "Valle dei Templi", "Tramonti sul mare"],
+      },
+    ],
+    faqs: [
+      { q: "È una suite con jacuzzi privata?", a: "Sì: jacuzzi interna alla suite, ad uso esclusivo." },
+      { q: "C’è anche la sauna?", a: "Sì: sauna interna moderna, in privacy totale." },
+      { q: "Come funziona l’accesso?", a: noir.smartAccess },
+    ],
+  },
+  {
+    slug: "suite-spa-porto-empedocle",
+    primaryKeyword: "suite spa Porto Empedocle",
+    title: "Suite SPA a Porto Empedocle con jacuzzi e sauna privata",
+    dateModifiedISO: "2026-04-24",
+    suggestedSuite: "infinity",
+    relatedBlogSlugs: [
+      "spa-privata-porto-empedocle-coppie",
+      "hotel-con-spa-porto-empedocle-alternativa-suite",
+      "jacuzzi-in-camera-sicilia-come-scegliere",
+      "prenotare-suite-spa-whatsapp",
+    ],
+    metaTitle: `Suite SPA Porto Empedocle: jacuzzi privata + sauna | ${noir.name}`,
+    metaDescription:
+      "Suite SPA a Porto Empedocle: jacuzzi privata e sauna interna ad uso esclusivo. Se vuoi una spa per coppie senza condivisione, questa è la soluzione più semplice. Zona Agrigento. Prenota diretto via WhatsApp.",
+    ogTitle: "Suite SPA a Porto Empedocle — Jacuzzi & Sauna private",
+    ogDescription:
+      "SPA privata in suite: niente turni, niente spazi comuni. Per coppie, con prenotazione diretta su WhatsApp.",
+    hero: {
+      eyebrow: "Suite SPA",
+      h1: "Suite SPA a Porto Empedocle: spa privata, in camera.",
+      sub: `Jacuzzi privata e sauna interna ad uso esclusivo. Da €${noir.startingFrom}/notte. ${noir.smartAccess}.`,
+      image: { src: "/infinity-letto.jpg", alt: "Suite SPA a Porto Empedocle con jacuzzi privata e sauna interna" },
+    },
+    blocks: [
+      {
+        title: "SPA in camera (vera)",
+        body: "Una suite spa funziona quando non devi uscire dalla stanza: benessere privato, ritmi tuoi, zero condivisione.",
+        bullets: ["Jacuzzi in suite", "Sauna interna", "Atmosfera per coppie"],
+      },
+      {
+        title: "Se stavi cercando “hotel con spa”",
+        body: "Molti cercano hotel con spa, ma spesso la spa è condivisa o a turni. Qui il benessere è dentro la suite: più privacy, più libertà.",
+      },
+      {
+        title: "Prenotazione diretta",
+        body: "Scrivi su WhatsApp con le date: ti confermiamo disponibilità e la suite migliore per il tuo mood.",
+      },
+    ],
+    faqs: [
+      { q: "È adatta a coppie?", a: "Sì: è pensata per una notte romantica con privacy totale." },
+      { q: "Jacuzzi e sauna sono private?", a: "Sì: interne alla suite e ad uso esclusivo." },
+      { q: "Arrivo e partenza?", a: noir.smartAccess },
+    ],
+  },
+  {
+    slug: "suite-romantica-agrigento",
+    primaryKeyword: "suite romantica Agrigento",
+    title: "Suite romantica in zona Agrigento con jacuzzi e sauna",
+    dateModifiedISO: "2026-04-24",
+    suggestedSuite: "passion",
+    relatedBlogSlugs: [
+      "dove-alloggiare-agrigento-coppia",
+      "suite-con-jacuzzi-agrigento",
+      "suite-con-sauna-agrigento",
+      "regalo-spa-privata-agrigento",
+    ],
+    metaTitle: `Suite romantica Agrigento: jacuzzi privata e sauna | ${noir.name}`,
+    metaDescription:
+      "Suite romantica in zona Agrigento: dormi a Porto Empedocle in una suite per coppie con jacuzzi privata e sauna interna ad uso esclusivo. Da 135€/notte. Prenota diretto via WhatsApp.",
+    ogTitle: "Suite romantica (zona Agrigento) — Jacuzzi & Sauna private",
+    ogDescription:
+      "Per coppie: notte romantica con wellness privato, zero spazi condivisi e prenotazione diretta su WhatsApp.",
+    hero: {
+      eyebrow: "Agrigento (Zona)",
+      h1: "Suite romantica in zona Agrigento: la scelta giusta è la notte.",
+      sub: `Base Porto Empedocle. Jacuzzi privata, sauna interna, atmosfera notturna. Da €${noir.startingFrom}/notte. ${noir.smartAccess}.`,
+      image: { src: "/passion-letto-jacuzzi-sauna.jpg", alt: "Suite romantica in zona Agrigento con jacuzzi e sauna" },
+    },
+    blocks: [
+      {
+        title: "Dove alloggiare (in coppia)",
+        body: "Se stai cercando una suite romantica ad Agrigento, la soluzione più pratica è dormire in zona: Porto Empedocle è comoda e ti dà un finale perfetto della giornata.",
+        bullets: ["Base comoda", "Rientro in spa privata", "Zero stress"],
+      },
+      {
+        title: "Jacuzzi privata + sauna interna",
+        body: "Per una notte romantica, conta la privacy: wellness dentro la suite, senza condivisione e senza turni.",
+        bullets: ["Jacuzzi ad uso esclusivo", "Sauna interna", "Perfetta per anniversario/sorpresa"],
+      },
+      {
+        title: "Idee veloci (zona Agrigento)",
+        body: "Una sola cosa fuori, poi dentro: il weekend funziona quando non lo riempi.",
+        bullets: ["Valle dei Templi", "Scala dei Turchi", "Tramonto e rientro"],
+      },
+    ],
+    faqs: [
+      { q: "È lontano da Agrigento?", a: "Porto Empedocle è in zona Agrigento: posizione comoda per muoversi." },
+      { q: "È un alloggio per coppie?", a: "Sì: progettato per fughe romantiche e notti speciali." },
+      { q: "Come prenoto?", a: "WhatsApp è il modo più rapido: scrivi date e preferenza." },
+    ],
+  },
+  {
+    slug: "spa-privata-sicilia",
+    primaryKeyword: "spa privata Sicilia",
+    title: "SPA privata in Sicilia per coppie (jacuzzi e sauna)",
+    dateModifiedISO: "2026-04-24",
+    suggestedSuite: "infinity",
+    relatedBlogSlugs: [
+      "suite-spa-sicilia-jacuzzi-sauna-privata",
+      "jacuzzi-in-camera-sicilia-come-scegliere",
+      "suite-romantica-sicilia-cosa-conta-davvero",
+      "prenotare-suite-spa-whatsapp",
+    ],
+    metaTitle: `SPA privata in Sicilia: suite con jacuzzi e sauna | ${noir.name}`,
+    metaDescription:
+      "SPA privata in Sicilia per coppie: suite con jacuzzi privata e sauna interna ad uso esclusivo a Porto Empedocle (zona Agrigento). Se vuoi privacy totale, questa è la scelta più diretta. Da 135€/notte.",
+    ogTitle: "SPA privata in Sicilia — Jacuzzi & Sauna ad uso esclusivo",
+    ogDescription:
+      "Suite spa privata per coppie: niente spazi comuni, niente turni. Prenotazione diretta su WhatsApp.",
+    hero: {
+      eyebrow: "Sicilia",
+      h1: "SPA privata in Sicilia: una notte, zero condivisione.",
+      sub: `Jacuzzi privata + sauna interna. Porto Empedocle (zona Agrigento). Da €${noir.startingFrom}/notte. ${noir.smartAccess}.`,
+      image: { src: "/infinity-letto.jpg", alt: "SPA privata in Sicilia con jacuzzi privata e sauna interna" },
+    },
+    blocks: [
+      {
+        title: "La differenza: privata = dentro la suite",
+        body: "Se cerchi spa privata in Sicilia, controlla una cosa: che benessere e privacy siano dentro la stanza. È così che l’esperienza diventa davvero “per coppie”.",
+        bullets: ["Jacuzzi e sauna in suite", "Uso esclusivo", "Niente turni"],
+      },
+      {
+        title: "Alternative a “hotel con spa”",
+        body: "Molte ricerche partono da hotel/resort con spa. Se però vuoi intimità, una suite spa privata è spesso più adatta: meno persone, più libertà.",
+      },
+      {
+        title: "Prenota diretto",
+        body: "WhatsApp è il modo più rapido per bloccare la data e scegliere la suite migliore per te.",
+      },
+    ],
+    faqs: [
+      { q: "È adatta a weekend romantici in Sicilia?", a: "Sì: è pensata per coppie, anniversari e fughe romantiche." },
+      { q: "Jacuzzi e sauna sono private?", a: "Sì: interne alla suite e ad uso esclusivo." },
+      { q: "Check-in / check-out?", a: noir.smartAccess },
     ],
   },
 ] satisfies SeoLanding[];
@@ -741,6 +929,229 @@ export const BLOG_POSTS: BlogPost[] = [
       {
         title: "Cosa includi nella richiesta",
         body: "Se è un anniversario o una sorpresa, scrivilo: possiamo consigliarti la suite migliore e il setup più adatto.",
+      },
+    ],
+  },
+  {
+    slug: "appartamento-con-jacuzzi-porto-empedocle",
+    primaryKeyword: "appartamento con jacuzzi Porto Empedocle",
+    title: "Appartamento con jacuzzi a Porto Empedocle: cosa cercare (e perché una suite spa privata vince)",
+    metaTitle: `Appartamento con jacuzzi Porto Empedocle: guida rapida per coppie | ${noir.name}`,
+    metaDescription:
+      "Appartamento con jacuzzi a Porto Empedocle: checklist concreta per coppie (privacy, uso esclusivo, sauna interna). Se vuoi davvero “in camera”, una suite spa privata è la scelta più semplice.",
+    excerpt:
+      "Cerchi un appartamento con jacuzzi? Ecco cosa controllare per evitare offerte “mezze” e puntare sulla privacy reale.",
+    datePublishedISO: "2026-04-24",
+    relatedLandingSlugs: ["suite-porto-empedocle", "spa-porto-empedocle", "suite-spa-porto-empedocle", "jacuzzi-privata-porto-empedocle"],
+    heroImage: { src: "/passion-jacuzzi.jpg", alt: "Appartamento con jacuzzi a Porto Empedocle: alternativa suite spa privata" },
+    sections: [
+      {
+        title: "Jacuzzi: la domanda è “è ad uso esclusivo?”",
+        body: "Che sia appartamento o suite, cambia tutto se la jacuzzi è davvero privata e interna all’alloggio. Se è condivisa o a turni, non è quello che stai cercando.",
+      },
+      {
+        title: "Se vuoi un livello in più: sauna interna",
+        body: "Sauna interna = percorso completo. È il dettaglio che trasforma un “alloggio con idromassaggio” in una spa privata per coppie.",
+        bullets: ["Jacuzzi privata", "Sauna interna", "Zero spazi condivisi"],
+      },
+      {
+        title: "Porto Empedocle: base comoda (zona Agrigento)",
+        body: "Se vuoi anche mare e luoghi iconici, sei vicino alla costa e alla Valle dei Templi. Ma il punto forte resta la notte, in privacy totale.",
+      },
+    ],
+  },
+  {
+    slug: "casa-vacanze-porto-empedocle-con-jacuzzi",
+    primaryKeyword: "casa vacanze Porto Empedocle con jacuzzi",
+    title: "Casa vacanze a Porto Empedocle con jacuzzi: guida rapida per coppie",
+    metaTitle: `Casa vacanze Porto Empedocle con jacuzzi: cosa controllare | ${noir.name}`,
+    metaDescription:
+      "Casa vacanze a Porto Empedocle con jacuzzi: cosa controllare prima di prenotare (uso esclusivo, privacy reale, sauna interna). Alternative: suite spa privata per coppie.",
+    excerpt:
+      "Una casa vacanze con jacuzzi può essere perfetta. Basta scegliere quella giusta: ecco i criteri senza giri di parole.",
+    datePublishedISO: "2026-04-24",
+    relatedLandingSlugs: ["suite-porto-empedocle", "spa-porto-empedocle", "suite-spa-porto-empedocle"],
+    heroImage: { src: "/passion-letto-jacuzzi-sauna.jpg", alt: "Casa vacanze romantica a Porto Empedocle con jacuzzi" },
+    sections: [
+      {
+        title: "Privacy: evita le “quasi private”",
+        body: "Molte case vacanze promettono relax, ma poi hai spazi comuni o regole che interrompono il mood. Per coppie, privacy totale è la base.",
+        bullets: ["Ingresso riservato", "Niente spazi condivisi", "Atmosfera per due"],
+      },
+      {
+        title: "Jacuzzi + sauna: il pacchetto completo",
+        body: "Se vuoi un’esperienza spa vera, la combinazione acqua + calore cambia tutto. Sauna interna in alloggio = upgrade immediato.",
+      },
+      {
+        title: "Prenotazione diretta: più semplice",
+        body: "Per disponibilità e dettagli rapidi, il contatto diretto via WhatsApp è il modo più veloce.",
+      },
+    ],
+  },
+  {
+    slug: "dove-dormire-porto-empedocle-coppia",
+    primaryKeyword: "dove dormire a Porto Empedocle",
+    title: "Dove dormire a Porto Empedocle (in coppia): la scelta che vale davvero",
+    metaTitle: `Dove dormire a Porto Empedocle in coppia: guida pratica | ${noir.name}`,
+    metaDescription:
+      "Dove dormire a Porto Empedocle in coppia: guida pratica tra posizione, privacy e benessere. Se vuoi una notte romantica con jacuzzi e sauna ad uso esclusivo, punta su una suite spa privata.",
+    excerpt:
+      "Se devi scegliere un solo criterio, è questo: la notte deve essere un’esperienza, non una stanza.",
+    datePublishedISO: "2026-04-24",
+    relatedLandingSlugs: ["suite-porto-empedocle", "spa-porto-empedocle", "suite-vicino-scala-dei-turchi", "weekend-romantico-porto-empedocle"],
+    heroImage: { src: "/infinity-letto.jpg", alt: "Dove dormire a Porto Empedocle: suite romantica per coppie" },
+    sections: [
+      {
+        title: "Scegli la notte, non solo la posizione",
+        body: "Scala dei Turchi e mare sono vicini, ma la differenza la fa come finisce la giornata. Per coppie, una suite con wellness privato vale più di una lista infinita di servizi.",
+      },
+      {
+        title: "Se cerchi romanticismo: privacy + wellness",
+        body: "Jacuzzi privata e sauna interna sono il modo più semplice per rendere una notte davvero romantica, senza stress e senza condivisione.",
+        bullets: ["Jacuzzi privata", "Sauna interna", "Smart access"],
+      },
+      {
+        title: "Prenota diretto (WhatsApp)",
+        body: "Scrivi date e preferenza: ti confermiamo disponibilità e la suite migliore per voi due.",
+      },
+    ],
+  },
+  {
+    slug: "dove-alloggiare-agrigento-coppia",
+    primaryKeyword: "dove alloggiare Agrigento coppia",
+    title: "Dove alloggiare in zona Agrigento (in coppia): base Porto Empedocle + suite spa",
+    metaTitle: `Dove alloggiare Agrigento in coppia: Porto Empedocle + spa privata | ${noir.name}`,
+    metaDescription:
+      "Dove alloggiare in zona Agrigento in coppia: scegli una base comoda (Porto Empedocle) e chiudi la giornata in una suite spa privata con jacuzzi e sauna ad uso esclusivo.",
+    excerpt:
+      "Agrigento di giorno, spa privata di notte: il piano più semplice che funziona.",
+    datePublishedISO: "2026-04-24",
+    relatedLandingSlugs: ["suite-romantica-agrigento", "weekend-romantico-agrigento", "suite-vicino-valle-dei-templi", "spa-porto-empedocle"],
+    heroImage: { src: "/passion-letto-jacuzzi-sauna.jpg", alt: "Dove alloggiare in zona Agrigento in coppia: suite spa" },
+    sections: [
+      {
+        title: "La scelta pratica: dormire in zona Agrigento",
+        body: "Se vuoi visitare la Valle dei Templi e la costa, Porto Empedocle è una base comoda. Il valore aggiunto è rientrare in una suite che diventa l’esperienza.",
+        bullets: ["Valle dei Templi", "Scala dei Turchi", "Rientro in spa privata"],
+      },
+      {
+        title: "Suite romantica: cosa cambia davvero",
+        body: "Non è “camera carina”. È privacy totale + wellness in camera: jacuzzi e sauna ad uso esclusivo.",
+      },
+      {
+        title: "Prenota diretto",
+        body: "WhatsApp: date, occasione e preferenza. Risposta rapida e zero passaggi.",
+      },
+    ],
+  },
+  {
+    slug: "hotel-con-spa-porto-empedocle-alternativa-suite",
+    primaryKeyword: "hotel con spa Porto Empedocle",
+    title: "Hotel con spa a Porto Empedocle? Se vuoi privacy totale, meglio una suite spa privata",
+    metaTitle: `Hotel con spa Porto Empedocle: alternativa più privata | ${noir.name}`,
+    metaDescription:
+      "Hotel con spa a Porto Empedocle: se stai cercando spa per coppie senza condivisione, spesso la scelta migliore è una suite spa privata con jacuzzi e sauna interne ad uso esclusivo.",
+    excerpt:
+      "Se la tua priorità è intimità (non la hall), qui trovi la differenza tra spa “di struttura” e spa privata in camera.",
+    datePublishedISO: "2026-04-24",
+    relatedLandingSlugs: ["suite-spa-porto-empedocle", "spa-porto-empedocle", "suite-porto-empedocle"],
+    heroImage: { src: "/infinity-letto.jpg", alt: "Alternativa a hotel con spa: suite spa privata a Porto Empedocle" },
+    sections: [
+      {
+        title: "Il punto: spa condivisa vs spa privata",
+        body: "Molti hotel hanno spa, ma spesso è condivisa o a turni. Se vuoi una notte intera, la soluzione più diretta è avere jacuzzi e sauna dentro la suite.",
+      },
+      {
+        title: "Per coppie: la privacy è il lusso",
+        body: "Zero spazi comuni significa meno frizioni e più atmosfera. È questo che rende una notte davvero romantica.",
+      },
+      {
+        title: "Prenotazione diretta",
+        body: "Scrivi su WhatsApp: ti confermiamo disponibilità e ti consigliamo la suite migliore per il tuo mood.",
+      },
+    ],
+  },
+  {
+    slug: "suite-spa-sicilia-jacuzzi-sauna-privata",
+    primaryKeyword: "suite spa Sicilia",
+    title: "Suite SPA in Sicilia: jacuzzi privata + sauna (cosa cercare per una vera spa privata)",
+    metaTitle: `Suite spa Sicilia: jacuzzi privata e sauna interna | ${noir.name}`,
+    metaDescription:
+      "Suite spa in Sicilia: guida concreta per coppie. Cosa significa spa privata, perché jacuzzi e sauna devono essere in camera e ad uso esclusivo, e come evitare spa condivise o a turni.",
+    excerpt:
+      "Vuoi una suite spa in Sicilia? Ecco i criteri che contano davvero per privacy e benessere.",
+    datePublishedISO: "2026-04-24",
+    relatedLandingSlugs: ["spa-privata-sicilia", "suite-con-sauna-sicilia", "spa-porto-empedocle"],
+    heroImage: { src: "/passion-letto-jacuzzi-sauna.jpg", alt: "Suite spa in Sicilia con jacuzzi privata e sauna interna" },
+    sections: [
+      {
+        title: "Spa privata: deve essere dentro la stanza",
+        body: "Se devi uscire dalla camera o condividi spazi, non è davvero privata. Una suite spa privata mette tutto dentro l’alloggio.",
+      },
+      {
+        title: "Jacuzzi + sauna: percorso completo",
+        body: "Acqua e calore sono la combo che trasforma un weekend romantico. Per coppie, è la differenza tra “carino” e “memorabile”.",
+        bullets: ["Jacuzzi privata", "Sauna interna", "Atmosfera notturna"],
+      },
+      {
+        title: "Sicilia (zona Agrigento): base Porto Empedocle",
+        body: "Comoda per muoversi tra mare e mete iconiche, con una notte in wellness privato come punto forte.",
+      },
+    ],
+  },
+  {
+    slug: "jacuzzi-in-camera-sicilia-come-scegliere",
+    primaryKeyword: "suite con jacuzzi in camera",
+    title: "Suite con jacuzzi in camera: come scegliere in Sicilia (jacuzzi privata e sauna)",
+    metaTitle: `Suite con jacuzzi in camera in Sicilia: guida per coppie | ${noir.name}`,
+    metaDescription:
+      "Suite con jacuzzi in camera: guida rapida per Sicilia. Differenza tra jacuzzi privata e idromassaggio generico, perché la sauna interna alza il livello e come evitare spa condivise (hotel/resort).",
+    excerpt:
+      "Cerchi jacuzzi in camera? Ecco cosa controllare per avere davvero privacy e benessere privato.",
+    datePublishedISO: "2026-04-24",
+    relatedLandingSlugs: ["spa-privata-sicilia", "spa-porto-empedocle", "suite-spa-porto-empedocle", "jacuzzi-privata-porto-empedocle"],
+    heroImage: { src: "/passion-jacuzzi.jpg", alt: "Suite con jacuzzi in camera in Sicilia: jacuzzi privata e sauna" },
+    sections: [
+      {
+        title: "Jacuzzi in camera: privata o no?",
+        body: "La parola “in camera” conta solo se l’uso è esclusivo. Se c’è condivisione, non è una vera esperienza per coppie.",
+      },
+      {
+        title: "Sauna interna: la svolta",
+        body: "Sauna interna significa percorso completo. È l’upgrade che rende l’esperienza una spa privata, non solo “vasca con getti”.",
+        bullets: ["Sauna interna", "Jacuzzi privata", "Zero spazi comuni"],
+      },
+      {
+        title: "Perché molte ricerche partono da hotel/resort",
+        body: "È normale cercare hotel con jacuzzi/spa. Ma se la priorità è intimità, spesso una suite spa privata è più adatta.",
+      },
+    ],
+  },
+  {
+    slug: "anniversario-sorpresa-romantica-jacuzzi",
+    primaryKeyword: "sorpresa romantica con jacuzzi",
+    title: "Anniversario o sorpresa romantica: perché una notte con jacuzzi e sauna funziona sempre",
+    metaTitle: `Sorpresa romantica con jacuzzi: idea anniversario per coppie | ${noir.name}`,
+    metaDescription:
+      "Sorpresa romantica con jacuzzi: idea semplice per anniversario o fuga di coppia in Sicilia. Una suite con jacuzzi privata e sauna interna ad uso esclusivo crea un ricordo immediato. Prenotazione diretta su WhatsApp.",
+    excerpt:
+      "Quando vuoi stupire davvero, scegli un’esperienza: privacy, benessere e una notte fuori dall’ordinario.",
+    datePublishedISO: "2026-04-24",
+    relatedLandingSlugs: ["suite-romantica-porto-empedocle", "suite-porto-empedocle", "weekend-romantico-porto-empedocle", "spa-porto-empedocle"],
+    heroImage: { src: "/infinity-letto.jpg", alt: "Sorpresa romantica con jacuzzi privata e sauna interna" },
+    sections: [
+      {
+        title: "Perché una notte “con spa privata” batte qualsiasi regalo",
+        body: "Un oggetto è un oggetto. Un’esperienza in coppia diventa un ricordo. Jacuzzi e sauna in privacy totale fanno il resto.",
+      },
+      {
+        title: "Il piano che funziona: semplice",
+        body: "Non riempire la giornata: una cena, rientro e spa privata in suite. Il momento forte è la notte.",
+        bullets: ["Cena lenta", "Rientro in privacy", "Jacuzzi + sauna"],
+      },
+      {
+        title: "Cosa scrivere per prenotare (WhatsApp)",
+        body: "Date, occasione e preferenza (più intima o più scenografica). Ti confermiamo disponibilità e opzione migliore.",
       },
     ],
   },
