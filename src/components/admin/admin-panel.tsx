@@ -11,7 +11,7 @@ import {
 } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import { type BookingRecord, type BookingStatus } from "@/lib/booking/types";
-import { suites } from "@/lib/noir";
+import { noir, suites } from "@/lib/noir";
 
 type View = "pending" | "confirmed" | "cancelled";
 
@@ -32,6 +32,61 @@ export function AdminPanel() {
   const [view, setView] = useState<View>("pending");
   const [loading, setLoading] = useState(false);
   const [msg, setMsg] = useState<string | null>(null);
+  const [linkCopied, setLinkCopied] = useState(false);
+
+  const [gNome, setGNome] = useState("");
+  const [gSuite, setGSuite] = useState<"" | "passion" | "infinity">("");
+  const [gArrivo, setGArrivo] = useState("");
+  const [gPartenza, setGPartenza] = useState("");
+  const [gOccasione, setGOccasione] = useState<"" | "anniversario" | "sorpresa" | "proposta" | "weekend">("");
+  const [gCodice, setGCodice] = useState("");
+  const [gCheckIn, setGCheckIn] = useState("");
+  const [gCheckOut, setGCheckOut] = useState("");
+  const [gWifi, setGWifi] = useState("");
+  const [gWifiPass, setGWifiPass] = useState("");
+  const [gMaps, setGMaps] = useState("");
+  const [gParcheggio, setGParcheggio] = useState("");
+  const [gRistoranti, setGRistoranti] = useState("");
+  const [gNote, setGNote] = useState("");
+
+  const guestLink = useMemo(() => {
+    const url = new URL("/ospiti", noir.siteUrl);
+    const sp = url.searchParams;
+    const add = (k: string, v: string) => {
+      const t = v.trim();
+      if (t) sp.set(k, t);
+    };
+    add("nome", gNome);
+    if (gSuite) add("suite", gSuite);
+    add("arrivo", gArrivo);
+    add("partenza", gPartenza);
+    if (gOccasione) add("occasione", gOccasione);
+    add("codice", gCodice);
+    add("checkin", gCheckIn);
+    add("checkout", gCheckOut);
+    add("wifi", gWifi);
+    add("wifiPass", gWifiPass);
+    add("maps", gMaps);
+    add("parcheggio", gParcheggio);
+    add("ristoranti", gRistoranti);
+    add("note", gNote);
+    return url.toString();
+  }, [
+    gNome,
+    gSuite,
+    gArrivo,
+    gPartenza,
+    gOccasione,
+    gCodice,
+    gCheckIn,
+    gCheckOut,
+    gWifi,
+    gWifiPass,
+    gMaps,
+    gParcheggio,
+    gRistoranti,
+    gNote,
+  ]);
 
   const load = async () => {
     setLoading(true);
@@ -312,6 +367,183 @@ export function AdminPanel() {
               </div>
               <div className="mt-3 text-xs text-noir-mist/45">
                 Per sbloccare: imposta lo stato su “Cancellata” o elimina il record.
+              </div>
+            </div>
+
+            <div className="noir-panel p-6">
+              <div className="text-xs tracking-[0.26em] uppercase text-noir-mist/55">
+                Generatore link ospiti (Guida /ospiti)
+              </div>
+              <div className="mt-4 grid gap-3 md:grid-cols-12">
+                <label className="md:col-span-4">
+                  <div className="text-xs tracking-[0.22em] uppercase text-noir-mist/45">Nome</div>
+                  <input
+                    value={gNome}
+                    onChange={(e) => setGNome(e.target.value)}
+                    placeholder="Es. Marco"
+                    className="mt-2 h-11 w-full rounded-full border border-white/10 bg-white/5 px-4 text-sm text-noir-mist/85 outline-none"
+                  />
+                </label>
+                <label className="md:col-span-4">
+                  <div className="text-xs tracking-[0.22em] uppercase text-noir-mist/45">Suite</div>
+                  <select
+                    value={gSuite}
+                    onChange={(e) => setGSuite(e.target.value as "" | "passion" | "infinity")}
+                    className="mt-2 h-11 w-full rounded-full border border-white/10 bg-white/5 px-4 text-sm text-noir-mist/85 outline-none"
+                  >
+                    <option value="">(non specificata)</option>
+                    <option value="passion">Passion</option>
+                    <option value="infinity">Infinity</option>
+                  </select>
+                </label>
+                <label className="md:col-span-4">
+                  <div className="text-xs tracking-[0.22em] uppercase text-noir-mist/45">Occasione</div>
+                  <select
+                    value={gOccasione}
+                    onChange={(e) =>
+                      setGOccasione(e.target.value as "" | "anniversario" | "sorpresa" | "proposta" | "weekend")
+                    }
+                    className="mt-2 h-11 w-full rounded-full border border-white/10 bg-white/5 px-4 text-sm text-noir-mist/85 outline-none"
+                  >
+                    <option value="">(nessuna)</option>
+                    <option value="anniversario">Anniversario</option>
+                    <option value="sorpresa">Sorpresa</option>
+                    <option value="proposta">Proposta</option>
+                    <option value="weekend">Weekend</option>
+                  </select>
+                </label>
+
+                <label className="md:col-span-3">
+                  <div className="text-xs tracking-[0.22em] uppercase text-noir-mist/45">Arrivo</div>
+                  <input
+                    value={gArrivo}
+                    onChange={(e) => setGArrivo(e.target.value)}
+                    placeholder="Es. 25/04"
+                    className="mt-2 h-11 w-full rounded-full border border-white/10 bg-white/5 px-4 text-sm text-noir-mist/85 outline-none"
+                  />
+                </label>
+                <label className="md:col-span-3">
+                  <div className="text-xs tracking-[0.22em] uppercase text-noir-mist/45">Partenza</div>
+                  <input
+                    value={gPartenza}
+                    onChange={(e) => setGPartenza(e.target.value)}
+                    placeholder="Es. 26/04"
+                    className="mt-2 h-11 w-full rounded-full border border-white/10 bg-white/5 px-4 text-sm text-noir-mist/85 outline-none"
+                  />
+                </label>
+                <label className="md:col-span-3">
+                  <div className="text-xs tracking-[0.22em] uppercase text-noir-mist/45">Check-in</div>
+                  <input
+                    value={gCheckIn}
+                    onChange={(e) => setGCheckIn(e.target.value)}
+                    placeholder="Es. 15:00"
+                    className="mt-2 h-11 w-full rounded-full border border-white/10 bg-white/5 px-4 text-sm text-noir-mist/85 outline-none"
+                  />
+                </label>
+                <label className="md:col-span-3">
+                  <div className="text-xs tracking-[0.22em] uppercase text-noir-mist/45">Check-out</div>
+                  <input
+                    value={gCheckOut}
+                    onChange={(e) => setGCheckOut(e.target.value)}
+                    placeholder="Es. 11:00"
+                    className="mt-2 h-11 w-full rounded-full border border-white/10 bg-white/5 px-4 text-sm text-noir-mist/85 outline-none"
+                  />
+                </label>
+
+                <label className="md:col-span-4">
+                  <div className="text-xs tracking-[0.22em] uppercase text-noir-mist/45">Codice porta</div>
+                  <input
+                    value={gCodice}
+                    onChange={(e) => setGCodice(e.target.value)}
+                    placeholder="4–10 cifre"
+                    className="mt-2 h-11 w-full rounded-full border border-white/10 bg-white/5 px-4 text-sm text-noir-mist/85 outline-none"
+                  />
+                </label>
+                <label className="md:col-span-4">
+                  <div className="text-xs tracking-[0.22em] uppercase text-noir-mist/45">Wi‑Fi</div>
+                  <input
+                    value={gWifi}
+                    onChange={(e) => setGWifi(e.target.value)}
+                    placeholder="Nome rete"
+                    className="mt-2 h-11 w-full rounded-full border border-white/10 bg-white/5 px-4 text-sm text-noir-mist/85 outline-none"
+                  />
+                </label>
+                <label className="md:col-span-4">
+                  <div className="text-xs tracking-[0.22em] uppercase text-noir-mist/45">Password Wi‑Fi</div>
+                  <input
+                    value={gWifiPass}
+                    onChange={(e) => setGWifiPass(e.target.value)}
+                    placeholder="Password"
+                    className="mt-2 h-11 w-full rounded-full border border-white/10 bg-white/5 px-4 text-sm text-noir-mist/85 outline-none"
+                  />
+                </label>
+
+                <label className="md:col-span-12">
+                  <div className="text-xs tracking-[0.22em] uppercase text-noir-mist/45">Google Maps (URL)</div>
+                  <input
+                    value={gMaps}
+                    onChange={(e) => setGMaps(e.target.value)}
+                    placeholder="Incolla un link Google Maps (opzionale)"
+                    className="mt-2 h-11 w-full rounded-full border border-white/10 bg-white/5 px-4 text-sm text-noir-mist/85 outline-none"
+                  />
+                </label>
+
+                <label className="md:col-span-4">
+                  <div className="text-xs tracking-[0.22em] uppercase text-noir-mist/45">Parcheggi (1 per riga)</div>
+                  <textarea
+                    value={gParcheggio}
+                    onChange={(e) => setGParcheggio(e.target.value)}
+                    placeholder="Es. Parcheggio vicino …"
+                    className="mt-2 min-h-[120px] w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-noir-mist/85 outline-none"
+                  />
+                </label>
+                <label className="md:col-span-4">
+                  <div className="text-xs tracking-[0.22em] uppercase text-noir-mist/45">Ristoranti (1 per riga)</div>
+                  <textarea
+                    value={gRistoranti}
+                    onChange={(e) => setGRistoranti(e.target.value)}
+                    placeholder="Es. Nome ristorante — zona"
+                    className="mt-2 min-h-[120px] w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-noir-mist/85 outline-none"
+                  />
+                </label>
+                <label className="md:col-span-4">
+                  <div className="text-xs tracking-[0.22em] uppercase text-noir-mist/45">Note (1 per riga)</div>
+                  <textarea
+                    value={gNote}
+                    onChange={(e) => setGNote(e.target.value)}
+                    placeholder="Es. Occhio alla porta: attendi 3–5s per chiuderla"
+                    className="mt-2 min-h-[120px] w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-noir-mist/85 outline-none"
+                  />
+                </label>
+              </div>
+
+              <div className="mt-5 grid gap-3 md:grid-cols-12 md:items-center">
+                <div className="md:col-span-9">
+                  <input
+                    value={guestLink}
+                    readOnly
+                    onFocus={(e) => e.currentTarget.select()}
+                    className="h-11 w-full rounded-full border border-white/10 bg-white/5 px-4 text-sm text-noir-mist/85 outline-none"
+                  />
+                </div>
+                <div className="md:col-span-3">
+                  <button
+                    type="button"
+                    className="noir-button noir-button-primary w-full justify-center py-3"
+                    onClick={async () => {
+                      await navigator.clipboard.writeText(guestLink).catch(() => null);
+                      setLinkCopied(true);
+                      window.setTimeout(() => setLinkCopied(false), 1200);
+                    }}
+                  >
+                    <Check className="h-4 w-4 text-white/90" />
+                    {linkCopied ? "Copiato" : "Copia link"}
+                  </button>
+                </div>
+              </div>
+
+              <div className="mt-3 text-xs text-noir-mist/45">
+                Il link contiene i dati in URL. Compila solo ciò che vuoi mostrare all’ospite.
               </div>
             </div>
 
