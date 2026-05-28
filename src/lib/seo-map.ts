@@ -110,6 +110,27 @@ export const SEO_MAP: SeoMapEntry[] = [
       };
     }
 
+    if (l.slug === "suite-con-tastierino-porto-empedocle") {
+      return {
+        url: `/${l.slug}`,
+        primaryKeyword: l.primaryKeyword,
+        secondaryKeywords: [
+          "suite con tastierino Porto Empedocle",
+          "suite con check-in autonomo Sicilia",
+          "check-in autonomo Porto Empedocle",
+          "accesso con codice",
+          "smart check-in",
+          "suite con spa in camera",
+          "suite con spa privata in camera",
+          "jacuzzi privata in camera",
+          "sauna interna",
+          "prenotazione diretta WhatsApp",
+        ],
+        intent: "locale" as const,
+        primaryCta: "WhatsApp" as const,
+      };
+    }
+
     if (l.slug === "suite-romantica-agrigento") {
       return {
         url: `/${l.slug}`,
@@ -122,6 +143,106 @@ export const SEO_MAP: SeoMapEntry[] = [
           "weekend romantico Agrigento",
           "spa privata Agrigento",
           "Valle dei Templi",
+          "prenotazione diretta WhatsApp",
+        ],
+        intent: "locale" as const,
+        primaryCta: "WhatsApp" as const,
+      };
+    }
+
+    if (l.slug === "suite-con-jacuzzi-agrigento") {
+      return {
+        url: `/${l.slug}`,
+        primaryKeyword: l.primaryKeyword,
+        secondaryKeywords: [
+          "suite con jacuzzi Agrigento",
+          "suite con jacuzzi in zona Agrigento",
+          "suite con jacuzzi in camera",
+          "jacuzzi privata in camera",
+          "suite spa privata",
+          "sauna interna",
+          "spa privata Agrigento",
+          "Porto Empedocle",
+          "prenotazione diretta WhatsApp",
+        ],
+        intent: "locale" as const,
+        primaryCta: "WhatsApp" as const,
+      };
+    }
+
+    if (l.slug === "camera-con-vasca-idromassaggio-agrigento") {
+      return {
+        url: `/${l.slug}`,
+        primaryKeyword: l.primaryKeyword,
+        secondaryKeywords: [
+          "camera con vasca idromassaggio Agrigento",
+          "camera con idromassaggio Agrigento",
+          "vasca idromassaggio in camera",
+          "suite con idromassaggio",
+          "jacuzzi idromassaggio privata",
+          "sauna interna",
+          "suite spa privata in camera",
+          "Porto Empedocle",
+          "prenotazione diretta WhatsApp",
+        ],
+        intent: "locale" as const,
+        primaryCta: "WhatsApp" as const,
+      };
+    }
+
+    if (l.slug === "bb-romantico-agrigento") {
+      return {
+        url: `/${l.slug}`,
+        primaryKeyword: l.primaryKeyword,
+        secondaryKeywords: [
+          "b&b romantico Agrigento",
+          "alloggio romantico Agrigento",
+          "weekend romantico Agrigento",
+          "fuga romantica Agrigento",
+          "suite per coppie Agrigento",
+          "suite con spa in camera",
+          "suite con spa privata in camera",
+          "Porto Empedocle",
+          "prenotazione diretta WhatsApp",
+        ],
+        intent: "locale" as const,
+        primaryCta: "WhatsApp" as const,
+      };
+    }
+
+    if (l.slug === "suite-per-coppie-agrigento") {
+      return {
+        url: `/${l.slug}`,
+        primaryKeyword: l.primaryKeyword,
+        secondaryKeywords: [
+          "suite per coppie Agrigento",
+          "suite romantica Agrigento",
+          "suite spa Agrigento",
+          "suite con jacuzzi Agrigento",
+          "spa privata per coppie Sicilia",
+          "anniversario Agrigento",
+          "sorpresa romantica Agrigento",
+          "Porto Empedocle",
+          "prenotazione diretta WhatsApp",
+        ],
+        intent: "locale" as const,
+        primaryCta: "WhatsApp" as const,
+      };
+    }
+
+    if (l.slug === "fuga-romantica-agrigento") {
+      return {
+        url: `/${l.slug}`,
+        primaryKeyword: l.primaryKeyword,
+        secondaryKeywords: [
+          "fuga romantica Agrigento",
+          "notte romantica Agrigento",
+          "weekend romantico Agrigento",
+          "suite romantica Agrigento",
+          "suite con spa privata in camera",
+          "jacuzzi privata",
+          "sauna interna",
+          "Porto Empedocle",
           "prenotazione diretta WhatsApp",
         ],
         intent: "locale" as const,

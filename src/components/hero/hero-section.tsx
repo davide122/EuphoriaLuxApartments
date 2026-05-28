@@ -77,7 +77,7 @@ export function HeroSection() {
       <div className="relative z-10 noir-container flex min-h-[100svh] flex-col justify-end pb-14 pt-28 sm:pb-16">
         <div className="inline-flex items-center gap-2 text-[11px] tracking-[0.22em] uppercase text-noir-mist/60">
           <Sparkles className="h-4 w-4 text-noir-aqua" />
-          Private luxury experience — Porto Empedocle
+          Suite con spa privata — Porto Empedocle
         </div>
 
         <motion.h1
@@ -86,7 +86,7 @@ export function HeroSection() {
           animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           transition={{ duration: 1.0, ease: [0.22, 1, 0.36, 1], delay: 0.12 }}
         >
-          Euphoria: Jacuzzi privata + Sauna. Una notte che non si dimentica.
+          Euphoria: suite con jacuzzi privata e sauna a Porto Empedocle.
         </motion.h1>
 
         <motion.p
@@ -96,8 +96,8 @@ export function HeroSection() {
           transition={{ duration: 1.0, ease: [0.22, 1, 0.36, 1], delay: 0.22 }}
         >
           Porto Empedocle, Sicilia. Due suite per coppie: Passion (più intima) e Infinity
-          (più scenografica). Privacy totale, luci immersive e benessere privato.
-          Prenotazione diretta in 2 minuti su WhatsApp.
+          (più spaziosa). Jacuzzi privata e sauna interna in camera, senza condivisione.
+          Prenotazione diretta su WhatsApp.
         </motion.p>
 
         <motion.div

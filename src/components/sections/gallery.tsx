@@ -18,8 +18,8 @@ export function GallerySection() {
             title="Ogni foto è un dettaglio reale. Zero “effetto catalogo”."
             description={
               <>
-                Quello che vedi è ciò che trovi: privacy totale, spa interna, luci notturne e
-                materiali che fanno scena. Se ti ci vedi già, scrivi ora: ti diciamo cosa è libero.
+                Quello che vedi è ciò che trovi: privacy totale e SPA privata in suite (jacuzzi + sauna).
+                Se vuoi sapere cosa è libero, scrivici su WhatsApp.
               </>
             }
           />

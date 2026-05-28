@@ -16,11 +16,11 @@ export function DirectBookingSection() {
         <Reveal>
           <SectionHeader
             eyebrow="Prenotazione Diretta"
-            title="Prenota diretto. Più semplice. Più veloce. Più Euphoria."
+            title="Prenotazione diretta su WhatsApp."
             description={
               <>
-                WhatsApp è il modo più rapido: ti diciamo disponibilità e miglior opzione tra
-                Passion e Infinity. Da €{noir.startingFrom}/notte. {noir.smartAccess}.
+                Scrivi date e numero di persone: ti confermiamo disponibilità e ti aiutiamo a
+                scegliere tra Passion e Infinity. Da €{noir.startingFrom}/notte. {noir.smartAccess}.
               </>
             }
             right={<div className="hidden items-center gap-2 md:inline-flex" />}
@@ -30,16 +30,16 @@ export function DirectBookingSection() {
         <div className="mt-12 grid gap-5 md:grid-cols-3">
           {[
             {
-              k: "Disponibilità immediata",
-              v: "Niente passaggi: scrivi e ti rispondiamo rapidamente con le date libere.",
+              k: "Risposta rapida",
+              v: "Scrivi le date e ti diciamo subito cosa è libero.",
             },
             {
-              k: "Esperienza su misura",
-              v: "Anniversario, sorpresa, weekend romantico: scegliamo insieme la suite giusta.",
+              k: "Scelta semplice",
+              v: "Ti guidiamo tra Passion e Infinity in base a quello che cerchi.",
             },
             {
-              k: "Privacy e chiarezza",
-              v: "Zero spazi condivisi. Tutto è privato, dall’arrivo all’esperienza wellness.",
+              k: "Privacy reale",
+              v: "Jacuzzi e sauna sono in suite: nessun turno e nessuno spazio condiviso.",
             },
           ].map((b, idx) => (
             <Reveal key={b.k} delay={0.04 + idx * 0.03}>

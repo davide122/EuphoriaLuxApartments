@@ -23,7 +23,7 @@ export function FooterSection() {
             <div className="md:col-span-5">
               <div className="noir-h1 text-3xl text-noir-mist">{noir.name}</div>
               <div className="mt-3 text-sm text-noir-muted">
-                Luxury suite a {noir.location}. Jacuzzi privata, sauna interna, luci immersive.
+                Suite con SPA privata a {noir.location}. Jacuzzi privata e sauna interna in camera.
                 Da €{noir.startingFrom}/notte. {noir.smartAccess}.
               </div>
             </div>
@@ -106,7 +106,7 @@ export function FooterSection() {
 
           <div className="mt-10 flex flex-col gap-2 border-t border-white/10 pt-6 text-xs text-noir-mist/45 sm:flex-row sm:items-center sm:justify-between">
             <div>© {new Date().getFullYear()} {noir.name}. Tutti i diritti riservati.</div>
-            <div className="tracking-[0.22em] uppercase">Dark. Elegant. Unforgettable.</div>
+            <div className="tracking-[0.22em] uppercase">Prenotazione diretta su WhatsApp</div>
           </div>
         </div>
       </div>

@@ -30,7 +30,7 @@ function jsonLdSuitesIndex() {
 export const metadata: Metadata = {
   title: `Suites | ${noir.name}`,
   description:
-    "Scopri Passion e Infinity: suites luxury a Porto Empedocle per coppie, con jacuzzi privata, sauna interna, cucina con forno, Wi‑Fi e condizionatori. Prenota via WhatsApp.",
+    "Scopri Passion e Infinity: due suite a Porto Empedocle per coppie, con jacuzzi privata e sauna interna in camera. Cucina con forno, Wi‑Fi e condizionatori. Prenotazione diretta via WhatsApp.",
   alternates: { canonical: "/suites" },
   openGraph: {
     type: "website",
@@ -39,14 +39,14 @@ export const metadata: Metadata = {
     locale: "it_IT",
     title: `Suites | ${noir.name}`,
     description:
-      "Scopri Passion e Infinity: suites luxury a Porto Empedocle per coppie, con jacuzzi privata, sauna interna, cucina con forno, Wi‑Fi e condizionatori. Prenota via WhatsApp.",
+      "Scopri Passion e Infinity: due suite a Porto Empedocle per coppie, con jacuzzi privata e sauna interna in camera. Prenotazione diretta via WhatsApp.",
     images: [{ url: "/suites/opengraph-image", width: 1200, height: 630, alt: `Suites — ${noir.name}` }],
   },
   twitter: {
     card: "summary_large_image",
     title: `Suites | ${noir.name}`,
     description:
-      "Scopri Passion e Infinity: suites luxury a Porto Empedocle per coppie, con jacuzzi privata, sauna interna, cucina con forno, Wi‑Fi e condizionatori.",
+      "Scopri Passion e Infinity: due suite a Porto Empedocle per coppie, con jacuzzi privata e sauna interna in camera.",
     images: ["/suites/opengraph-image"],
   },
 };
@@ -65,11 +65,11 @@ export default function SuitesPage() {
             <Reveal>
               <SectionHeader
                 eyebrow="Suites"
-                title="Scegli la tua scena."
+                title="Scegli la suite giusta per voi."
                 description={
                   <>
-                    Ogni suite è una firma. Stesso standard Euphoria, due interpretazioni
-                    diverse di lusso notturno e benessere privato.
+                    Due suite a Porto Empedocle, pensate per coppie: jacuzzi privata e sauna interna
+                    in totale privacy. Cambia lo stile, non i servizi.
                   </>
                 }
               />

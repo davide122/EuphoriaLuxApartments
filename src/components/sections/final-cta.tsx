@@ -24,13 +24,13 @@ export function FinalCtaSection() {
                   Prenotazioni
                 </div>
                 <div className="noir-h1 mt-5 text-4xl leading-[1.02] text-noir-mist sm:text-5xl md:text-6xl">
-                  Se vuoi una suite normale,
+                  Chiedi disponibilità
                   <br />
-                  non è questa.
+                  in modo diretto.
                 </div>
                 <p className="mt-6 max-w-xl text-base leading-7 text-noir-muted">
-                  Se vuoi una notte privata con jacuzzi, sauna e atmosfera notturna da ricordare,
-                  fai la cosa più semplice: scrivici ora. Risposta rapida, prenotazione diretta.
+                  Scrivici su WhatsApp con date e preferenza (Passion o Infinity).
+                  Ti rispondiamo rapidamente con le opzioni disponibili.
                 </p>
                 <div className="mt-8 text-sm text-noir-mist/70">
                   <span className="font-medium text-noir-mist/85">Da €{noir.startingFrom}/notte</span>

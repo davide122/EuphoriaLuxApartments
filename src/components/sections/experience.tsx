@@ -29,19 +29,18 @@ export function ExperienceSection() {
       <div className="noir-container">
         <Reveal>
           <SectionHeader
-            eyebrow="The Experience"
+            eyebrow="Esperienza"
             title={
               <>
-                Sei dentro Euphoria.
+                Tutto quello che serve,
                 <br />
-                Tutto il resto si spegne.
+                già dentro la suite.
               </>
             }
             description={
               <>
-                Una suite da vivere, non da raccontare. Jacuzzi privata e sauna interna,
-                luci immersive e comfort completo (cucina con forno, Wi‑Fi, condizionatori).
-                Smart check-in e smart check-out completamente da soli (tastierino).
+                Jacuzzi privata e sauna interna, zero spazi condivisi, comfort completo (cucina con
+                forno, Wi‑Fi, condizionatori) e accesso autonomo con tastierino.
               </>
             }
           />

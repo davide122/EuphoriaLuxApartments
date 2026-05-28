@@ -16,10 +16,10 @@ export const suites = [
   {
     slug: "passion",
     name: "Passion",
-    tagline: "La suite più intima. Un lusso vicino, sensuale, silenzioso.",
+    tagline: "Suite intima per coppie, con jacuzzi privata e sauna interna.",
     cover: "/passion-letto-jacuzzi-sauna.jpg",
     highlights: [
-      "Jacuzzi Spa privata con LED",
+      "Jacuzzi privata in suite (uso esclusivo)",
       "Sauna interna moderna",
       "Cucina completa con forno",
       "Wi‑Fi e condizionatori",
@@ -28,11 +28,11 @@ export const suites = [
   {
     slug: "infinity",
     name: "Infinity",
-    tagline: "Spazio, luce, design. Un’esperienza ampia e scenografica.",
+    tagline: "Suite più spaziosa, con luci scenografiche e jacuzzi privata.",
     cover: "/infinity-letto.jpg",
     highlights: [
       "Illuminazione viola / fucsia / blu",
-      "Jacuzzi Spa privata",
+      "Jacuzzi privata in suite (uso esclusivo)",
       "Cucina completa con forno",
       "Wi‑Fi e condizionatori",
     ],
@@ -43,32 +43,32 @@ export const experiencePillars = [
   {
     title: "Jacuzzi Spa privata",
     description:
-      "Acqua scura, riflessi, led. Un rituale di benessere che ti avvolge.",
+      "Jacuzzi privata in suite: relax per due, senza spazi condivisi.",
   },
   {
     title: "Sauna interna",
     description:
-      "Calore elegante, essenziale. Respiri l’aria, sparisce il mondo.",
+      "Sauna dentro la suite: benessere completo senza uscire dalla stanza.",
   },
   {
     title: "Lights experience",
     description:
-      "Viola, fucsia, blu e ciano: una regia luminosa pensata per emozionare.",
+      "Luci d’atmosfera (viola, fucsia, blu e ciano) per una serata più “speciale”.",
   },
   {
     title: "Romantic atmosphere",
     description:
-      "Spazio, silenzio, pelle. L’intimità diventa design.",
+      "Privacy, silenzio e dettagli curati: pensata per coppie.",
   },
   {
     title: "Design esclusivo",
     description:
-      "Marmo chiaro, pavimenti lucidi, dettagli scultorei. Nulla è casuale.",
+      "Materiali chiari e finiture curate: una suite moderna, senza eccessi.",
   },
   {
     title: "Esperienza notturna",
     description:
-      "Quando cala la luce, Euphoria si accende. E tu entri nella scena.",
+      "Di sera l’atmosfera cambia grazie alle luci e al wellness privato.",
   },
 ] as const;
 

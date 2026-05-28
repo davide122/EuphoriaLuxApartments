@@ -16,11 +16,11 @@ export function SuitesSection() {
         <Reveal>
           <SectionHeader
             eyebrow="Suites"
-            title="Scegli la tua atmosfera: Passion o Infinity."
+            title="Due suite, stessa idea: privacy e SPA in camera."
             description={
               <>
-                Passion è più intima e raccolta. Infinity è più ampia e scenografica.
-                In entrambi i casi: Jacuzzi privata, sauna, luci immersive e privacy totale.
+                Passion è più intima. Infinity è più spaziosa. In entrambe: jacuzzi privata e sauna
+                interna ad uso esclusivo, con accesso autonomo.
               </>
             }
           />

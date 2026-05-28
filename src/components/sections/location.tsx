@@ -62,11 +62,11 @@ export function LocationSection() {
             <Reveal>
               <SectionHeader
                 eyebrow="Location"
-                title="Porto Empedocle, Sicilia: privacy e mare a pochi minuti."
+                title="Porto Empedocle, Sicilia: una base comoda per la zona di Agrigento."
                 description={
                   <>
-                    Una base elegante e riservata per coppie. Vicina al mare e ai luoghi
-                    più suggestivi della zona, ma soprattutto lontana dal rumore: qui conta la vostra notte.
+                    Sei vicino a Scala dei Turchi e Valle dei Templi. Il vantaggio è rientrare in
+                    suite e avere la tua SPA privata in camera, senza spazi condivisi.
                   </>
                 }
               />
@@ -74,9 +74,9 @@ export function LocationSection() {
             <div className="mt-10 grid gap-3 sm:grid-cols-2">
               {[
                 { k: "Mare", v: "A pochi minuti" },
-                { k: "Atmosfera", v: "Notturna & intima" },
-                { k: "Esperienza", v: "Romantica" },
-                { k: "Design", v: "Scenografico" },
+                { k: "Agrigento", v: "Comodo per muoversi" },
+                { k: "Privacy", v: "Zero spazi condivisi" },
+                { k: "SPA in camera", v: "Jacuzzi + sauna" },
               ].map((b, idx) => (
                 <Reveal key={b.k} delay={0.06 + idx * 0.03}>
                   <div className="noir-panel px-6 py-5">

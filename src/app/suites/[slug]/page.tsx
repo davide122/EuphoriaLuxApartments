@@ -157,7 +157,7 @@ const SERVICE_GROUPS: Array<{
     items: [
       { k: "Jacuzzi privata", v: "Uso esclusivo, dentro la suite.", Icon: Bath },
       { k: "Sauna interna", v: "Percorso completo, senza uscire.", Icon: Flame },
-      { k: "Doccia scenografica", v: "Dettagli che fanno scena.", Icon: Droplets },
+      { k: "Doccia a vista", v: "Dettaglio pratico e d’impatto.", Icon: Droplets },
     ],
   },
   {
@@ -177,11 +177,11 @@ const SERVICE_GROUPS: Array<{
     ],
   },
   {
-    title: "Mood & design",
+    title: "Atmosfera & design",
     items: [
-      { k: "Lights experience", v: "Regia luminosa immersiva.", Icon: Lightbulb },
-      { k: "Materiali e dettagli", v: "Scelte che non sembrano “standard”.", Icon: Sparkles },
-      { k: "Atmosfera notturna", v: "Quando cala la luce, si accende la scena.", Icon: Sparkles },
+      { k: "Lights experience", v: "Luci d’atmosfera (viola, fucsia, blu e ciano).", Icon: Lightbulb },
+      { k: "Materiali e dettagli", v: "Finiture curate, suite moderna.", Icon: Sparkles },
+      { k: "Serata in privacy", v: "Benessere privato e zero spazi condivisi.", Icon: Sparkles },
     ],
   },
 ];
@@ -260,7 +260,7 @@ function ExperienceFlow() {
   const steps = [
     {
       k: "Arrivo",
-      v: "Entrate in autonomia: zero attese, zero stress. Il mood parte subito.",
+      v: "Entrate in autonomia con il tastierino: zero attese e zero stress.",
       Icon: DoorClosed,
     },
     {
@@ -270,12 +270,12 @@ function ExperienceFlow() {
     },
     {
       k: "Notte",
-      v: "Luci immersive e design: la suite diventa scena. Elegante, non eccessiva.",
+      v: "Luci d’atmosfera e design curato: perfetta per una notte speciale.",
       Icon: Lightbulb,
     },
     {
       k: "Libertà",
-      v: "Cucina completa + forno: restate dentro l’esperienza, senza interromperla.",
+      v: "Cucina completa con forno: libertà totale (anche per una cena semplice).",
       Icon: ChefHat,
     },
   ] as const;
@@ -289,11 +289,11 @@ function ExperienceFlow() {
               Come si vive
             </div>
             <div className="mt-5 text-2xl font-medium tracking-tight text-noir-mist">
-              Un percorso semplice. Ma potentissimo.
+              Un percorso semplice, fatto bene.
             </div>
             <p className="mt-4 max-w-2xl text-sm leading-6 text-noir-muted">
-              Ogni dettaglio è pensato per eliminare frizioni e aumentare sensazioni. Non “servizi”:
-              momenti.
+              Le cose importanti sono poche: accesso autonomo, privacy reale e wellness privato
+              dentro la suite.
             </p>
           </div>
           <div className="hidden md:inline-flex items-center gap-2" />
@@ -500,7 +500,7 @@ export default async function SuiteDetailPage({
                     </div>
                     <p className="mt-4 text-sm leading-6 text-noir-muted">
                       Weekend romantico, anniversario, sorpresa: scrivi su WhatsApp e ti guidiamo tra Passion e Infinity
-                      in base al mood che vuoi.
+                      in base allo stile che preferite.
                     </p>
                   </div>
                   <div className="flex flex-col gap-3 sm:flex-row">

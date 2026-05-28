@@ -14,14 +14,14 @@ export function IntroSection() {
                   Euphoria
                 </div>
                 <div className="noir-h1 mt-5 text-4xl leading-[1.02] text-noir-mist sm:text-5xl">
-                  Non è un alloggio.
+                  Suite con SPA privata,
                   <br />
-                  È un’esperienza privata.
+                  senza condivisione.
                 </div>
                 <p className="mt-6 max-w-xl text-base leading-7 text-noir-muted">
-                  Euphoria è pensata per coppie che cercano privacy, benessere e un’atmosfera
-                  notturna fuori dall’ordinario. Jacuzzi privata, sauna interna e luci immersive
-                  trasformano anche una sola notte in un ricordo. Prenotazione diretta, veloce.
+                  Euphoria è pensata per coppie: jacuzzi privata e sauna interna sono dentro la
+                  suite, ad uso esclusivo. In più hai comfort reali (cucina con forno, Wi‑Fi e
+                  condizionatori) e accesso autonomo con tastierino.
                 </p>
                 <div className="mt-8">
                   <div className="text-sm text-noir-mist/70">

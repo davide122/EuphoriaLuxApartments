@@ -6,8 +6,8 @@ export function SaunaSection() {
       id="sauna"
       ambient="sauna"
       eyebrow="Sauna"
-      title="Sauna interna: benessere vero, intimità totale."
-      description="Il lusso non è solo estetica: è come ti senti. La sauna completa l’esperienza e alza il livello: più relax, più intimità, più stacco dal mondo."
+      title="Sauna interna, dentro la suite."
+      description="Sauna in camera: completa la SPA privata insieme alla jacuzzi, senza uscire dalla stanza e senza condivisione."
       bullets={[
         "Esperienza wellness completa, senza uscire dalla suite",
         "Un momento lento e privato, perfetto per coppie",

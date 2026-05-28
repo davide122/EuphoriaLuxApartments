@@ -17,11 +17,11 @@ export function ReviewsSection() {
         <Reveal>
           <SectionHeader
             eyebrow="Fiducia"
-            title="Chi sceglie Euphoria non cerca una stanza. Cerca un ricordo."
+            title="Recensioni: cosa apprezzano davvero le coppie."
             description={
               <>
-                Privacy, atmosfera e benessere privato: è per questo che le coppie ci scelgono
-                per anniversari, sorprese e fughe romantiche.
+                Privacy reale, jacuzzi privata e sauna interna: ecco perché ci scelgono per
+                anniversari, sorprese e weekend romantici.
               </>
             }
           />
@@ -42,7 +42,7 @@ export function ReviewsSection() {
             {
               who: "Coppia · Surprise night",
               quote:
-                "Infinity è scenografica, Passion è super intima. Esperienza davvero fuori dall’ordinario.",
+                "Infinity è più spaziosa, Passion è più intima. Jacuzzi e sauna private: top.",
             },
           ].map((r, idx) => (
             <Reveal key={r.who} delay={0.04 + idx * 0.03}>
@@ -70,4 +70,3 @@ export function ReviewsSection() {
     </section>
   );
 }
-
