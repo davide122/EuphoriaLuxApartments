@@ -1,4 +1,4 @@
-import { Star } from "lucide-react";
+import { DoorClosed, Heart, Sparkles } from "lucide-react";
 import { Reveal } from "@/components/motion/reveal";
 import { NoirAnchor } from "@/components/ui/noir-anchor";
 import { SectionHeader } from "@/components/ui/section-header";
@@ -8,53 +8,51 @@ export function ReviewsSection() {
   const whatsappHref =
     noir.contacts.whatsapp +
     `?text=${encodeURIComponent(
-      "Ciao, vorrei verificare disponibilità. Date: __/__/__ → __/__/__. Siamo in __. Grazie."
+      "Ciao, vorrei verificare disponibilità. Date: __/__/__ → __/__/__. Grazie."
     )}`;
 
   return (
-    <section id="recensioni" data-ambient="noir" className="relative z-10 py-20 sm:py-28">
+    <section id="recensioni" data-ambient="noir" className="relative z-10 py-16 sm:py-24">
       <div className="noir-container">
         <Reveal>
           <SectionHeader
-            eyebrow="Fiducia"
-            title="Chi sceglie Euphoria non cerca una stanza. Cerca un ricordo."
+            eyebrow="Perché Euphoria"
+            title="Il lusso, qui, è non avere nessuno intorno."
             description={
               <>
-                Privacy, atmosfera e benessere privato: è per questo che le coppie ci scelgono
-                per anniversari, sorprese e fughe romantiche.
+                Non attraversate corridoi in accappatoio. Non prenotate un turno in spa.
+                Non aspettate qualcuno per entrare. La suite è vostra.
               </>
             }
           />
         </Reveal>
 
-        <div className="mt-12 grid gap-5 md:grid-cols-3">
+        <div className="euphoria-snap-rail -mx-5 mt-10 flex snap-x snap-mandatory gap-10 overflow-x-auto px-5 pb-5 sm:-mx-8 sm:px-8 lg:-mx-12 lg:px-12">
           {[
             {
-              who: "Coppia · Anniversario",
-              quote:
-                "Atmosfera incredibile. Jacuzzi privata e sauna perfette per il nostro anniversario.",
+              title: "Privacy, davvero",
+              copy: "Jacuzzi, sauna, letto e cucina sono dentro la vostra suite. Non condividete nessuno spazio.",
+              icon: Heart,
             },
             {
-              who: "Coppia · Weekend romantico",
-              quote:
-                "Pulizia impeccabile e privacy totale. Prenotazione diretta facile e risposta velocissima.",
+              title: "Entrate da soli",
+              copy: "Il codice arriva sul telefono. Niente reception e nessuna attesa al vostro arrivo.",
+              icon: DoorClosed,
             },
             {
-              who: "Coppia · Surprise night",
-              quote:
-                "Infinity è scenografica, Passion è super intima. Esperienza davvero fuori dall’ordinario.",
+              title: "La prepariamo per voi",
+              copy: "Il romantico essenziale parte da €10. Per una sorpresa diversa, raccontateci direttamente cosa immaginate.",
+              icon: Sparkles,
             },
           ].map((r, idx) => (
-            <Reveal key={r.who} delay={0.04 + idx * 0.03}>
-              <div className="noir-panel p-7">
-                <div className="flex items-center gap-1 text-noir-aqua">
-                  {Array.from({ length: 5 }).map((_, i) => (
-                    <Star key={i} className="h-4 w-4 fill-current" />
-                  ))}
+            <Reveal key={r.title} delay={0.04 + idx * 0.03} className="min-w-[84vw] snap-center border-l border-noir-fuchsia/35 pl-7 sm:min-w-[54vw] lg:min-w-[36vw]">
+              <article className="flex h-full flex-col py-5">
+                <r.icon className="h-6 w-6 text-noir-champagne" />
+                <div className="mt-4 text-xs tracking-[0.22em] uppercase text-noir-mist/55">
+                  {r.title}
                 </div>
-                <div className="mt-4 text-sm text-noir-mist/75">{r.who}</div>
-                <div className="mt-3 text-sm leading-6 text-noir-mist/80">“{r.quote}”</div>
-              </div>
+                <p className="noir-h1 mt-5 text-2xl leading-snug text-noir-mist/85">{r.copy}</p>
+              </article>
             </Reveal>
           ))}
         </div>
@@ -62,7 +60,7 @@ export function ReviewsSection() {
         <Reveal delay={0.14}>
           <div className="mt-10">
             <NoirAnchor href={whatsappHref} target="_blank" rel="noreferrer" variant="primary">
-              Verifica disponibilità su WhatsApp
+              Chiedi le tue date
             </NoirAnchor>
           </div>
         </Reveal>
@@ -70,4 +68,3 @@ export function ReviewsSection() {
     </section>
   );
 }
-

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import {
   Bath,
@@ -6,19 +7,18 @@ import {
   DoorClosed,
   Droplets,
   Flame,
-  Lightbulb,
   type LucideIcon,
   MapPin,
   MessageCircle,
   Shield,
   Sparkles,
   ThermometerSun,
+  Wine,
   Wifi,
 } from "lucide-react";
 import { TopNav } from "@/components/nav/top-nav";
 import { FooterSection } from "@/components/sections/footer";
 import { Reveal } from "@/components/motion/reveal";
-import { MediaFrame } from "@/components/ui/media-frame";
 import { NoirAnchor } from "@/components/ui/noir-anchor";
 import { NoirLink } from "@/components/ui/noir-link";
 import { Breadcrumbs, breadcrumbJsonLd } from "@/components/ui/breadcrumbs";
@@ -44,7 +44,7 @@ export async function generateMetadata({
   if (!suite) return { robots: { index: false, follow: false } };
 
   const title = `${suite.name} — Suite con jacuzzi privata e sauna | ${noir.name}`;
-  const description = `${suite.name}: ${suite.tagline} Jacuzzi privata, sauna interna, cucina completa con forno, Wi‑Fi e condizionatori. Da €${noir.startingFrom}/notte. Prenota via WhatsApp.`;
+  const description = `${suite.name}: ${suite.tagline} Jacuzzi e sauna private, cucina completa e aperitivo di benvenuto incluso. Da €${noir.startingFrom} a notte.`;
 
   return {
     title,
@@ -107,6 +107,7 @@ function jsonLdForSuite(args: { url: string; imageUrl: string; suiteName: string
       { "@type": "LocationFeatureSpecification", name: "Cucina completa con forno", value: true },
       { "@type": "LocationFeatureSpecification", name: "Wi‑Fi", value: true },
       { "@type": "LocationFeatureSpecification", name: "Aria condizionata", value: true },
+      { "@type": "LocationFeatureSpecification", name: "Aperitivo di benvenuto incluso", value: true },
     ],
     makesOffer: {
       "@type": "Offer",
@@ -134,18 +135,52 @@ function jsonLdFaqPage(args: { pageUrl: string; faqs: Array<{ q: string; a: stri
 
 const FRAMES: Record<
   string,
-  Array<{ label: string; tone: "spa" | "sauna" | "night" | "noir"; src: string }>
+  Array<{ label: string; src: string; shape: "wide" | "tall" }>
 > = {
   passion: [
-    { label: "Private spa — letto · jacuzzi · sauna", tone: "spa", src: "/passion-letto-jacuzzi-sauna.jpg" },
-    { label: "Jacuzzi privata (LED)", tone: "spa", src: "/passion-jacuzzi.jpg" },
-    { label: "Mattina — luce naturale", tone: "night", src: "/passion-morning-2.jpg" },
+    { label: "Letto, jacuzzi e sauna nello stesso spazio", src: "/passion-letto-jacuzzi-sauna.jpg", shape: "tall" },
+    { label: "La suite nella luce del mattino", src: "/passion-morning.jpg", shape: "wide" },
+    { label: "Jacuzzi privata", src: "/passion-jacuzzi.jpg", shape: "wide" },
+    { label: "Il risveglio in Passion", src: "/passion-morning-1.jpg", shape: "tall" },
+    { label: "Una prospettiva più intima", src: "/passion-morning-2.jpg", shape: "tall" },
+    { label: "L’atmosfera della notte", src: "/passion/WhatsApp Image 2026-08-16 at 21.29.22.jpeg", shape: "tall" },
+    { label: "Il benessere, a pochi passi dal letto", src: "/passion/WhatsApp Image 2026-08-16 at 21.29.22 (1).jpeg", shape: "tall" },
+    { label: "Luci soffuse e privacy", src: "/passion/WhatsApp Image 2026-08-16 at 21.29.23.jpeg", shape: "tall" },
   ],
   infinity: [
-    { label: "Letto (luci immersive)", tone: "night", src: "/infinity-letto.jpg" },
-    { label: "Cucina completa + forno", tone: "noir", src: "/infinity-cucina.jpg" },
-    { label: "Jacuzzi + doccia a vista", tone: "spa", src: "/infinity-jacuzzi-doccia-vista.jpg" },
+    { label: "Il living immerso nelle proiezioni", src: "/infinity-salotto.jpg", shape: "tall" },
+    { label: "La cucina completa", src: "/infinity-cucina.jpg", shape: "wide" },
+    { label: "Jacuzzi privata e doccia", src: "/infinity-jacuzzi-doccia-vista.jpg", shape: "tall" },
+    { label: "La zona notte", src: "/infinity-letto.jpg", shape: "tall" },
+    { label: "La jacuzzi sotto una luce diversa", src: "/infinity-jacuzzi.jpg", shape: "tall" },
+    { label: "Infinity in tutta la sua ampiezza", src: "/infinity/WhatsApp Image 2026-08-16 at 21.29.16.jpeg", shape: "wide" },
+    { label: "Una suite che cambia atmosfera", src: "/infinity/WhatsApp Image 2026-08-16 at 21.29.16 (1).jpeg", shape: "wide" },
+    { label: "Lo spazio wellness", src: "/infinity/WhatsApp Image 2026-08-16 at 21.29.23 (1).jpeg", shape: "tall" },
+    { label: "Dettagli della zona giorno", src: "/infinity/WhatsApp Image 2026-08-16 at 21.29.15.jpeg", shape: "wide" },
+    { label: "Luce, acqua, silenzio", src: "/infinity/WhatsApp Image 2026-08-16 at 21.29.16 (2).jpeg", shape: "wide" },
+    { label: "Un’altra prospettiva sulla suite", src: "/infinity/WhatsApp Image 2026-08-16 at 21.29.23 (2).jpeg", shape: "tall" },
+    { label: "La notte dentro Infinity", src: "/infinity/WhatsApp Image 2026-08-16 at 21.29.16 (4).jpeg", shape: "wide" },
   ],
+};
+
+const SUITE_VISUALS: Record<
+  string,
+  { hero: string; statement: string; introduction: string; size: string }
+> = {
+  passion: {
+    hero: "/passion-letto-jacuzzi-sauna.jpg",
+    statement: "Tutto vicino. Anche voi.",
+    introduction:
+      "Un unico ambiente avvolgente, pensato per far sparire il resto. Il letto, la jacuzzi e la sauna convivono nello stesso spazio: intimo, caldo, immediato.",
+    size: "55 m²",
+  },
+  infinity: {
+    hero: "/infinity-salotto.jpg",
+    statement: "Più spazio per perdervi.",
+    introduction:
+      "Settantasette metri quadrati che cambiano ritmo insieme a voi. Living, cucina, zona notte e benessere diventano scene diverse della stessa esperienza.",
+    size: "77 m²",
+  },
 };
 
 const SERVICE_GROUPS: Array<{
@@ -153,35 +188,27 @@ const SERVICE_GROUPS: Array<{
   items: Array<{ k: string; v: string; Icon: LucideIcon }>;
 }> = [
   {
-    title: "Wellness privato",
+    title: "Benessere privato",
     items: [
-      { k: "Jacuzzi privata", v: "Uso esclusivo, dentro la suite.", Icon: Bath },
-      { k: "Sauna interna", v: "Percorso completo, senza uscire.", Icon: Flame },
-      { k: "Doccia scenografica", v: "Dettagli che fanno scena.", Icon: Droplets },
+      { k: "Jacuzzi privata", v: "Dentro la suite, sempre e soltanto vostra.", Icon: Bath },
+      { k: "Sauna interna", v: "La accendete quando volete, senza prenotare un turno.", Icon: Flame },
+      { k: "Doccia in suite", v: "Dall’acqua calda al letto, senza uscire dal vostro spazio.", Icon: Droplets },
     ],
   },
   {
-    title: "Comfort reale",
+    title: "Comfort pratico",
     items: [
-      { k: "Cucina completa + forno", v: "Libertà totale, anche di notte.", Icon: ChefHat },
-      { k: "Wi‑Fi", v: "Stabile e veloce.", Icon: Wifi },
-      { k: "Condizionatori", v: "Comfort in ogni stagione.", Icon: ThermometerSun },
+      { k: "Cucina completa + forno", v: "Per una cena, un caffè o una colazione senza uscire.", Icon: ChefHat },
+      { k: "Wi‑Fi", v: "Incluso nel soggiorno.", Icon: Wifi },
+      { k: "Aria condizionata", v: "Comfort in ogni stagione.", Icon: ThermometerSun },
     ],
   },
   {
-    title: "Privacy & accesso",
+    title: "Privacy e accesso",
     items: [
-      { k: "Zero spazi condivisi", v: "Qui conta la vostra privacy.", Icon: Shield },
-      { k: "Ingresso riservato", v: "Arrivo discreto e semplice.", Icon: DoorClosed },
-      { k: "Smart access", v: noir.smartAccess, Icon: Sparkles },
-    ],
-  },
-  {
-    title: "Mood & design",
-    items: [
-      { k: "Lights experience", v: "Regia luminosa immersiva.", Icon: Lightbulb },
-      { k: "Materiali e dettagli", v: "Scelte che non sembrano “standard”.", Icon: Sparkles },
-      { k: "Atmosfera notturna", v: "Quando cala la luce, si accende la scena.", Icon: Sparkles },
+      { k: "Nessuno spazio condiviso", v: "La suite e la spa restano soltanto vostre.", Icon: Shield },
+      { k: "Ingresso autonomo", v: "Ricevete il codice e non passate dalla reception.", Icon: DoorClosed },
+      { k: "Aperitivo di benvenuto", v: "Tagliere di salumi e una bottiglia di prosecco, inclusi nel soggiorno.", Icon: Wine },
     ],
   },
 ];
@@ -192,67 +219,33 @@ function ServiceMatrix({
   suiteName: string;
 }) {
   return (
-    <div className="mt-10 grid gap-6 lg:grid-cols-12">
-      <div className="lg:col-span-5">
-        <div className="noir-panel p-8 sm:p-9">
-          <div className="text-xs tracking-[0.26em] uppercase text-noir-mist/55">
-            Servizi inclusi
-          </div>
-          <div className="mt-5 text-2xl font-medium tracking-tight text-noir-mist">
-            Tutto quello che serve, già dentro la suite.
-          </div>
-          <p className="mt-4 text-sm leading-6 text-noir-muted">
-            Una suite non si giudica solo dalle foto. Conta ciò che trovi davvero: benessere privato,
-            comfort e privacy, senza frizioni. {suiteName} è pronta quando lo sei tu.
+    <section className="mt-28 border-y border-white/10 py-16 sm:mt-36 sm:py-24">
+      <div className="grid gap-14 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
+        <div>
+          <p className="text-base text-noir-aqua">Dentro {suiteName}</p>
+          <h2 className="noir-h1 mt-5 max-w-xl text-5xl leading-[0.98] text-noir-mist sm:text-6xl">
+            Tutto vostro. Senza orari.
+          </h2>
+          <p className="mt-7 max-w-lg text-lg leading-8 text-noir-muted">
+            La spa non è in un’altra stanza dell’hotel. È qui, nella vostra suite, pronta quando lo siete voi.
           </p>
-          <div className="mt-7 text-sm text-noir-mist/70">
-            <span className="font-medium text-noir-mist/85">Da €{noir.startingFrom}/notte</span>
-            <span className="mx-2 text-white/25">•</span>
-            Jacuzzi privata
-            <span className="mx-2 text-white/25">•</span>
-            Sauna interna
-            <span className="mx-2 text-white/25">•</span>
-            Cucina completa + forno
-            <span className="mx-2 text-white/25">•</span>
-            Wi‑Fi + condizionatori
-            <span className="mx-2 text-white/25">•</span>
-            {noir.smartAccess}
-          </div>
         </div>
-      </div>
-      <div className="lg:col-span-7">
-        <div className="grid gap-4 sm:grid-cols-2">
-          {SERVICE_GROUPS.map((g) => (
-            <div key={g.title} className="noir-panel p-7">
-              <div className="flex items-center justify-between gap-6">
-                <div className="text-xs tracking-[0.26em] uppercase text-noir-mist/55">
-                  {g.title}
+        <div className="grid gap-x-10 gap-y-12 sm:grid-cols-2">
+          {SERVICE_GROUPS.flatMap((group) => group.items).map((item) => {
+            const Icon = item.Icon;
+            return (
+              <div key={item.k} className="flex gap-5 border-t border-white/10 pt-6">
+                <Icon className="mt-1 h-6 w-6 shrink-0 text-noir-aqua" />
+                <div>
+                  <h3 className="text-xl font-medium tracking-tight text-noir-mist">{item.k}</h3>
+                  <p className="mt-2 text-base leading-7 text-noir-muted">{item.v}</p>
                 </div>
-                <div className="h-1.5 w-1.5 rounded-full bg-white/45" />
               </div>
-              <div className="mt-5 grid gap-4">
-                {g.items.map((it) => {
-                  const Icon = it.Icon;
-                  return (
-                    <div key={it.k} className="flex items-start gap-4">
-                      <div className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-white/10 bg-white/5">
-                        <Icon className="h-5 w-5 text-noir-aqua" />
-                      </div>
-                      <div>
-                        <div className="text-sm font-medium tracking-tight text-noir-mist">
-                          {it.k}
-                        </div>
-                        <div className="mt-1 text-sm leading-6 text-noir-muted">{it.v}</div>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
-    </div>
+    </section>
   );
 }
 
@@ -260,63 +253,45 @@ function ExperienceFlow() {
   const steps = [
     {
       k: "Arrivo",
-      v: "Entrate in autonomia: zero attese, zero stress. Il mood parte subito.",
+      v: "Ricevete il codice sul telefono ed entrate senza passare dalla reception.",
       Icon: DoorClosed,
     },
     {
-      k: "Rituale",
-      v: "Jacuzzi privata e sauna interna: acqua, calore, silenzio. Solo voi due.",
+      k: "Benessere",
+      v: "Jacuzzi e sauna sono dentro la suite. Nessun turno da prenotare.",
       Icon: Bath,
     },
     {
-      k: "Notte",
-      v: "Luci immersive e design: la suite diventa scena. Elegante, non eccessiva.",
-      Icon: Lightbulb,
+      k: "Soggiorno",
+      v: "Preparate qualcosa, scegliete la musica e restate dentro quanto volete.",
+      Icon: ChefHat,
     },
     {
-      k: "Libertà",
-      v: "Cucina completa + forno: restate dentro l’esperienza, senza interromperla.",
-      Icon: ChefHat,
+      k: "Uscita",
+      v: "Al check-out richiudete la porta. Nessuna coda e nessuna chiave da consegnare.",
+      Icon: Sparkles,
     },
   ] as const;
 
   return (
-    <div className="mt-12">
-      <div className="noir-panel p-8 sm:p-9">
-        <div className="flex items-start justify-between gap-6">
-          <div>
-            <div className="text-xs tracking-[0.26em] uppercase text-noir-mist/55">
-              Come si vive
+    <section className="mt-28 sm:mt-36">
+      <p className="text-base text-noir-aqua">Dal primo messaggio all’ultimo istante</p>
+      <h2 className="noir-h1 mt-5 max-w-4xl text-5xl leading-[0.98] text-noir-mist sm:text-6xl lg:text-7xl">
+        Arrivate. Chiudete la porta. Il tempo cambia ritmo.
+      </h2>
+      <div className="mt-14 grid gap-10 border-t border-white/10 pt-10 md:grid-cols-4">
+        {steps.map((s, idx) => (
+          <div key={s.k}>
+            <div className="flex items-center gap-4 text-noir-aqua">
+              <span className="text-lg tabular-nums">0{idx + 1}</span>
+              <s.Icon className="h-6 w-6" />
             </div>
-            <div className="mt-5 text-2xl font-medium tracking-tight text-noir-mist">
-              Un percorso semplice. Ma potentissimo.
-            </div>
-            <p className="mt-4 max-w-2xl text-sm leading-6 text-noir-muted">
-              Ogni dettaglio è pensato per eliminare frizioni e aumentare sensazioni. Non “servizi”:
-              momenti.
-            </p>
+            <h3 className="mt-6 text-2xl font-medium tracking-tight text-noir-mist">{s.k}</h3>
+            <p className="mt-3 text-base leading-7 text-noir-muted">{s.v}</p>
           </div>
-          <div className="hidden md:inline-flex items-center gap-2" />
-        </div>
-        <div className="relative mt-10 grid gap-4 md:grid-cols-4">
-          <div className="pointer-events-none absolute left-6 right-6 top-6 hidden h-px bg-white/10 md:block" />
-          {steps.map((s, idx) => (
-            <div key={s.k} className="relative rounded-2xl border border-white/10 bg-white/5 px-6 py-6">
-              <div className="relative inline-flex h-12 w-12 items-center justify-center rounded-full border border-white/12 bg-[radial-gradient(120%_120%_at_20%_0%,rgba(var(--ambient-c)/0.32),transparent_58%),radial-gradient(120%_120%_at_80%_10%,rgba(var(--ambient-a)/0.28),transparent_62%),rgba(255,255,255,0.06)]">
-                <s.Icon className="h-5 w-5 text-noir-aqua" />
-                <div className="absolute -right-2 -top-2 inline-flex h-6 w-6 items-center justify-center rounded-full border border-white/10 bg-white/5 text-[10px] font-medium text-noir-mist/80">
-                  {idx + 1}
-                </div>
-              </div>
-              <div className="mt-4 text-sm font-medium tracking-tight text-noir-mist">
-                {s.k}
-              </div>
-              <div className="mt-2 text-sm leading-6 text-noir-muted">{s.v}</div>
-            </div>
-          ))}
-        </div>
+        ))}
       </div>
-    </div>
+    </section>
   );
 }
 
@@ -328,6 +303,8 @@ export default async function SuiteDetailPage({
   const { slug } = await params;
   const suite = BY_SLUG[slug];
   if (!suite) notFound();
+  const visual = SUITE_VISUALS[slug];
+  const gallery = FRAMES[slug] ?? [];
   const pageUrl = `${noir.siteUrl}/suites/${suite.slug}`;
   const imageUrl = `${noir.siteUrl}${suite.cover}`;
   const crumbs = [
@@ -348,9 +325,9 @@ export default async function SuiteDetailPage({
   ] as const;
 
   return (
-    <div className="relative flex min-h-[100svh] flex-col">
+    <div className="relative flex min-h-[100svh] flex-col bg-[#060309]">
       <TopNav />
-      <main className="relative flex-1 pt-28">
+      <main className="relative flex-1">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -362,157 +339,124 @@ export default async function SuiteDetailPage({
             ]),
           }}
         />
-        <section data-ambient="noir" className="relative z-10 py-16 sm:py-20">
+        <section
+          data-ambient="noir"
+          className="relative z-10 overflow-hidden bg-[radial-gradient(ellipse_at_12%_30%,rgba(139,92,246,0.11),transparent_34%),radial-gradient(ellipse_at_88%_68%,rgba(237,63,166,0.08),transparent_32%),linear-gradient(180deg,#060309_0%,#0a050e_50%,#060309_100%)] pb-20"
+        >
+          <Reveal>
+            <div className="relative min-h-[100svh] overflow-hidden rounded-b-[3rem] sm:rounded-b-[5rem]">
+              <Image
+                src={visual.hero}
+                alt={`${suite.name}, suite con jacuzzi privata e sauna`}
+                fill
+                priority
+                sizes="100vw"
+                className="object-cover"
+              />
+              <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(6,3,12,0.58)_0%,rgba(6,3,12,0.08)_38%,rgba(6,3,12,0.9)_100%)]" />
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_24%,rgba(219,39,119,0.18),transparent_34%),radial-gradient(circle_at_12%_70%,rgba(124,58,237,0.22),transparent_38%)]" />
+              <div className="noir-container relative z-10 flex min-h-[100svh] flex-col pb-10 pt-28 sm:pb-16">
+                <Breadcrumbs items={crumbs} />
+                <div className="mt-auto max-w-5xl">
+                  <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-base text-white/80 sm:text-lg">
+                    <span className="inline-flex items-center gap-2"><MapPin className="h-5 w-5 text-noir-aqua" />{locationLine}</span>
+                    <span>{visual.size}</span>
+                    <span>Da €{noir.startingFrom} / notte</span>
+                  </div>
+                  <h1 className="noir-h1 mt-6 text-[clamp(4.5rem,14vw,11rem)] leading-[0.78] tracking-[-0.055em] text-white">
+                    {suite.name}
+                  </h1>
+                  <p className="noir-h1 mt-8 text-3xl leading-tight text-white sm:text-5xl">
+                    {visual.statement}
+                  </p>
+                  <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+                    <NoirAnchor href={whatsappHref} target="_blank" rel="noreferrer" variant="primary">
+                      Verifica le tue date
+                      <MessageCircle className="h-5 w-5 text-noir-aqua" />
+                    </NoirAnchor>
+                    <NoirLink href="/suites" variant="ghost">Confronta le suite</NoirLink>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </Reveal>
+
           <div className="noir-container">
-            <Breadcrumbs items={crumbs} />
-            <Reveal>
-              <div className="noir-panel noir-glow p-9 sm:p-12">
-                <div className="text-xs tracking-[0.26em] uppercase text-noir-mist/55">
-                  Suite
+            <Reveal delay={0.05}>
+              <div className="grid gap-12 py-24 sm:py-32 lg:grid-cols-12 lg:items-end">
+                <div className="lg:col-span-8">
+                  <h2 className="noir-h1 text-5xl leading-[0.98] text-noir-mist sm:text-7xl">
+                    {visual.introduction}
+                  </h2>
                 </div>
-                <div className="noir-h1 mt-5 text-5xl leading-[0.98] text-noir-mist sm:text-6xl">
-                  {suite.name}
-                </div>
-                <p className="mt-6 max-w-2xl text-base leading-7 text-noir-muted">
-                  {suite.tagline}
-                </p>
-                <div className="mt-7 grid gap-4 lg:grid-cols-12 lg:items-end">
-                  <div className="lg:col-span-8">
-                    <div className="text-sm text-noir-mist/70">
-                      <span className="font-medium text-noir-mist/85">Da €{noir.startingFrom}/notte</span>
-                      <span className="mx-2 text-white/25">•</span>
-                      Jacuzzi privata
-                      <span className="mx-2 text-white/25">•</span>
-                      Sauna interna
-                      <span className="mx-2 text-white/25">•</span>
-                      Cucina completa + forno
-                      <span className="mx-2 text-white/25">•</span>
-                      Wi‑Fi + condizionatori
-                      <span className="mx-2 text-white/25">•</span>
-                      {noir.smartAccess}
-                    </div>
+                <div className="lg:col-span-4 lg:pl-8">
+                  <div className="space-y-5 border-l border-noir-fuchsia/35 pl-6">
+                    <p className="flex gap-3 text-lg leading-7 text-noir-mist">
+                      <Wine className="mt-0.5 h-6 w-6 shrink-0 text-noir-aqua" />
+                      <span>{noir.welcomeIncluded}, incluso.</span>
+                    </p>
+                    {suite.highlights.slice(0, 4).map((highlight) => (
+                      <p key={highlight} className="text-lg leading-7 text-noir-mist/80">{highlight}</p>
+                    ))}
                   </div>
-                  <div className="lg:col-span-4">
-                    <div className="noir-panel px-6 py-5">
-                      <div className="text-xs tracking-[0.26em] uppercase text-noir-mist/55">
-                        Località
-                      </div>
-                      <div className="mt-3 inline-flex items-center gap-2 text-sm text-noir-mist/80">
-                        <MapPin className="h-4 w-4 text-noir-aqua" />
-                        {locationLine}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="mt-10 flex flex-col gap-3 sm:flex-row">
-                  <NoirAnchor href={whatsappHref} target="_blank" rel="noreferrer" variant="primary">
-                    Verifica disponibilità su WhatsApp
-                    <MessageCircle className="h-4 w-4 text-noir-aqua" />
-                  </NoirAnchor>
-                  <NoirLink href="/suites" variant="ghost">
-                    Torna alle suites
-                  </NoirLink>
                 </div>
               </div>
             </Reveal>
 
-            <div className="mt-10 grid gap-6 lg:grid-cols-12">
-              <div className="lg:col-span-7">
-                <Reveal delay={0.05}>
-                  <MediaFrame
-                    label="Atmosfera — luci & materiali"
-                    tone={slug === "passion" ? "spa" : "night"}
-                    src={suite.cover}
-                    alt={suite.name}
-                    className="aspect-[16/10]"
-                    priority
-                  />
-                </Reveal>
+            <div className="mb-10 flex flex-wrap items-end justify-between gap-5 border-b border-white/10 pb-7">
+              <div>
+                <p className="text-base text-noir-aqua">Galleria completa</p>
+                <h2 className="noir-h1 mt-3 text-4xl text-noir-mist sm:text-6xl">Guardate ogni spazio.</h2>
               </div>
-              <div className="lg:col-span-5">
-                <Reveal delay={0.10}>
-                  <div className="noir-panel p-8 sm:p-9">
-                    <div className="text-xs tracking-[0.26em] uppercase text-noir-mist/55">
-                      In questa suite
-                    </div>
-                    <div className="mt-6 grid gap-2">
-                      {suite.highlights.map((h) => (
-                        <div
-                          key={h}
-                          className="flex items-start gap-3 text-sm leading-6 text-noir-mist/80"
-                        >
-                          <span className="mt-2 inline-block h-1.5 w-1.5 rounded-full bg-white/45" />
-                          <span>{h}</span>
-                        </div>
-                      ))}
-                    </div>
-                    <div className="mt-8 grid gap-3">
-                      {suiteFaqs.map((f) => (
-                        <details key={f.q} className="rounded-2xl border border-white/10 bg-white/5 px-6 py-5">
-                          <summary className="cursor-pointer list-none text-sm font-medium text-noir-mist/85 [&::-webkit-details-marker]:hidden">
-                            <div className="flex items-center justify-between gap-6">
-                              <span className="inline-flex items-center gap-2">
-                                <f.Icon className="h-4 w-4 text-noir-aqua" />
-                                {f.q}
-                              </span>
-                              <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-white/55" />
-                            </div>
-                          </summary>
-                          <div className="mt-3 text-sm leading-6 text-noir-muted">{f.a}</div>
-                        </details>
-                      ))}
-                    </div>
-                  </div>
-                </Reveal>
-              </div>
+              <p className="text-lg text-noir-muted">{gallery.length} fotografie</p>
             </div>
 
-            <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {(FRAMES[slug] ?? []).map((f, idx) => (
-                <Reveal key={f.label} delay={0.06 + idx * 0.04}>
-                  <MediaFrame
-                    label={f.label}
-                    tone={f.tone}
-                    src={f.src}
-                    className="aspect-[4/5]"
-                  />
+            <div className="grid gap-5 md:grid-cols-2 sm:gap-7">
+              {gallery.slice(1).map((frame, idx) => (
+                <Reveal
+                  key={frame.src}
+                  delay={Math.min(idx * 0.025, 0.15)}
+                  className={frame.shape === "wide" ? "md:col-span-2" : ""}
+                >
+                  <figure>
+                    <div className={`relative overflow-hidden ${
+                      frame.shape === "wide"
+                        ? "aspect-[16/10] rounded-[2rem_2rem_6rem_2rem] sm:aspect-[16/8]"
+                        : "aspect-[4/5] rounded-[2rem_2rem_5rem_2rem]"
+                    }`}>
+                      <Image
+                        src={frame.src}
+                        alt={`${suite.name}: ${frame.label}`}
+                        fill
+                        sizes={frame.shape === "wide" ? "(max-width: 768px) 100vw, 1200px" : "(max-width: 768px) 100vw, 50vw"}
+                        className="object-cover transition duration-1000 ease-out hover:scale-[1.025]"
+                      />
+                      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-transparent" />
+                    </div>
+                    <figcaption className="mt-4 text-lg text-noir-mist/75">{frame.label}</figcaption>
+                  </figure>
                 </Reveal>
               ))}
             </div>
 
-            <Reveal delay={0.10}>
-              <ExperienceFlow />
-            </Reveal>
+            <Reveal delay={0.08}><ServiceMatrix suiteName={suite.name} /></Reveal>
+            <Reveal delay={0.1}><ExperienceFlow /></Reveal>
 
             <Reveal delay={0.12}>
-              <ServiceMatrix suiteName={suite.name} />
-            </Reveal>
-
-            <Reveal delay={0.18}>
-              <div className="mt-12 noir-panel noir-glow p-9 sm:p-10">
-                <div className="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
-                  <div className="max-w-2xl">
-                    <div className="text-xs tracking-[0.26em] uppercase text-noir-mist/55">
-                      Prenotazione diretta
-                    </div>
-                    <div className="mt-5 text-2xl font-medium tracking-tight text-noir-mist">
-                      Dimmi data e occasione. Ti rispondiamo con la soluzione migliore.
-                    </div>
-                    <p className="mt-4 text-sm leading-6 text-noir-muted">
-                      Weekend romantico, anniversario, sorpresa: scrivi su WhatsApp e ti guidiamo tra Passion e Infinity
-                      in base al mood che vuoi.
-                    </p>
-                  </div>
-                  <div className="flex flex-col gap-3 sm:flex-row">
-                    <NoirAnchor href={whatsappHref} target="_blank" rel="noreferrer" variant="primary" className="group">
-                      Scrivi su WhatsApp
-                      <MessageCircle className="h-4 w-4 text-noir-aqua transition group-hover:translate-x-0.5" />
-                    </NoirAnchor>
-                    <NoirAnchor href={`tel:${noir.contacts.phone.replaceAll(" ", "")}`} variant="ghost" className="group">
-                      Chiama
-                      <span className="h-1.5 w-1.5 rounded-full bg-white/50 transition group-hover:scale-125" />
-                    </NoirAnchor>
-                  </div>
+              <div className="mt-28 border-y border-white/10 py-16 sm:mt-36 sm:py-24">
+                <p className="text-lg text-noir-aqua">Prenotazione diretta</p>
+                <h2 className="noir-h1 mt-5 max-w-4xl text-5xl leading-[0.98] text-noir-mist sm:text-7xl">
+                  La suite è pronta. Mancano solo le vostre date.
+                </h2>
+                <p className="mt-7 max-w-2xl text-lg leading-8 text-noir-muted">
+                  Scriveteci quando volete arrivare. Vi rispondiamo direttamente, senza passaggi inutili.
+                </p>
+                <div className="mt-10 flex flex-col gap-3 sm:flex-row">
+                  <NoirAnchor href={whatsappHref} target="_blank" rel="noreferrer" variant="primary">
+                    Chiedi disponibilità
+                    <MessageCircle className="h-5 w-5 text-noir-aqua" />
+                  </NoirAnchor>
+                  <NoirAnchor href={`tel:${noir.contacts.phone.replaceAll(" ", "")}`} variant="ghost">Chiama</NoirAnchor>
                 </div>
               </div>
             </Reveal>

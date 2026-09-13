@@ -35,7 +35,7 @@ export const SEO_LANDINGS = [
     relatedBlogSlugs: ["suite-romantica-sicilia-cosa-conta-davvero"],
     metaTitle: `Suite romantica a Porto Empedocle con jacuzzi e sauna | ${noir.name}`,
     metaDescription:
-      "Una suite luxury per coppie a Porto Empedocle: jacuzzi privata, sauna interna, cucina con forno, Wi‑Fi e condizionatori. Da 135€/notte. Prenotazione diretta via WhatsApp.",
+      "Una suite luxury per coppie a Porto Empedocle: jacuzzi privata, sauna interna, cucina con forno, Wi‑Fi e condizionatori. Da 150€/notte. Prenotazione diretta via WhatsApp.",
     ogTitle: "Suite romantica a Porto Empedocle — Jacuzzi privata & Sauna interna",
     ogDescription:
       "Euphoria è la scelta per una notte speciale: wellness privato, atmosfera cinematica, arrivo e partenza in autonomia.",
@@ -140,7 +140,7 @@ export const SEO_LANDINGS = [
     ],
     metaTitle: `SPA privata a Porto Empedocle con jacuzzi e sauna | ${noir.name}`,
     metaDescription:
-      "Vivi un’esperienza SPA privata a Porto Empedocle. Suite con jacuzzi idromassaggio e sauna ad uso esclusivo, perfetta per coppie. In zona Agrigento (Scala dei Turchi, Valle dei Templi). Da 135€/notte. Prenotazione diretta via WhatsApp.",
+      "Vivi un’esperienza SPA privata a Porto Empedocle. Suite con jacuzzi idromassaggio e sauna ad uso esclusivo, perfetta per coppie. In zona Agrigento (Scala dei Turchi, Valle dei Templi). Da 150€/notte. Prenotazione diretta via WhatsApp.",
     ogTitle: "SPA privata a Porto Empedocle — Jacuzzi & Sauna ad uso esclusivo",
     ogDescription:
       "Suite SPA privata per coppie: idromassaggio, sauna interna, privacy totale e prenotazione diretta via WhatsApp.",
@@ -181,7 +181,7 @@ export const SEO_LANDINGS = [
     relatedBlogSlugs: ["weekend-romantico-agrigento-itinerario-sera-notte"],
     metaTitle: `Weekend romantico Agrigento: suite con jacuzzi e sauna | ${noir.name}`,
     metaDescription:
-      "Idea weekend romantico in zona Agrigento: soggiorna a Porto Empedocle in una suite con jacuzzi privata e sauna interna. Da 135€/notte. Contatto diretto WhatsApp.",
+      "Idea weekend romantico in zona Agrigento: soggiorna a Porto Empedocle in una suite con jacuzzi privata e sauna interna. Da 150€/notte. Contatto diretto WhatsApp.",
     ogTitle: "Weekend romantico (zona Agrigento) — Jacuzzi & Sauna",
     ogDescription:
       "Dormire a Porto Empedocle e vivere Agrigento: wellness privato, luci immersive e zero stress.",
@@ -262,7 +262,7 @@ export const SEO_LANDINGS = [
     relatedBlogSlugs: ["weekend-romantico-agrigento-itinerario-sera-notte"],
     metaTitle: `Suite vicino Scala dei Turchi con jacuzzi privata | ${noir.name}`,
     metaDescription:
-      "Vuoi dormire vicino Scala dei Turchi? Soggiorna a Porto Empedocle in una suite luxury con jacuzzi privata e sauna interna. Da 135€/notte. Prenotazione diretta WhatsApp.",
+      "Vuoi dormire vicino Scala dei Turchi? Soggiorna a Porto Empedocle in una suite luxury con jacuzzi privata e sauna interna. Da 150€/notte. Prenotazione diretta WhatsApp.",
     ogTitle: "Suite vicino Scala dei Turchi — Jacuzzi privata & Sauna",
     ogDescription:
       "Giornata tra mare e luce, notte in wellness privato. Prenota diretto via WhatsApp.",
@@ -344,7 +344,7 @@ export const SEO_LANDINGS = [
     relatedBlogSlugs: ["suite-romantica-sicilia-cosa-conta-davvero", "anniversario-sorpresa-romantica-jacuzzi"],
     metaTitle: `Weekend romantico a Porto Empedocle: suite con jacuzzi privata | ${noir.name}`,
     metaDescription:
-      "Weekend romantico a Porto Empedocle: scegli una suite luxury con jacuzzi privata e sauna interna. Da 135€/notte. Prenotazione diretta via WhatsApp.",
+      "Weekend romantico a Porto Empedocle: scegli una suite luxury con jacuzzi privata e sauna interna. Da 150€/notte. Prenotazione diretta via WhatsApp.",
     ogTitle: "Weekend romantico a Porto Empedocle — Jacuzzi privata & Sauna",
     ogDescription:
       "Un piano semplice: mare, silenzio e wellness privato. Prenota diretto su WhatsApp.",
@@ -391,7 +391,7 @@ export const SEO_LANDINGS = [
     ],
     metaTitle: `Suite Porto Empedocle: jacuzzi privata e sauna | ${noir.name}`,
     metaDescription:
-      "Suite a Porto Empedocle per coppie: jacuzzi privata e sauna interna ad uso esclusivo, comfort completo e zero spazi condivisi. Zona Agrigento. Da 135€/notte. Prenotazione diretta su WhatsApp.",
+      "Suite a Porto Empedocle per coppie: jacuzzi privata e sauna interna ad uso esclusivo, comfort completo e zero spazi condivisi. Zona Agrigento. Da 150€/notte. Prenotazione diretta su WhatsApp.",
     ogTitle: "Suite a Porto Empedocle — Jacuzzi privata & Sauna interna",
     ogDescription:
       "Due suite per coppie: Passion (più intima) e Infinity (più scenografica). Wellness privato, privacy totale, prenotazione diretta via WhatsApp.",
@@ -483,7 +483,7 @@ export const SEO_LANDINGS = [
     ],
     metaTitle: `Suite romantica Agrigento: jacuzzi privata e sauna | ${noir.name}`,
     metaDescription:
-      "Suite romantica in zona Agrigento: dormi a Porto Empedocle in una suite per coppie con jacuzzi privata e sauna interna ad uso esclusivo. Da 135€/notte. Prenota diretto via WhatsApp.",
+      "Suite romantica in zona Agrigento: dormi a Porto Empedocle in una suite per coppie con jacuzzi privata e sauna interna ad uso esclusivo. Da 150€/notte. Prenota diretto via WhatsApp.",
     ogTitle: "Suite romantica (zona Agrigento) — Jacuzzi & Sauna private",
     ogDescription:
       "Per coppie: notte romantica con wellness privato, zero spazi condivisi e prenotazione diretta su WhatsApp.",
@@ -530,7 +530,7 @@ export const SEO_LANDINGS = [
     ],
     metaTitle: `SPA privata in Sicilia: suite con jacuzzi e sauna | ${noir.name}`,
     metaDescription:
-      "SPA privata in Sicilia per coppie: suite con jacuzzi privata e sauna interna ad uso esclusivo a Porto Empedocle (zona Agrigento). Se vuoi privacy totale, questa è la scelta più diretta. Da 135€/notte.",
+      "SPA privata in Sicilia per coppie: suite con jacuzzi privata e sauna interna ad uso esclusivo a Porto Empedocle (zona Agrigento). Se vuoi privacy totale, questa è la scelta più diretta. Da 150€/notte.",
     ogTitle: "SPA privata in Sicilia — Jacuzzi & Sauna ad uso esclusivo",
     ogDescription:
       "Suite spa privata per coppie: niente spazi comuni, niente turni. Prenotazione diretta su WhatsApp.",

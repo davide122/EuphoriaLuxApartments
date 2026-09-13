@@ -135,7 +135,7 @@ export function BookingWidget({
                 Scegli le date.
               </div>
               <div className="mt-4 text-base leading-7 text-noir-muted">
-                Da €{noir.startingFrom}/notte · {noir.smartAccess}. Verifica disponibilità per{" "}
+                Da €{noir.startingFrom}/notte, aperitivo di benvenuto incluso · {noir.smartAccess}. Verifica disponibilità per{" "}
                 <span className="text-noir-mist/85">{suiteObj.name}</span>, poi invia la richiesta.
               </div>
             </div>

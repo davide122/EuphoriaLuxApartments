@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Bodoni_Moda, Manrope } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
-import { AmbientOrchestrator } from "@/components/ambient/ambient-orchestrator";
 import { SmoothScroll } from "@/components/smooth-scroll";
 import { ClientAnalytics } from "@/components/analytics/client-analytics";
 import { noir } from "@/lib/noir";
@@ -24,11 +23,11 @@ const noirUI = Manrope({
 export const metadata: Metadata = {
   metadataBase: new URL(noir.siteUrl),
   title: {
-    default: "Euphoria — Luxury experience a Porto Empedocle",
+    default: "Suite con SPA privata a Porto Empedocle | Euphoria",
     template: "%s — Euphoria",
   },
   description:
-    "Euphoria Luxury Suite a Porto Empedocle: jacuzzi privata, sauna interna, luci immersive e atmosfera romantica. Da 135€ a notte. Smart check-in e smart check-out completamente da soli (tastierino). Prenotazione diretta via WhatsApp.",
+    "Due suite romantiche con jacuzzi e sauna private a Porto Empedocle, vicino Agrigento. Self check-in, cucina, Netflix e aperitivo. Da 150€ a coppia.",
   applicationName: "Euphoria",
   alternates: { canonical: "/" },
   robots: "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1",
@@ -46,22 +45,22 @@ export const metadata: Metadata = {
     url: "/",
     siteName: "Euphoria",
     locale: "it_IT",
-    title: "Euphoria — Dove il lusso incontra la notte",
+    title: "Suite con SPA privata a Porto Empedocle | Euphoria",
     description:
-      "Jacuzzi privata, sauna, luci e design. Da 135€ a notte. Smart check-in e smart check-out completamente da soli (tastierino) e prenotazione diretta via WhatsApp a Porto Empedocle.",
+      "Suite romantiche vicino Agrigento con jacuzzi e sauna ad uso esclusivo, self check-in e aperitivo incluso. Da 150€ a coppia.",
     images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: "Euphoria Luxury Suite" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Euphoria",
+    title: "Suite con SPA privata a Porto Empedocle | Euphoria",
     description:
-      "Private luxury experience a Porto Empedocle: jacuzzi spa, sauna e atmosfera notturna.",
+      "Due suite romantiche vicino Agrigento con jacuzzi, sauna e privacy totale.",
     images: ["/opengraph-image"],
   },
 };
 
 export const viewport = {
-  themeColor: "#05060a",
+  themeColor: "#060309",
   colorScheme: "dark",
 };
 
@@ -94,7 +93,6 @@ gtag('config', '${gaId}', { send_page_view: false });`}
         ) : null}
         <SmoothScroll>
           <ClientAnalytics />
-          <AmbientOrchestrator />
           {children}
         </SmoothScroll>
       </body>

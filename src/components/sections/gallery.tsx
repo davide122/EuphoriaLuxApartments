@@ -1,121 +1,35 @@
-import { Reveal } from "@/components/motion/reveal";
-import { MediaFrame } from "@/components/ui/media-frame";
-import { NoirAnchor } from "@/components/ui/noir-anchor";
+import Image from "next/image";
 import { SectionHeader } from "@/components/ui/section-header";
-import { galleryFrames, noir } from "@/lib/noir";
+import { galleryFrames } from "@/lib/noir";
 
 export function GallerySection() {
   return (
-    <section
-      id="galleria"
-      data-ambient="noir"
-      className="relative z-10 py-20 sm:py-28"
-    >
+    <section id="galleria" data-ambient="noir" className="relative z-10 py-16 sm:py-24">
       <div className="noir-container">
-        <Reveal>
-          <SectionHeader
-            eyebrow="Galleria"
-            title="Ogni foto è un dettaglio reale. Zero “effetto catalogo”."
-            description={
-              <>
-                Quello che vedi è ciò che trovi: privacy totale, spa interna, luci notturne e
-                materiali che fanno scena. Se ti ci vedi già, scrivi ora: ti diciamo cosa è libero.
-              </>
-            }
-          />
-        </Reveal>
+        <SectionHeader
+          eyebrow="Le suite, davvero"
+          title="Quello che vedete sarà tutto vostro."
+          description="Sono foto reali di Passion e Infinity. Nessuna stanza campione, nessuna spa condivisa: prenotate proprio questi spazi."
+        />
 
-        <div className="mt-12 hidden grid-cols-12 gap-6 lg:grid">
-          <div className="col-span-7">
-            <Reveal>
-              <div className="grid gap-6">
-                <MediaFrame
-                  label={galleryFrames[0].label}
-                  tone={galleryFrames[0].tone}
-                  src={galleryFrames[0].src}
-                  className="aspect-[16/10]"
-                  priority
-                />
-                <div className="grid grid-cols-2 gap-6">
-                  <MediaFrame
-                    label={galleryFrames[3].label}
-                    tone={galleryFrames[3].tone}
-                    src={galleryFrames[3].src}
-                    className="aspect-[4/5]"
-                  />
-                  <MediaFrame
-                    label={galleryFrames[2].label}
-                    tone={galleryFrames[2].tone}
-                    src={galleryFrames[2].src}
-                    className="aspect-[4/5]"
-                  />
-                </div>
-              </div>
-            </Reveal>
-          </div>
-          <div className="col-span-5">
-            <Reveal delay={0.08}>
-              <div className="grid gap-6">
-                <MediaFrame
-                  label={galleryFrames[1].label}
-                  tone={galleryFrames[1].tone}
-                  src={galleryFrames[1].src}
-                  className="aspect-[4/5]"
-                />
-                <MediaFrame
-                  label={galleryFrames[4].label}
-                  tone={galleryFrames[4].tone}
-                  src={galleryFrames[4].src}
-                  className="aspect-[16/11]"
-                />
-                <MediaFrame
-                  label={galleryFrames[5].label}
-                  tone={galleryFrames[5].tone}
-                  src={galleryFrames[5].src}
-                  className="aspect-[16/10]"
-                />
-              </div>
-            </Reveal>
-          </div>
-        </div>
-
-        <div className="mt-10 lg:hidden">
-          <div className="flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-            {galleryFrames.map((f) => (
-              <div key={f.label} className="min-w-[78%] snap-start">
-                <Reveal>
-                  <MediaFrame
-                    label={f.label}
-                    tone={f.tone}
-                    src={f.src}
-                    className="aspect-[4/5]"
-                  />
-                </Reveal>
+        <div className="euphoria-marquee-mask -mx-5 mt-12 overflow-hidden sm:-mx-8 lg:-mx-12">
+          <div className="euphoria-marquee flex w-max gap-4">
+            {[0, 1].map((copy) => (
+              <div key={copy} aria-hidden={copy === 1} className="flex gap-4">
+                {galleryFrames.map((frame) => (
+                  <figure
+                    key={`${copy}-${frame.src}`}
+                    className="relative h-[52vh] min-h-[390px] w-[72vw] max-w-[520px] shrink-0 overflow-hidden rounded-[2rem_2rem_7rem_2rem] sm:w-[42vw]"
+                  >
+                    <Image src={encodeURI(frame.src)} alt={copy === 0 ? frame.label : ""} fill sizes="(max-width: 640px) 72vw, 42vw" className="object-cover" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent" />
+                    <figcaption className="absolute bottom-7 left-7 text-xs uppercase tracking-[0.24em] text-white/70">{frame.label}</figcaption>
+                  </figure>
+                ))}
               </div>
             ))}
           </div>
-          <div className="mt-4 text-xs tracking-[0.22em] uppercase text-noir-mist/50">
-            Swipe per esplorare
-          </div>
         </div>
-
-        <Reveal delay={0.14}>
-          <div className="mt-10 flex flex-col gap-3 sm:flex-row">
-            <NoirAnchor
-              href={
-                noir.contacts.whatsapp +
-                `?text=${encodeURIComponent(
-                  "Ciao, vorrei verificare disponibilità. Date: __/__/__ → __/__/__. Siamo in __. Grazie."
-                )}`
-              }
-              target="_blank"
-              rel="noreferrer"
-              variant="primary"
-            >
-              Scrivi su WhatsApp
-            </NoirAnchor>
-          </div>
-        </Reveal>
       </div>
     </section>
   );

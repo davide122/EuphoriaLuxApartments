@@ -3,7 +3,6 @@ import { notFound } from "next/navigation";
 import { TopNav } from "@/components/nav/top-nav";
 import { FooterSection } from "@/components/sections/footer";
 import { Reveal } from "@/components/motion/reveal";
-import { SectionHeader } from "@/components/ui/section-header";
 import { MediaFrame } from "@/components/ui/media-frame";
 import { NoirAnchor } from "@/components/ui/noir-anchor";
 import { NoirLink } from "@/components/ui/noir-link";
@@ -169,20 +168,20 @@ export default async function SeoLandingPage({ params }: { params: Promise<{ slu
           <div className="noir-container">
             <Breadcrumbs items={crumbs} />
             <Reveal>
-              <div className="noir-panel noir-glow overflow-hidden p-9 sm:p-12">
+              <div className="overflow-hidden border-y border-fuchsia-100/15 py-10 sm:py-14">
                 <div className="grid gap-10 lg:grid-cols-12 lg:items-center">
                   <div className="lg:col-span-6">
-                    <SectionHeader
-                      eyebrow={landing.hero.eyebrow}
-                      title={landing.hero.h1}
-                      description={landing.hero.sub}
-                    />
+                    <div className="euphoria-kicker">{landing.hero.eyebrow}</div>
+                    <h1 className="noir-h1 mt-6 text-5xl leading-[0.94] text-noir-mist sm:text-6xl lg:text-7xl">
+                      {landing.hero.h1}
+                    </h1>
+                    <p className="mt-6 max-w-xl text-base leading-7 text-noir-muted">{landing.hero.sub}</p>
                     <div className="mt-10 flex flex-col gap-3 sm:flex-row">
                       <NoirAnchor href={whatsappHref} target="_blank" rel="noreferrer" variant="primary">
-                        Verifica disponibilità su WhatsApp
+                        Chiedi le tue date
                       </NoirAnchor>
                       <NoirLink href="/suites" variant="ghost">
-                        Vedi Passion e Infinity
+                        Confronta Passion e Infinity
                       </NoirLink>
                     </div>
                   </div>
@@ -200,35 +199,32 @@ export default async function SeoLandingPage({ params }: { params: Promise<{ slu
               </div>
             </Reveal>
 
-            <div className="mt-12 grid gap-6 lg:grid-cols-3">
+            <article className="mx-auto mt-20 max-w-4xl">
               {landing.blocks.map((b, idx) => (
                 <Reveal key={b.title} delay={0.05 + idx * 0.04}>
-                  <div className="noir-panel p-8 sm:p-9">
-                    <div className="text-xs tracking-[0.26em] uppercase text-noir-mist/55">
-                      {landing.primaryKeyword}
+                  <section className="border-t border-white/10 py-10 sm:py-12">
+                    <div className="text-[10px] uppercase tracking-[0.24em] text-noir-fuchsia/70">
+                      {String(idx + 1).padStart(2, "0")} · {landing.primaryKeyword}
                     </div>
-                    <div className="mt-5 text-xl font-medium tracking-tight text-noir-mist">
+                    <h2 className="noir-h1 mt-5 text-3xl leading-tight text-noir-mist sm:text-4xl">
                       {b.title}
-                    </div>
-                    <p className="mt-4 text-sm leading-6 text-noir-muted">{b.body}</p>
+                    </h2>
+                    <p className="mt-6 text-base leading-8 text-noir-muted sm:text-lg">{b.body}</p>
                     {b.bullets ? (
-                      <div className="mt-6 grid gap-2">
+                      <ul className="mt-7 grid gap-3 border-l border-noir-violet/30 pl-6">
                         {b.bullets.map((t) => (
-                          <div key={t} className="flex items-start gap-3 text-sm leading-6 text-noir-mist/80">
-                            <span className="mt-2 inline-block h-1.5 w-1.5 rounded-full bg-white/45" />
-                            <span>{t}</span>
-                          </div>
+                          <li key={t} className="text-base leading-7 text-noir-mist/78">{t}</li>
                         ))}
-                      </div>
+                      </ul>
                     ) : null}
-                  </div>
+                  </section>
                 </Reveal>
               ))}
-            </div>
+            </article>
 
             <Reveal delay={0.14}>
               <div className="mt-10 text-sm text-noir-mist/70">
-                <span className="font-medium text-noir-mist/85">Da €{noir.startingFrom}/notte</span>
+                <span className="font-medium text-noir-mist/85">Da €{noir.startingFrom}/notte · aperitivo incluso</span>
                 <span className="mx-2 text-white/25">•</span>
                 Jacuzzi privata
                 <span className="mx-2 text-white/25">•</span>
@@ -239,15 +235,15 @@ export default async function SeoLandingPage({ params }: { params: Promise<{ slu
             </Reveal>
 
             <Reveal delay={0.18}>
-              <div className="mt-10 grid gap-3">
-                <div className="text-xs tracking-[0.26em] uppercase text-noir-mist/55">FAQ</div>
+              <div className="mx-auto mt-20 max-w-4xl">
+                <div className="euphoria-kicker">Domande frequenti</div>
                 <div className="grid gap-3">
                   {landing.faqs.map((f) => (
-                    <details key={f.q} className="noir-panel group px-6 py-5">
+                    <details key={f.q} className="group border-b border-white/10 px-1 py-6">
                       <summary className="cursor-pointer list-none text-sm font-medium text-noir-mist/85 [&::-webkit-details-marker]:hidden">
                         <div className="flex items-center justify-between gap-6">
                           <span>{f.q}</span>
-                          <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-white/55 transition group-open:bg-white/80" />
+                          <span className="text-xl font-light text-noir-fuchsia transition group-open:rotate-45">+</span>
                         </div>
                       </summary>
                       <div className="mt-3 text-sm leading-6 text-noir-muted">{f.a}</div>
@@ -259,18 +255,18 @@ export default async function SeoLandingPage({ params }: { params: Promise<{ slu
 
             {relatedPosts.length ? (
               <Reveal delay={0.20}>
-                <div className="mt-10 grid gap-4 lg:grid-cols-12 lg:items-center">
+                <div className="mt-20 grid gap-10 border-t border-fuchsia-100/15 pt-10 lg:grid-cols-12 lg:items-start">
                   <div className="lg:col-span-7">
-                    <div className="noir-panel p-8 sm:p-9">
+                    <div>
                       <div className="text-xs tracking-[0.26em] uppercase text-noir-mist/55">
                         Approfondisci
                       </div>
                       <div className="mt-5 text-lg font-medium tracking-tight text-noir-mist">
-                        Una guida utile prima di prenotare.
+                        Qualcosa da leggere prima di partire.
                       </div>
                       <div className="mt-5 grid gap-3">
                         {relatedPosts.slice(0, 5).map((p) => (
-                          <NoirLink key={p.slug} href={`/blog/${p.slug}`} variant="ghost" className="justify-center sm:justify-start">
+                          <NoirLink key={p.slug} href={`/blog/${p.slug}`} variant="ghost" className="justify-start border-x-0 border-b-0 border-t border-white/10 px-0 text-left">
                             {p.title}
                           </NoirLink>
                         ))}
@@ -278,13 +274,13 @@ export default async function SeoLandingPage({ params }: { params: Promise<{ slu
                     </div>
                   </div>
                   <div className="lg:col-span-5">
-                    <div className="noir-panel p-8 sm:p-9">
+                    <div className="border-l border-noir-fuchsia/25 pl-7">
                       <div className="text-xs tracking-[0.26em] uppercase text-noir-mist/55">
-                        Link rapidi
+                        La suite giusta
                       </div>
                       <div className="mt-6 grid gap-3">
                         <NoirLink href={suggestedSuiteHref} variant="primary" className="justify-center">
-                          Vedi la suite consigliata
+                          Scopri la suite consigliata
                         </NoirLink>
                       </div>
                     </div>
@@ -296,10 +292,10 @@ export default async function SeoLandingPage({ params }: { params: Promise<{ slu
             <Reveal delay={0.22}>
               <div className="mt-10 flex flex-col gap-3 sm:flex-row">
                 <NoirAnchor href={whatsappHref} target="_blank" rel="noreferrer" variant="primary">
-                  Prenota diretto su WhatsApp
+                  Chiedi disponibilità
                 </NoirAnchor>
                 <NoirLink href="/blog" variant="ghost">
-                  Leggi le guide
+                  Torna al journal
                 </NoirLink>
               </div>
             </Reveal>

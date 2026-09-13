@@ -1,15 +1,13 @@
 import { TopNav } from "@/components/nav/top-nav";
 import { HeroSection } from "@/components/hero/hero-section";
-import { DirectBookingSection } from "@/components/sections/direct-booking";
-import { IntroSection } from "@/components/sections/intro";
 import { ExperienceSection } from "@/components/sections/experience";
+import { CinematicScrollSection } from "@/components/sections/cinematic-scroll";
+import { AmbientOrchestrator } from "@/components/ambient/ambient-orchestrator";
 import { SuitesSection } from "@/components/sections/suites";
-import { JacuzziSection } from "@/components/sections/jacuzzi";
-import { SaunaSection } from "@/components/sections/sauna";
+import { RomanticPackagesSection } from "@/components/sections/romantic-packages";
 import { GallerySection } from "@/components/sections/gallery";
 import { ReviewsSection } from "@/components/sections/reviews";
 import { FaqSection } from "@/components/sections/faq";
-import { NightSection } from "@/components/sections/night";
 import { LocationSection } from "@/components/sections/location";
 import { FinalCtaSection } from "@/components/sections/final-cta";
 import { FooterSection } from "@/components/sections/footer";
@@ -18,36 +16,32 @@ import { noir } from "@/lib/noir";
 
 const homeFaqs = [
   {
-    q: "La jacuzzi è privata?",
-    a: "Sì. È interna alla suite ed è ad uso esclusivo: zero condivisione, zero spazi comuni.",
+    q: "Jacuzzi e sauna sono davvero private?",
+    a: "Sì. Sono dentro la suite e restano a vostro uso esclusivo per tutto il soggiorno.",
   },
   {
-    q: "La sauna è nella suite?",
-    a: "Sì, interna. Completa l’esperienza wellness senza uscire dalla tua privacy.",
+    q: "Che differenza c’è tra Passion e Infinity?",
+    a: "Passion è un ambiente unico da 55 m², con tutto vicino. Infinity misura 77 m² e offre più spazio tra zona notte, living e cucina. Jacuzzi e sauna sono presenti in entrambe.",
   },
   {
-    q: "È adatto a coppie?",
-    a: "Sì. Euphoria è pensata per fughe romantiche, anniversari e notti speciali.",
+    q: "Posso fare colazione in suite?",
+    a: "Sì. Potete fare colazione restando nella vostra suite.",
   },
   {
     q: "Ci sono cucina e forno?",
-    a: "Sì: cucina completa + forno, per vivere la suite con totale libertà.",
+    a: "Sì. Entrambe hanno una cucina completa con forno.",
   },
   {
-    q: "Wi‑Fi e condizionatori?",
-    a: "Sì: Wi‑Fi e aria condizionata sono inclusi in entrambe le suite.",
+    q: "Come funziona l’ingresso?",
+    a: "Ricevete un codice per il tastierino. Entrate e uscite senza passare dalla reception.",
   },
   {
-    q: "Come prenoto più velocemente?",
-    a: "WhatsApp: ti confermiamo disponibilità e dettagli in modo rapido e diretto.",
+    q: "Posso organizzare anniversari o sorprese?",
+    a: "Sì. Il pacchetto romantico essenziale parte da €10 e include petali di rosa, atmosfera calda, luci accese e suite climatizzata al vostro arrivo. Per richieste personalizzate, scriveteci direttamente.",
   },
   {
-    q: "Smart check-in e smart check-out?",
-    a: "Sì: accesso tramite tastierino. Arrivi e parti completamente da soli, senza attese.",
-  },
-  {
-    q: "Posso organizzare una sorpresa (anniversario/proposta)?",
-    a: "Sì: scrivici su WhatsApp e prepariamo l’esperienza in base alla tua occasione.",
+    q: "Quanto costa e come prenoto?",
+    a: "Le suite partono da €150 a notte e includono un aperitivo di benvenuto con tagliere di salumi e una bottiglia di prosecco. Scriveteci su WhatsApp con le date: vi mandiamo disponibilità e prezzo.",
   },
 ] as const;
 
@@ -108,6 +102,8 @@ function jsonLdHome() {
         { "@type": "LocationFeatureSpecification", name: "Cucina completa con forno", value: true },
         { "@type": "LocationFeatureSpecification", name: "Wi‑Fi", value: true },
         { "@type": "LocationFeatureSpecification", name: "Aria condizionata", value: true },
+        { "@type": "LocationFeatureSpecification", name: "Check-in con tastierino", value: true },
+        { "@type": "LocationFeatureSpecification", name: "Aperitivo di benvenuto incluso", value: true },
       ],
       isPartOf: { "@id": `${noir.siteUrl}#org` },
     },
@@ -120,21 +116,19 @@ export default function Home() {
     <div className="relative flex flex-1 flex-col">
       <TopNav />
       <main className="relative flex-1">
+        <AmbientOrchestrator />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdHome()) }}
         />
         <HeroSection />
-        <DirectBookingSection />
-        <SuitesSection />
-        <IntroSection />
         <ExperienceSection />
-        <JacuzziSection />
-        <SaunaSection />
+        <CinematicScrollSection />
+        <SuitesSection />
+        <RomanticPackagesSection />
         <GallerySection />
         <ReviewsSection />
-        <FaqSection />
-        <NightSection />
+        <FaqSection faqs={homeFaqs} />
         <LocationSection />
         <FinalCtaSection />
         <FooterSection />

@@ -3,7 +3,6 @@ import { notFound } from "next/navigation";
 import { TopNav } from "@/components/nav/top-nav";
 import { FooterSection } from "@/components/sections/footer";
 import { Reveal } from "@/components/motion/reveal";
-import { SectionHeader } from "@/components/ui/section-header";
 import { MediaFrame } from "@/components/ui/media-frame";
 import { NoirAnchor } from "@/components/ui/noir-anchor";
 import { NoirLink } from "@/components/ui/noir-link";
@@ -172,20 +171,23 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           <div className="noir-container">
             <Breadcrumbs items={crumbs} />
             <Reveal>
-              <div className="noir-panel noir-glow overflow-hidden p-9 sm:p-12">
+              <div className="overflow-hidden border-y border-fuchsia-100/15 py-10 sm:py-14">
                 <div className="grid gap-10 lg:grid-cols-12 lg:items-center">
                   <div className="lg:col-span-6">
-                    <SectionHeader
-                      eyebrow="Guida"
-                      title={post.title}
-                      description={post.excerpt}
-                    />
+                    <div className="euphoria-kicker">Journal · {post.primaryKeyword}</div>
+                    <h1 className="noir-h1 mt-6 text-5xl leading-[0.94] text-noir-mist sm:text-6xl lg:text-7xl">
+                      {post.title}
+                    </h1>
+                    <p className="mt-6 max-w-xl text-base leading-7 text-noir-muted">{post.excerpt}</p>
+                    <time dateTime={post.datePublishedISO} className="mt-6 block text-[10px] uppercase tracking-[0.24em] text-noir-mist/40">
+                      {new Intl.DateTimeFormat("it-IT", { day: "numeric", month: "long", year: "numeric" }).format(new Date(post.datePublishedISO))}
+                    </time>
                     <div className="mt-10 flex flex-col gap-3 sm:flex-row">
                       <NoirAnchor href={whatsappHref} target="_blank" rel="noreferrer" variant="primary">
-                        Verifica disponibilità su WhatsApp
+                        Chiedi le tue date
                       </NoirAnchor>
                       <NoirLink href="/blog" variant="ghost">
-                        Tutte le guide
+                        Torna al journal
                       </NoirLink>
                     </div>
                   </div>
@@ -203,51 +205,49 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
               </div>
             </Reveal>
 
-            <div className="mt-12 grid gap-6 lg:grid-cols-12">
+            <div className="mt-20 grid gap-12 lg:grid-cols-12">
               <div className="lg:col-span-8">
-                <div className="grid gap-6">
+                <article className="grid gap-0">
                   {post.sections.map((s, idx) => (
                     <Reveal key={s.title} delay={0.04 + idx * 0.03}>
-                      <div className="noir-panel p-8 sm:p-9">
-                        <div className="text-xl font-medium tracking-tight text-noir-mist">
+                      <section className="border-t border-white/10 py-10 sm:py-12">
+                        <div className="text-[10px] uppercase tracking-[0.24em] text-noir-fuchsia/70">{String(idx + 1).padStart(2, "0")}</div>
+                        <h2 className="noir-h1 mt-4 text-3xl leading-tight text-noir-mist sm:text-4xl">
                           {s.title}
-                        </div>
-                        <p className="mt-4 text-sm leading-6 text-noir-muted">{s.body}</p>
+                        </h2>
+                        <p className="mt-6 text-base leading-8 text-noir-muted sm:text-lg">{s.body}</p>
                         {s.bullets ? (
-                          <div className="mt-6 grid gap-2">
+                          <ul className="mt-7 grid gap-3 border-l border-noir-violet/30 pl-6">
                             {s.bullets.map((t) => (
-                              <div key={t} className="flex items-start gap-3 text-sm leading-6 text-noir-mist/80">
-                                <span className="mt-2 inline-block h-1.5 w-1.5 rounded-full bg-white/45" />
-                                <span>{t}</span>
-                              </div>
+                              <li key={t} className="text-base leading-7 text-noir-mist/78">{t}</li>
                             ))}
-                          </div>
+                          </ul>
                         ) : null}
-                      </div>
+                      </section>
                     </Reveal>
                   ))}
-                </div>
+                </article>
 
                 <Reveal delay={0.16}>
                   <div className="mt-10 flex flex-col gap-3 sm:flex-row">
                     <NoirAnchor href={whatsappHref} target="_blank" rel="noreferrer" variant="primary">
-                      Prenota diretto su WhatsApp
+                      Chiedi disponibilità
                     </NoirAnchor>
                     <NoirLink href="/suites" variant="ghost">
-                      Vedi le suites
+                      Confronta Passion e Infinity
                     </NoirLink>
                   </div>
                 </Reveal>
 
                 {relatedPosts.length ? (
                   <Reveal delay={0.20}>
-                    <div className="mt-6 noir-panel p-8 sm:p-9">
+                    <div className="mt-12 border-t border-fuchsia-100/15 pt-9">
                       <div className="text-xs tracking-[0.26em] uppercase text-noir-mist/55">
                         Guide correlate
                       </div>
-                      <div className="mt-6 grid gap-3">
+                      <div className="mt-6 grid gap-1">
                         {relatedPosts.slice(0, 5).map((p) => (
-                          <NoirLink key={p.slug} href={`/blog/${p.slug}`} variant="ghost" className="justify-center sm:justify-start">
+                          <NoirLink key={p.slug} href={`/blog/${p.slug}`} variant="ghost" className="justify-start border-x-0 border-b-0 border-t border-white/10 px-0 text-left">
                             {p.title}
                           </NoirLink>
                         ))}
@@ -257,13 +257,13 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                 ) : null}
               </div>
 
-              <div className="lg:col-span-4">
+              <aside className="lg:col-span-4">
                 <Reveal delay={0.10}>
-                  <div className="noir-panel p-8 sm:p-9">
+                  <div className="border-l border-noir-fuchsia/25 pl-7 lg:sticky lg:top-28">
                     <div className="text-xs tracking-[0.26em] uppercase text-noir-mist/55">
                       Info rapide
                     </div>
-                    <div className="mt-6 grid gap-2">
+                    <div className="mt-6 grid gap-3">
                       {[
                         `Da €${noir.startingFrom}/notte`,
                         "Jacuzzi privata",
@@ -283,7 +283,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
                 {relatedLandings.length ? (
                   <Reveal delay={0.14}>
-                    <div className="mt-6 noir-panel p-8 sm:p-9">
+                    <div className="mt-10 border-l border-noir-violet/25 pl-7">
                       <div className="text-xs tracking-[0.26em] uppercase text-noir-mist/55">
                         Pagine utili
                       </div>
@@ -300,7 +300,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                     </div>
                   </Reveal>
                 ) : null}
-              </div>
+              </aside>
             </div>
           </div>
         </section>

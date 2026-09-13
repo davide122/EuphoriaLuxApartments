@@ -36,56 +36,37 @@ export function AdminPanel() {
 
   const [gNome, setGNome] = useState("");
   const [gSuite, setGSuite] = useState<"" | "passion" | "infinity">("");
+  const [gMode, setGMode] = useState<"pernottamento" | "dayuse">("pernottamento");
   const [gArrivo, setGArrivo] = useState("");
   const [gPartenza, setGPartenza] = useState("");
-  const [gOccasione, setGOccasione] = useState<"" | "anniversario" | "sorpresa" | "proposta" | "weekend">("");
   const [gCodice, setGCodice] = useState("");
   const [gCheckIn, setGCheckIn] = useState("");
   const [gCheckOut, setGCheckOut] = useState("");
-  const [gWifi, setGWifi] = useState("");
-  const [gWifiPass, setGWifiPass] = useState("");
-  const [gMaps, setGMaps] = useState("");
-  const [gParcheggio, setGParcheggio] = useState("");
-  const [gRistoranti, setGRistoranti] = useState("");
-  const [gNote, setGNote] = useState("");
 
   const guestLink = useMemo(() => {
-    const url = new URL("/ospiti", noir.siteUrl);
+    if (!gSuite) return "";
+    const url = new URL(`/ospiti/${gSuite}/${gMode}`, noir.siteUrl);
     const sp = url.searchParams;
     const add = (k: string, v: string) => {
       const t = v.trim();
       if (t) sp.set(k, t);
     };
     add("nome", gNome);
-    if (gSuite) add("suite", gSuite);
     add("arrivo", gArrivo);
     add("partenza", gPartenza);
-    if (gOccasione) add("occasione", gOccasione);
     add("codice", gCodice);
     add("checkin", gCheckIn);
     add("checkout", gCheckOut);
-    add("wifi", gWifi);
-    add("wifiPass", gWifiPass);
-    add("maps", gMaps);
-    add("parcheggio", gParcheggio);
-    add("ristoranti", gRistoranti);
-    add("note", gNote);
     return url.toString();
   }, [
     gNome,
     gSuite,
+    gMode,
     gArrivo,
     gPartenza,
-    gOccasione,
     gCodice,
     gCheckIn,
     gCheckOut,
-    gWifi,
-    gWifiPass,
-    gMaps,
-    gParcheggio,
-    gRistoranti,
-    gNote,
   ]);
 
   const load = async () => {
@@ -372,7 +353,7 @@ export function AdminPanel() {
 
             <div className="noir-panel p-6">
               <div className="text-xs tracking-[0.26em] uppercase text-noir-mist/55">
-                Generatore link ospiti (Guida /ospiti)
+                Generatore link guida ospiti
               </div>
               <div className="mt-4 grid gap-3 md:grid-cols-12">
                 <label className="md:col-span-4">
@@ -397,19 +378,14 @@ export function AdminPanel() {
                   </select>
                 </label>
                 <label className="md:col-span-4">
-                  <div className="text-xs tracking-[0.22em] uppercase text-noir-mist/45">Occasione</div>
+                  <div className="text-xs tracking-[0.22em] uppercase text-noir-mist/45">Formula</div>
                   <select
-                    value={gOccasione}
-                    onChange={(e) =>
-                      setGOccasione(e.target.value as "" | "anniversario" | "sorpresa" | "proposta" | "weekend")
-                    }
+                    value={gMode}
+                    onChange={(e) => setGMode(e.target.value as "pernottamento" | "dayuse")}
                     className="mt-2 h-11 w-full rounded-full border border-white/10 bg-white/5 px-4 text-sm text-noir-mist/85 outline-none"
                   >
-                    <option value="">(nessuna)</option>
-                    <option value="anniversario">Anniversario</option>
-                    <option value="sorpresa">Sorpresa</option>
-                    <option value="proposta">Proposta</option>
-                    <option value="weekend">Weekend</option>
+                    <option value="pernottamento">Pernottamento</option>
+                    <option value="dayuse">Day Use</option>
                   </select>
                 </label>
 
@@ -450,69 +426,13 @@ export function AdminPanel() {
                   />
                 </label>
 
-                <label className="md:col-span-4">
+                <label className="md:col-span-12">
                   <div className="text-xs tracking-[0.22em] uppercase text-noir-mist/45">Codice porta</div>
                   <input
                     value={gCodice}
                     onChange={(e) => setGCodice(e.target.value)}
                     placeholder="4–10 cifre"
                     className="mt-2 h-11 w-full rounded-full border border-white/10 bg-white/5 px-4 text-sm text-noir-mist/85 outline-none"
-                  />
-                </label>
-                <label className="md:col-span-4">
-                  <div className="text-xs tracking-[0.22em] uppercase text-noir-mist/45">Wi‑Fi</div>
-                  <input
-                    value={gWifi}
-                    onChange={(e) => setGWifi(e.target.value)}
-                    placeholder="Nome rete"
-                    className="mt-2 h-11 w-full rounded-full border border-white/10 bg-white/5 px-4 text-sm text-noir-mist/85 outline-none"
-                  />
-                </label>
-                <label className="md:col-span-4">
-                  <div className="text-xs tracking-[0.22em] uppercase text-noir-mist/45">Password Wi‑Fi</div>
-                  <input
-                    value={gWifiPass}
-                    onChange={(e) => setGWifiPass(e.target.value)}
-                    placeholder="Password"
-                    className="mt-2 h-11 w-full rounded-full border border-white/10 bg-white/5 px-4 text-sm text-noir-mist/85 outline-none"
-                  />
-                </label>
-
-                <label className="md:col-span-12">
-                  <div className="text-xs tracking-[0.22em] uppercase text-noir-mist/45">Google Maps (URL)</div>
-                  <input
-                    value={gMaps}
-                    onChange={(e) => setGMaps(e.target.value)}
-                    placeholder="Incolla un link Google Maps (opzionale)"
-                    className="mt-2 h-11 w-full rounded-full border border-white/10 bg-white/5 px-4 text-sm text-noir-mist/85 outline-none"
-                  />
-                </label>
-
-                <label className="md:col-span-4">
-                  <div className="text-xs tracking-[0.22em] uppercase text-noir-mist/45">Parcheggi (1 per riga)</div>
-                  <textarea
-                    value={gParcheggio}
-                    onChange={(e) => setGParcheggio(e.target.value)}
-                    placeholder="Es. Parcheggio vicino …"
-                    className="mt-2 min-h-[120px] w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-noir-mist/85 outline-none"
-                  />
-                </label>
-                <label className="md:col-span-4">
-                  <div className="text-xs tracking-[0.22em] uppercase text-noir-mist/45">Ristoranti (1 per riga)</div>
-                  <textarea
-                    value={gRistoranti}
-                    onChange={(e) => setGRistoranti(e.target.value)}
-                    placeholder="Es. Nome ristorante — zona"
-                    className="mt-2 min-h-[120px] w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-noir-mist/85 outline-none"
-                  />
-                </label>
-                <label className="md:col-span-4">
-                  <div className="text-xs tracking-[0.22em] uppercase text-noir-mist/45">Note (1 per riga)</div>
-                  <textarea
-                    value={gNote}
-                    onChange={(e) => setGNote(e.target.value)}
-                    placeholder="Es. Occhio alla porta: attendi 3–5s per chiuderla"
-                    className="mt-2 min-h-[120px] w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-noir-mist/85 outline-none"
                   />
                 </label>
               </div>
@@ -529,7 +449,8 @@ export function AdminPanel() {
                 <div className="md:col-span-3">
                   <button
                     type="button"
-                    className="noir-button noir-button-primary w-full justify-center py-3"
+                    className={`noir-button noir-button-primary w-full justify-center py-3 ${guestLink ? "" : "opacity-60"}`}
+                    disabled={!guestLink}
                     onClick={async () => {
                       await navigator.clipboard.writeText(guestLink).catch(() => null);
                       setLinkCopied(true);
@@ -543,7 +464,7 @@ export function AdminPanel() {
               </div>
 
               <div className="mt-3 text-xs text-noir-mist/45">
-                Il link contiene i dati in URL. Compila solo ciò che vuoi mostrare all’ospite.
+                La guida vera è fissa per suite e formula. Nel link entrano solo i dettagli che cambiano davvero: nome, date, codice e orari.
               </div>
             </div>
 

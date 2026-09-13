@@ -1,28 +1,28 @@
 @import "tailwindcss";
 
 :root {
-  --noir-midnight: #05060a;
-  --noir-ink: #0a0b12;
-  --noir-graphite: #101224;
-  --noir-stone: #161828;
-  --noir-mist: #dfe3ef;
-  --noir-muted: #a7adbf;
-  --noir-violet: #8a2eff;
-  --noir-fuchsia: #ff2fb2;
-  --noir-electric: #2e6bff;
-  --noir-aqua: #2df2ff;
-  --noir-champagne: #d7b79f;
+  --noir-midnight: #060309;
+  --noir-ink: #0c0611;
+  --noir-graphite: #160b20;
+  --noir-stone: #24122f;
+  --noir-mist: #fff8fd;
+  --noir-muted: #c9b9cb;
+  --noir-violet: #8b5cf6;
+  --noir-fuchsia: #ed3fa6;
+  --noir-electric: #b82cff;
+  --noir-aqua: #d98cff;
+  --noir-champagne: #f4b8df;
 
-  --ambient-a: 138 46 255;
-  --ambient-b: 46 107 255;
-  --ambient-c: 45 242 255;
+  --ambient-a: 139 92 246;
+  --ambient-b: 184 44 255;
+  --ambient-c: 237 63 166;
 
-  --surface-1: 12 12 20;
-  --surface-2: 18 18 30;
+  --surface-1: 16 8 23;
+  --surface-2: 30 13 42;
   --stroke-1: 255 255 255;
 
   --shadow-ink: 0 0 0;
-  --radius-xl: 28px;
+  --radius-xl: 24px;
 
   --background: var(--noir-midnight);
   --foreground: var(--noir-mist);
@@ -48,11 +48,14 @@
 }
 
 body {
-  background: var(--background);
+  background:
+    radial-gradient(1000px circle at 12% -5%, rgba(139, 92, 246, 0.12), transparent 55%),
+    radial-gradient(900px circle at 95% 16%, rgba(237, 63, 166, 0.08), transparent 52%),
+    var(--background);
   color: var(--foreground);
   font-family: var(--font-noir-ui), ui-sans-serif, system-ui, -apple-system,
     BlinkMacSystemFont, "Segoe UI", sans-serif;
-  text-rendering: geometricPrecision;
+  text-rendering: optimizeLegibility;
 }
 
 html,
@@ -67,23 +70,7 @@ body {
 
 @layer base {
   body {
-    background:
-      radial-gradient(
-        900px circle at 18% 12%,
-        rgba(var(--ambient-a) / 0.20),
-        transparent 58%
-      ),
-      radial-gradient(
-        1100px circle at 82% 24%,
-        rgba(var(--ambient-c) / 0.12),
-        transparent 60%
-      ),
-      radial-gradient(
-        1400px circle at 52% 118%,
-        rgba(var(--ambient-b) / 0.12),
-        transparent 62%
-      ),
-      linear-gradient(var(--noir-midnight), var(--noir-midnight));
+    background: var(--noir-midnight);
   }
 
   a {
@@ -93,92 +80,52 @@ body {
 
 @layer components {
   .noir-container {
-    @apply mx-auto w-full max-w-7xl px-6 sm:px-10;
+    @apply mx-auto w-full max-w-[1440px] px-5 sm:px-8 lg:px-12;
   }
 
   .noir-panel {
-    background:
-      radial-gradient(
-        900px circle at 20% 0%,
-        rgba(var(--ambient-a) / 0.12),
-        transparent 55%
-      ),
-      linear-gradient(
-        180deg,
-        rgba(var(--surface-2) / 0.56),
-        rgba(var(--surface-1) / 0.42)
-      );
-    border: 1px solid rgba(var(--stroke-1) / 0.12);
+    background: linear-gradient(145deg, rgb(var(--surface-2) / 0.66), rgb(var(--surface-1) / 0.88));
+    border: 1px solid rgba(234, 190, 255, 0.13);
     border-radius: var(--radius-xl);
-    box-shadow:
-      0 24px 70px rgba(var(--shadow-ink) / 0.55),
-      0 1px 0 rgba(255 255 255 / 0.06) inset;
-    backdrop-filter: blur(16px);
+    box-shadow: 0 28px 90px rgba(var(--shadow-ink) / 0.38), inset 0 1px 0 rgba(255,255,255,0.035);
+    backdrop-filter: blur(18px);
   }
 
   .noir-chip {
-    @apply inline-flex items-center gap-2 rounded-xl px-3.5 py-1.5 text-xs tracking-[0.18em] uppercase;
-    background: rgba(var(--surface-2) / 0.55);
+    @apply inline-flex items-center gap-2 rounded px-3.5 py-1.5 text-xs tracking-[0.12em] uppercase;
+    background: rgba(var(--surface-2) / 0.92);
     border: 1px solid rgba(var(--stroke-1) / 0.12);
   }
 
   .noir-button {
-    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-medium tracking-wide transition;
-    background: rgba(255 255 255 / 0.08);
-    border: 1px solid rgba(var(--stroke-1) / 0.12);
-    box-shadow:
-      0 22px 70px rgba(var(--shadow-ink) / 0.40),
-      0 1px 0 rgba(255 255 255 / 0.08) inset;
+    @apply inline-flex min-h-12 cursor-pointer items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-medium transition duration-300;
+    background: rgba(255,255,255,0.035);
+    border: 1px solid rgba(242, 210, 255, 0.22);
   }
 
   .noir-button:hover {
+    border-color: rgba(224, 157, 255, 0.58);
+    background: rgba(184, 44, 255, 0.1);
+    box-shadow: 0 0 28px rgba(184, 44, 255, 0.12);
     transform: translateY(-1px);
-    border-color: rgba(var(--stroke-1) / 0.22);
-    background: rgba(255 255 255 / 0.11);
   }
 
   .noir-button-primary {
-    background:
-      radial-gradient(
-        120% 120% at 20% 0%,
-        rgba(var(--ambient-c) / 0.55),
-        transparent 52%
-      ),
-      radial-gradient(
-        120% 120% at 80% 20%,
-        rgba(var(--ambient-a) / 0.55),
-        transparent 58%
-      ),
-      linear-gradient(
-        90deg,
-        rgba(var(--ambient-b) / 0.65),
-        rgba(var(--ambient-a) / 0.65)
-      );
-    border-color: rgba(255 255 255 / 0.16);
+    background: linear-gradient(115deg, #8b5cf6 0%, #c23ee8 48%, #ed3fa6 100%);
+    border-color: rgba(255, 210, 244, 0.42);
+    color: #fffafd;
+    box-shadow: 0 12px 34px rgba(184, 44, 255, 0.22);
   }
 
   .noir-button-primary:hover {
-    background:
-      radial-gradient(
-        120% 120% at 20% 0%,
-        rgba(var(--ambient-c) / 0.70),
-        transparent 52%
-      ),
-      radial-gradient(
-        120% 120% at 80% 20%,
-        rgba(var(--ambient-a) / 0.70),
-        transparent 58%
-      ),
-      linear-gradient(
-        90deg,
-        rgba(var(--ambient-b) / 0.80),
-        rgba(var(--ambient-a) / 0.80)
-      );
+    background: linear-gradient(115deg, #9870ff 0%, #d14af0 48%, #f35cb3 100%);
+    border-color: rgba(255, 235, 250, 0.64);
+    box-shadow: 0 16px 42px rgba(237, 63, 166, 0.26);
   }
 
   .noir-h1 {
     font-family: var(--font-noir-display), ui-serif, Georgia, serif;
-    letter-spacing: -0.03em;
+    letter-spacing: -0.035em;
   }
 
   .noir-glow {
@@ -189,27 +136,91 @@ body {
     content: "";
     position: absolute;
     inset: -1px;
-    border-radius: inherit;
-    background:
-      radial-gradient(
-        120% 120% at 20% 0%,
-        rgba(var(--ambient-c) / 0.40),
-        transparent 45%
-      ),
-      radial-gradient(
-        120% 120% at 80% 20%,
-        rgba(var(--ambient-a) / 0.35),
-        transparent 55%
-      ),
-      radial-gradient(
-        120% 120% at 50% 80%,
-        rgba(var(--ambient-b) / 0.20),
-        transparent 60%
-      );
-    filter: blur(26px);
-    opacity: 0.9;
-    pointer-events: none;
     z-index: -1;
+    border-radius: inherit;
+    background: linear-gradient(120deg, rgba(var(--ambient-a)/0.42), transparent 38%, rgba(var(--ambient-c)/0.28));
+    filter: blur(20px);
+    opacity: 0.55;
+    pointer-events: none;
+  }
+
+  .euphoria-kicker {
+    @apply inline-flex items-center gap-3 text-[11px] font-medium uppercase tracking-[0.28em];
+    color: #f4b8df;
+  }
+
+  .euphoria-stars {
+    background-image:
+      radial-gradient(circle at 12% 18%, rgba(255,255,255,.8) 0 1px, transparent 1.5px),
+      radial-gradient(circle at 63% 9%, rgba(219,179,255,.75) 0 1px, transparent 1.6px),
+      radial-gradient(circle at 82% 34%, rgba(255,170,225,.68) 0 1px, transparent 1.5px),
+      radial-gradient(circle at 38% 72%, rgba(255,255,255,.55) 0 1px, transparent 1.4px);
+    background-size: 170px 170px, 230px 230px, 280px 280px, 210px 210px;
+  }
+
+  .euphoria-snap-rail {
+    scrollbar-width: none;
+    overscroll-behavior-inline: contain;
+  }
+
+  .euphoria-snap-rail::-webkit-scrollbar {
+    display: none;
+  }
+
+  .euphoria-marquee-mask {
+    mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
+  }
+
+  .euphoria-marquee {
+    animation: euphoria-marquee 48s linear infinite;
+    will-change: transform;
+  }
+
+  .euphoria-marquee:hover,
+  .euphoria-marquee:focus-within {
+    animation-play-state: paused;
+  }
+}
+
+@media (min-width: 1024px) {
+  .suite-duel:hover .suite-duel-scene {
+    flex-basis: 42%;
+  }
+
+  .suite-duel .suite-duel-scene:hover {
+    flex-basis: 58%;
+  }
+
+  .suite-duel:has(.suite-duel-scene:focus-within) .suite-duel-scene {
+    flex-basis: 42%;
+  }
+
+  .suite-duel .suite-duel-scene:focus-within {
+    flex-basis: 58%;
+  }
+}
+
+@keyframes euphoria-marquee {
+  to { transform: translateX(-50%); }
+}
+
+:focus-visible {
+  outline: 2px solid var(--noir-fuchsia);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .euphoria-marquee {
+    animation: none !important;
   }
 }
 

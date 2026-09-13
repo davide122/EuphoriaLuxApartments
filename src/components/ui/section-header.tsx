@@ -14,14 +14,14 @@ export function SectionHeader({
   return (
     <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
       <div className="max-w-2xl">
-        <div className="text-xs tracking-[0.26em] uppercase text-noir-mist/55">
+        <div className="euphoria-kicker">
           {eyebrow}
         </div>
-        <h2 className="noir-h1 mt-4 text-3xl leading-[1.02] text-noir-mist sm:text-4xl md:text-5xl">
+        <h2 className="noir-h1 mt-5 text-4xl leading-[0.98] text-noir-mist sm:text-5xl md:text-6xl">
           {title}
         </h2>
         {description ? (
-          <div className="mt-4 text-base leading-7 text-noir-muted">
+          <div className="mt-5 max-w-xl text-base leading-7 text-noir-muted">
             {description}
           </div>
         ) : null}

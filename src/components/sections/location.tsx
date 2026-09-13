@@ -1,114 +1,108 @@
-import { MapPin } from "lucide-react";
+import { Car, MapPin, Waves } from "lucide-react";
+import Image from "next/image";
 import { Reveal } from "@/components/motion/reveal";
 import { NoirAnchor } from "@/components/ui/noir-anchor";
 import { SectionHeader } from "@/components/ui/section-header";
 import { noir } from "@/lib/noir";
 
-function MiniMap() {
-  return (
-    <div className="noir-panel noir-glow overflow-hidden">
-      <div className="relative aspect-[4/3]">
-        <svg
-          viewBox="0 0 800 600"
-          className="absolute inset-0 h-full w-full"
-          role="img"
-          aria-label="Mappa stilizzata"
-        >
-          <defs>
-            <linearGradient id="g1" x1="0" x2="1" y1="0" y2="1">
-              <stop offset="0" stopColor="rgba(45,242,255,0.55)" />
-              <stop offset="0.55" stopColor="rgba(138,46,255,0.55)" />
-              <stop offset="1" stopColor="rgba(255,47,178,0.45)" />
-            </linearGradient>
-            <radialGradient id="g2" cx="55%" cy="45%" r="60%">
-              <stop offset="0" stopColor="rgba(255,255,255,0.10)" />
-              <stop offset="1" stopColor="rgba(0,0,0,0)" />
-            </radialGradient>
-          </defs>
-          <rect width="800" height="600" fill="rgba(255,255,255,0.02)" />
-          <rect width="800" height="600" fill="url(#g2)" />
-          <path
-            d="M80 420 C 140 350, 210 340, 280 360 C 330 374, 380 400, 420 390 C 510 365, 560 300, 640 275 C 710 254, 760 265, 780 280"
-            fill="none"
-            stroke="url(#g1)"
-            strokeWidth="4"
-            opacity="0.85"
-          />
-          <path
-            d="M120 160 C 220 140, 280 175, 340 230 C 410 292, 480 320, 560 300 C 640 280, 700 230, 760 185"
-            fill="none"
-            stroke="rgba(255,255,255,0.10)"
-            strokeWidth="2"
-          />
-          <circle cx="520" cy="320" r="10" fill="rgba(45,242,255,0.75)" />
-          <circle cx="520" cy="320" r="26" fill="rgba(45,242,255,0.10)" />
-          <circle cx="520" cy="320" r="44" fill="rgba(45,242,255,0.06)" />
-        </svg>
-        <div className="absolute left-6 top-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs text-noir-mist/80">
-          <MapPin className="h-4 w-4 text-noir-aqua" />
-          Porto Empedocle
-        </div>
-      </div>
-    </div>
-  );
-}
+const PILLS = [
+  {
+    title: "Dove siamo",
+    value: `${noir.location}, Sicilia`,
+    icon: MapPin,
+  },
+  {
+    title: "Vicino al mare",
+    value: "A pochi minuti dalla costa",
+    icon: Waves,
+  },
+  {
+    title: "Parcheggio",
+    value: "Facile da raggiungere in auto",
+    icon: Car,
+  },
+];
 
 export function LocationSection() {
   return (
-    <section data-ambient="location" className="relative z-10 py-20 sm:py-28">
+    <section id="dove-siamo" data-ambient="location" className="relative z-10 py-16 sm:py-24">
       <div className="noir-container">
-        <div className="grid gap-10 lg:grid-cols-12 lg:items-center">
+        <div className="grid gap-10 lg:grid-cols-12 lg:items-start">
           <div className="lg:col-span-6">
             <Reveal>
               <SectionHeader
-                eyebrow="Location"
-                title="Porto Empedocle, Sicilia: privacy e mare a pochi minuti."
+                eyebrow="Porto Empedocle, Sicilia"
+                title="Il mare vicino. Il mondo abbastanza lontano."
                 description={
                   <>
-                    Una base elegante e riservata per coppie. Vicina al mare e ai luoghi
-                    più suggestivi della zona, ma soprattutto lontana dal rumore: qui conta la vostra notte.
+                    Arrivate facilmente in auto. Il mare è a pochi minuti;
+                    una volta entrati, però, potreste non avere voglia di uscire.
                   </>
                 }
               />
             </Reveal>
+
             <div className="mt-10 grid gap-3 sm:grid-cols-2">
-              {[
-                { k: "Mare", v: "A pochi minuti" },
-                { k: "Atmosfera", v: "Notturna & intima" },
-                { k: "Esperienza", v: "Romantica" },
-                { k: "Design", v: "Scenografico" },
-              ].map((b, idx) => (
-                <Reveal key={b.k} delay={0.06 + idx * 0.03}>
-                  <div className="noir-panel px-6 py-5">
-                    <div className="text-xs tracking-[0.26em] uppercase text-noir-mist/55">
-                      {b.k}
+              {PILLS.map((p, idx) => {
+                const Icon = p.icon;
+                return (
+                  <Reveal key={p.title} delay={0.04 + idx * 0.02}>
+                    <div className="flex items-start gap-4 border-l border-noir-violet/30 py-3 pl-5">
+                      <span className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-white/10 bg-white/5">
+                        <Icon className="h-4 w-4 text-noir-aqua" />
+                      </span>
+                      <div>
+                        <div className="text-xs tracking-[0.26em] uppercase text-noir-mist/55">
+                          {p.title}
+                        </div>
+                        <div className="mt-2 text-sm text-noir-mist/80">{p.value}</div>
+                      </div>
                     </div>
-                    <div className="mt-2 text-sm text-noir-mist/80">{b.v}</div>
-                  </div>
-                </Reveal>
-              ))}
+                  </Reveal>
+                );
+              })}
             </div>
-            <Reveal delay={0.14}>
+
+            <Reveal delay={0.12}>
               <div className="mt-10 flex flex-col gap-3 sm:flex-row">
                 <NoirAnchor
                   href={
                     noir.contacts.whatsapp +
                     `?text=${encodeURIComponent(
-                      "Ciao, vorrei verificare disponibilità. Date: __/__/__ → __/__/__. Siamo in __. Grazie."
+                      "Ciao, vorrei la posizione esatta e informazioni su parcheggio e arrivo. Grazie."
                     )}`
                   }
                   target="_blank"
                   rel="noreferrer"
                   variant="primary"
                 >
-                  Chiedi disponibilità su WhatsApp
+                  Mandami la posizione
                 </NoirAnchor>
               </div>
             </Reveal>
           </div>
+
           <div className="lg:col-span-6">
-            <Reveal delay={0.08}>
-              <MiniMap />
+            <Reveal delay={0.06}>
+              <div className="noir-glow overflow-hidden rounded-[3rem_3rem_10rem_3rem]">
+                <div className="relative aspect-[4/3]">
+                  <Image
+                    src="/infinity/WhatsApp%20Image%202026-08-16%20at%2021.29.15.jpeg"
+                    alt="Euphoria — Porto Empedocle, vista della suite"
+                    fill
+                    sizes="(max-width: 1024px) 92vw, 50vw"
+                    className="object-cover"
+                  />
+                  <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+                  <div className="absolute left-5 top-5 inline-flex items-center gap-2 rounded-full border border-white/10 bg-black/40 px-4 py-2 text-xs text-noir-mist/85 backdrop-blur">
+                    <MapPin className="h-4 w-4 text-noir-aqua" />
+                    {noir.location}
+                  </div>
+                  <div className="absolute inset-x-5 bottom-5 text-sm leading-6 text-noir-mist/90">
+                    Dopo la prenotazione ricevete posizione, indicazioni e codice d’ingresso direttamente su WhatsApp.
+                  </div>
+                </div>
+              </div>
             </Reveal>
           </div>
         </div>

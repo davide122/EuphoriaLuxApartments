@@ -18,13 +18,13 @@ export function FooterSection() {
   return (
     <footer data-ambient="noir" className="relative z-10 pb-28 pt-14 sm:pb-16">
       <div className="noir-container">
-        <div className="noir-panel p-8 sm:p-10">
+        <div className="border-t border-fuchsia-100/12 pt-10">
           <div className="grid gap-10 md:grid-cols-12 md:items-start">
             <div className="md:col-span-5">
               <div className="noir-h1 text-3xl text-noir-mist">{noir.name}</div>
               <div className="mt-3 text-sm text-noir-muted">
-                Luxury suite a {noir.location}. Jacuzzi privata, sauna interna, luci immersive.
-                Da €{noir.startingFrom}/notte. {noir.smartAccess}.
+                Due suite private a {noir.location}. Jacuzzi, sauna e una notte
+                da vivere senza condividere niente con nessuno.
               </div>
             </div>
             <div className="md:col-span-7">
@@ -106,7 +106,7 @@ export function FooterSection() {
 
           <div className="mt-10 flex flex-col gap-2 border-t border-white/10 pt-6 text-xs text-noir-mist/45 sm:flex-row sm:items-center sm:justify-between">
             <div>© {new Date().getFullYear()} {noir.name}. Tutti i diritti riservati.</div>
-            <div className="tracking-[0.22em] uppercase">Dark. Elegant. Unforgettable.</div>
+            <div className="tracking-[0.22em] uppercase">Entrate. Chiudete. Restate.</div>
           </div>
         </div>
       </div>
