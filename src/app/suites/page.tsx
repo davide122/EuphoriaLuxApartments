@@ -3,6 +3,7 @@ import { TopNav } from "@/components/nav/top-nav";
 import { FooterSection } from "@/components/sections/footer";
 import { SuitesSection } from "@/components/sections/suites";
 import { noir, suites } from "@/lib/noir";
+import { openGraphImage, socialImages } from "@/lib/social";
 
 function jsonLdSuitesIndex() {
   return {
@@ -36,14 +37,14 @@ export const metadata: Metadata = {
     title: `Suites con jacuzzi e sauna a Porto Empedocle | ${noir.name}`,
     description:
       "Passion: 55 m², un unico ambiente. Infinity: 77 m², più spazio da vivere. Jacuzzi e sauna private in entrambe.",
-    images: [{ url: "/suites/opengraph-image", width: 1200, height: 630, alt: `Suites — ${noir.name}` }],
+    images: [openGraphImage(socialImages.home, `Passion e Infinity — ${noir.name}`)],
   },
   twitter: {
     card: "summary_large_image",
     title: `Suites con jacuzzi e sauna a Porto Empedocle | ${noir.name}`,
     description:
       "Passion o Infinity: due modi diversi di stare insieme, con jacuzzi e sauna private.",
-    images: ["/suites/opengraph-image"],
+    images: [socialImages.home],
   },
 };
 

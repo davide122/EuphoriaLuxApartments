@@ -5,6 +5,7 @@ import "./globals.css";
 import { SmoothScroll } from "@/components/smooth-scroll";
 import { ClientAnalytics } from "@/components/analytics/client-analytics";
 import { noir } from "@/lib/noir";
+import { openGraphImage, socialImages } from "@/lib/social";
 
 const noirDisplay = Bodoni_Moda({
   variable: "--font-noir-display",
@@ -48,14 +49,14 @@ export const metadata: Metadata = {
     title: "Suite con SPA privata a Porto Empedocle | Euphoria",
     description:
       "Suite romantiche vicino Agrigento con jacuzzi e sauna ad uso esclusivo, self check-in e aperitivo incluso. Da 150€ a coppia.",
-    images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: "Euphoria Luxury Suite" }],
+    images: [openGraphImage(socialImages.home, "Euphoria Luxury Suite con SPA privata")],
   },
   twitter: {
     card: "summary_large_image",
     title: "Suite con SPA privata a Porto Empedocle | Euphoria",
     description:
       "Due suite romantiche vicino Agrigento con jacuzzi, sauna e privacy totale.",
-    images: ["/opengraph-image"],
+    images: [socialImages.home],
   },
 };
 

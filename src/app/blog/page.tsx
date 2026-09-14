@@ -10,6 +10,7 @@ import { Reveal } from "@/components/motion/reveal";
 import { SectionHeader } from "@/components/ui/section-header";
 import { noir } from "@/lib/noir";
 import { BLOG_POSTS } from "@/lib/seo-content";
+import { openGraphImage, socialImages } from "@/lib/social";
 
 function jsonLdBlogIndex() {
   return {
@@ -43,14 +44,14 @@ export const metadata: Metadata = {
     title: `Guide & Idee — ${noir.name}`,
     description:
       "Guide concrete per coppie: weekend romantici, suite con jacuzzi privata e sauna, e consigli pratici per prenotare in modo diretto.",
-    images: [{ url: "/blog/opengraph-image", width: 1200, height: 630, alt: `Guide & Idee — ${noir.name}` }],
+    images: [openGraphImage(socialImages.journal, `Guide & Idee — ${noir.name}`)],
   },
   twitter: {
     card: "summary_large_image",
     title: `Guide & Idee — ${noir.name}`,
     description:
       "Guide concrete per coppie: weekend romantici, suite con jacuzzi privata e sauna, e consigli pratici per prenotare in modo diretto.",
-    images: ["/blog/opengraph-image"],
+    images: [socialImages.journal],
   },
 };
 

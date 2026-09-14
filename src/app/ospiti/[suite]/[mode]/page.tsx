@@ -8,6 +8,7 @@ import { NoirAnchor } from "@/components/ui/noir-anchor";
 import { MediaFrame } from "@/components/ui/media-frame";
 import { GuestGuideCarousel, type GuestGuideSlide } from "@/components/guest/guest-guide-carousel";
 import { noir } from "@/lib/noir";
+import { openGraphImage, socialImages } from "@/lib/social";
 
 type SuiteSlug = "passion" | "infinity";
 type StayMode = "pernottamento" | "dayuse";
@@ -140,6 +141,7 @@ export async function generateMetadata({
   const modeLabel = MODE_BY_STAY[mode].label;
   const title = `Guida ospite ${suiteLabel} ${modeLabel} | ${noir.name}`;
   const description = `Guida pratica ${suiteLabel}: posizione, accesso con tastierino, jacuzzi, sauna e istruzioni ${modeLabel.toLowerCase()}.`;
+  const socialImage = suite === "infinity" ? socialImages.infinity : socialImages.passion;
 
   return {
     title,
@@ -153,13 +155,13 @@ export async function generateMetadata({
       locale: "it_IT",
       title,
       description,
-      images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: title }],
+      images: [openGraphImage(socialImage, title)],
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
-      images: ["/opengraph-image"],
+      images: [socialImage],
     },
   };
 }

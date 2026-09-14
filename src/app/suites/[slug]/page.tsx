@@ -23,6 +23,7 @@ import { NoirAnchor } from "@/components/ui/noir-anchor";
 import { NoirLink } from "@/components/ui/noir-link";
 import { Breadcrumbs, breadcrumbJsonLd } from "@/components/ui/breadcrumbs";
 import { noir, suites } from "@/lib/noir";
+import { openGraphImage, socialImages } from "@/lib/social";
 
 const BY_SLUG: Record<string, (typeof suites)[number]> = Object.fromEntries(
   suites.map((s) => [s.slug, s])
@@ -45,6 +46,7 @@ export async function generateMetadata({
 
   const title = `${suite.name} — Suite con jacuzzi privata e sauna | ${noir.name}`;
   const description = `${suite.name}: ${suite.tagline} Jacuzzi e sauna private, cucina completa e aperitivo di benvenuto incluso. Da €${noir.startingFrom} a notte.`;
+  const socialImage = suite.slug === "infinity" ? socialImages.infinity : socialImages.passion;
 
   return {
     title,
@@ -57,15 +59,13 @@ export async function generateMetadata({
       title,
       description,
       locale: "it_IT",
-      images: [
-        { url: `/suites/${suite.slug}/opengraph-image`, width: 1200, height: 630, alt: `${suite.name} — ${noir.name}` },
-      ],
+      images: [openGraphImage(socialImage, `${suite.name} — ${noir.name}`)],
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
-      images: [`/suites/${suite.slug}/opengraph-image`],
+      images: [socialImage],
     },
   };
 }

@@ -7,6 +7,7 @@ import { NoirAnchor } from "@/components/ui/noir-anchor";
 import { NoirLink } from "@/components/ui/noir-link";
 import { MediaFrame } from "@/components/ui/media-frame";
 import { noir } from "@/lib/noir";
+import { openGraphImage, socialImages } from "@/lib/social";
 
 export const metadata: Metadata = {
   title: `Guida Ospiti | ${noir.name}`,
@@ -21,13 +22,13 @@ export const metadata: Metadata = {
     locale: "it_IT",
     title: `Guida Ospite | ${noir.name}`,
     description: "Guida pratica per ospiti: accesso, tastierino, jacuzzi, sauna e istruzioni per il soggiorno.",
-    images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: `Guida Ospite — ${noir.name}` }],
+    images: [openGraphImage(socialImages.home, `Guida Ospite — ${noir.name}`)],
   },
   twitter: {
     card: "summary_large_image",
     title: `Guida Ospite | ${noir.name}`,
     description: "Guida pratica per ospiti: accesso, tastierino, jacuzzi, sauna e istruzioni per il soggiorno.",
-    images: ["/opengraph-image"],
+    images: [socialImages.home],
   },
 };
 

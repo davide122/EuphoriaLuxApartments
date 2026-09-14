@@ -11,6 +11,7 @@ import { NoirLink } from "@/components/ui/noir-link";
 import { Breadcrumbs, breadcrumbJsonLd } from "@/components/ui/breadcrumbs";
 import { noir } from "@/lib/noir";
 import { BLOG_POSTS, BLOG_POSTS_BY_SLUG, SEO_LANDINGS_BY_SLUG } from "@/lib/seo-content";
+import { openGraphImage, socialImageForSource } from "@/lib/social";
 
 export const dynamicParams = false;
 
@@ -26,6 +27,7 @@ export async function generateMetadata({
   const { slug } = await params;
   const post = BLOG_POSTS_BY_SLUG[slug];
   if (!post) return { robots: { index: false, follow: false } };
+  const socialImage = socialImageForSource(post.heroImage.src);
 
   const landingKeywords = (post.relatedLandingSlugs ?? [])
     .map((s) => SEO_LANDINGS_BY_SLUG[s])
@@ -56,15 +58,13 @@ export async function generateMetadata({
       description: post.metaDescription,
       siteName: noir.name,
       locale: "it_IT",
-      images: [
-        { url: `/blog/${post.slug}/opengraph-image`, width: 1200, height: 630, alt: post.heroImage.alt },
-      ],
+      images: [openGraphImage(socialImage, post.heroImage.alt)],
     },
     twitter: {
       card: "summary_large_image",
       title: post.title,
       description: post.metaDescription,
-      images: [`/blog/${post.slug}/opengraph-image`],
+      images: [socialImage],
     },
   };
 }
