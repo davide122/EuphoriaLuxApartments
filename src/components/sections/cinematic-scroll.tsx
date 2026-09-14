@@ -1,7 +1,7 @@
 "use client";
 
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { ArrowDown, Pause, Play, Sparkles } from "lucide-react";
+import { ArrowRight, Pause, Play, Sparkles } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { Reveal } from "@/components/motion/reveal";
 import { NoirLink } from "@/components/ui/noir-link";
@@ -104,6 +104,7 @@ function PlayToggle({ playing, onToggle }: { playing: boolean; onToggle: () => v
 
 export function CinematicScrollSection() {
   const sectionRef = useRef<HTMLElement>(null);
+  const mobileRailRef = useRef<HTMLDivElement>(null);
   const viewedScenes = useRef<Set<number>>(new Set());
   const reduceMotion = useReducedMotion();
   const [active, setActive] = useState(0);
@@ -113,7 +114,12 @@ export function CinematicScrollSection() {
     const section = sectionRef.current;
     if (!section) return;
 
-    const triggers = Array.from(section.querySelectorAll<HTMLElement>("[data-scene-trigger]"));
+    const isDesktop = window.matchMedia("(min-width: 1024px)").matches;
+    const triggers = Array.from(
+      section.querySelectorAll<HTMLElement>(
+        isDesktop ? "[data-desktop-scene]" : "[data-mobile-scene]"
+      )
+    );
     const observer = new IntersectionObserver(
       (entries) => {
         const visible = entries
@@ -121,7 +127,10 @@ export function CinematicScrollSection() {
           .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
         if (!visible) return;
 
-        const index = Number((visible.target as HTMLElement).dataset.sceneTrigger);
+        const target = visible.target as HTMLElement;
+        const index = Number(
+          isDesktop ? target.dataset.desktopScene : target.dataset.mobileScene
+        );
         if (Number.isNaN(index)) return;
 
         setActive(index);
@@ -130,7 +139,9 @@ export function CinematicScrollSection() {
           trackEvent({ name: "reel_view", params: { reel: index + 1, title: SCENES[index].title } });
         }
       },
-      { rootMargin: "-24% 0px -24% 0px", threshold: [0.2, 0.45, 0.7] }
+      isDesktop
+        ? { rootMargin: "-24% 0px -24% 0px", threshold: [0.2, 0.45, 0.7] }
+        : { root: mobileRailRef.current, rootMargin: "0px -12%", threshold: [0.55, 0.72] }
     );
 
     triggers.forEach((trigger) => observer.observe(trigger));
@@ -163,10 +174,24 @@ export function CinematicScrollSection() {
       </div>
 
       <div className="noir-container relative">
-        <Reveal>
+        <Reveal className="lg:hidden">
+          <div className="flex items-end justify-between gap-5">
+            <div>
+              <div className="euphoria-kicker">Video reali</div>
+              <h2 className="noir-h1 mt-3 text-[2.45rem] leading-[0.92] text-white">
+                Passion o Infinity?
+              </h2>
+            </div>
+            <div className="shrink-0 pb-1 text-[10px] tracking-[0.24em] text-white/55">
+              {String(active + 1).padStart(2, "0")} / {String(SCENES.length).padStart(2, "0")}
+            </div>
+          </div>
+        </Reveal>
+
+        <Reveal className="hidden lg:block">
           <div className="max-w-4xl">
             <div className="euphoria-kicker">Passion & Infinity · in movimento</div>
-            <h2 className="noir-h1 mt-5 text-[2.8rem] leading-[0.9] text-white sm:text-6xl md:text-7xl lg:text-[5.6rem]">
+            <h2 className="noir-h1 mt-5 text-[5.6rem] leading-[0.9] text-white">
               Non immaginatela.
               <br />
               <span className="text-white/48">Sentitela.</span>
@@ -177,8 +202,71 @@ export function CinematicScrollSection() {
           </div>
         </Reveal>
 
-        <div className="mt-12 lg:mt-20 lg:grid lg:grid-cols-[minmax(0,1.25fr)_minmax(21rem,.75fr)] lg:gap-16 xl:gap-24">
-          <div className="hidden lg:block">
+        <div
+          ref={mobileRailRef}
+          className="euphoria-snap-rail -mx-5 mt-7 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-5 sm:-mx-8 sm:px-8 lg:hidden"
+          aria-label="Video delle suite Passion e Infinity"
+        >
+          {SCENES.map((scene, index) => (
+            <motion.article
+              key={scene.video}
+              data-mobile-scene={index}
+              animate={{ opacity: active === index ? 1 : 0.58, scale: active === index ? 1 : 0.955 }}
+              transition={{ duration: reduceMotion ? 0 : 0.45, ease: [0.22, 1, 0.36, 1] }}
+              className="relative aspect-[9/16] max-h-[72svh] min-w-[82vw] snap-center overflow-hidden rounded-2xl border border-white/14 bg-[#100717] shadow-[0_24px_70px_rgba(0,0,0,.42)] sm:min-w-[58vw]"
+            >
+              <VideoScene index={index} active={active === index} playing={playing && !reduceMotion} className="h-full w-full object-cover" />
+              <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(5,2,8,.12),transparent_42%,rgba(5,2,8,.94)_100%)]" />
+              <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/2 opacity-35 blur-3xl" style={{ background: `radial-gradient(circle at 50% 100%, ${scene.accent}, transparent 64%)` }} />
+
+              <div className="absolute inset-x-0 top-0 flex items-center justify-between gap-4 p-5">
+                <span className="text-[9px] font-semibold uppercase tracking-[0.28em]" style={{ color: scene.accent }}>
+                  {scene.chapter} · {scene.suite}
+                </span>
+                {!reduceMotion ? (
+                  <PlayToggle
+                    playing={playing && active === index}
+                    onToggle={() => {
+                      if (active !== index) {
+                        setActive(index);
+                        setPlaying(true);
+                        return;
+                      }
+                      togglePlaying();
+                    }}
+                  />
+                ) : null}
+              </div>
+
+              <div className="absolute inset-x-0 bottom-0 p-6">
+                <div className="flex items-center gap-2 text-[10px] uppercase tracking-[0.22em] text-white/65">
+                  <Sparkles className="h-3 w-3" />
+                  {scene.kicker}
+                </div>
+                <h3 className="noir-h1 mt-3 text-[2.4rem] leading-[0.92] text-white">{scene.title}</h3>
+                <NoirLink href={scene.href} variant="ghost" className="mt-6 border-white/24 bg-black/25 text-white backdrop-blur-xl">
+                  Scopri {scene.suite}
+                  <ArrowRight className="h-4 w-4" />
+                </NoirLink>
+              </div>
+            </motion.article>
+          ))}
+        </div>
+
+        <div className="flex items-center gap-2 lg:hidden" aria-hidden="true">
+          {SCENES.map((scene, index) => (
+            <span
+              key={scene.chapter}
+              className={`h-1 rounded-full transition-[width,background-color] duration-300 ${
+                active === index ? "w-8 bg-fuchsia-300" : "w-2 bg-white/22"
+              }`}
+            />
+          ))}
+          <span className="ml-auto text-[9px] uppercase tracking-[0.22em] text-white/45">Scorri</span>
+        </div>
+
+        <div className="mt-20 hidden grid-cols-[minmax(0,1.25fr)_minmax(21rem,.75fr)] gap-16 lg:grid xl:gap-24">
+          <div>
             <div className="sticky top-20 h-[calc(100svh-6.5rem)] min-h-[620px] overflow-hidden rounded-[3.5rem] border border-white/14 bg-[#0b050f] shadow-[0_44px_140px_rgba(0,0,0,.58)]">
               {SCENES.map((scene, index) => (
                 <motion.div
@@ -219,27 +307,20 @@ export function CinematicScrollSection() {
             </div>
           </div>
 
-          <div className="space-y-7 lg:space-y-0">
+          <div>
             {SCENES.map((scene, index) => (
               <motion.article
                 key={scene.video}
-                data-scene-trigger={index}
+                data-desktop-scene={index}
                 initial={reduceMotion ? false : { opacity: 0.5, y: 28 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ amount: 0.42 }}
                 transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
-                className="relative flex min-h-[82svh] flex-col justify-end overflow-hidden rounded-[2.35rem] border border-white/14 bg-[#100717] shadow-[0_28px_90px_rgba(0,0,0,.42)] lg:min-h-[92svh] lg:justify-center lg:overflow-visible lg:rounded-none lg:border-0 lg:bg-transparent lg:shadow-none"
+                className="relative flex min-h-[92svh] flex-col justify-center"
               >
-                <div className="absolute inset-0 lg:hidden">
-                  <VideoScene index={index} active={active === index} playing={playing && !reduceMotion} className="h-full w-full object-cover" />
-                  <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(5,2,8,.16),transparent_30%,rgba(5,2,8,.22)_48%,rgba(5,2,8,.96)_100%)]" />
-                  <div className="absolute inset-x-0 bottom-0 h-2/3 opacity-45 blur-3xl" style={{ background: `radial-gradient(circle at 50% 100%, ${scene.accent}, transparent 62%)` }} />
-                </div>
-
-                <div className="relative z-10 p-7 sm:p-10 lg:p-0">
+                <div>
                   <div className="flex items-center justify-between gap-5">
                     <span className="text-[10px] font-semibold uppercase tracking-[0.3em]" style={{ color: scene.accent }}>{scene.chapter} · {scene.suite}</span>
-                    <span className="text-[10px] uppercase tracking-[0.22em] text-white/55 lg:hidden">Video reale</span>
                   </div>
 
                   <div className="mt-5 flex items-center gap-2 text-xs uppercase tracking-[0.24em] text-white/68">
@@ -250,10 +331,7 @@ export function CinematicScrollSection() {
                   <p className="mt-5 max-w-md text-base leading-7 text-white/80 lg:text-[#d8cadb]">{scene.copy}</p>
 
                   <div className="mt-8 flex items-center gap-4">
-                    <NoirLink href={scene.href} variant="ghost" className="border-white/24 bg-black/25 text-white backdrop-blur-xl lg:bg-white/[.04]">Scopri {scene.suite}</NoirLink>
-                    <div className="lg:hidden">
-                      {!reduceMotion ? <PlayToggle playing={playing && active === index} onToggle={togglePlaying} /> : null}
-                    </div>
+                    <NoirLink href={scene.href} variant="ghost" className="border-white/24 bg-white/[.04] text-white">Scopri {scene.suite}</NoirLink>
                   </div>
                 </div>
               </motion.article>
@@ -261,10 +339,6 @@ export function CinematicScrollSection() {
           </div>
         </div>
 
-        <div className="mt-8 flex items-center justify-center gap-3 text-[10px] uppercase tracking-[0.26em] text-white/48 lg:hidden">
-          <ArrowDown className="h-3.5 w-3.5 animate-bounce" />
-          Scorri per cambiare scena
-        </div>
       </div>
     </section>
   );

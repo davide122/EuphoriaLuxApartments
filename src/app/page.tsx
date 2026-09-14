@@ -6,7 +6,7 @@ import { AmbientOrchestrator } from "@/components/ambient/ambient-orchestrator";
 import { SuitesSection } from "@/components/sections/suites";
 import { RomanticPackagesSection } from "@/components/sections/romantic-packages";
 import { GallerySection } from "@/components/sections/gallery";
-import { ReviewsSection } from "@/components/sections/reviews";
+import { ImagineSection } from "@/components/sections/imagine-section";
 import { FaqSection } from "@/components/sections/faq";
 import { LocationSection } from "@/components/sections/location";
 import { FinalCtaSection } from "@/components/sections/final-cta";
@@ -127,7 +127,7 @@ export default function Home() {
         <SuitesSection />
         <RomanticPackagesSection />
         <GallerySection />
-        <ReviewsSection />
+        <ImagineSection />
         <FaqSection faqs={homeFaqs} />
         <LocationSection />
         <FinalCtaSection />

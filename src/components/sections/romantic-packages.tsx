@@ -34,7 +34,7 @@ export function RomanticPackagesSection() {
             const text = `Ciao, vorrei informazioni sul pacchetto “${pkg.name}”. Date preferite: __/__/__ → __/__/__. Grazie.`;
             return (
               <Reveal key={pkg.name} delay={0.04 + idx * 0.04} className="min-w-[84vw] snap-center sm:min-w-[56vw] lg:min-w-[30vw]">
-                <article className={`relative flex h-full min-h-[31rem] flex-col overflow-hidden rounded-[2.5rem_5rem_2.5rem_2.5rem] border p-7 shadow-[0_30px_90px_rgba(0,0,0,.3)] sm:p-9 ${idx % 2 === 0 ? "border-fuchsia-200/25 bg-[linear-gradient(145deg,rgba(111,35,155,.48),rgba(23,8,31,.92)_55%)]" : "border-violet-200/25 bg-[linear-gradient(145deg,rgba(70,42,180,.46),rgba(18,8,29,.94)_55%)]"}`}>
+                <article className={`relative flex h-full min-h-[31rem] flex-col overflow-hidden rounded-2xl border p-7 shadow-[0_30px_90px_rgba(0,0,0,.3)] sm:p-9 ${idx % 2 === 0 ? "border-fuchsia-200/25 bg-[linear-gradient(145deg,rgba(111,35,155,.48),rgba(23,8,31,.92)_55%)]" : "border-violet-200/25 bg-[linear-gradient(145deg,rgba(70,42,180,.46),rgba(18,8,29,.94)_55%)]"}`}>
                   <div className={`pointer-events-none absolute -right-24 -top-24 h-64 w-64 rounded-full blur-[80px] ${idx % 2 === 0 ? "bg-[#ff2aa1]/35" : "bg-[#7137ff]/40"}`} />
                   <div className="flex items-start justify-between gap-4">
                     <div>

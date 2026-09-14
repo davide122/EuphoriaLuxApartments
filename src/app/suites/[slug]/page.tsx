@@ -344,7 +344,7 @@ export default async function SuiteDetailPage({
           className="relative z-10 overflow-hidden bg-[radial-gradient(ellipse_at_12%_30%,rgba(139,92,246,0.11),transparent_34%),radial-gradient(ellipse_at_88%_68%,rgba(237,63,166,0.08),transparent_32%),linear-gradient(180deg,#060309_0%,#0a050e_50%,#060309_100%)] pb-20"
         >
           <Reveal>
-            <div className="relative min-h-[100svh] overflow-hidden rounded-b-[3rem] sm:rounded-b-[5rem]">
+            <div className="relative min-h-[100svh] overflow-hidden rounded-2xl">
               <Image
                 src={visual.hero}
                 alt={`${suite.name}, suite con jacuzzi privata e sauna`}
@@ -421,8 +421,8 @@ export default async function SuiteDetailPage({
                   <figure>
                     <div className={`relative overflow-hidden ${
                       frame.shape === "wide"
-                        ? "aspect-[16/10] rounded-[2rem_2rem_6rem_2rem] sm:aspect-[16/8]"
-                        : "aspect-[4/5] rounded-[2rem_2rem_5rem_2rem]"
+                        ? "aspect-[16/10] rounded-2xl sm:aspect-[16/8]"
+                        : "aspect-[4/5] rounded-2xl"
                     }`}>
                       <Image
                         src={frame.src}

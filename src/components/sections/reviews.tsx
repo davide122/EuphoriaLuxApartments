@@ -47,7 +47,7 @@ export function ReviewsSection() {
             },
           ].map((r, idx) => (
             <Reveal key={r.title} delay={0.04 + idx * 0.03} className="min-w-[82vw] snap-center sm:min-w-[54vw] lg:min-w-[34vw]">
-              <article className={`relative flex min-h-[22rem] h-full flex-col overflow-hidden rounded-[5rem_2.5rem_2.5rem_2.5rem] border p-8 sm:p-10 ${idx === 1 ? "border-violet-200/25 bg-[linear-gradient(145deg,rgba(73,42,166,.42),rgba(18,8,28,.9))]" : "border-fuchsia-200/25 bg-[linear-gradient(145deg,rgba(145,36,112,.38),rgba(20,8,26,.92))]"}`}>
+              <article className={`relative flex min-h-[22rem] h-full flex-col overflow-hidden rounded-2xl border p-8 sm:p-10 ${idx === 1 ? "border-violet-200/25 bg-[linear-gradient(145deg,rgba(73,42,166,.42),rgba(18,8,28,.9))]" : "border-fuchsia-200/25 bg-[linear-gradient(145deg,rgba(145,36,112,.38),rgba(20,8,26,.92))]"}`}>
                 <div className={`absolute -right-16 -top-16 h-48 w-48 rounded-full blur-[70px] ${idx === 1 ? "bg-[#7137ff]/45" : "bg-[#ff2aa1]/40"}`} />
                 <r.icon className="relative h-7 w-7 text-white" />
                 <div className="relative mt-5 text-xs font-semibold tracking-[0.22em] uppercase text-[#ffc8ea]">

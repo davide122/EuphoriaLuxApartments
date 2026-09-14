@@ -16,7 +16,7 @@ export function GallerySection() {
           {galleryFrames.slice(0, 5).map((frame) => (
             <figure
               key={frame.src}
-              className="relative aspect-[3/4] min-w-[78vw] snap-center overflow-hidden rounded-[2.5rem_2.5rem_5rem_2.5rem] border border-white/15 sm:min-w-[54vw]"
+              className="relative aspect-[3/4] min-w-[78vw] snap-center overflow-hidden rounded-2xl border border-white/15 sm:min-w-[54vw]"
             >
               <Image
                 src={encodeURI(frame.src)}

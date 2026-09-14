@@ -92,7 +92,7 @@ export function ExperienceSection() {
                 className="min-w-[82vw] snap-center sm:min-w-[58vw] lg:min-w-[36vw]"
               >
                 <article
-                  className="group relative aspect-[4/5] overflow-hidden rounded-[2.25rem_4.5rem_2.25rem_2.25rem] border border-fuchsia-100/20 bg-noir-graphite shadow-[0_28px_70px_rgba(0,0,0,.34)]"
+                  className="group relative aspect-[4/5] overflow-hidden rounded-2xl border border-fuchsia-100/20 bg-noir-graphite shadow-[0_28px_70px_rgba(0,0,0,.34)]"
                 >
                   <Image
                     src={encodeURI(VISUALS[idx])}
@@ -124,7 +124,7 @@ export function ExperienceSection() {
         <Reveal delay={0.18}>
           <div className="mt-10 flex flex-col gap-3 sm:flex-row">
             <NoirAnchor href={whatsappHref} target="_blank" rel="noreferrer" variant="primary">
-              Dimmi quando vuoi venire
+              Verifica le tue date
             </NoirAnchor>
           </div>
         </Reveal>
