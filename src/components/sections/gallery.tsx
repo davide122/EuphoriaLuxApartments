@@ -12,20 +12,18 @@ export function GallerySection() {
           description="Sono foto reali di Passion e Infinity. Nessuna stanza campione, nessuna spa condivisa: prenotate proprio questi spazi."
         />
 
-        <div className="mt-10 grid grid-cols-2 gap-3 lg:hidden">
-          {galleryFrames.slice(0, 5).map((frame, index) => (
+        <div className="euphoria-snap-rail -mx-5 mt-10 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-6 sm:-mx-8 sm:px-8 lg:hidden">
+          {galleryFrames.slice(0, 5).map((frame) => (
             <figure
               key={frame.src}
-              className={`relative overflow-hidden rounded-2xl ${
-                index === 0 ? "col-span-2 aspect-[16/11]" : "aspect-[3/4]"
-              }`}
+              className="relative aspect-[3/4] min-w-[78vw] snap-center overflow-hidden rounded-[2.5rem_2.5rem_5rem_2.5rem] border border-white/15 sm:min-w-[54vw]"
             >
               <Image
                 src={encodeURI(frame.src)}
                 alt={frame.label}
                 fill
-                sizes={index === 0 ? "calc(100vw - 40px)" : "calc(50vw - 26px)"}
-                className="object-cover object-center"
+                sizes="(max-width: 640px) 78vw, 54vw"
+                className="object-cover object-center transition duration-700 hover:scale-105"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent" />
               <figcaption className="absolute inset-x-3 bottom-3 text-[9px] uppercase leading-4 tracking-[0.16em] text-white/75">

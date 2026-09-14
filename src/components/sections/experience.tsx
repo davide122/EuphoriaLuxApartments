@@ -82,34 +82,32 @@ export function ExperienceSection() {
           />
         </Reveal>
 
-        <div className="mt-10 grid grid-cols-2 gap-3 lg:-mx-12 lg:mt-12 lg:flex lg:snap-x lg:snap-mandatory lg:gap-5 lg:overflow-x-auto lg:px-12 lg:pb-6">
+        <div className="euphoria-snap-rail -mx-5 mt-10 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-7 sm:-mx-8 sm:px-8 lg:-mx-12 lg:mt-12 lg:gap-5 lg:px-12">
           {experiencePillars.map((p, idx) => {
             const Icon = ICONS[idx % ICONS.length];
             return (
               <Reveal
                 key={p.title}
                 delay={0.03 + idx * 0.02}
-                className={`${idx === 0 ? "col-span-2" : ""} lg:col-span-1 lg:min-w-[36vw] lg:snap-center`}
+                className="min-w-[82vw] snap-center sm:min-w-[58vw] lg:min-w-[36vw]"
               >
                 <article
-                  className={`group relative overflow-hidden rounded-2xl bg-noir-graphite ${
-                    idx === 0 ? "aspect-[16/10]" : "aspect-[3/4]"
-                  } lg:aspect-[4/5]`}
+                  className="group relative aspect-[4/5] overflow-hidden rounded-[2.25rem_4.5rem_2.25rem_2.25rem] border border-fuchsia-100/20 bg-noir-graphite shadow-[0_28px_70px_rgba(0,0,0,.34)]"
                 >
                   <Image
                     src={encodeURI(VISUALS[idx])}
                     alt=""
                     fill
                     sizes="(max-width: 640px) 82vw, (max-width: 1024px) 58vw, 36vw"
-                    className="object-cover opacity-65 transition duration-1000 group-hover:scale-105"
+                    className="object-cover opacity-85 transition duration-1000 group-hover:scale-105"
                   />
-                  <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(6,3,9,0.06),rgba(6,3,9,0.22)_42%,rgba(6,3,9,0.94))]" />
+                  <div className={`absolute inset-0 ${idx % 2 === 0 ? "bg-[linear-gradient(180deg,rgba(6,3,9,.08),rgba(139,92,246,.12)_40%,rgba(6,3,9,.97))]" : "bg-[linear-gradient(180deg,rgba(6,3,9,.08),rgba(237,63,166,.13)_40%,rgba(6,3,9,.97))]"}`} />
                   <div className="absolute inset-x-0 bottom-0 p-4 sm:p-6 lg:p-9">
                     <Icon className="h-5 w-5 text-noir-champagne lg:h-6 lg:w-6" />
                     <div className={`noir-h1 mt-3 text-noir-mist ${idx === 0 ? "text-2xl" : "text-xl"} lg:mt-5 lg:text-3xl`}>
                       {p.title}
                     </div>
-                    <p className={`${idx === 0 ? "block" : "hidden"} mt-2 max-w-sm text-xs leading-5 text-noir-mist/72 lg:mt-3 lg:block lg:text-sm lg:leading-6`}>
+                    <p className="mt-2 max-w-sm text-sm leading-6 text-white/85 lg:mt-3">
                       {p.description}
                     </p>
                   </div>
@@ -119,7 +117,7 @@ export function ExperienceSection() {
           })}
         </div>
 
-        <div className="mt-3 hidden items-center gap-3 text-[10px] uppercase tracking-[0.28em] text-noir-mist/40 lg:flex">
+        <div className="mt-3 flex items-center gap-3 text-[10px] uppercase tracking-[0.28em] text-noir-mist/65">
           Trascina per esplorare
         </div>
 

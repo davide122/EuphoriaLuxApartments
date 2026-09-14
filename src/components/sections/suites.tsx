@@ -1,4 +1,7 @@
+"use client";
+
 import Image from "next/image";
+import { motion } from "framer-motion";
 import { ArrowUpRight, Check } from "lucide-react";
 import { Reveal } from "@/components/motion/reveal";
 import { NoirAnchor } from "@/components/ui/noir-anchor";
@@ -8,7 +11,7 @@ import { noir, suites } from "@/lib/noir";
 const suiteStories = {
   passion: {
     number: "01",
-    image: "/passion-letto-jacuzzi-sauna.jpg",
+    image: "/passion/WhatsApp Image 2026-08-16 at 21.29.22.jpeg",
     promise: "Tutto vicino. Anche voi.",
     story:
       "Letto, jacuzzi e sauna vivono nello stesso ambiente. Passion è raccolta, calda, immediata: chiudete la porta e non serve più spostarsi.",
@@ -18,7 +21,7 @@ const suiteStories = {
   },
   infinity: {
     number: "02",
-    image: "/infinity-salotto.jpg",
+    image: "/infinity-letto.jpg",
     promise: "Più spazio. Più modi di viverlo.",
     story:
       "Zona notte, living e cucina danno respiro alla serata. Infinity è più ampia e scenografica: una cena, la spa, un film. Sempre dentro.",
@@ -37,21 +40,29 @@ function SuiteScene({ suite }: { suite: (typeof suites)[number] }) {
     )}`;
 
   return (
-    <article className="suite-duel-scene group relative min-h-[680px] overflow-hidden rounded-2xl bg-noir-ink lg:min-h-[84svh] lg:basis-1/2 lg:rounded-none lg:transition-[flex-basis] lg:duration-700 lg:ease-[cubic-bezier(.22,1,.36,1)]">
+    <motion.article
+      initial={{ opacity: 0.55, y: 36, scale: 0.96 }}
+      whileInView={{ opacity: 1, y: 0, scale: 1 }}
+      whileHover={{ y: -8 }}
+      viewport={{ amount: 0.48 }}
+      transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
+      className="suite-duel-scene group relative min-h-[72svh] min-w-[86vw] snap-center overflow-hidden rounded-[2.5rem] border border-fuchsia-100/20 bg-noir-ink shadow-[0_34px_90px_rgba(0,0,0,.45)] sm:min-w-[72vw] lg:min-h-[82svh] lg:min-w-0 lg:basis-1/2 lg:rounded-[3rem] lg:transition-[flex-basis,transform] lg:duration-700 lg:ease-[cubic-bezier(.22,1,.36,1)]"
+    >
       <Image
-        src={story.image}
+        src={encodeURI(story.image)}
         alt={`${suite.name}, suite Euphoria da ${suite.size}`}
         fill
         sizes="(max-width: 1024px) 100vw, 58vw"
-        className={`object-cover transition duration-[1400ms] ease-out group-hover:scale-[1.035] ${
-          suite.slug === "passion" ? "object-[center_62%]" : "object-center"
+        className={`object-cover transition duration-[1400ms] ease-out group-hover:scale-[1.075] ${
+          suite.slug === "passion" ? "object-[center_54%]" : "object-center"
         }`}
       />
       <div className={`absolute inset-0 bg-gradient-to-t ${story.tone}`} />
-      <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(6,3,9,.16),transparent_35%,rgba(6,3,9,.35))]" />
+      <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(6,3,9,.28),transparent_32%,rgba(6,3,9,.18)_48%,rgba(6,3,9,.96)_100%)]" />
+      <div className={`absolute -right-20 top-24 h-64 w-64 rounded-full blur-[90px] transition duration-700 group-hover:scale-125 ${suite.slug === "passion" ? "bg-[#ff2aa1]/24" : "bg-[#7137ff]/28"}`} />
 
-      <div className="relative flex min-h-[680px] flex-col justify-between p-7 sm:p-10 lg:min-h-[84svh] lg:p-12 xl:p-14">
-        <div className="flex items-start justify-between gap-5 text-[10px] uppercase tracking-[0.28em] text-white/65">
+      <div className="relative flex min-h-[72svh] flex-col justify-between p-7 sm:p-10 lg:min-h-[82svh] lg:p-12 xl:p-14">
+        <div className="flex items-start justify-between gap-5 text-[10px] font-semibold uppercase tracking-[0.28em] text-white/85">
           <span>{story.number} · {suite.size}</span>
           <span className={story.accent}>{suite.mood}</span>
         </div>
@@ -63,11 +74,11 @@ function SuiteScene({ suite }: { suite: (typeof suites)[number] }) {
           <h3 className="noir-h1 mt-4 text-6xl leading-none text-white sm:text-7xl xl:text-8xl">
             {suite.name}
           </h3>
-          <p className="mt-6 max-w-lg text-base leading-7 text-white/78">
+          <p className="mt-6 max-w-lg text-base leading-7 text-white/90">
             {story.story}
           </p>
 
-          <div className="mt-7 flex flex-wrap gap-x-5 gap-y-2 text-xs text-white/68">
+          <div className="mt-7 flex flex-wrap gap-x-5 gap-y-2 text-xs text-white/82">
             {story.details.map((detail) => (
               <span key={detail} className="inline-flex items-center gap-2">
                 <span className={`h-1 w-1 rounded-full bg-current ${story.accent}`} />
@@ -87,7 +98,7 @@ function SuiteScene({ suite }: { suite: (typeof suites)[number] }) {
           </div>
         </div>
       </div>
-    </article>
+    </motion.article>
   );
 }
 
@@ -109,11 +120,11 @@ export function SuitesSection() {
       </div>
 
       <Reveal delay={0.06}>
-        <div className="suite-duel relative mt-10 grid gap-5 px-5 sm:px-8 lg:mt-14 lg:flex lg:gap-0 lg:overflow-hidden lg:border-y lg:border-white/10 lg:px-0">
+        <div className="suite-duel euphoria-snap-rail relative mt-10 flex snap-x snap-mandatory gap-5 overflow-x-auto px-5 pb-10 sm:px-8 lg:mx-auto lg:mt-14 lg:max-w-[1440px] lg:gap-6 lg:overflow-visible lg:px-12">
           {suites.map((suite) => (
             <SuiteScene key={suite.slug} suite={suite} />
           ))}
-          <div className="pointer-events-none absolute left-1/2 top-1/2 z-20 hidden h-12 w-12 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-white/25 bg-black/35 text-[8px] uppercase tracking-[0.12em] text-white/80 backdrop-blur-xl lg:flex">
+          <div className="pointer-events-none absolute left-1/2 top-1/2 z-20 hidden h-14 w-14 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-fuchsia-100/35 bg-[#16081d]/75 text-[8px] uppercase tracking-[0.12em] text-white/90 shadow-[0_0_45px_rgba(237,63,166,.28)] backdrop-blur-xl lg:flex">
             oppure
           </div>
         </div>

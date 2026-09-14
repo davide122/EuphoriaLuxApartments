@@ -1,7 +1,7 @@
 "use client";
 
 import { type AnchorHTMLAttributes, type ReactNode } from "react";
-import { isWhatsAppHref, trackEvent } from "@/lib/analytics";
+import { getAnalyticsContext, isWhatsAppHref, trackEvent } from "@/lib/analytics";
 
 export function NoirAnchor({
   children,
@@ -21,6 +21,7 @@ export function NoirAnchor({
   return (
     <a
       {...props}
+      data-analytics-tracked="true"
       className={`${base} ${tone} ${className}`}
       onClick={(e) => {
         props.onClick?.(e);
@@ -35,6 +36,7 @@ export function NoirAnchor({
         trackEvent({
           name: eventName,
           params: {
+            ...getAnalyticsContext(e.currentTarget),
             href,
             variant,
             ...track?.params,

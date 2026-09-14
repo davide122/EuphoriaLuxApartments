@@ -33,15 +33,15 @@ export function HeroSection() {
     )}`;
 
   return (
-    <section className="relative isolate min-h-[92svh] overflow-hidden bg-noir-ink sm:min-h-[100svh]">
+    <section id="hero" className="relative isolate min-h-[92svh] overflow-hidden bg-noir-ink sm:min-h-[100svh]">
       <div className="absolute inset-0">
         <Image
-          src="/passion/WhatsApp Image 2026-08-16 at 21.29.22 (1).jpeg"
-          alt="Sauna privata Euphoria Luxury Suite"
+          src="/heroImage.png"
+          alt="Euphoria Luxury Suite con sauna, letto e jacuzzi privata"
           fill
           priority
           sizes="(max-width: 639px) 100vw, 1px"
-          className="object-cover object-[center_46%] sm:hidden"
+          className="translate-y-[1.5%] scale-[1.04] object-cover object-[32%_center] sm:hidden"
         />
         <Image
           src="/heroImage.png"

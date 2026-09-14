@@ -12,7 +12,8 @@ export function ReviewsSection() {
     )}`;
 
   return (
-    <section id="recensioni" data-ambient="noir" className="relative z-10 py-16 sm:py-24">
+    <section id="recensioni" data-ambient="noir" className="relative z-10 overflow-hidden py-16 sm:py-24">
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(700px_circle_at_12%_70%,rgba(237,63,166,.12),transparent_65%),radial-gradient(700px_circle_at_88%_20%,rgba(139,92,246,.14),transparent_65%)]" />
       <div className="noir-container">
         <Reveal>
           <SectionHeader
@@ -27,7 +28,7 @@ export function ReviewsSection() {
           />
         </Reveal>
 
-        <div className="mt-10 grid gap-8 lg:-mx-12 lg:flex lg:snap-x lg:snap-mandatory lg:gap-10 lg:overflow-x-auto lg:px-12 lg:pb-5">
+        <div className="euphoria-snap-rail -mx-5 mt-10 flex snap-x snap-mandatory gap-5 overflow-x-auto px-5 pb-7 sm:-mx-8 sm:px-8 lg:-mx-12 lg:gap-7 lg:px-12">
           {[
             {
               title: "Privacy, davvero",
@@ -45,13 +46,14 @@ export function ReviewsSection() {
               icon: Sparkles,
             },
           ].map((r, idx) => (
-            <Reveal key={r.title} delay={0.04 + idx * 0.03} className="border-l border-noir-fuchsia/35 pl-6 lg:min-w-[36vw] lg:snap-center lg:pl-7">
-              <article className="flex h-full flex-col py-5">
-                <r.icon className="h-6 w-6 text-noir-champagne" />
-                <div className="mt-4 text-xs tracking-[0.22em] uppercase text-noir-mist/55">
+            <Reveal key={r.title} delay={0.04 + idx * 0.03} className="min-w-[82vw] snap-center sm:min-w-[54vw] lg:min-w-[34vw]">
+              <article className={`relative flex min-h-[22rem] h-full flex-col overflow-hidden rounded-[5rem_2.5rem_2.5rem_2.5rem] border p-8 sm:p-10 ${idx === 1 ? "border-violet-200/25 bg-[linear-gradient(145deg,rgba(73,42,166,.42),rgba(18,8,28,.9))]" : "border-fuchsia-200/25 bg-[linear-gradient(145deg,rgba(145,36,112,.38),rgba(20,8,26,.92))]"}`}>
+                <div className={`absolute -right-16 -top-16 h-48 w-48 rounded-full blur-[70px] ${idx === 1 ? "bg-[#7137ff]/45" : "bg-[#ff2aa1]/40"}`} />
+                <r.icon className="relative h-7 w-7 text-white" />
+                <div className="relative mt-5 text-xs font-semibold tracking-[0.22em] uppercase text-[#ffc8ea]">
                   {r.title}
                 </div>
-                <p className="noir-h1 mt-5 text-2xl leading-snug text-noir-mist/85">{r.copy}</p>
+                <p className="noir-h1 relative mt-auto pt-8 text-2xl leading-snug text-white sm:text-3xl">{r.copy}</p>
               </article>
             </Reveal>
           ))}

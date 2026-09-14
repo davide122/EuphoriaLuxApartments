@@ -8,7 +8,7 @@ export function TopNav() {
     <header className="fixed left-0 right-0 top-0 z-50 border-b border-fuchsia-200/10 bg-[#08040d]/72 backdrop-blur-xl">
       <div className="noir-container">
         <div className="flex h-[72px] items-center justify-between gap-4">
-          <Link href="/" className="group noir-h1 text-2xl text-noir-mist" aria-label="Euphoria Luxury Suite, home">
+          <Link href="/" className="group noir-h1 inline-flex min-h-11 items-center text-2xl text-noir-mist" aria-label="Euphoria Luxury Suite, home">
             Euphoria <span className="ml-1 font-sans text-[9px] tracking-[0.22em] uppercase text-noir-champagne transition group-hover:text-noir-fuchsia">Luxury Suite</span>
           </Link>
           <div className="hidden items-center gap-6 text-xs tracking-[0.22em] uppercase text-noir-mist/55 md:flex">
@@ -36,7 +36,7 @@ export function TopNav() {
               target="_blank"
               rel="noreferrer"
               variant="primary"
-              className="hidden min-h-10 px-5 py-2 md:inline-flex"
+              className="hidden min-h-11 px-5 py-2 md:inline-flex"
             >
               <CalendarDays className="h-4 w-4" />
               Verifica date
@@ -51,7 +51,7 @@ export function TopNav() {
               target="_blank"
               rel="noreferrer"
               variant="primary"
-              className="min-h-10 px-4 py-2 md:hidden"
+              className="min-h-11 px-4 py-2 md:hidden"
             >
               Prenota
             </NoirAnchor>

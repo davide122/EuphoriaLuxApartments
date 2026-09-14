@@ -4,6 +4,7 @@ import Script from "next/script";
 import "./globals.css";
 import { SmoothScroll } from "@/components/smooth-scroll";
 import { ClientAnalytics } from "@/components/analytics/client-analytics";
+import { VercelAnalytics } from "@/components/analytics/vercel-analytics";
 import { noir } from "@/lib/noir";
 import { openGraphImage, socialImages } from "@/lib/social";
 
@@ -96,6 +97,7 @@ gtag('config', '${gaId}', { send_page_view: false });`}
           <ClientAnalytics />
           {children}
         </SmoothScroll>
+        <VercelAnalytics />
       </body>
     </html>
   );

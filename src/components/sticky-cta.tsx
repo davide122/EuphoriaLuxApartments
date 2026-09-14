@@ -3,6 +3,7 @@
 import { MessageCircle } from "lucide-react";
 import { useEffect, useState } from "react";
 import { noir } from "@/lib/noir";
+import { NoirAnchor } from "@/components/ui/noir-anchor";
 
 export function StickyCta({
   href,
@@ -37,15 +38,17 @@ export function StickyCta({
       ].join(" ")}
     >
       <div className="w-full max-w-sm rounded-full border border-white/15 bg-[#120819]/92 p-1.5 shadow-2xl shadow-black/45 backdrop-blur-xl">
-        <a
+        <NoirAnchor
           href={whatsappHref}
           target="_blank"
           rel="noreferrer"
-          className="noir-button noir-button-primary w-full justify-center rounded-full py-3"
+          variant="primary"
+          className="w-full justify-center rounded-full py-3"
+          track={{ name: "whatsapp_click", params: { source: "sticky_cta", label } }}
         >
           <MessageCircle className="h-4 w-4" />
           {label}
-        </a>
+        </NoirAnchor>
       </div>
     </div>
   );

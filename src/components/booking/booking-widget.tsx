@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { CalendarCheck, Mail, Phone, Sparkles, User } from "lucide-react";
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import { BookingCalendar } from "@/components/booking/calendar";
 import { noir, suites } from "@/lib/noir";
 import { NoirAnchor } from "@/components/ui/noir-anchor";
@@ -41,6 +41,7 @@ export function BookingWidget({
 
   const [submitting, setSubmitting] = useState(false);
   const [result, setResult] = useState<{ ok: true; id: string } | { ok: false; error: string } | null>(null);
+  const formStarted = useRef(false);
 
   const suiteObj = useMemo(() => suites.find((s) => s.slug === suite) ?? suites[0], [suite]);
   const nights = dates.checkIn && dates.checkOut ? nightsBetween(dates.checkIn, dates.checkOut) : 0;
@@ -153,6 +154,10 @@ export function BookingWidget({
                       setSuite(s.slug);
                       setDates({ checkIn: null, checkOut: null });
                       setResult(null);
+                      trackEvent({
+                        name: "booking_suite_select",
+                        params: { suite: s.slug },
+                      });
                     }}
                     className={[
                       "rounded-full border px-4 py-2 text-xs tracking-[0.22em] uppercase transition",
@@ -169,7 +174,17 @@ export function BookingWidget({
           </div>
 
           <div className="mt-8">
-            <BookingCalendar suite={suite} value={dates} onChange={(v) => setDates(v)} />
+            <BookingCalendar
+              suite={suite}
+              value={dates}
+              onChange={(value) => {
+                setDates(value);
+                trackEvent({
+                  name: value.checkOut ? "booking_dates_complete" : "booking_date_start",
+                  params: { suite, step: value.checkOut ? "complete" : "check_in" },
+                });
+              }}
+            />
           </div>
         </div>
       </div>
@@ -193,7 +208,14 @@ export function BookingWidget({
             </span>
           </div>
 
-          <div className="mt-7 grid gap-3">
+          <div
+            className="mt-7 grid gap-3"
+            onFocusCapture={() => {
+              if (formStarted.current) return;
+              formStarted.current = true;
+              trackEvent({ name: "booking_form_start", params: { suite } });
+            }}
+          >
             <div className="rounded-2xl border border-white/10 bg-white/5 px-6 py-5">
               <div className="text-xs tracking-[0.26em] uppercase text-noir-mist/55">
                 Soggiorno
@@ -299,6 +321,10 @@ export function BookingWidget({
               rel="noreferrer"
               variant="primary"
               className="w-full justify-center py-3.5"
+              track={{
+                name: "whatsapp_click",
+                params: { source: "booking_widget", label: "Verifica disponibilità" },
+              }}
             >
               Verifica disponibilità su WhatsApp
             </NoirAnchor>

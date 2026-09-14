@@ -51,8 +51,8 @@ export function FaqSection(props: FaqSectionProps) {
           {faqs.map((f, idx) => (
             <Reveal key={f.q} delay={0.04 + idx * 0.02}>
               <details className="group border-b border-fuchsia-100/12 px-1 py-6 transition hover:border-fuchsia-200/30">
-                <summary className="cursor-pointer list-none text-sm font-medium text-noir-mist/85 [&::-webkit-details-marker]:hidden">
-                  <div className="flex items-center justify-between gap-6">
+                <summary className="flex min-h-11 cursor-pointer list-none items-center text-sm font-medium text-noir-mist/85 [&::-webkit-details-marker]:hidden">
+                  <div className="flex w-full items-center justify-between gap-6">
                     <span>{f.q}</span>
                     <span className="text-2xl font-light text-noir-fuchsia transition duration-300 group-open:rotate-45">+</span>
                   </div>

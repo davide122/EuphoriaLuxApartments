@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { type ReactNode } from "react";
-import { isWhatsAppHref, trackEvent } from "@/lib/analytics";
+import { getAnalyticsContext, isWhatsAppHref, trackEvent } from "@/lib/analytics";
 
 export function NoirLink({
   href,
@@ -23,8 +23,9 @@ export function NoirLink({
   return (
     <Link
       href={href}
+      data-analytics-tracked="true"
       className={`${base} ${tone} ${className}`}
-      onClick={() => {
+      onClick={(event) => {
         const eventName =
           track?.name ??
           (isWhatsAppHref(href)
@@ -35,6 +36,7 @@ export function NoirLink({
         trackEvent({
           name: eventName,
           params: {
+            ...getAnalyticsContext(event.currentTarget),
             href,
             variant,
             ...track?.params,
