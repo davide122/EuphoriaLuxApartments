@@ -1,49 +1,51 @@
 "use client";
 
-import Link from "next/link";
+import { MessageCircle } from "lucide-react";
 import { useEffect, useState } from "react";
 import { noir } from "@/lib/noir";
 
-export function StickyCta() {
+export function StickyCta({
+  href,
+  label = "Verifica disponibilità",
+  revealAfter = 620,
+}: {
+  href?: string;
+  label?: string;
+  revealAfter?: number;
+} = {}) {
   const [visible, setVisible] = useState(false);
-  const whatsappHref =
-    noir.contacts.whatsapp +
+  const whatsappHref = href ??
+    (noir.contacts.whatsapp +
     `?text=${encodeURIComponent(
       "Ciao, vorrei verificare disponibilità. Suite: Passion o Infinity. Date: __/__/__ → __/__/__. Siamo in __. Grazie."
-    )}`;
+    )}`);
 
   useEffect(() => {
     const onScroll = () => {
-      setVisible(window.scrollY > 180);
+      setVisible(window.scrollY > revealAfter);
     };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [revealAfter]);
 
   return (
     <div
       className={[
-        "fixed inset-x-0 bottom-4 z-50 px-4 sm:hidden transition duration-300",
+        "fixed inset-x-0 bottom-3 z-50 flex justify-center px-4 pb-[env(safe-area-inset-bottom)] sm:hidden transition duration-300",
         visible ? "opacity-100 translate-y-0" : "pointer-events-none opacity-0 translate-y-2",
       ].join(" ")}
     >
-      <div className="noir-panel flex items-center justify-between gap-3 rounded-full px-3 py-3">
+      <div className="w-full max-w-sm rounded-full border border-white/15 bg-[#120819]/92 p-1.5 shadow-2xl shadow-black/45 backdrop-blur-xl">
         <a
           href={whatsappHref}
           target="_blank"
           rel="noreferrer"
-          className="noir-button noir-button-primary flex-1 justify-center rounded-full py-3"
+          className="noir-button noir-button-primary w-full justify-center rounded-full py-3"
         >
-          WhatsApp disponibilità
+          <MessageCircle className="h-4 w-4" />
+          {label}
         </a>
-        <Link
-          href="/suites"
-          className="inline-flex h-12 items-center justify-center rounded-full border border-white/10 bg-white/5 px-4 text-xs tracking-[0.22em] uppercase text-noir-mist/80"
-          aria-label="Suites"
-        >
-          Suites
-        </Link>
       </div>
     </div>
   );

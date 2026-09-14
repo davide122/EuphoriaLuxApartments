@@ -16,7 +16,10 @@ export function Breadcrumbs({
       <nav aria-label="Breadcrumb" className="mb-6">
         <ol className="flex flex-wrap items-center gap-2 text-xs tracking-[0.22em] uppercase text-noir-mist/55">
           {items.map((it, idx) => (
-            <li key={it.href} className="flex items-center gap-2">
+            <li
+              key={it.href}
+              className={`items-center gap-2 ${idx === items.length - 1 ? "hidden sm:flex" : "flex"}`}
+            >
               <Link href={it.href} className="transition hover:text-noir-mist">
                 {it.label}
               </Link>

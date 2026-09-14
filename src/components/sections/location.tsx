@@ -84,7 +84,7 @@ export function LocationSection() {
 
           <div className="lg:col-span-6">
             <Reveal delay={0.06}>
-              <div className="noir-glow overflow-hidden rounded-[3rem_3rem_10rem_3rem]">
+              <div className="noir-glow overflow-hidden rounded-2xl">
                 <div className="relative aspect-[4/3]">
                   <Image
                     src="/infinity/WhatsApp%20Image%202026-08-16%20at%2021.29.15.jpeg"

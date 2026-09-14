@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { TopNav } from "@/components/nav/top-nav";
 import { FooterSection } from "@/components/sections/footer";
+import { FinalCtaSection } from "@/components/sections/final-cta";
+import { StickyCta } from "@/components/sticky-cta";
 import { Reveal } from "@/components/motion/reveal";
 import { MediaFrame } from "@/components/ui/media-frame";
 import { NoirAnchor } from "@/components/ui/noir-anchor";
@@ -148,7 +150,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   return (
     <div className="relative flex min-h-[100svh] flex-col">
       <TopNav />
-      <main className="relative flex-1 pt-28">
+      <main className="relative flex-1 pt-[72px]">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -167,22 +169,23 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           }}
         />
 
-        <section data-ambient="noir" className="relative z-10 py-16 sm:py-20">
+        <section data-ambient="noir" className="editorial-canvas relative z-10 overflow-hidden pb-20 pt-7 sm:pb-28 sm:pt-10">
           <div className="noir-container">
             <Breadcrumbs items={crumbs} />
             <Reveal>
-              <div className="overflow-hidden border-y border-fuchsia-100/15 py-10 sm:py-14">
-                <div className="grid gap-10 lg:grid-cols-12 lg:items-center">
-                  <div className="lg:col-span-6">
+              <div className="editorial-hero relative overflow-hidden rounded-2xl p-4 sm:p-7 lg:p-10">
+                <div className="pointer-events-none absolute -bottom-24 -left-4 select-none font-display text-[16rem] leading-none text-white/[0.018]" aria-hidden="true">E</div>
+                <div className="relative grid gap-7 lg:grid-cols-12 lg:items-center lg:gap-10">
+                  <div className="order-2 px-2 pb-4 lg:order-1 lg:col-span-6 lg:px-2 lg:py-4">
                     <div className="euphoria-kicker">Journal · {post.primaryKeyword}</div>
-                    <h1 className="noir-h1 mt-6 text-5xl leading-[0.94] text-noir-mist sm:text-6xl lg:text-7xl">
+                    <h1 className="noir-h1 mt-5 text-[2.65rem] leading-[0.94] text-noir-mist sm:text-6xl lg:text-7xl">
                       {post.title}
                     </h1>
                     <p className="mt-6 max-w-xl text-base leading-7 text-noir-muted">{post.excerpt}</p>
                     <time dateTime={post.datePublishedISO} className="mt-6 block text-[10px] uppercase tracking-[0.24em] text-noir-mist/40">
                       {new Intl.DateTimeFormat("it-IT", { day: "numeric", month: "long", year: "numeric" }).format(new Date(post.datePublishedISO))}
                     </time>
-                    <div className="mt-10 flex flex-col gap-3 sm:flex-row">
+                    <div className="mt-8 flex flex-col gap-3 sm:flex-row lg:mt-10">
                       <NoirAnchor href={whatsappHref} target="_blank" rel="noreferrer" variant="primary">
                         Chiedi le tue date
                       </NoirAnchor>
@@ -191,13 +194,13 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                       </NoirLink>
                     </div>
                   </div>
-                  <div className="lg:col-span-6">
+                  <div className="order-1 lg:order-2 lg:col-span-6">
                     <MediaFrame
                       label={post.primaryKeyword}
                       tone="night"
                       src={post.heroImage.src}
                       alt={post.heroImage.alt}
-                      className="aspect-[16/10]"
+                      className="aspect-[16/11] rounded-xl sm:aspect-[16/10]"
                       priority
                     />
                   </div>
@@ -205,19 +208,19 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
               </div>
             </Reveal>
 
-            <div className="mt-20 grid gap-12 lg:grid-cols-12">
+            <div className="mt-10 grid gap-8 sm:mt-16 lg:grid-cols-12 lg:gap-12">
               <div className="lg:col-span-8">
-                <article className="grid gap-0">
+                <article className="editorial-prose grid gap-4">
                   {post.sections.map((s, idx) => (
                     <Reveal key={s.title} delay={0.04 + idx * 0.03}>
-                      <section className="border-t border-white/10 py-10 sm:py-12">
-                        <div className="text-[10px] uppercase tracking-[0.24em] text-noir-fuchsia/70">{String(idx + 1).padStart(2, "0")}</div>
+                      <section className="editorial-card rounded-2xl p-6 sm:p-9">
+                        <div className="text-[10px] uppercase tracking-[0.24em] text-noir-champagne/65">Capitolo {String(idx + 1).padStart(2, "0")}</div>
                         <h2 className="noir-h1 mt-4 text-3xl leading-tight text-noir-mist sm:text-4xl">
                           {s.title}
                         </h2>
                         <p className="mt-6 text-base leading-8 text-noir-muted sm:text-lg">{s.body}</p>
                         {s.bullets ? (
-                          <ul className="mt-7 grid gap-3 border-l border-noir-violet/30 pl-6">
+                          <ul className="mt-7 grid gap-3 rounded-xl border border-white/8 bg-white/[0.025] p-5">
                             {s.bullets.map((t) => (
                               <li key={t} className="text-base leading-7 text-noir-mist/78">{t}</li>
                             ))}
@@ -259,7 +262,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
               <aside className="lg:col-span-4">
                 <Reveal delay={0.10}>
-                  <div className="border-l border-noir-fuchsia/25 pl-7 lg:sticky lg:top-28">
+                  <div className="editorial-card rounded-2xl p-6 lg:sticky lg:top-24 lg:p-7">
                     <div className="text-xs tracking-[0.26em] uppercase text-noir-mist/55">
                       Info rapide
                     </div>
@@ -283,7 +286,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
                 {relatedLandings.length ? (
                   <Reveal delay={0.14}>
-                    <div className="mt-10 border-l border-noir-violet/25 pl-7">
+                    <div className="editorial-card mt-4 rounded-2xl p-6 lg:mt-6 lg:p-7">
                       <div className="text-xs tracking-[0.26em] uppercase text-noir-mist/55">
                         Pagine utili
                       </div>
@@ -304,8 +307,10 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
             </div>
           </div>
         </section>
+        <FinalCtaSection />
       </main>
       <FooterSection />
+      <StickyCta href={whatsappHref} label="Chiedi le tue date" revealAfter={360} />
     </div>
   );
 }

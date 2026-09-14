@@ -47,16 +47,52 @@ export function CinematicScrollSection() {
     <section
       ref={sectionRef}
       data-ambient="night"
-      className="relative z-10 h-[290svh] sm:h-[300svh] lg:h-[320svh]"
+      className="relative z-10 py-16 lg:h-[320svh] lg:py-0"
     >
-      <div className="sticky top-0 flex h-[100svh] overflow-hidden lg:items-center">
-        <div className="absolute inset-0 bg-[radial-gradient(900px_circle_at_70%_45%,rgba(237,63,166,0.15),transparent_58%),radial-gradient(700px_circle_at_20%_50%,rgba(139,92,246,0.14),transparent_60%)]" />
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-[68svh] bg-[linear-gradient(180deg,transparent_0%,rgba(6,3,9,0.56)_24%,rgba(6,3,9,0.96)_62%,#060309_100%)] lg:hidden" />
+      <div className="noir-container lg:hidden">
+        <div className="relative aspect-[9/13] overflow-hidden rounded-2xl bg-noir-graphite">
+          <video
+            muted
+            playsInline
+            autoPlay={!reduceMotion}
+            loop
+            preload="metadata"
+            poster="/euphoria-scroll-poster.webp"
+            aria-label="Jacuzzi Euphoria illuminata da luci rosa e viola"
+            className="h-full w-full object-cover object-center"
+          >
+            <source src="/euphoria-scroll-mobile.mp4" type="video/mp4" />
+          </video>
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-black/5" />
+        </div>
 
-        <div className="noir-container relative flex h-full flex-col justify-end gap-8 pb-24 lg:grid lg:grid-cols-12 lg:items-center lg:py-24">
+        <div className="mt-9">
+          <div className="euphoria-kicker">Dall’arrivo alla notte</div>
+          <h2 className="noir-h1 mt-5 text-4xl leading-[0.95] text-noir-mist">
+            Tutto resta dentro la vostra suite.
+          </h2>
+        </div>
+
+        <div className="mt-8 grid gap-0 border-t border-white/10">
+          {CHAPTERS.map((item) => (
+            <article key={item.eyebrow} className="border-b border-white/10 py-7">
+              <div className="text-[10px] uppercase tracking-[0.26em] text-noir-champagne/70">
+                {item.eyebrow}
+              </div>
+              <h3 className="noir-h1 mt-3 text-2xl text-noir-mist">{item.title}</h3>
+              <p className="mt-3 text-[0.9375rem] leading-6 text-noir-mist/72">{item.copy}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+
+      <div className="sticky top-0 hidden h-[100svh] overflow-hidden lg:flex lg:items-center">
+        <div className="absolute inset-0 bg-[radial-gradient(900px_circle_at_70%_45%,rgba(237,63,166,0.15),transparent_58%),radial-gradient(700px_circle_at_20%_50%,rgba(139,92,246,0.14),transparent_60%)]" />
+
+        <div className="noir-container relative grid h-full grid-cols-12 items-center gap-8 py-24">
           <div className="relative z-20 lg:col-span-5">
             <div className="euphoria-kicker">Dall’arrivo alla notte</div>
-            <div className="relative mt-6 min-h-[16.5rem] sm:mt-8 sm:min-h-[16rem]">
+            <div className="relative mt-8 min-h-[16rem]">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={chapter}
@@ -68,10 +104,10 @@ export function CinematicScrollSection() {
                   <div className="text-[10px] uppercase tracking-[0.3em] text-noir-champagne/70">
                     {CHAPTERS[chapter].eyebrow}
                   </div>
-                  <h2 className="noir-h1 mt-4 max-w-[9ch] text-[2.65rem] leading-[0.9] text-noir-mist sm:mt-5 sm:text-6xl lg:text-7xl">
+                  <h2 className="noir-h1 mt-5 max-w-[9ch] text-7xl leading-[0.9] text-noir-mist">
                     {CHAPTERS[chapter].title}
                   </h2>
-                  <p className="mt-5 max-w-md text-[0.9375rem] leading-6 text-noir-mist/75 sm:mt-6 sm:text-base sm:leading-7 lg:text-noir-muted">
+                  <p className="mt-6 max-w-md text-base leading-7 text-noir-muted">
                     {CHAPTERS[chapter].copy}
                   </p>
                 </motion.div>
@@ -93,7 +129,7 @@ export function CinematicScrollSection() {
           </div>
 
           <motion.div
-            className="absolute inset-x-0 top-0 h-[64svh] overflow-hidden rounded-b-[3.25rem] sm:h-[68svh] lg:static lg:col-span-7 lg:h-[82svh] lg:w-auto lg:rounded-[44%_44%_16%_44%]"
+            className="relative col-span-7 h-[82svh] overflow-hidden rounded-2xl"
           >
             <video
               ref={videoRef}
@@ -108,14 +144,9 @@ export function CinematicScrollSection() {
               }}
               className="h-full w-full object-cover object-center"
             >
-              <source
-                src="/euphoria-scroll-mobile.mp4"
-                type="video/mp4"
-                media="(max-width: 767px)"
-              />
-              <source src="/euphoria-scroll.mp4" type="video/mp4" />
+              <source src="/euphoria-scroll.mp4" type="video/mp4" media="(min-width: 1024px)" />
             </video>
-            <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(6,3,9,0.04),transparent_48%,rgba(6,3,9,0.7))] lg:bg-[linear-gradient(90deg,rgba(6,3,9,0.62),transparent_45%),linear-gradient(180deg,rgba(6,3,9,0.08),transparent_60%,rgba(6,3,9,0.32))]" />
+            <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,rgba(6,3,9,0.62),transparent_45%),linear-gradient(180deg,rgba(6,3,9,0.08),transparent_60%,rgba(6,3,9,0.32))]" />
           </motion.div>
         </div>
       </div>

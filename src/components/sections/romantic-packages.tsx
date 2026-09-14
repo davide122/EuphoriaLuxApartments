@@ -11,7 +11,7 @@ export function RomanticPackagesSection() {
       data-ambient="night"
       className="relative z-10 overflow-hidden py-16 sm:py-24"
     >
-      <div className="absolute inset-0 opacity-80">
+      <div className="absolute inset-0 hidden opacity-80 lg:block">
         <div className="absolute inset-0 bg-[radial-gradient(1000px_circle_at_18%_10%,rgba(var(--ambient-a)/0.18),transparent_60%),radial-gradient(1000px_circle_at_82%_16%,rgba(var(--ambient-c)/0.16),transparent_60%),radial-gradient(1200px_circle_at_50%_120%,rgba(var(--ambient-b)/0.12),transparent_62%)]" />
       </div>
 
@@ -29,11 +29,11 @@ export function RomanticPackagesSection() {
           />
         </Reveal>
 
-        <div className="euphoria-snap-rail -mx-5 mt-12 flex snap-x snap-mandatory gap-12 overflow-x-auto px-5 pb-6 sm:-mx-8 sm:px-8 lg:-mx-12 lg:px-12">
+        <div className="mt-10 grid gap-10 lg:-mx-12 lg:mt-12 lg:flex lg:snap-x lg:snap-mandatory lg:gap-12 lg:overflow-x-auto lg:px-12 lg:pb-6">
           {romanticPackages.map((pkg, idx) => {
             const text = `Ciao, vorrei informazioni sul pacchetto “${pkg.name}”. Date preferite: __/__/__ → __/__/__. Grazie.`;
             return (
-              <Reveal key={pkg.name} delay={0.04 + idx * 0.04} className="min-w-[82vw] snap-center border-l border-noir-fuchsia/30 pl-7 sm:min-w-[52vw] lg:min-w-[30vw]">
+              <Reveal key={pkg.name} delay={0.04 + idx * 0.04} className="border-l border-noir-fuchsia/30 pl-6 lg:min-w-[30vw] lg:snap-center lg:pl-7">
                 <article className="relative flex h-full flex-col py-4">
                   <div className="flex items-start justify-between gap-4">
                     <div>
@@ -51,7 +51,7 @@ export function RomanticPackagesSection() {
 
                   <div className="mt-5 text-sm leading-6 text-noir-muted">{pkg.summary}</div>
 
-                  <div className="mt-6 grid gap-3">
+                  <div className="mt-6 hidden gap-3 lg:grid">
                     {pkg.bullets.map((b) => (
                       <div
                         key={b}

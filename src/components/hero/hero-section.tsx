@@ -41,9 +41,9 @@ export function HeroSection() {
           fill
           priority
           sizes="100vw"
-          className="scale-[1.02] object-cover object-[61%_center]"
+          className="translate-y-[1.5%] scale-[1.04] object-cover object-[32%_center] sm:translate-y-0 sm:scale-[1.02] sm:object-[61%_center]"
         />
-        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(6,3,9,0.98)_0%,rgba(6,3,9,0.86)_35%,rgba(6,3,9,0.25)_68%,rgba(6,3,9,0.42)_100%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(6,3,9,0.42)_0%,rgba(6,3,9,0.72)_42%,rgba(6,3,9,0.96)_100%)] sm:bg-[linear-gradient(90deg,rgba(6,3,9,0.98)_0%,rgba(6,3,9,0.86)_35%,rgba(6,3,9,0.25)_68%,rgba(6,3,9,0.42)_100%)]" />
         <div className="absolute inset-0 bg-[radial-gradient(700px_circle_at_76%_12%,rgba(139,92,246,0.22),transparent_58%),radial-gradient(600px_circle_at_58%_70%,rgba(237,63,166,0.12),transparent_60%)]" />
         <div className="euphoria-stars absolute inset-0 opacity-30" />
         <div className="absolute inset-x-0 bottom-0 h-52 bg-[linear-gradient(180deg,transparent,#060309)]" />

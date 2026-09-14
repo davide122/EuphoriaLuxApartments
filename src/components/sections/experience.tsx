@@ -82,12 +82,20 @@ export function ExperienceSection() {
           />
         </Reveal>
 
-        <div className="euphoria-snap-rail -mx-5 mt-12 flex snap-x snap-mandatory gap-5 overflow-x-auto px-5 pb-6 sm:-mx-8 sm:px-8 lg:-mx-12 lg:px-12">
+        <div className="mt-10 grid grid-cols-2 gap-3 lg:-mx-12 lg:mt-12 lg:flex lg:snap-x lg:snap-mandatory lg:gap-5 lg:overflow-x-auto lg:px-12 lg:pb-6">
           {experiencePillars.map((p, idx) => {
             const Icon = ICONS[idx % ICONS.length];
             return (
-              <Reveal key={p.title} delay={0.03 + idx * 0.02} className="min-w-[82vw] snap-center sm:min-w-[58vw] lg:min-w-[36vw]">
-                <article className="group relative aspect-[4/5] overflow-hidden rounded-[2rem_2rem_7rem_2rem] bg-noir-graphite">
+              <Reveal
+                key={p.title}
+                delay={0.03 + idx * 0.02}
+                className={`${idx === 0 ? "col-span-2" : ""} lg:col-span-1 lg:min-w-[36vw] lg:snap-center`}
+              >
+                <article
+                  className={`group relative overflow-hidden rounded-2xl bg-noir-graphite ${
+                    idx === 0 ? "aspect-[16/10]" : "aspect-[3/4]"
+                  } lg:aspect-[4/5]`}
+                >
                   <Image
                     src={encodeURI(VISUALS[idx])}
                     alt=""
@@ -96,10 +104,14 @@ export function ExperienceSection() {
                     className="object-cover opacity-65 transition duration-1000 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(6,3,9,0.06),rgba(6,3,9,0.22)_42%,rgba(6,3,9,0.94))]" />
-                  <div className="absolute inset-x-0 bottom-0 p-7 sm:p-9">
-                    <Icon className="h-6 w-6 text-noir-champagne" />
-                    <div className="noir-h1 mt-5 text-3xl text-noir-mist">{p.title}</div>
-                    <p className="mt-3 max-w-sm text-sm leading-6 text-noir-mist/72">{p.description}</p>
+                  <div className="absolute inset-x-0 bottom-0 p-4 sm:p-6 lg:p-9">
+                    <Icon className="h-5 w-5 text-noir-champagne lg:h-6 lg:w-6" />
+                    <div className={`noir-h1 mt-3 text-noir-mist ${idx === 0 ? "text-2xl" : "text-xl"} lg:mt-5 lg:text-3xl`}>
+                      {p.title}
+                    </div>
+                    <p className={`${idx === 0 ? "block" : "hidden"} mt-2 max-w-sm text-xs leading-5 text-noir-mist/72 lg:mt-3 lg:block lg:text-sm lg:leading-6`}>
+                      {p.description}
+                    </p>
                   </div>
                 </article>
               </Reveal>
@@ -107,7 +119,7 @@ export function ExperienceSection() {
           })}
         </div>
 
-        <div className="mt-3 flex items-center gap-3 text-[10px] uppercase tracking-[0.28em] text-noir-mist/40">
+        <div className="mt-3 hidden items-center gap-3 text-[10px] uppercase tracking-[0.28em] text-noir-mist/40 lg:flex">
           Trascina per esplorare
         </div>
 

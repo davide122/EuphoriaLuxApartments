@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { TopNav } from "@/components/nav/top-nav";
 import { FooterSection } from "@/components/sections/footer";
+import { FinalCtaSection } from "@/components/sections/final-cta";
+import { StickyCta } from "@/components/sticky-cta";
 import { Reveal } from "@/components/motion/reveal";
 import { MediaFrame } from "@/components/ui/media-frame";
 import { NoirAnchor } from "@/components/ui/noir-anchor";
@@ -151,7 +153,7 @@ export default async function SeoLandingPage({ params }: { params: Promise<{ slu
   return (
     <div className="relative flex min-h-[100svh] flex-col">
       <TopNav />
-      <main className="relative flex-1 pt-28">
+      <main className="relative flex-1 pt-[72px]">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -164,19 +166,20 @@ export default async function SeoLandingPage({ params }: { params: Promise<{ slu
           }}
         />
 
-        <section data-ambient="noir" className="relative z-10 py-16 sm:py-20">
+        <section data-ambient="noir" className="editorial-canvas relative z-10 overflow-hidden pb-20 pt-7 sm:pb-28 sm:pt-10">
           <div className="noir-container">
             <Breadcrumbs items={crumbs} />
             <Reveal>
-              <div className="overflow-hidden border-y border-fuchsia-100/15 py-10 sm:py-14">
-                <div className="grid gap-10 lg:grid-cols-12 lg:items-center">
-                  <div className="lg:col-span-6">
+              <div className="editorial-hero relative overflow-hidden rounded-2xl p-4 sm:p-7 lg:p-10">
+                <div className="pointer-events-none absolute -bottom-24 -left-4 select-none font-display text-[16rem] leading-none text-white/[0.018]" aria-hidden="true">E</div>
+                <div className="relative grid gap-7 lg:grid-cols-12 lg:items-center lg:gap-10">
+                  <div className="order-2 px-2 pb-4 lg:order-1 lg:col-span-6 lg:px-2 lg:py-4">
                     <div className="euphoria-kicker">{landing.hero.eyebrow}</div>
-                    <h1 className="noir-h1 mt-6 text-5xl leading-[0.94] text-noir-mist sm:text-6xl lg:text-7xl">
+                    <h1 className="noir-h1 mt-5 text-[2.65rem] leading-[0.94] text-noir-mist sm:text-6xl lg:text-7xl">
                       {landing.hero.h1}
                     </h1>
                     <p className="mt-6 max-w-xl text-base leading-7 text-noir-muted">{landing.hero.sub}</p>
-                    <div className="mt-10 flex flex-col gap-3 sm:flex-row">
+                    <div className="mt-8 flex flex-col gap-3 sm:flex-row lg:mt-10">
                       <NoirAnchor href={whatsappHref} target="_blank" rel="noreferrer" variant="primary">
                         Chiedi le tue date
                       </NoirAnchor>
@@ -185,13 +188,13 @@ export default async function SeoLandingPage({ params }: { params: Promise<{ slu
                       </NoirLink>
                     </div>
                   </div>
-                  <div className="lg:col-span-6">
+                  <div className="order-1 lg:order-2 lg:col-span-6">
                     <MediaFrame
                       label={landing.title}
                       tone="noir"
                       src={landing.hero.image.src}
                       alt={landing.hero.image.alt}
-                      className="aspect-[16/10]"
+                      className="aspect-[16/11] rounded-xl sm:aspect-[16/10]"
                       priority
                     />
                   </div>
@@ -199,11 +202,11 @@ export default async function SeoLandingPage({ params }: { params: Promise<{ slu
               </div>
             </Reveal>
 
-            <article className="mx-auto mt-20 max-w-4xl">
+            <article className="editorial-prose mx-auto mt-10 grid max-w-4xl gap-4 sm:mt-16">
               {landing.blocks.map((b, idx) => (
                 <Reveal key={b.title} delay={0.05 + idx * 0.04}>
-                  <section className="border-t border-white/10 py-10 sm:py-12">
-                    <div className="text-[10px] uppercase tracking-[0.24em] text-noir-fuchsia/70">
+                  <section className="editorial-card rounded-2xl p-6 sm:p-9">
+                    <div className="text-[10px] uppercase tracking-[0.24em] text-noir-champagne/65">
                       {String(idx + 1).padStart(2, "0")} · {landing.primaryKeyword}
                     </div>
                     <h2 className="noir-h1 mt-5 text-3xl leading-tight text-noir-mist sm:text-4xl">
@@ -211,7 +214,7 @@ export default async function SeoLandingPage({ params }: { params: Promise<{ slu
                     </h2>
                     <p className="mt-6 text-base leading-8 text-noir-muted sm:text-lg">{b.body}</p>
                     {b.bullets ? (
-                      <ul className="mt-7 grid gap-3 border-l border-noir-violet/30 pl-6">
+                      <ul className="mt-7 grid gap-3 rounded-xl border border-white/8 bg-white/[0.025] p-5">
                         {b.bullets.map((t) => (
                           <li key={t} className="text-base leading-7 text-noir-mist/78">{t}</li>
                         ))}
@@ -223,7 +226,7 @@ export default async function SeoLandingPage({ params }: { params: Promise<{ slu
             </article>
 
             <Reveal delay={0.14}>
-              <div className="mt-10 text-sm text-noir-mist/70">
+              <div className="editorial-card mx-auto mt-4 flex max-w-4xl flex-wrap gap-x-2 gap-y-2 rounded-2xl px-6 py-5 text-sm text-noir-mist/70 sm:mt-6">
                 <span className="font-medium text-noir-mist/85">Da €{noir.startingFrom}/notte · aperitivo incluso</span>
                 <span className="mx-2 text-white/25">•</span>
                 Jacuzzi privata
@@ -235,12 +238,12 @@ export default async function SeoLandingPage({ params }: { params: Promise<{ slu
             </Reveal>
 
             <Reveal delay={0.18}>
-              <div className="mx-auto mt-20 max-w-4xl">
+              <div className="editorial-card mx-auto mt-12 max-w-4xl rounded-2xl p-6 sm:mt-16 sm:p-9">
                 <div className="euphoria-kicker">Domande frequenti</div>
                 <div className="grid gap-3">
                   {landing.faqs.map((f) => (
-                    <details key={f.q} className="group border-b border-white/10 px-1 py-6">
-                      <summary className="cursor-pointer list-none text-sm font-medium text-noir-mist/85 [&::-webkit-details-marker]:hidden">
+                    <details key={f.q} className="group border-b border-white/10 px-1 py-5 last:border-0">
+                      <summary className="min-h-11 cursor-pointer list-none text-base font-medium text-noir-mist/90 [&::-webkit-details-marker]:hidden">
                         <div className="flex items-center justify-between gap-6">
                           <span>{f.q}</span>
                           <span className="text-xl font-light text-noir-fuchsia transition group-open:rotate-45">+</span>
@@ -255,7 +258,7 @@ export default async function SeoLandingPage({ params }: { params: Promise<{ slu
 
             {relatedPosts.length ? (
               <Reveal delay={0.20}>
-                <div className="mt-20 grid gap-10 border-t border-fuchsia-100/15 pt-10 lg:grid-cols-12 lg:items-start">
+                <div className="editorial-card mt-12 grid gap-10 rounded-2xl p-6 sm:mt-16 sm:p-9 lg:grid-cols-12 lg:items-start">
                   <div className="lg:col-span-7">
                     <div>
                       <div className="text-xs tracking-[0.26em] uppercase text-noir-mist/55">
@@ -301,8 +304,10 @@ export default async function SeoLandingPage({ params }: { params: Promise<{ slu
             </Reveal>
           </div>
         </section>
+        <FinalCtaSection />
       </main>
       <FooterSection />
+      <StickyCta href={whatsappHref} label="Chiedi le tue date" revealAfter={360} />
     </div>
   );
 }

@@ -27,7 +27,7 @@ export function ReviewsSection() {
           />
         </Reveal>
 
-        <div className="euphoria-snap-rail -mx-5 mt-10 flex snap-x snap-mandatory gap-10 overflow-x-auto px-5 pb-5 sm:-mx-8 sm:px-8 lg:-mx-12 lg:px-12">
+        <div className="mt-10 grid gap-8 lg:-mx-12 lg:flex lg:snap-x lg:snap-mandatory lg:gap-10 lg:overflow-x-auto lg:px-12 lg:pb-5">
           {[
             {
               title: "Privacy, davvero",
@@ -45,7 +45,7 @@ export function ReviewsSection() {
               icon: Sparkles,
             },
           ].map((r, idx) => (
-            <Reveal key={r.title} delay={0.04 + idx * 0.03} className="min-w-[84vw] snap-center border-l border-noir-fuchsia/35 pl-7 sm:min-w-[54vw] lg:min-w-[36vw]">
+            <Reveal key={r.title} delay={0.04 + idx * 0.03} className="border-l border-noir-fuchsia/35 pl-6 lg:min-w-[36vw] lg:snap-center lg:pl-7">
               <article className="flex h-full flex-col py-5">
                 <r.icon className="h-6 w-6 text-noir-champagne" />
                 <div className="mt-4 text-xs tracking-[0.22em] uppercase text-noir-mist/55">

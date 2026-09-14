@@ -30,7 +30,10 @@ export function AmbientOrchestrator() {
     const reduceMotion =
       typeof window !== "undefined" &&
       window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
-    if (reduceMotion) return;
+    const mobileOrTouch =
+      typeof window !== "undefined" &&
+      window.matchMedia?.("(max-width: 820px), (pointer: coarse)")?.matches;
+    if (reduceMotion || mobileOrTouch) return;
 
     gsap.registerPlugin(ScrollTrigger);
 

@@ -10,8 +10,11 @@ export function SmoothScroll({ children }: { children: ReactNode }) {
     const reduceMotion =
       typeof window !== "undefined" &&
       window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
+    const mobileOrTouch =
+      typeof window !== "undefined" &&
+      window.matchMedia?.("(max-width: 820px), (pointer: coarse)")?.matches;
 
-    if (reduceMotion) return;
+    if (reduceMotion || mobileOrTouch) return;
 
     const lenis = new Lenis({
       lerp: 0.09,

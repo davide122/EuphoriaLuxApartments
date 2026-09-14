@@ -13,8 +13,8 @@ const suiteStories = {
     story:
       "Letto, jacuzzi e sauna vivono nello stesso ambiente. Passion è raccolta, calda, immediata: chiudete la porta e non serve più spostarsi.",
     details: ["55 m²", "Un unico ambiente", "Atmosfera più intima"],
-    tone: "from-[#19030e]/95 via-[#15020b]/48 to-[#ed3fa6]/12",
-    accent: "text-[#ff92cc]",
+    tone: "from-[#060309]/95 via-[#0c0611]/48 to-[#ed3fa6]/10",
+    accent: "text-noir-champagne",
   },
   infinity: {
     number: "02",
@@ -23,8 +23,8 @@ const suiteStories = {
     story:
       "Zona notte, living e cucina danno respiro alla serata. Infinity è più ampia e scenografica: una cena, la spa, un film. Sempre dentro.",
     details: ["77 m²", "Living e cucina", "Atmosfera più scenografica"],
-    tone: "from-[#08031d]/96 via-[#0a0720]/42 to-[#8b5cf6]/15",
-    accent: "text-[#b9a5ff]",
+    tone: "from-[#060309]/95 via-[#0c0611]/48 to-[#8b5cf6]/12",
+    accent: "text-noir-champagne",
   },
 } as const;
 
@@ -37,18 +37,20 @@ function SuiteScene({ suite }: { suite: (typeof suites)[number] }) {
     )}`;
 
   return (
-    <article className="suite-duel-scene group relative min-h-[78svh] overflow-hidden bg-noir-ink lg:min-h-[84svh] lg:basis-1/2 lg:transition-[flex-basis] lg:duration-700 lg:ease-[cubic-bezier(.22,1,.36,1)]">
+    <article className="suite-duel-scene group relative min-h-[680px] overflow-hidden rounded-2xl bg-noir-ink lg:min-h-[84svh] lg:basis-1/2 lg:rounded-none lg:transition-[flex-basis] lg:duration-700 lg:ease-[cubic-bezier(.22,1,.36,1)]">
       <Image
         src={story.image}
         alt={`${suite.name}, suite Euphoria da ${suite.size}`}
         fill
         sizes="(max-width: 1024px) 100vw, 58vw"
-        className="object-cover transition duration-[1400ms] ease-out group-hover:scale-[1.035]"
+        className={`object-cover transition duration-[1400ms] ease-out group-hover:scale-[1.035] ${
+          suite.slug === "passion" ? "object-[center_62%]" : "object-center"
+        }`}
       />
       <div className={`absolute inset-0 bg-gradient-to-t ${story.tone}`} />
       <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(6,3,9,.16),transparent_35%,rgba(6,3,9,.35))]" />
 
-      <div className="relative flex min-h-[78svh] flex-col justify-between p-7 sm:p-10 lg:min-h-[84svh] lg:p-12 xl:p-14">
+      <div className="relative flex min-h-[680px] flex-col justify-between p-7 sm:p-10 lg:min-h-[84svh] lg:p-12 xl:p-14">
         <div className="flex items-start justify-between gap-5 text-[10px] uppercase tracking-[0.28em] text-white/65">
           <span>{story.number} · {suite.size}</span>
           <span className={story.accent}>{suite.mood}</span>
@@ -107,7 +109,7 @@ export function SuitesSection() {
       </div>
 
       <Reveal delay={0.06}>
-        <div className="suite-duel relative mt-14 overflow-hidden border-y border-white/10 lg:flex">
+        <div className="suite-duel relative mt-10 grid gap-5 px-5 sm:px-8 lg:mt-14 lg:flex lg:gap-0 lg:overflow-hidden lg:border-y lg:border-white/10 lg:px-0">
           {suites.map((suite) => (
             <SuiteScene key={suite.slug} suite={suite} />
           ))}
