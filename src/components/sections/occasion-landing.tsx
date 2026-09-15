@@ -10,7 +10,7 @@ import { OCCASIONS } from "@/lib/occasions";
 import { suites } from "@/lib/noir";
 
 export function OccasionLanding({ occasion, whatsappHref, schema }: { occasion: (typeof OCCASIONS)[number]; whatsappHref: string; schema: unknown[] }) {
-  const suite = suites.find((s) => s.slug === occasion.suggestedSuite)!;
+  const suite = suites.find((s) => s.slug === occasion.suggestedSuite) ?? suites[1] ?? suites[0];
   return (
     <div className="relative flex min-h-screen flex-col">
       <TopNav />
