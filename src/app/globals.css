@@ -301,3 +301,24 @@ body {
     transform: translate3d(0, 0, 0);
   }
 }
+
+/* Euphoria moments: large editorial type and deliberate, user-led transitions. */
+.occasion-script {
+  color: #f4b8df;
+  font-style: italic;
+  font-weight: 400;
+}
+.occasion-section {
+  background: radial-gradient(ellipse at 15% 45%, #5e21552b, transparent 60%), #09050e;
+}
+.occasion-stage { border-radius: 3px 3px 64px 3px; }
+.occasion-choice { color: #c9b9cb; }
+.occasion-choice[aria-pressed="true"] { color: #fff8fd; border-bottom-color: #ed3fa6; }
+.occasion-choice[aria-pressed="true"] svg { color: #f4b8df; transform: rotate(45deg); }
+.occasion-section :is(button, a):focus-visible { outline: 2px solid #f4b8df; outline-offset: 5px; }
+@media (max-width: 639px) {
+  .occasion-stage { border-bottom-right-radius: 36px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .occasion-section *, .occasion-section *::before, .occasion-section *::after { animation: none !important; transition: none !important; }
+}

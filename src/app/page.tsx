@@ -12,6 +12,8 @@ import { LocationSection } from "@/components/sections/location";
 import { FinalCtaSection } from "@/components/sections/final-cta";
 import { FooterSection } from "@/components/sections/footer";
 import { StickyCta } from "@/components/sticky-cta";
+import { OccasionsSection } from "@/components/sections/occasions";
+import { OCCASIONS } from "@/lib/occasions";
 import { noir } from "@/lib/noir";
 
 const homeFaqs = [
@@ -122,6 +124,7 @@ export default function Home() {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdHome()) }}
         />
         <HeroSection />
+        <OccasionsSection moments={OCCASIONS.map(({ slug, label, line, detail, hero }) => ({ slug, label, line, detail, image: hero.image }))} />
         <ExperienceSection />
         <CinematicScrollSection />
         <SuitesSection />

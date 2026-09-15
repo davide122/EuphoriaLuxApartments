@@ -43,6 +43,32 @@ export default function sitemap(): MetadataRoute.Sitemap {
   }
 
   push({
+    url: `${base}/prenota`,
+    lastModified: now,
+    changeFrequency: "weekly",
+    priority: 0.88,
+    images: [abs("/infinity-letto.jpg")],
+  });
+
+  push({
+    url: `${base}/ospiti`,
+    lastModified: now,
+    changeFrequency: "monthly",
+    priority: 0.7,
+  });
+
+  for (const s of suites) {
+    for (const mode of ["pernottamento", "dayuse"] as const) {
+      push({
+        url: `${base}/ospiti/${s.slug}/${mode}`,
+        lastModified: now,
+        changeFrequency: "monthly",
+        priority: 0.6,
+      });
+    }
+  }
+
+  push({
     url: `${base}/blog`,
     lastModified: now,
     changeFrequency: "weekly",

@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 import {
   ArrowDown,
@@ -26,6 +26,7 @@ const HERO_FEATURES = [
 ] as const;
 
 export function HeroSection() {
+  const reduced = useReducedMotion();
   const whatsappHref =
     noir.contacts.whatsapp +
     `?text=${encodeURIComponent(
@@ -60,7 +61,7 @@ export function HeroSection() {
       <div className="relative z-10 noir-container flex min-h-[92svh] flex-col justify-end pb-8 pt-24 sm:min-h-[100svh] sm:justify-center sm:pb-20 sm:pt-32">
         <motion.div
           className="euphoria-kicker"
-          initial={{ opacity: 0, y: 12 }}
+          initial={reduced ? false : { opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.65 }}
         >
@@ -70,25 +71,26 @@ export function HeroSection() {
 
         <motion.h1
           className="noir-h1 mt-4 max-w-[15ch] text-[2.45rem] leading-[0.94] text-noir-mist sm:mt-7 sm:max-w-[13ch] sm:text-7xl sm:leading-[0.9] lg:text-[6.7rem]"
-          initial={{ opacity: 0, y: 24 }}
+          initial={reduced ? false : { opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.08 }}
         >
-          Suite con SPA privata a Porto Empedocle.
+          Il mondo fuori.
+          <br /><span className="occasion-script">Voi, dentro.</span>
         </motion.h1>
 
         <motion.p
           className="mt-4 max-w-[42rem] text-pretty text-[0.9375rem] leading-6 text-noir-mist/80 sm:mt-7 sm:text-lg sm:leading-7"
-          initial={{ opacity: 0, y: 14 }}
+          initial={reduced ? false : { opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.75, delay: 0.18 }}
         >
           <span className="sm:hidden">
-            Due suite romantiche con jacuzzi e sauna private. Privacy totale,
+            Suite con SPA privata a Porto Empedocle. Jacuzzi, sauna, privacy totale,
             ingresso autonomo e aperitivo incluso.
           </span>
           <span className="hidden sm:inline">
-            Due suite romantiche vicino ad Agrigento con Jacuzzi idromassaggio e sauna
+            Due suite con SPA privata a Porto Empedocle, vicino ad Agrigento. Jacuzzi e sauna
             ad uso esclusivo. Privacy totale per fughe di coppia, compleanni,
             anniversari e proposte di matrimonio.
           </span>
@@ -97,7 +99,7 @@ export function HeroSection() {
         <motion.ul
           className="mt-5 grid max-w-5xl grid-cols-2 border-l border-t border-fuchsia-200/15 text-[11px] leading-4 text-noir-mist/76 sm:mt-8 sm:grid-cols-3 sm:text-xs lg:grid-cols-6"
           aria-label="Servizi principali inclusi nelle suite"
-          initial={{ opacity: 0 }}
+          initial={reduced ? false : { opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.3 }}
         >
@@ -116,7 +118,7 @@ export function HeroSection() {
 
         <motion.div
           className="mt-5 text-sm text-noir-mist/72"
-          initial={{ opacity: 0, y: 8 }}
+          initial={reduced ? false : { opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.65, delay: 0.36 }}
         >
@@ -126,7 +128,7 @@ export function HeroSection() {
 
         <motion.div
           className="mt-5 flex flex-col gap-3 sm:mt-8 sm:flex-row sm:items-center"
-          initial={{ opacity: 0, y: 18 }}
+          initial={reduced ? false : { opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.28 }}
         >
@@ -140,8 +142,8 @@ export function HeroSection() {
             Chiedi le tue date
             <MessageCircle className="h-4 w-4" />
           </NoirAnchor>
-          <NoirLink href="#suites" variant="ghost" className="group hidden sm:inline-flex">
-            Scegli la suite
+          <NoirLink href="#occasioni" variant="ghost" className="group">
+            Trova il tuo momento
             <ArrowDown className="h-4 w-4 text-noir-mist/80 transition group-hover:translate-y-0.5" />
           </NoirLink>
         </motion.div>

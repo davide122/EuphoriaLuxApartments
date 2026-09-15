@@ -1,4 +1,5 @@
 import { noir } from "@/lib/noir";
+import { OCCASIONS } from "@/lib/occasions";
 
 export type SeoLanding = {
   slug: string;
@@ -26,6 +27,7 @@ export type SeoLanding = {
 };
 
 export const SEO_LANDINGS = [
+  ...OCCASIONS,
   {
     slug: "suite-romantica-porto-empedocle",
     primaryKeyword: "suite romantica Porto Empedocle",
@@ -1152,6 +1154,174 @@ export const BLOG_POSTS: BlogPost[] = [
       {
         title: "Cosa scrivere per prenotare (WhatsApp)",
         body: "Date, occasione e preferenza (più intima o più scenografica). Ti confermiamo disponibilità e opzione migliore.",
+      },
+    ],
+  },
+  {
+    slug: "spa-privata-mamma-figlia-perche-funziona",
+    primaryKeyword: "spa privata mamma figlia Sicilia",
+    title: "Spa privata mamma e figlia: perché funziona meglio di un caffè al bar",
+    metaTitle: `Spa privata mamma e figlia: perché funziona | ${noir.name}`,
+    metaDescription:
+      "Perché una spa privata in suite è la formula perfetta per un pomeriggio tra mamma e figlia. Jacuzzi, sauna, nessun estraneo intorno: privacy, relax e tante chiacchiere senza limiti.",
+    excerpt:
+      "Non serve un pacchetto. Basta un posto privato dove stare in due, parlare, bere qualcosa e non incrociare nessuno.",
+    datePublishedISO: "2026-09-15",
+    relatedLandingSlugs: ["spa-privata-mamma-figlia-porto-empedocle", "regalo-voucher-spa-privata-sicilia"],
+    heroImage: { src: "/passion-letto-jacuzzi-sauna.jpg", alt: "Spa privata per mamma e figlia, relax tra sole voi due" },
+    sections: [
+      {
+        title: "Il problema del bar o del locale: sempre qualcun altro intorno",
+        body: "Quando mamma e figlia vogliono parlare davvero, il bar è l’ultimo posto che funziona. C’è sempre qualcuno che conoscono, sempre rumore, sempre fretta di finire il caffè. In una suite privata invece la porta si chiude e dentro ci siete solo voi due.",
+      },
+      {
+        title: "Jacuzzi e sauna non sono il lusso: sono la scusa per rallentare",
+        body: "La verità è che spesso mamma e figlia non si prendono il tempo per stare insieme. La spa privata non è un lusso: è una scusa per stare ferme, senza dover fare, senza dover andare.",
+        bullets: ["Niente fretta", "Niente orari", "Niente pubblico"],
+      },
+      {
+        title: "È anche un regalo perfetto (per una volta diverso dal solito profumo)",
+        body: "Se il classico regalo mamma-figlia ti sembra scontato, una mezza giornata in spa privata invece diventa un momento. Si ricorda. E non si butta nel cassetto dopo due settimane.",
+      },
+    ],
+  },
+  {
+    slug: "pre-wedding-idea-spa-privata-sposa-amica",
+    primaryKeyword: "pre wedding spa privata sposa testimone",
+    title: "Pre-wedding spa privata: la vera idea per sposa e testimone (non le foto social)",
+    metaTitle: `Pre wedding spa privata: sposa e testimone | ${noir.name}`,
+    metaDescription:
+      "Pre-wedding diverso: spa privata per sposa, testimone o migliori amiche. Jacuzzi, sauna, prosecco e totale privacy. Perfetta il giorno prima o qualche giorno prima del matrimonio. Nessuno sconosciuto intorno.",
+    excerpt:
+      "Niente spa dell’hotel con gente sconosciuta. Niente “rituali” da brochure. Sola voi, prosecco e 4 mura.",
+    datePublishedISO: "2026-09-15",
+    relatedLandingSlugs: ["pre-wedding-spa-privata-sposa-testimone", "regalo-voucher-spa-privata-sicilia"],
+    heroImage: { src: "/infinity-letto.jpg", alt: "Pre-wedding spa privata tra sposa e testimone, totale privacy" },
+    sections: [
+      {
+        title: "Perché la spa in hotel non funziona il giorno prima",
+        body: "Il giorno prima del matrimonio la sposa non ha voglia di incrociare gente. Non ha voglia di fare i saluti, di fare bella figura, di rispettare orari. Ha voglia di stare con una o due persone fidate e zero altri. Questo in un hotel con spa condivisa non succede.",
+      },
+      {
+        title: "Qual è il momento giusto per farlo",
+        body: "Non per forza il giorno prima. Può essere anche una settimana prima, un sabato pomeriggio, la sera dopo la prova dell’abito. Non conta quando: conta che dentro la suite non ci sia nessun altro.",
+        bullets: ["Sera prima del matrimonio", "Qualche giorno prima", "Dopo la prova abito"],
+      },
+      {
+        title: "Cosa serve davvero: 3 cose e il resto è superfluo",
+        body: "Prosecco (o qualsiasi altra bevanda preferite), telefono messo in silenzioso e la suite. Il resto (trucchi, foto, musica, chiacchiere) lo aggiungete voi da sole, senza regole.",
+      },
+    ],
+  },
+  {
+    slug: "perche-andare-in-spa-da-solo-persona-sola",
+    primaryKeyword: "andare in spa da solo persona sola",
+    title: "Perché andare in spa da solo (anche se sei abituato a andarci in due)",
+    metaTitle: `Perché andare in spa da solo: reset totale | ${noir.name}`,
+    metaDescription:
+      "Perché la spa privata per una persona sola è una delle cose più ricostituenti che puoi regalarti. Telefono silenzioso, jacuzzi, sauna e zero obblighi di conversazione. Reset del cervello, non solo del corpo.",
+    excerpt:
+      "Chi l’ha detto che la spa è solo per coppie? A volte la miglior spa è quella dove non parli per 4 ore di fila.",
+    datePublishedISO: "2026-09-15",
+    relatedLandingSlugs: ["spa-privata-persona-sola-sicilia", "stacca-spa-privata-dopo-esami-lavoro"],
+    heroImage: { src: "/passion-jacuzzi.jpg", alt: "Spa privata per una persona sola, isolamento volontario dal mondo" },
+    sections: [
+      {
+        title: "Non è “strano”. È un lusso che pochi si concedono.",
+        body: "Nella nostra testa la parola spa si è incollata a coppia, weekend romantico, anniversario. Ma il reset migliore che puoi fare, dopo settimane pesanti, è spesso quando sei solo. Nessuno che ti chiede come stai. Nessuna conversazione da sostenere. Nessuno che ha fretta.",
+      },
+      {
+        title: "Cosa succede veramente in 4 ore da solo in spa",
+        body: "La prima mezz’ora pensi ancora alle cose da fare. Poi, lentamente, il telefono smette di vibrarti in testa. La jacuzzi fa il suo. La sauna pure. Alla fine esci e ti ricordi com’era essere leggero.",
+        bullets: ["Telefono in silenzioso", "Nessun programma", "Zero obblighi"],
+      },
+      {
+        title: "Quando dovresti farlo: 5 momenti in cui è obbligatorio",
+        body: "Fine esami, consegna tesi, progetto chiuso, settimana devastante, lite con una persona importante. In tutti questi casi, 4 ore da soli in una spa privata valgono più di 2 weekend qualsiasi.",
+      },
+    ],
+  },
+  {
+    slug: "compleanno-diverso-senza-festa-spa-privata",
+    primaryKeyword: "compleanno diverso senza festa spa privata",
+    title: "Compleanno senza festa: se odi il casino, questa è la tua idea perfetta",
+    metaTitle: `Compleanno senza festa: spa privata con chi conta | ${noir.name}`,
+    metaDescription:
+      "Compleanno diverso per chi odia tavolate, musica alta e 30 persone obbligatorie. Spa privata in suite con 1 o 2 persone importanti: jacuzzi, sauna, qualcosa da bere e zero stress. Idea alternativa che funziona.",
+    excerpt:
+      "Se il tuo compleanno ideale non ha torta con candeline e 40 messaggi vocali, questa è l’alternativa giusta.",
+    datePublishedISO: "2026-09-15",
+    relatedLandingSlugs: ["compleanno-spa-privata-senza-festa", "regalo-voucher-spa-privata-sicilia"],
+    heroImage: { src: "/infinity-letto.jpg", alt: "Compleanno in spa privata senza festa, relax con poche persone care" },
+    sections: [
+      {
+        title: "Il compleanno perfetto per chi non ama essere il centro dell’attenzione",
+        body: "C’è un tipo di persona che il giorno del compleanno non vuole la sorpresa con cori, i 30 messaggi vocali del gruppo di amici, la cena con 25 persone che conosce a metà. Se ti riconosci, un compleanno in spa privata con 1 o 2 persone è quello che fa per te.",
+      },
+      {
+        title: "Perché funziona meglio di qualsiasi festa organizzata",
+        body: "Nessun obbligo. Nessun brindisi programmato. Nessun “fai un discorsetto”. Tu, 1 o 2 persone che contano, jacuzzi, sauna, da bere se volete, e basta. Quello è un compleanno vero.",
+        bullets: ["Nessun orario fisso", "Nessuno che urla “tanti auguri”", "Tutta la privacy che vuoi"],
+      },
+      {
+        title: "Se è un regalo per qualcun altro che odia le feste",
+        body: "Se conosci una persona che odia il casino del compleanno, un voucher spa privata è un regalo perfetto. È l’opposto del classico oggetto che poi non usa. È 4 o 8 ore di pace vera.",
+      },
+    ],
+  },
+  {
+    slug: "dopo-esami-lavoro-stacca-in-spa-privata",
+    primaryKeyword: "dopo esami lavoro reset spa privata",
+    title: "Dopo esami, tesi o periodo pesante: il reset migliore è 4 ore in spa privata",
+    metaTitle: `Dopo esami lavoro: reset in spa privata | ${noir.name}`,
+    metaDescription:
+      "Dopo esami universitari, consegna tesi, chiusura di un progetto o cambio lavoro: il modo migliore per staccare è una spa privata tutta per te. Jacuzzi, sauna, telefono silenzioso e zero da fare per qualche ora.",
+    excerpt:
+      "Quando la testa ancora “ronfa” dopo settimane di lavoro, 4 ore di spa privata valgono più di un weekend qualsiasi.",
+    datePublishedISO: "2026-09-15",
+    relatedLandingSlugs: ["stacca-spa-privata-dopo-esami-lavoro", "spa-privata-persona-sola-sicilia"],
+    heroImage: { src: "/passion-letto-jacuzzi-sauna.jpg", alt: "Reset dopo esami o lavoro in spa privata, totale relax" },
+    sections: [
+      {
+        title: "Il giorno dopo la fine non hai voglia di vedere nessuno. Ed è normale.",
+        body: "Quando finisci un esame pesante, consegni una tesi, chiudi un progetto o cambi lavoro, il tuo cervello non è pronto per “festeggiare”. È vuoto. Quello che ti serve non è la festa con gli amici. È pace.",
+      },
+      {
+        title: "Perché la formula “nessun programma” è quella giusta",
+        body: "Nella spa privata non hai niente da fare. Non hai orari da rispettare. Non hai lista attività. Puoi stare in jacuzzi 20 minuti o 2 ore. Puoi dormire 3 ore di pomeriggio. Puoi guardare Netflix o stare in silenzio. È la libertà completa.",
+        bullets: ["Niente orari", "Niente liste cose da fare", "Nessuno che ti aspetta"],
+      },
+      {
+        title: "Meglio da solo o con una persona?",
+        body: "Dipende. Se dopo il periodo pesante non hai voglia di parlare: solo tu. Se invece vuoi qualcuno con cui stare zitto fianco a fianco: una persona, una sola. Più di una torna confusione.",
+      },
+    ],
+  },
+  {
+    slug: "regalo-esperienza-spa-privata-piu-forte-di-oggetti",
+    primaryKeyword: "regalo esperienza spa privata voucher",
+    title: "Regalo esperienza spa privata: ecco perché vale più di qualsiasi oggetto",
+    metaTitle: `Regalo esperienza spa privata: voucher Euphoria | ${noir.name}`,
+    metaDescription:
+      "Perché un voucher spa privata è il regalo perfetto per mamma, migliore amica, laurea, testimone matrimonio, compleanno. L’esperienza si ricorda, l’oggetto finisce in un cassetto. Voucher personalizzabile.",
+    excerpt:
+      "Il profumo si butta. Il maglione non va. Una notte o 4 ore in spa privata sono un momento che resta.",
+    datePublishedISO: "2026-09-15",
+    relatedLandingSlugs: ["regalo-voucher-spa-privata-sicilia", "spa-privata-mamma-figlia-porto-empedocle", "pre-wedding-spa-privata-sposa-testimone"],
+    heroImage: { src: "/infinity-letto.jpg", alt: "Voucher regalo esperienza spa privata Euphoria" },
+    sections: [
+      {
+        title: "Tutti i regali “oggetto” hanno lo stesso problema",
+        body: "Il profumo piace o non piace. La taglia va o non va. Il colore va bene o è orribile. Anche se ci metti impegno, sbagliare è facilissimo. Con un voucher spa privata non sbagli mai. Non c’è taglia. Non c’è colore. Non c’è gusto sbagliato.",
+      },
+      {
+        title: "Quali occasioni si prestano perfettamente",
+        body: "Praticamente tutte. Mamma, migliore amica, sorella, laurea, promozione lavoro, compleanno, testimone di matrimonio, dopo un periodo brutto, dopo una gravidanza, “perché ti meriti stacco”. Non serve una “ricorrenza ufficiale”.",
+        bullets: ["Festa della mamma", "Laurea", "Compleanno", "Testimone matrimonio"],
+      },
+      {
+        title: "Come lo fai: 2 minuti su WhatsApp",
+        body: "Scrivi l’occasione, la cifra o la formula che vuoi (day use o pernottamento), eventualmente una dedica. Ti arriva un voucher personalizzato. Chi lo riceve decide Passion o Infinity, data e chi portare con sé. Zero stress per tutti.",
       },
     ],
   },

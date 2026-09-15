@@ -36,6 +36,7 @@ export function FooterSection() {
                   <div className="mt-4 grid gap-2 text-sm">
                     {[
                       { href: "/#esperienza", label: "Esperienza" },
+                      { href: "/#occasioni", label: "Le vostre occasioni" },
                       { href: "/#suites", label: "Suites" },
                       { href: "/blog", label: "Guide" },
                       { href: "/#galleria", label: "Galleria" },

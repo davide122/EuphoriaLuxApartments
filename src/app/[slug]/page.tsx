@@ -1,3 +1,5 @@
+import { OccasionLanding } from "@/components/sections/occasion-landing";
+import { OCCASIONS } from "@/lib/occasions";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { TopNav } from "@/components/nav/top-nav";
@@ -149,6 +151,16 @@ export default async function SeoLandingPage({ params }: { params: Promise<{ slu
     `?text=${encodeURIComponent(
       `Ciao, vorrei verificare disponibilità. Tema: ${landing.title}. Date: __/__/__ → __/__/__. Siamo in __. Grazie.`
     )}`;
+
+  const occasion = OCCASIONS.find((item) => item.slug === slug);
+  if (occasion) {
+    return <OccasionLanding occasion={occasion} whatsappHref={whatsappHref} schema={[
+      jsonLdOrganization(),
+      { "@context": "https://schema.org", "@type": "WebPage", "@id": `${pageUrl}#page`, url: pageUrl, name: landing.title, description: landing.metaDescription, primaryImageOfPage: imageUrl, about: { "@id": `${noir.siteUrl}#business` } },
+      jsonLdFaqPage({ pageUrl, faqs: landing.faqs }),
+      breadcrumbJsonLd({ baseUrl: noir.siteUrl, items: [{ href: "/", label: "Home" }, { href: "/#occasioni", label: "Occasioni" }, { href: `/${occasion.slug}`, label: occasion.label }] }),
+    ]} />;
+  }
 
   return (
     <div className="relative flex min-h-[100svh] flex-col">
