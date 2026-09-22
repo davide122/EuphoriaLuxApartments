@@ -13,6 +13,9 @@ const noirDisplay = Bodoni_Moda({
   subsets: ["latin"],
   weight: ["400", "500", "600"],
   display: "swap",
+  preload: false,
+  adjustFontFallback: true,
+  fallback: ["Georgia", "Times New Roman", "serif"],
 });
 
 const noirUI = Manrope({
@@ -20,6 +23,9 @@ const noirUI = Manrope({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600"],
   display: "swap",
+  preload: false,
+  adjustFontFallback: true,
+  fallback: ["Inter", "system-ui", "Segoe UI", "Helvetica Neue", "Arial", "sans-serif"],
 });
 
 export const metadata: Metadata = {
