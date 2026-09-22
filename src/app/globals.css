@@ -311,13 +311,61 @@ body {
 .occasion-section {
   background: radial-gradient(ellipse at 15% 45%, #5e21552b, transparent 60%), #09050e;
 }
-.occasion-stage { border-radius: 3px 3px 64px 3px; }
-.occasion-choice { color: #c9b9cb; }
-.occasion-choice[aria-pressed="true"] { color: #fff8fd; border-bottom-color: #ed3fa6; }
-.occasion-choice[aria-pressed="true"] svg { color: #f4b8df; transform: rotate(45deg); }
-.occasion-section :is(button, a):focus-visible { outline: 2px solid #f4b8df; outline-offset: 5px; }
-@media (max-width: 639px) {
-  .occasion-stage { border-bottom-right-radius: 36px; }
+.occasion-rail {
+  --rail-padding: 20px;
+  --card-width: 82%;
+  --card-gap: 16px;
+  display: flex;
+  gap: var(--card-gap);
+  margin-inline: calc(-1 * var(--rail-padding));
+  padding: 6px var(--rail-padding) 12px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: var(--rail-padding);
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+}
+.occasion-rail::-webkit-scrollbar { display: none; }
+.occasion-rail::after {
+  content: "";
+  flex: 0 0 max(0px, calc(100% - var(--card-width) - var(--card-gap)));
+}
+.occasion-card {
+  flex: 0 0 var(--card-width);
+  min-width: 0;
+  display: flex;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  border: 1px solid #ffffff24;
+  border-radius: 16px 16px 36px 16px;
+  background: linear-gradient(145deg, #201024, #100a16);
+  transition: border-color 250ms, box-shadow 250ms;
+}
+.occasion-card[data-active="true"] {
+  border-color: #eabedb70;
+  box-shadow: 0 4px 24px #00000030;
+}
+.occasion-card-link { display: flex; flex: 1; min-width: 0; flex-direction: column; border-radius: inherit; overflow: hidden; }
+.occasion-arrow {
+  display: inline-flex;
+  height: 48px;
+  width: 48px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #ffffff40;
+  border-radius: 50%;
+  color: #fff8fd;
+  cursor: pointer;
+  transition: background-color 200ms, border-color 200ms;
+}
+.occasion-arrow:hover:not(:disabled) { border-color: #f4b8df; background: #ffffff10; }
+.occasion-arrow:disabled { opacity: 0.3; cursor: default; }
+.occasion-section :is(button, a, [tabindex]):focus-visible { outline: 2px solid #f4b8df; outline-offset: 3px; }
+@media (min-width: 640px) {
+  .occasion-rail { --rail-padding: 32px; --card-width: 60%; --card-gap: 24px; }
+}
+@media (min-width: 1024px) {
+  .occasion-rail { --rail-padding: 48px; --card-width: 440px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .occasion-section *, .occasion-section *::before, .occasion-section *::after { animation: none !important; transition: none !important; }

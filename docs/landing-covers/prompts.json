@@ -1,0 +1,198 @@
+{
+  "tool": "Built-in image_gen",
+  "date": "2026-09-17",
+  "covers": [
+    {
+      "slug": "anniversario-matrimonio-agrigento",
+      "ref": "passion-letto-jacuzzi-sauna.jpg",
+      "scene": "A mature married couple in elegant evening clothes sitting together on the bed, sharing a quiet anniversary toast.",
+      "alt": "Coppia che festeggia l’anniversario nella suite Passion",
+      "generatedSource": "/Users/davide122/.codex/generated_images/01a0ac59-656a-7121-97ad-8ebf7ccec0c3/exec-dfc344e1-690b-4e3c-ac2c-045b103d9693.png",
+      "prompt": "Use case: compositing. Asset: photorealistic editorial hospitality landing cover, landscape 3:2. Input is the EDIT TARGET, a real suite photograph, not a loose inspiration. Add only this scene: A mature married couple in elegant evening clothes sitting together on the bed, sharing a quiet anniversary toast.. Preserve the exact room architecture, furniture, tub geometry, wall textures, lighting fixtures, ceiling, and relative proportions. Do not invent amenities, windows, or expand the room. Match original lighting including purple lighting where present, realistic skin textures and anatomy, believable human scale. Keep subjects in central crop-safe area. Tasteful candid photography, no text, no watermark, no logos. If source is portrait, compose a landscape crop without inventing unseen architecture."
+    },
+    {
+      "slug": "proposta-matrimonio-suite-agrigento",
+      "ref": "infinity-letto.jpg",
+      "scene": "An adult man kneeling beside the bed presenting a small open ring box to his surprised smiling adult partner in an elegant dress.",
+      "alt": "Una proposta di matrimonio nella suite Infinity",
+      "generatedSource": "/Users/davide122/.codex/generated_images/01a0ac59-656a-7121-97ad-8ebf7ccec0c3/exec-145bf6c5-c16c-475f-b161-7fd35e65aae6.png",
+      "prompt": "Use case: compositing. Asset: photorealistic editorial hospitality landing cover, landscape 3:2. Input is the EDIT TARGET, a real suite photograph, not a loose inspiration. Add only this scene: An adult man kneeling beside the bed presenting a small open ring box to his surprised smiling adult partner in an elegant dress.. Preserve the exact room architecture, furniture, tub geometry, wall textures, lighting fixtures, ceiling, and relative proportions. Do not invent amenities, windows, or expand the room. Match original lighting including purple lighting where present, realistic skin textures and anatomy, believable human scale. Keep subjects in central crop-safe area. Tasteful candid photography, no text, no watermark, no logos. If source is portrait, compose a landscape crop without inventing unseen architecture."
+    },
+    {
+      "slug": "compleanno-romantico-agrigento",
+      "ref": "infinity-salotto.jpg",
+      "scene": "An adult couple on the sofa, one offering the other a small birthday cake with a single candle, intimate evening.",
+      "alt": "Compleanno di coppia nel salotto Infinity",
+      "generatedSource": "/Users/davide122/.codex/generated_images/01a0ac59-656a-7121-97ad-8ebf7ccec0c3/exec-754928b3-0d3f-49ec-82f3-16ebcb171844.png",
+      "prompt": "Use case: compositing. Asset: photorealistic editorial hospitality landing cover, landscape 3:2. Input is the EDIT TARGET, a real suite photograph, not a loose inspiration. Add only this scene: An adult couple on the sofa, one offering the other a small birthday cake with a single candle, intimate evening.. Preserve the exact room architecture, furniture, tub geometry, wall textures, lighting fixtures, ceiling, and relative proportions. Do not invent amenities, windows, or expand the room. Match original lighting including purple lighting where present, realistic skin textures and anatomy, believable human scale. Keep subjects in central crop-safe area. Tasteful candid photography, no text, no watermark, no logos. If source is portrait, compose a landscape crop without inventing unseen architecture."
+    },
+    {
+      "slug": "location-shooting-fotografico-agrigento",
+      "ref": "infinity-letto.jpg",
+      "scene": "Editorial photoshoot backstage: one adult female model in an elegant fully clothed evening outfit seated on the bed and a professional photographer with a camera in the foreground. A small photographic softbox at the edge.",
+      "alt": "Backstage di uno shooting fotografico nella suite Infinity",
+      "generatedSource": "/Users/davide122/.codex/generated_images/01a0ac59-656a-7121-97ad-8ebf7ccec0c3/exec-61f38e4d-50bc-44a5-bfc7-1827c51446ca.png",
+      "prompt": "Use case: compositing. Asset: photorealistic editorial hospitality landing cover, landscape 3:2. Input is the EDIT TARGET, a real suite photograph, not a loose inspiration. Add only this scene: Editorial photoshoot backstage: one adult female model in an elegant fully clothed evening outfit seated on the bed and a professional photographer with a camera in the foreground. A small photographic softbox at the edge.. Preserve the exact room architecture, furniture, tub geometry, wall textures, lighting fixtures, ceiling, and relative proportions. Do not invent amenities, windows, or expand the room. Match original lighting including purple lighting where present, realistic skin textures and anatomy, believable human scale. Keep subjects in central crop-safe area. Tasteful candid photography, no text, no watermark, no logos. If source is portrait, compose a landscape crop without inventing unseen architecture."
+    },
+    {
+      "slug": "suite-notte-nozze-agrigento",
+      "ref": "infinity-letto.jpg",
+      "scene": "Newlywed adult couple seated closely at the foot of the bed after their reception, bride wearing a simple ivory wedding dress, groom in a dark suit with loosened tie, shoes on, affectionate candid moment.",
+      "alt": "Sposi nella suite Infinity dopo il ricevimento",
+      "generatedSource": "/Users/davide122/.codex/generated_images/01a0ac59-656a-7121-97ad-8ebf7ccec0c3/exec-edbcbe28-5488-44ca-bb50-df7a467f3394.png",
+      "prompt": "Use case: compositing. Asset: photorealistic editorial hospitality landing cover, landscape 3:2. Input is the EDIT TARGET, a real suite photograph, not a loose inspiration. Add only this scene: Newlywed adult couple seated closely at the foot of the bed after their reception, bride wearing a simple ivory wedding dress, groom in a dark suit with loosened tie, shoes on, affectionate candid moment.. Preserve the exact room architecture, furniture, tub geometry, wall textures, lighting fixtures, ceiling, and relative proportions. Do not invent amenities, windows, or expand the room. Match original lighting including purple lighting where present, realistic skin textures and anatomy, believable human scale. Keep subjects in central crop-safe area. Tasteful candid photography, no text, no watermark, no logos. If source is portrait, compose a landscape crop without inventing unseen architecture."
+    },
+    {
+      "slug": "pre-wedding-spa-privata-sposa-testimone",
+      "ref": "passion-jacuzzi.jpg",
+      "scene": "Two adult women approximately 30, bride-to-be and her friend, relaxing in the water wearing opaque modest swimsuits. A small white bridal hair bow worn by one subtly suggests pre-wedding, natural laughter.",
+      "alt": "Futura sposa e amica nella jacuzzi Passion",
+      "generatedSource": "/Users/davide122/.codex/generated_images/01a0ac59-656a-7121-97ad-8ebf7ccec0c3/exec-8d5626f2-3a5e-4deb-9acb-7dc7be213d18.png",
+      "prompt": "Use case: compositing. Asset: photorealistic editorial hospitality landing cover, landscape 3:2. Input is the EDIT TARGET, a real suite photograph, not a loose inspiration. Add only this scene: Two adult women approximately 30, bride-to-be and her friend, relaxing in the water wearing opaque modest swimsuits. A small white bridal hair bow worn by one subtly suggests pre-wedding, natural laughter.. Preserve the exact room architecture, furniture, tub geometry, wall textures, lighting fixtures, ceiling, and relative proportions. Do not invent amenities, windows, or expand the room. Match original lighting including purple lighting where present, realistic skin textures and anatomy, believable human scale. Keep subjects in central crop-safe area. Tasteful candid photography, no text, no watermark, no logos. If source is portrait, compose a landscape crop without inventing unseen architecture."
+    },
+    {
+      "slug": "spa-privata-persona-sola-sicilia",
+      "ref": "passion-jacuzzi.jpg",
+      "scene": "One adult woman approximately 35 relaxing alone in the water wearing an opaque modest swimsuit, head comfortably resting on the tub edge, eyes gently closed, peaceful natural moment.",
+      "alt": "Relax in solitudine nella jacuzzi Passion",
+      "generatedSource": "/Users/davide122/.codex/generated_images/01a0ac59-656a-7121-97ad-8ebf7ccec0c3/exec-065ebb2e-6d9d-4ad8-8700-9d9f11aa09a7.png",
+      "prompt": "Use case: compositing. Asset: photorealistic editorial hospitality landing cover, landscape 3:2. Input is the EDIT TARGET, a real suite photograph, not a loose inspiration. Add only this scene: One adult woman approximately 35 relaxing alone in the water wearing an opaque modest swimsuit, head comfortably resting on the tub edge, eyes gently closed, peaceful natural moment.. Preserve the exact room architecture, furniture, tub geometry, wall textures, lighting fixtures, ceiling, and relative proportions. Do not invent amenities, windows, or expand the room. Match original lighting including purple lighting where present, realistic skin textures and anatomy, believable human scale. Keep subjects in central crop-safe area. Tasteful candid photography, no text, no watermark, no logos. If source is portrait, compose a landscape crop without inventing unseen architecture."
+    },
+    {
+      "slug": "spa-privata-due-amiche-porto-empedocle",
+      "ref": "infinity-salotto.jpg",
+      "scene": "Two adult female friends approximately 35 seated on the sofa wearing fully closed white bathrobes, chatting and laughing over cups of tea, relaxed friendship wellness break, fully covered bodies.",
+      "alt": "Due amiche in accappatoio nel salotto Infinity",
+      "generatedSource": "/Users/davide122/.codex/generated_images/01a0ac59-656a-7121-97ad-8ebf7ccec0c3/exec-20e4ee87-1527-4b31-b015-aa953aae6912.png",
+      "prompt": "Use case: compositing. Asset: photorealistic editorial hospitality landing cover, landscape 3:2. Input is the EDIT TARGET, a real suite photograph, not a loose inspiration. Add only this scene: Two adult female friends approximately 35 seated on the sofa wearing fully closed white bathrobes, chatting and laughing over cups of tea, relaxed friendship wellness break, fully covered bodies.. Preserve the exact room architecture, furniture, tub geometry, wall textures, lighting fixtures, ceiling, and relative proportions. Do not invent amenities, windows, or expand the room. Match original lighting including purple lighting where present, realistic skin textures and anatomy, believable human scale. Keep subjects in central crop-safe area. Tasteful candid photography, no text, no watermark, no logos. If source is portrait, compose a landscape crop without inventing unseen architecture."
+    },
+    {
+      "slug": "compleanno-spa-privata-senza-festa",
+      "ref": "infinity-salotto.jpg",
+      "scene": "Two adult female friends on the sofa in casual elegant clothes, one blowing out a single candle on a small birthday cake held by her friend, peaceful small celebration.",
+      "alt": "Un compleanno tranquillo tra amiche nella suite Infinity",
+      "generatedSource": "/Users/davide122/.codex/generated_images/01a0ac59-656a-7121-97ad-8ebf7ccec0c3/exec-c602950a-85dd-4f16-ba52-ecdb77c39ff7.png",
+      "prompt": "Use case: compositing. Asset: photorealistic editorial hospitality landing cover, landscape 3:2. Input is the EDIT TARGET, a real suite photograph, not a loose inspiration. Add only this scene: Two adult female friends on the sofa in casual elegant clothes, one blowing out a single candle on a small birthday cake held by her friend, peaceful small celebration.. Preserve the exact room architecture, furniture, tub geometry, wall textures, lighting fixtures, ceiling, and relative proportions. Do not invent amenities, windows, or expand the room. Match original lighting including purple lighting where present, realistic skin textures and anatomy, believable human scale. Keep subjects in central crop-safe area. Tasteful candid photography, no text, no watermark, no logos. If source is portrait, compose a landscape crop without inventing unseen architecture."
+    },
+    {
+      "slug": "stacca-spa-privata-dopo-esami-lavoro",
+      "ref": "passion-jacuzzi.jpg",
+      "scene": "An adult man approximately 28 in opaque swim shorts relaxing alone in the water, arms resting naturally on the tub rim, relieved peaceful expression after a demanding working period.",
+      "alt": "Una pausa dopo il lavoro nella jacuzzi Passion",
+      "generatedSource": "/Users/davide122/.codex/generated_images/01a0ac59-656a-7121-97ad-8ebf7ccec0c3/exec-a6cd9a51-ae8a-4162-a059-ffd1775dc109.png",
+      "prompt": "Use case: compositing. Asset: photorealistic editorial hospitality landing cover, landscape 3:2. Input is the EDIT TARGET, a real suite photograph, not a loose inspiration. Add only this scene: An adult man approximately 28 in opaque swim shorts relaxing alone in the water, arms resting naturally on the tub rim, relieved peaceful expression after a demanding working period.. Preserve the exact room architecture, furniture, tub geometry, wall textures, lighting fixtures, ceiling, and relative proportions. Do not invent amenities, windows, or expand the room. Match original lighting including purple lighting where present, realistic skin textures and anatomy, believable human scale. Keep subjects in central crop-safe area. Tasteful candid photography, no text, no watermark, no logos. If source is portrait, compose a landscape crop without inventing unseen architecture."
+    },
+    {
+      "slug": "regalo-voucher-spa-privata-sicilia",
+      "ref": "infinity-salotto.jpg",
+      "scene": "Two adult women sitting on the sofa, one handing a small plain ivory gift envelope with a satin ribbon to her delighted mother, no writing on envelope.",
+      "alt": "Un’esperienza da regalare nella suite Infinity",
+      "generatedSource": "/Users/davide122/.codex/generated_images/01a0ac59-656a-7121-97ad-8ebf7ccec0c3/exec-4481a66b-e0cc-4a82-a16d-68faeaaf8744.png",
+      "prompt": "Use case: compositing. Asset: photorealistic editorial hospitality landing cover, landscape 3:2. Input is the EDIT TARGET, a real suite photograph, not a loose inspiration. Add only this scene: Two adult women sitting on the sofa, one handing a small plain ivory gift envelope with a satin ribbon to her delighted mother, no writing on envelope.. Preserve the exact room architecture, furniture, tub geometry, wall textures, lighting fixtures, ceiling, and relative proportions. Do not invent amenities, windows, or expand the room. Match original lighting including purple lighting where present, realistic skin textures and anatomy, believable human scale. Keep subjects in central crop-safe area. Tasteful candid photography, no text, no watermark, no logos. If source is portrait, compose a landscape crop without inventing unseen architecture."
+    },
+    {
+      "slug": "suite-romantica-porto-empedocle",
+      "ref": "passion-letto-jacuzzi-sauna.jpg",
+      "scene": "An adult couple in elegant evening clothes standing close together at the foot of the bed, gently holding hands and smiling.",
+      "alt": "Un momento romantico nella suite Passion",
+      "generatedSource": "/Users/davide122/.codex/generated_images/01a0ac59-656a-7121-97ad-8ebf7ccec0c3/exec-e3cf115c-79f9-4431-b044-473f4266e4fb.png",
+      "prompt": "Use case: compositing. Asset: photorealistic editorial hospitality landing cover, landscape 3:2. Input is the EDIT TARGET, a real suite photograph, not a loose inspiration. Add only this scene: An adult couple in elegant evening clothes standing close together at the foot of the bed, gently holding hands and smiling.. Preserve the exact room architecture, furniture, tub geometry, wall textures, lighting fixtures, ceiling, and relative proportions. Do not invent amenities, windows, or expand the room. Match original lighting including purple lighting where present, realistic skin textures and anatomy, believable human scale. Keep subjects in central crop-safe area. Tasteful candid photography, no text, no watermark, no logos. If source is portrait, compose a landscape crop without inventing unseen architecture."
+    },
+    {
+      "slug": "jacuzzi-privata-porto-empedocle",
+      "ref": "passion-jacuzzi.jpg",
+      "scene": "An adult couple approximately 40 seated in the water wearing modest opaque swimwear, quietly talking, natural comfortable posture.",
+      "alt": "Una coppia nella jacuzzi privata Passion",
+      "generatedSource": "/Users/davide122/.codex/generated_images/01a0ac59-656a-7121-97ad-8ebf7ccec0c3/exec-93d40724-a68a-4ec1-a093-a8114791d70e.png",
+      "prompt": "Use case: compositing. Asset: photorealistic editorial hospitality landing cover, landscape 3:2. Input is the EDIT TARGET, a real suite photograph, not a loose inspiration. Add only this scene: An adult couple approximately 40 seated in the water wearing modest opaque swimwear, quietly talking, natural comfortable posture.. Preserve the exact room architecture, furniture, tub geometry, wall textures, lighting fixtures, ceiling, and relative proportions. Do not invent amenities, windows, or expand the room. Match original lighting including purple lighting where present, realistic skin textures and anatomy, believable human scale. Keep subjects in central crop-safe area. Tasteful candid photography, no text, no watermark, no logos. If source is portrait, compose a landscape crop without inventing unseen architecture."
+    },
+    {
+      "slug": "spa-porto-empedocle",
+      "ref": "infinity-jacuzzi-doccia-vista.jpg",
+      "scene": "One adult woman wearing a modest dark swimsuit seated in the water, smiling softly, gentle small bubbles and a folded white towel on the tub edge.",
+      "alt": "Una pausa benessere nella jacuzzi Infinity",
+      "generatedSource": "/Users/davide122/.codex/generated_images/01a0ac59-656a-7121-97ad-8ebf7ccec0c3/exec-b7eafb9c-45cf-45cc-b148-18022e4d76b6.png",
+      "prompt": "Use case: compositing. Asset: photorealistic editorial hospitality landing cover, landscape 3:2. Input is the EDIT TARGET, a real suite photograph, not a loose inspiration. Add only this scene: One adult woman wearing a modest dark swimsuit seated in the water, smiling softly, gentle small bubbles and a folded white towel on the tub edge.. Preserve the exact room architecture, furniture, tub geometry, wall textures, lighting fixtures, ceiling, and relative proportions. Do not invent amenities, windows, or expand the room. Match original lighting including purple lighting where present, realistic skin textures and anatomy, believable human scale. Keep subjects in central crop-safe area. Tasteful candid photography, no text, no watermark, no logos. If source is portrait, compose a landscape crop without inventing unseen architecture."
+    },
+    {
+      "slug": "weekend-romantico-agrigento",
+      "ref": "infinity-salotto.jpg",
+      "scene": "An adult couple in casual elegant travel clothing relaxing on the sofa after arrival, one small closed weekend travel bag on the floor, warm candid smiles.",
+      "alt": "Un weekend in coppia nella suite Infinity",
+      "generatedSource": "/Users/davide122/.codex/generated_images/01a0ac59-656a-7121-97ad-8ebf7ccec0c3/exec-3a9f2c70-2b45-4a2a-83c9-ed6dbffbda49.png",
+      "prompt": "Use case: compositing. Asset: photorealistic editorial hospitality landing cover, landscape 3:2. Input is the EDIT TARGET, a real suite photograph, not a loose inspiration. Add only this scene: An adult couple in casual elegant travel clothing relaxing on the sofa after arrival, one small closed weekend travel bag on the floor, warm candid smiles.. Preserve the exact room architecture, furniture, tub geometry, wall textures, lighting fixtures, ceiling, and relative proportions. Do not invent amenities, windows, or expand the room. Match original lighting including purple lighting where present, realistic skin textures and anatomy, believable human scale. Keep subjects in central crop-safe area. Tasteful candid photography, no text, no watermark, no logos. If source is portrait, compose a landscape crop without inventing unseen architecture."
+    },
+    {
+      "slug": "suite-con-sauna-sicilia",
+      "ref": "passion-letto-jacuzzi-sauna.jpg",
+      "scene": "One adult woman in a fully closed white bathrobe standing beside the existing sauna doorway on the right, preparing for a private wellness moment. Preserve exactly the existing sauna size and position.",
+      "alt": "Relax accanto alla sauna della suite Passion",
+      "generatedSource": "/Users/davide122/.codex/generated_images/01a0ac59-656a-7121-97ad-8ebf7ccec0c3/exec-b82e131f-f809-430a-befb-f977fc8b5d25.png",
+      "prompt": "Use case: compositing. Asset: photorealistic editorial hospitality landing cover, landscape 3:2. Input is the EDIT TARGET, a real suite photograph, not a loose inspiration. Add only this scene: One adult woman in a fully closed white bathrobe standing beside the existing sauna doorway on the right, preparing for a private wellness moment. Preserve exactly the existing sauna size and position.. Preserve the exact room architecture, furniture, tub geometry, wall textures, lighting fixtures, ceiling, and relative proportions. Do not invent amenities, windows, or expand the room. Match original lighting including purple lighting where present, realistic skin textures and anatomy, believable human scale. Keep subjects in central crop-safe area. Tasteful candid photography, no text, no watermark, no logos. If source is portrait, compose a landscape crop without inventing unseen architecture."
+    },
+    {
+      "slug": "suite-vicino-scala-dei-turchi",
+      "ref": "infinity-letto.jpg",
+      "scene": "An adult couple in relaxed summer linen clothes sitting on the bed after a coastal walk, a straw hat and a small beach tote beside them. No exterior views or invented coastline.",
+      "alt": "Rientro in suite Infinity dopo una giornata sul mare",
+      "generatedSource": "/Users/davide122/.codex/generated_images/01a0ac59-656a-7121-97ad-8ebf7ccec0c3/exec-4749a960-6c91-4df4-a1b6-763808dcb8f0.png",
+      "prompt": "Use case: compositing. Asset: photorealistic editorial hospitality landing cover, landscape 3:2. Input is the EDIT TARGET, a real suite photograph, not a loose inspiration. Add only this scene: An adult couple in relaxed summer linen clothes sitting on the bed after a coastal walk, a straw hat and a small beach tote beside them. No exterior views or invented coastline.. Preserve the exact room architecture, furniture, tub geometry, wall textures, lighting fixtures, ceiling, and relative proportions. Do not invent amenities, windows, or expand the room. Match original lighting including purple lighting where present, realistic skin textures and anatomy, believable human scale. Keep subjects in central crop-safe area. Tasteful candid photography, no text, no watermark, no logos. If source is portrait, compose a landscape crop without inventing unseen architecture."
+    },
+    {
+      "slug": "suite-vicino-valle-dei-templi",
+      "ref": "infinity-salotto.jpg",
+      "scene": "An adult couple in relaxed sightseeing clothes seated on sofa reviewing a small folded tourist map with no legible text, small camera on the table, relaxed evening after sightseeing. No monuments or exterior additions.",
+      "alt": "Relax nella suite Infinity dopo una visita ad Agrigento",
+      "generatedSource": "/Users/davide122/.codex/generated_images/01a0ac59-656a-7121-97ad-8ebf7ccec0c3/exec-1b633d2c-3ce9-4981-8611-f65f7de071ef.png",
+      "prompt": "Use case: compositing. Asset: photorealistic editorial hospitality landing cover, landscape 3:2. Input is the EDIT TARGET, a real suite photograph, not a loose inspiration. Add only this scene: An adult couple in relaxed sightseeing clothes seated on sofa reviewing a small folded tourist map with no legible text, small camera on the table, relaxed evening after sightseeing. No monuments or exterior additions.. Preserve the exact room architecture, furniture, tub geometry, wall textures, lighting fixtures, ceiling, and relative proportions. Do not invent amenities, windows, or expand the room. Match original lighting including purple lighting where present, realistic skin textures and anatomy, believable human scale. Keep subjects in central crop-safe area. Tasteful candid photography, no text, no watermark, no logos. If source is portrait, compose a landscape crop without inventing unseen architecture."
+    },
+    {
+      "slug": "weekend-romantico-porto-empedocle",
+      "ref": "infinity-letto.jpg",
+      "scene": "An adult couple in comfortable fully clothed linen outfits seated together on the bed with two small espresso cups, leisurely weekend mood.",
+      "alt": "Un momento di calma nel weekend in suite Infinity",
+      "generatedSource": "/Users/davide122/.codex/generated_images/01a0ac59-656a-7121-97ad-8ebf7ccec0c3/exec-609c5698-cce5-4519-b7cc-48e999d01b40.png",
+      "prompt": "Use case: compositing. Asset: photorealistic editorial hospitality landing cover, landscape 3:2. Input is the EDIT TARGET, a real suite photograph, not a loose inspiration. Add only this scene: An adult couple in comfortable fully clothed linen outfits seated together on the bed with two small espresso cups, leisurely weekend mood.. Preserve the exact room architecture, furniture, tub geometry, wall textures, lighting fixtures, ceiling, and relative proportions. Do not invent amenities, windows, or expand the room. Match original lighting including purple lighting where present, realistic skin textures and anatomy, believable human scale. Keep subjects in central crop-safe area. Tasteful candid photography, no text, no watermark, no logos. If source is portrait, compose a landscape crop without inventing unseen architecture."
+    },
+    {
+      "slug": "suite-porto-empedocle",
+      "ref": "infinity-letto.jpg",
+      "scene": "One adult woman in elegant travel clothes standing next to her adult partner by the bed, a small closed suitcase nearby, happy arrival at their private suite.",
+      "alt": "Arrivo in coppia nella suite Infinity",
+      "generatedSource": "/Users/davide122/.codex/generated_images/01a0ac59-656a-7121-97ad-8ebf7ccec0c3/exec-455e25c8-0e22-4c34-8783-fd6b06f5d22d.png",
+      "prompt": "Use case: compositing. Asset: photorealistic editorial hospitality landing cover, landscape 3:2. Input is the EDIT TARGET, a real suite photograph, not a loose inspiration. Add only this scene: One adult woman in elegant travel clothes standing next to her adult partner by the bed, a small closed suitcase nearby, happy arrival at their private suite.. Preserve the exact room architecture, furniture, tub geometry, wall textures, lighting fixtures, ceiling, and relative proportions. Do not invent amenities, windows, or expand the room. Match original lighting including purple lighting where present, realistic skin textures and anatomy, believable human scale. Keep subjects in central crop-safe area. Tasteful candid photography, no text, no watermark, no logos. If source is portrait, compose a landscape crop without inventing unseen architecture."
+    },
+    {
+      "slug": "suite-spa-porto-empedocle",
+      "ref": "infinity-salotto.jpg",
+      "scene": "An adult couple wearing fully closed white bathrobes seated on the sofa enjoying herbal tea together, fully covered bodies, quiet wellness break.",
+      "alt": "Una pausa benessere in accappatoio nella suite Infinity",
+      "generatedSource": "/Users/davide122/.codex/generated_images/01a0ac59-656a-7121-97ad-8ebf7ccec0c3/exec-540ef22b-ebf8-454a-bbd0-c3c49ac98cf5.png",
+      "prompt": "Use case: compositing. Asset: photorealistic editorial hospitality landing cover, landscape 3:2. Input is the EDIT TARGET, a real suite photograph, not a loose inspiration. Add only this scene: An adult couple wearing fully closed white bathrobes seated on the sofa enjoying herbal tea together, fully covered bodies, quiet wellness break.. Preserve the exact room architecture, furniture, tub geometry, wall textures, lighting fixtures, ceiling, and relative proportions. Do not invent amenities, windows, or expand the room. Match original lighting including purple lighting where present, realistic skin textures and anatomy, believable human scale. Keep subjects in central crop-safe area. Tasteful candid photography, no text, no watermark, no logos. If source is portrait, compose a landscape crop without inventing unseen architecture."
+    },
+    {
+      "slug": "suite-romantica-agrigento",
+      "ref": "passion-letto-jacuzzi-sauna.jpg",
+      "scene": "An adult couple in evening clothing seated side by side on the bed, one gently embracing the other's shoulders, a few restrained rose petals on the coverlet.",
+      "alt": "Una serata romantica nella suite Passion",
+      "generatedSource": "/Users/davide122/.codex/generated_images/01a0ac59-656a-7121-97ad-8ebf7ccec0c3/exec-8d7be0d3-f522-48f7-9157-25176b7d8c59.png",
+      "prompt": "Use case: compositing. Asset: photorealistic editorial hospitality landing cover, landscape 3:2. Input is the EDIT TARGET, a real suite photograph, not a loose inspiration. Add only this scene: An adult couple in evening clothing seated side by side on the bed, one gently embracing the other's shoulders, a few restrained rose petals on the coverlet.. Preserve the exact room architecture, furniture, tub geometry, wall textures, lighting fixtures, ceiling, and relative proportions. Do not invent amenities, windows, or expand the room. Match original lighting including purple lighting where present, realistic skin textures and anatomy, believable human scale. Keep subjects in central crop-safe area. Tasteful candid photography, no text, no watermark, no logos. If source is portrait, compose a landscape crop without inventing unseen architecture."
+    },
+    {
+      "slug": "spa-privata-sicilia",
+      "ref": "passion-jacuzzi.jpg",
+      "scene": "No people. Fill the existing jacuzzi with clean gently bubbling water, add two neatly rolled white towels on its edge and a small natural bath sponge. A quiet inviting private wellness still life.",
+      "alt": "La jacuzzi Passion preparata per una pausa benessere",
+      "generatedSource": "/Users/davide122/.codex/generated_images/01a0ac59-656a-7121-97ad-8ebf7ccec0c3/exec-a6222223-900c-46ac-9790-21fc09f1688e.png",
+      "prompt": "Use case: compositing. Asset: photorealistic editorial hospitality landing cover, landscape 3:2. Input is the EDIT TARGET, a real suite photograph, not a loose inspiration. Add only this scene: No people. Fill the existing jacuzzi with clean gently bubbling water, add two neatly rolled white towels on its edge and a small natural bath sponge. A quiet inviting private wellness still life.. Preserve the exact room architecture, furniture, tub geometry, wall textures, lighting fixtures, ceiling, and relative proportions. Do not invent amenities, windows, or expand the room. Match original lighting including purple lighting where present, realistic skin textures and anatomy, believable human scale. Keep subjects in central crop-safe area. Tasteful candid photography, no text, no watermark, no logos. If source is portrait, compose a landscape crop without inventing unseen architecture."
+    },
+    {
+      "slug": "spa-privata-mamma-figlia-porto-empedocle",
+      "ref": "passion-jacuzzi.jpg",
+      "scene": "Mother approximately 55 and adult daughter approximately 28 relaxing together in the real jacuzzi, in opaque swimsuits, natural smiles.",
+      "alt": "Mamma e figlia adulta nella jacuzzi Passion",
+      "generatedSource": "/Users/davide122/.codex/generated_images/01a0ac59-656a-7121-97ad-8ebf7ccec0c3/exec-4dbc33da-ee22-4e99-8987-f97571381d38.png",
+      "prompt": "Use case: compositing. Asset: photorealistic editorial hospitality landing cover, landscape 3:2. Input is the EDIT TARGET, a real suite photograph, not a loose inspiration. Add only this scene: Mother approximately 55 and adult daughter approximately 28 relaxing together in the real jacuzzi, in opaque swimsuits, natural smiles.. Preserve the exact room architecture, furniture, tub geometry, wall textures, lighting fixtures, ceiling, and relative proportions. Do not invent amenities, windows, or expand the room. Match original lighting including purple lighting where present, realistic skin textures and anatomy, believable human scale. Keep subjects in central crop-safe area. Tasteful candid photography, no text, no watermark, no logos. If source is portrait, compose a landscape crop without inventing unseen architecture."
+    }
+  ]
+}

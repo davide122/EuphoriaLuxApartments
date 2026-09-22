@@ -1,5 +1,6 @@
 import { noir } from "@/lib/noir";
 import { OCCASIONS } from "@/lib/occasions";
+import { LANDING_COVERS } from "@/lib/landing-covers";
 
 export type SeoLanding = {
   slug: string;
@@ -26,7 +27,7 @@ export type SeoLanding = {
   faqs: Array<{ q: string; a: string }>;
 };
 
-export const SEO_LANDINGS = [
+export const SEO_LANDINGS = ([
   ...OCCASIONS,
   {
     slug: "suite-romantica-porto-empedocle",
@@ -563,7 +564,10 @@ export const SEO_LANDINGS = [
       { q: "Check-in / check-out?", a: noir.smartAccess },
     ],
   },
-] satisfies SeoLanding[];
+] satisfies SeoLanding[]).map((landing) => ({
+  ...landing,
+  hero: { ...landing.hero, image: LANDING_COVERS[landing.slug] ?? landing.hero.image },
+}));
 
 export const SEO_LANDINGS_BY_SLUG: Record<string, SeoLanding> = Object.fromEntries(
   SEO_LANDINGS.map((l) => [l.slug, l])

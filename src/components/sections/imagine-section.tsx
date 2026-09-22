@@ -59,6 +59,11 @@ const ATMOSPHERES = {
 } as const;
 
 const EXAMPLE = "È il nostro anniversario. Vorrei qualcosa di romantico, viola, con prosecco, ma non troppo sdolcinato.";
+const IDEA_STARTERS = [
+  "Anniversario intimo, luce viola e prosecco",
+  "Compleanno elegante con torta e petali",
+  "Una proposta semplice, calda e senza eccessi",
+] as const;
 const LOADING_COPY = [
   "Leggo la vostra idea",
   "Preparo luci e dettagli",
@@ -234,6 +239,12 @@ export function ImagineSection() {
     window.setTimeout(() => textareaRef.current?.focus(), reduceMotion ? 0 : 350);
   };
 
+  const chooseStarter = (starter: string) => {
+    setIdea(starter);
+    setError("");
+    window.setTimeout(() => textareaRef.current?.focus(), reduceMotion ? 0 : 150);
+  };
+
   return (
     <section
       id="imagine"
@@ -346,9 +357,13 @@ export function ImagineSection() {
         ) : null}
       </AnimatePresence>
 
-      <div className="relative flex min-h-[100svh] flex-col justify-between px-4 pb-[max(1.25rem,env(safe-area-inset-bottom))] pt-[max(5.5rem,env(safe-area-inset-top))] supports-[height:100dvh]:min-h-[100dvh] sm:px-8 sm:pb-8 sm:pt-28 lg:px-12">
-        <div className="flex items-center justify-between gap-5">
-          <div className="text-[10px] font-semibold uppercase tracking-[0.34em] text-white/78">Euphoria / Imagine</div>
+      <div className="relative flex min-h-[100svh] flex-col justify-between gap-10 px-5 pb-[max(1.5rem,env(safe-area-inset-bottom))] pt-[max(5.75rem,env(safe-area-inset-top))] supports-[height:100dvh]:min-h-[100dvh] sm:px-8 sm:pb-8 sm:pt-28 lg:px-12">
+        <div>
+          <div className="flex items-center justify-between gap-5">
+            <div className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-black/30 px-3 py-2 text-[9px] font-semibold uppercase tracking-[0.28em] text-white/82 backdrop-blur-xl">
+              <Sparkles className="h-3 w-3 text-fuchsia-200" aria-hidden="true" />
+              Euphoria Imagine · esperienza AI
+            </div>
           {phase === "ready" && visual.music ? (
             <button
               type="button"
@@ -359,6 +374,36 @@ export function ImagineSection() {
               {soundOn ? <Volume2 className="h-4 w-4" /> : <VolumeX className="h-4 w-4" />}
             </button>
           ) : null}
+          </div>
+
+          <AnimatePresence mode="wait">
+            {phase === "idle" ? (
+              <motion.div
+                key="imagine-intro"
+                initial={reduceMotion ? false : { opacity: 0, y: 18 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: reduceMotion ? 0 : 0.55, ease: [0.22, 1, 0.36, 1] }}
+                className="mt-7 max-w-3xl sm:mt-10"
+              >
+                <div className="text-[10px] font-semibold uppercase tracking-[0.26em] text-fuchsia-100/85">La vostra idea, dentro Euphoria</div>
+                <h2 className="noir-h1 mt-3 max-w-[13ch] text-[2.55rem] leading-[0.94] text-white sm:text-6xl lg:text-7xl">
+                  Raccontatela.<br /><span className="text-white/55">Noi ve la mostriamo.</span>
+                </h2>
+                <p id="imagine-explanation" className="mt-4 max-w-2xl text-sm leading-6 text-white/78 sm:text-base sm:leading-7">
+                  Descrivete la serata che avete in mente. L’intelligenza artificiale parte da una fotografia reale di Passion o Infinity e crea un’anteprima con luci e dettagli ispirati alle vostre parole.
+                </p>
+                <div className="mt-5 grid max-w-2xl grid-cols-3 gap-2" aria-label="Come funziona">
+                  {["Raccontate", "La vedete", "La organizziamo"].map((step, index) => (
+                    <div key={step} className="border-t border-white/22 pt-2.5">
+                      <span className="text-[9px] font-semibold tracking-[0.2em] text-fuchsia-200">0{index + 1}</span>
+                      <div className="mt-1 text-[11px] leading-4 text-white/72 sm:text-sm">{step}</div>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+            ) : null}
+          </AnimatePresence>
         </div>
 
         <div className="mx-auto w-full max-w-3xl">
@@ -369,7 +414,7 @@ export function ImagineSection() {
                 initial={reduceMotion ? false : { opacity: 0, y: 32, filter: "blur(10px)" }}
                 animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                 transition={{ duration: reduceMotion ? 0 : 0.7, ease: [0.22, 1, 0.36, 1] }}
-                className="max-h-[62dvh] overflow-y-auto overscroll-contain border border-white/14 bg-black/48 p-4 shadow-[0_24px_80px_rgba(0,0,0,.42)] backdrop-blur-2xl sm:p-6"
+                className="max-h-[68dvh] overflow-y-auto overscroll-contain rounded-2xl border border-white/18 bg-black/58 p-5 shadow-[0_24px_80px_rgba(0,0,0,.42)] backdrop-blur-2xl sm:p-7"
               >
                 <div className="text-[9px] font-semibold uppercase tracking-[0.26em] text-fuchsia-100/82">
                   Ho immaginato questa Euphoria per voi
@@ -385,6 +430,9 @@ export function ImagineSection() {
                     </span>
                   ))}
                 </div>
+                <p className="mt-4 max-w-xl text-sm leading-6 text-white/68">
+                  Questa è una visualizzazione della vostra idea nella suite reale. Se vi rappresenta, inviatela: verifichiamo insieme cosa preparare davvero.
+                </p>
                 <div className="mt-5 grid grid-cols-[1fr_auto] gap-2">
                   <NoirAnchor
                     href={whatsappHref}
@@ -393,7 +441,7 @@ export function ImagineSection() {
                     variant="primary"
                     className="min-h-12 w-full justify-center"
                   >
-                    Vivi questa esperienza
+                    Portala su WhatsApp
                     <Sparkles className="h-4 w-4" />
                   </NoirAnchor>
                   <button
@@ -421,35 +469,59 @@ export function ImagineSection() {
                 key="composer"
                 initial={false}
                 animate={{ opacity: 1, y: 0 }}
-                className="border border-white/14 bg-black/44 p-4 shadow-[0_24px_80px_rgba(0,0,0,.38)] backdrop-blur-2xl sm:p-6"
+                className="rounded-2xl border border-white/18 bg-black/58 p-5 shadow-[0_24px_80px_rgba(0,0,0,.42)] backdrop-blur-2xl sm:p-7"
               >
-                <label htmlFor="euphoria-idea" className="noir-h1 block max-w-[18ch] text-[1.7rem] leading-[1.05] sm:text-3xl">
-                  Dimmi come immagini la vostra serata.
-                </label>
+                <div className="flex items-start gap-3">
+                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-fuchsia-200/35 bg-fuchsia-300/10 text-[10px] font-semibold text-fuchsia-100">01</span>
+                  <div>
+                    <label htmlFor="euphoria-idea" className="noir-h1 block text-[1.55rem] leading-[1.05] sm:text-3xl">
+                      Come vorreste trovarla?
+                    </label>
+                    <p className="mt-1.5 text-xs leading-5 text-white/60">Occasione, atmosfera, colori e piccoli dettagli: scrivete liberamente.</p>
+                  </div>
+                </div>
+
+                <div className="mt-4 flex gap-2 overflow-x-auto pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden" aria-label="Idee di esempio">
+                  {IDEA_STARTERS.map((starter) => (
+                    <button
+                      key={starter}
+                      type="button"
+                      onClick={() => chooseStarter(starter)}
+                      className="min-h-11 shrink-0 cursor-pointer rounded-full border border-white/16 bg-white/[.06] px-3.5 text-left text-[11px] text-white/72 transition-colors hover:border-fuchsia-200/50 hover:bg-white/10 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fuchsia-200/80"
+                    >
+                      {starter}
+                    </button>
+                  ))}
+                </div>
+
                 <form onSubmit={submit} className="mt-4">
-                  <div className="border-b border-white/32 pb-2 transition-colors focus-within:border-fuchsia-200/80">
+                  <div className="rounded-xl border border-white/20 bg-black/28 p-3.5 transition-colors focus-within:border-fuchsia-200/80 focus-within:bg-black/40">
                     <textarea
                       ref={textareaRef}
                       id="euphoria-idea"
                       value={idea}
                       onChange={(event) => setIdea(event.target.value)}
-                      rows={3}
+                      rows={2}
                       maxLength={600}
                       enterKeyHint="send"
+                      aria-describedby="imagine-explanation imagine-help"
                       placeholder={EXAMPLE}
-                      className="block min-h-20 w-full resize-none bg-transparent text-base leading-6 text-white outline-none placeholder:text-white/38"
+                      className="block min-h-16 w-full resize-none bg-transparent text-base leading-6 text-white outline-none placeholder:text-white/38"
                     />
+                    <div className="mt-2 flex items-center justify-between gap-3 border-t border-white/10 pt-2">
+                      <span id="imagine-help" className="text-[10px] text-white/42">La foto richiede qualche istante.</span>
+                      <span className="text-[10px] tabular-nums text-white/42">{idea.length}/600</span>
+                    </div>
                   </div>
-                  <div className="mt-3 flex min-h-12 items-center justify-between gap-3">
+                  <div className="mt-3 flex min-h-12 items-center gap-3">
                     <div
-                      className="min-w-0 text-[10px] uppercase tracking-[0.16em] text-white/48"
+                      className="min-w-0 flex-1 text-[10px] uppercase tracking-[0.16em] text-white/58"
                       aria-live="polite"
                     >
                       <span className={error ? "normal-case tracking-normal text-rose-200/85" : ""}>
-                        {error || (listening ? "Ti ascolto…" : `Scrivi o usa la voce · ${idea.length}/600`)}
+                        {error || (listening ? "Ti ascolto…" : canListen ? "Puoi anche dettare la tua idea" : "Scrivi almeno qualche dettaglio")}
                       </span>
                     </div>
-                    <div className="flex shrink-0 items-center gap-2">
                     <button
                       type="button"
                       onClick={toggleListening}
@@ -462,12 +534,12 @@ export function ImagineSection() {
                     <button
                       type="submit"
                       disabled={idea.trim().length < 8}
-                      className="inline-flex h-12 w-12 shrink-0 cursor-pointer items-center justify-center rounded-full bg-white text-[#110717] transition-transform hover:scale-[1.03] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fuchsia-200/80 focus-visible:ring-offset-2 focus-visible:ring-offset-black disabled:cursor-default disabled:opacity-35"
+                      className="inline-flex min-h-12 shrink-0 cursor-pointer items-center justify-center gap-2 rounded-full bg-white px-5 text-sm font-medium text-[#110717] transition-transform hover:scale-[1.02] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fuchsia-200/80 focus-visible:ring-offset-2 focus-visible:ring-offset-black disabled:cursor-default disabled:opacity-35"
                       aria-label="Immagina questa esperienza"
                     >
+                      Crea l’anteprima
                       <Send className="h-4 w-4" />
                     </button>
-                    </div>
                   </div>
                 </form>
               </motion.div>

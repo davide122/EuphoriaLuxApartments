@@ -1,4 +1,5 @@
 import type { SeoLanding } from "@/lib/seo-content";
+import { LANDING_COVERS } from "@/lib/landing-covers";
 
 type Occasion = SeoLanding & { label: string; line: string; detail: string };
 const passion = { src: "/passion/WhatsApp Image 2026-08-16 at 21.29.22.jpeg", alt: "Passion: letto, luci soffuse e jacuzzi nella suite Euphoria" };
@@ -133,4 +134,8 @@ export const OCCASIONS: Occasion[] = ([
       { title: "Noi prepariamo il documento, chi lo riceve sceglie quando usarlo (entro limiti chiari)", body: "Dopo l’accordo su importo e formula è possibile preparare un documento personalizzato con dedica. Le date di validità e le condizioni di utilizzo vengono scritte in modo chiaro nel documento stesso e non sono estese senza accordo. Il destinatario sceglie Passion o Infinity e la data disponibile, contattandoci direttamente." },
     ], faqs: [{ q: "Posso creare un voucher per una cifra a mia scelta?", a: "Dipende dall’importo e dalla formula: scrivici la tua idea e valutiamo insieme, senza obbligo di conferma." }, { q: "Il voucher è spendibile quando si vuole, senza scadenza?", a: "No: ogni documento ha una scadenza chiara. Non vengono rilasciati voucher “a vita” o senza condizioni precise." }, { q: "Posso cambiare idea dopo l’acquisto?", a: "Le politiche di rimborso o modifica vengono definite caso per caso prima di confermare e riportate nell’accordo iniziale." }],
   },
-] satisfies Occasion[]).map((occasion) => ({ ...occasion, dateModifiedISO: "2026-09-15" }));
+] satisfies Occasion[]).map((occasion) => ({
+  ...occasion,
+  hero: { ...occasion.hero, image: LANDING_COVERS[occasion.slug] ?? occasion.hero.image },
+  dateModifiedISO: "2026-09-17",
+}));
