@@ -132,7 +132,8 @@ export function PartnersGrid() {
                 ti contattiamo. Niente spam, niente chiamate fredde.
               </p>
               <NoirAnchor
-                href={`#modulo?category=${activeData.slug}`}
+                href="#modulo"
+                onClick={() => window.dispatchEvent(new CustomEvent("collaboration-select", { detail: activeData.slug }))}
                 size="md"
                 variant="primary"
                 className="mt-5 w-full"

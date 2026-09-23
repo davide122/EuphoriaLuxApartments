@@ -370,3 +370,14 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .occasion-section *, .occasion-section *::before, .occasion-section *::after { animation: none !important; transition: none !important; }
 }
+
+/* Keep anchor destinations and focused fields below the fixed navigation. */
+html { scroll-padding-top: 88px; }
+.request-form input, .request-form textarea { scroll-margin-top: 100px; font-size: 16px; }
+.request-form textarea { resize: vertical; }
+.request-form label:focus-within { outline-color: var(--noir-violet); }
+.request-form label:has(input[type="radio"]:focus-visible) { outline: 2px solid var(--noir-violet); outline-offset: 3px; }
+.request-form fieldset, .request-form aside, .request-form > div { min-width: 0; }
+.request-form dd { min-width: 0; overflow-wrap: anywhere; text-align: right; }
+.request-form dt { flex-shrink: 0; }
+.request-form dl > div { gap: 12px; }

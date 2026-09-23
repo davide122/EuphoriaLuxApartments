@@ -74,7 +74,7 @@ export default async function VoucherPage() {
       })),
   };
   return (
-    <div className="relative flex min-h-[100svh] flex-col overflow-hidden">
+    <div className="relative flex min-h-[100svh] flex-col overflow-clip">
       <TopNav />
       <script
         type="application/ld+json"
@@ -83,13 +83,13 @@ export default async function VoucherPage() {
       <main className="relative flex-1 pt-28">
         <PremiumVoucherHero />
         <PremiumVoucherSteps />
-        <section id="scegli" className="relative z-10 py-16 sm:py-24">
+        <section id="scegli" className="relative z-10 py-16 sm:py-24" style={{ position: "relative" }}>
           <div className="noir-container">
             <PremiumVoucherCards />
           </div>
         </section>
 
-        <section id="dedica" className="relative z-10 border-t border-white/5 bg-zinc-950/40 py-16 sm:py-20">
+        <section id="dedica" className="relative z-10 border-t border-white/5 bg-zinc-950/40 py-16 sm:py-20" style={{ position: "relative" }}>
           <div className="noir-container">
             <div className="mx-auto max-w-3xl">
               <div className="mb-3 text-center text-xs uppercase tracking-[0.2em] text-purple-200/70">
@@ -109,7 +109,7 @@ export default async function VoucherPage() {
           </div>
         </section>
 
-        <section className="relative z-10 py-16 sm:py-20">
+        <section className="relative z-10 py-16 sm:py-20" style={{ position: "relative" }}>
           <div className="noir-container">
             <VoucherFaq />
           </div>

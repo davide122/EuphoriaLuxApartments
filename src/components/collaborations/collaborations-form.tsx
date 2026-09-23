@@ -27,9 +27,21 @@ export function CollaborationsForm() {
     if (typeof window === "undefined") return;
     const params = new URLSearchParams(window.location.search);
     const cat = params.get("category");
-    if (isCategory(cat)) setCategory(cat);
+    const frame = window.requestAnimationFrame(() => {
+      if (isCategory(cat)) setCategory(cat);
+    });
     const focus = params.get("focus");
-    if (focus === "1") setTimeout(() => document.getElementById("collab-business")?.focus(), 300);
+    const timer = focus === "1" ? window.setTimeout(() => document.getElementById("collab-business")?.focus(), 300) : undefined;
+    const select = (event: Event) => {
+      const slug = (event as CustomEvent<unknown>).detail;
+      if (isCategory(slug)) setCategory(slug);
+    };
+    window.addEventListener("collaboration-select", select);
+    return () => {
+      window.cancelAnimationFrame(frame);
+      window.clearTimeout(timer);
+      window.removeEventListener("collaboration-select", select);
+    };
   }, []);
 
   const categoryObj = CATEGORIES.find((c) => c.slug === category) ?? CATEGORIES[0];
@@ -70,7 +82,7 @@ Grazie!`;
         e.preventDefault();
         if (canSend) onSubmit();
       }}
-      className="mx-auto mt-10 grid max-w-6xl gap-8 lg:grid-cols-5"
+      className="request-form mx-auto mt-10 grid max-w-6xl gap-8 lg:grid-cols-5"
     >
       <div className="lg:col-span-3">
         <div className="rounded-3xl border border-white/5 bg-white/[0.02] p-6 sm:p-8">
@@ -81,7 +93,7 @@ Grazie!`;
 
           <fieldset>
             <legend className="mb-3 text-sm text-zinc-400">1 · Categoria</legend>
-            <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="grid gap-2 sm:grid-cols-2 xl:grid-cols-2">
               {CATEGORIES.map((c) => {
                 const selected = c.slug === category;
                 return (
@@ -132,6 +144,8 @@ Grazie!`;
               <input
                 id="collab-business"
                 type="text"
+                required
+                minLength={2}
                 value={businessName}
                 onChange={(e) => setBusinessName(e.target.value)}
                 placeholder="Es. Trattoria del Mare"
@@ -144,6 +158,8 @@ Grazie!`;
               </span>
               <input
                 type="text"
+                required
+                minLength={2}
                 value={contactName}
                 onChange={(e) => setContactName(e.target.value)}
                 placeholder="Nome e cognome"
@@ -168,6 +184,8 @@ Grazie!`;
               </span>
               <input
                 type="tel"
+                required
+                minLength={6}
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
                 placeholder="+39 3xx xxx xxxx"
@@ -205,7 +223,9 @@ Grazie!`;
               Cosa proponi (servizi, prezzi, sconti dedicati, ecc.)
             </span>
             <textarea
-              value={proposal}
+              required
+                minLength={8}
+                value={proposal}
               onChange={(e) => setProposal(e.target.value)}
               rows={5}
               placeholder="Un paio di righe sulla tua attività: cosa fai, per chi, cosa potremmo proporre ai nostri ospiti in esclusiva..."
@@ -226,6 +246,8 @@ Grazie!`;
             />
           </label>
 
+          {!canSend && <p className="mt-6 text-sm text-zinc-400">Compila attività e referente (almeno 2 caratteri), telefono (almeno 6 caratteri) e proposta (almeno 8 caratteri). Controlla l’email se inserita.</p>}
+
           <motion.button
             whileTap={{ scale: 0.99 }}
             type="submit"
@@ -243,7 +265,7 @@ Grazie!`;
       </div>
 
       <aside className="lg:col-span-2">
-        <div className="sticky top-28 space-y-4">
+        <div className="space-y-4 lg:sticky lg:top-28">
           <div className="overflow-hidden rounded-3xl border border-white/5 bg-white/[0.02] p-6">
             <div className="mb-3 text-xs uppercase tracking-[0.2em] text-purple-200/70">
               Riepilogo proposta

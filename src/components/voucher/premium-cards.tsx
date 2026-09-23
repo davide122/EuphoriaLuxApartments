@@ -5,33 +5,28 @@ import { useRef } from "react";
 import { Check, type LucideIcon } from "lucide-react";
 import { vouchers } from "@/lib/noir";
 import { NoirAnchor } from "@/components/ui/noir-anchor";
-import { ScrollReveal } from "@/components/motion/scroll-reveal";
 
 export function PremiumVoucherCards() {
   return (
     <>
-      <ScrollReveal y={10}>
-        <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
-          <div>
-            <div className="mb-3 text-xs uppercase tracking-[0.2em] text-purple-200/70">
-              4 formule
-            </div>
-            <h2 className="noir-display max-w-3xl text-3xl font-semibold text-white sm:text-4xl md:text-5xl">
-              Scegli quanto vale questo regalo.
-            </h2>
+      <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
+        <div>
+          <div className="mb-3 text-xs uppercase tracking-[0.2em] text-purple-200/70">
+            4 formule
           </div>
-          <ScrollReveal tint="color-shift" y={4} delay={0.06}>
-            <p className="max-w-md text-sm text-zinc-400 sm:text-base">
-              Ogni formula è modificabile dopo l'acquisto: nominativo, date, dettagli.
-              Il custom lo costruiamo insieme su WhatsApp.
-            </p>
-          </ScrollReveal>
+          <h2 className="noir-display max-w-3xl text-3xl font-semibold text-white sm:text-4xl md:text-5xl">
+            Scegli quanto vale questo regalo.
+          </h2>
         </div>
-      </ScrollReveal>
+        <p className="max-w-md text-sm text-zinc-400 sm:text-base">
+          Ogni formula è modificabile dopo l'acquisto: nominativo, date, dettagli.
+          Il custom lo costruiamo insieme su WhatsApp.
+        </p>
+      </div>
 
       <div className="mt-14 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
         {vouchers.map((v, i) => (
-          <Card key={v.slug} i={i} index={i} v={v} />
+          <Card key={v.slug} index={i} v={v} />
         ))}
       </div>
     </>
@@ -43,11 +38,10 @@ function Card({
   index,
 }: {
   v: (typeof vouchers)[number];
-  i: number;
   index: number;
 }) {
   const ref = useRef<HTMLDivElement | null>(null);
-  const inView = useInView(ref, { once: true, amount: 0.2, margin: "-8% 0px" });
+  const inView = useInView(ref, { once: true, amount: 0.12 });
   const Icon = v.icon as LucideIcon;
   const isFeatured = Boolean(v.highlighted);
   const price =
@@ -58,11 +52,21 @@ function Card({
       initial="hidden"
       animate={inView ? "show" : "hidden"}
       variants={{
-        hidden: { opacity: 0, y: 32 },
+        hidden: {
+          opacity: 0,
+          y: 32,
+          color: "rgb(161 161 170)",
+        },
         show: (custom: number) => ({
           opacity: 1,
           y: 0,
-          transition: { delay: 0.06 * custom, duration: 0.7, ease: [0.22, 1, 0.36, 1] },
+          color: "rgb(255 255 255)",
+          transition: {
+            delay: 0.06 * custom,
+            duration: 0.7,
+            ease: [0.22, 1, 0.36, 1],
+            color: { duration: 0.55, ease: "easeOut", delay: 0.18 + 0.04 * custom },
+          },
         }),
       }}
       custom={index}
@@ -105,31 +109,21 @@ function Card({
         <div className="mt-2 text-[11px] uppercase tracking-[0.18em] text-zinc-500">
           {v.durationLabel}
         </div>
-        <ScrollReveal tint="color-shift" y={6} delay={0.1 + 0.04 * index}>
-          <h3 className="noir-display mt-1 text-2xl font-semibold text-white sm:text-[1.7rem]">
-            {v.name.replace("Euphoria ", "")}
-          </h3>
-        </ScrollReveal>
-        <ScrollReveal tint="color-shift" y={4} delay={0.16 + 0.04 * index}>
-          <p className="mt-3 text-sm leading-relaxed text-zinc-400 sm:text-[0.95rem] sm:leading-7">
-            {v.tagline}
-          </p>
-        </ScrollReveal>
+        <h3 className="noir-display mt-1 text-2xl font-semibold text-white sm:text-[1.7rem]">
+          {v.name.replace("Euphoria ", "")}
+        </h3>
+        <p className="mt-3 text-sm leading-relaxed text-zinc-400 sm:text-[0.95rem] sm:leading-7">
+          {v.tagline}
+        </p>
 
         <ul className="relative mt-6 space-y-2.5 text-sm text-zinc-300/95 sm:text-[0.95rem]">
-          {v.bullets.map((b, bi) => (
-            <motion.li
-              key={b}
-              initial={{ opacity: 0, x: -10 }}
-              animate={inView ? { opacity: 1, x: 0 } : {}}
-              transition={{ delay: 0.2 + index * 0.06 + bi * 0.05, duration: 0.45, ease: "easeOut" }}
-              className="flex items-start gap-3"
-            >
+          {v.bullets.map((b) => (
+            <li key={b} className="flex items-start gap-3">
               <span className="mt-1 inline-flex h-4 w-4 flex-none items-center justify-center rounded-full bg-purple-500/20">
                 <Check className="h-3 w-3 text-purple-100" strokeWidth={2.8} />
               </span>
               <span className="leading-snug">{b}</span>
-            </motion.li>
+            </li>
           ))}
         </ul>
 
@@ -146,7 +140,8 @@ function Card({
 
         <div className="mt-8">
           <NoirAnchor
-            href={v.slug === "custom" ? `#dedica` : "#dedica"}
+            href="#dedica"
+            onClick={() => window.dispatchEvent(new CustomEvent("voucher-select", { detail: v.slug }))}
             size="md"
             variant={isFeatured ? "primary" : "ghost"}
             className="w-full"

@@ -118,9 +118,7 @@ export default function CollaboraPage() {
                 </p>
               </div>
             </Reveal>
-            <Reveal delay={80}>
-              <CollaborationsForm />
-            </Reveal>
+            <CollaborationsForm />
           </div>
         </section>
 

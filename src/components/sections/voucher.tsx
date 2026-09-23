@@ -1,141 +1,61 @@
-import { Check, Gift, Sparkles, type LucideIcon } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import { ArrowUpRight, Gift, PenLine, Printer, CalendarHeart } from "lucide-react";
 import { NoirAnchor } from "@/components/ui/noir-anchor";
-import { Reveal } from "@/components/motion/reveal";
 import { vouchers } from "@/lib/noir";
 
 export function VoucherSection() {
-  const featured = vouchers.find((v) => v.highlighted) ?? vouchers[1];
-  const priceText = (v: (typeof vouchers)[number]) =>
-    v.slug === "custom" ? (v.priceLabel ?? "su misura") : `€${v.price}`;
-  return (
-    <section id="voucher" className="relative z-10 overflow-hidden py-16 sm:py-20">
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute inset-0 bg-[radial-gradient(1000px_circle_at_18%_12%,rgba(168,85,247,0.18),transparent_55%),radial-gradient(900px_circle_at_86%_88%,rgba(236,72,153,0.16),transparent_55%)]" />
-      </div>
-      <div className="noir-container relative">
-        <Reveal>
-          <div className="grid gap-10 lg:grid-cols-12 lg:items-center">
-            <div className="lg:col-span-5">
-              <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-purple-500/20 bg-purple-500/5 px-4 py-1.5 text-xs uppercase tracking-[0.18em] text-purple-200/90">
-                <Gift className="h-3.5 w-3.5" />
-                Regalo Euphoria
-              </div>
-              <h2 className="noir-display max-w-xl text-3xl font-semibold leading-[1.02] text-white sm:text-4xl md:text-5xl">
-                Un oggetto si dimentica.
-                <br />
-                <span className="bg-gradient-to-br from-purple-300 via-fuchsia-300 to-purple-500 bg-clip-text text-transparent">
-                  Un voucher lo porti con te.
-                </span>
-              </h2>
-              <p className="mt-5 max-w-xl text-base leading-relaxed text-zinc-300/90 sm:text-lg">
-                Regala 3 ore di jacuzzi e sauna, o una notte intera in suite.
-                Dedica personalizzata, PDF stampabile, valido 12 mesi.
-                Perfetto per mamma, migliore amica, sposa, collega laureato, o chiunque si meriti di staccare.
-              </p>
-              <div className="mt-7 flex flex-wrap items-center gap-3">
-                <NoirAnchor href="/voucher" size="lg" variant="primary">
-                  Scegli il voucher
-                </NoirAnchor>
-                <NoirAnchor
-                  href="/collabora"
-                  size="md"
-                  variant="ghost"
-                  className="inline-flex items-center gap-1.5"
-                >
-                  <Sparkles className="h-4 w-4 text-purple-200" />
-                  Premi e benefit aziendali
-                </NoirAnchor>
-              </div>
-              <dl className="mt-9 grid max-w-md grid-cols-3 gap-3 text-sm">
-                {[
-                  ["Da €90", "Prezzo di partenza"],
-                  ["12 mesi", "Di validità"],
-                  ["2 persone", "incluse sempre"],
-                ].map(([t, d]) => (
-                  <div
-                    key={t}
-                    className="rounded-2xl border border-white/5 bg-white/[0.02] p-4"
-                  >
-                    <dt className="noir-display text-lg font-semibold text-white">{t}</dt>
-                    <dd className="mt-1 text-xs leading-relaxed text-zinc-400">{d}</dd>
-                  </div>
-                ))}
-              </dl>
-            </div>
+  const startingPrice = Math.min(...vouchers.filter(v => v.slug !== "custom").map(v => v.price));
 
-            <div className="lg:col-span-7">
-              <div className="grid gap-4 md:grid-cols-3">
-                {vouchers.slice(0, 3).map((v) => {
-                  const Icon = v.icon as LucideIcon;
-                  const isFeatured = v.slug === featured.slug;
-                  return (
-                    <article
-                      key={v.slug}
-                      className={`relative flex flex-col overflow-hidden rounded-3xl border p-6 transition ${
-                        isFeatured
-                          ? "border-purple-500/30 bg-gradient-to-br from-purple-900/40 via-zinc-900 to-zinc-950 shadow-[0_0_80px_-24px_rgba(168,85,247,0.55)] md:scale-[1.04]"
-                          : "border-white/5 bg-white/[0.02] hover:border-white/10"
-                      }`}
-                    >
-                      {isFeatured && (
-                        <div className="absolute right-5 top-5 rounded-full bg-purple-500/15 px-2.5 py-1 text-[10px] font-medium uppercase tracking-[0.15em] text-purple-200">
-                          più regalato
-                        </div>
-                      )}
-                      <div className="flex items-center justify-between">
-                        <div
-                          className={`inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.04] backdrop-blur ${v.iconAccent}`}
-                        >
-                          <Icon className="h-5 w-5" strokeWidth={1.7} />
-                        </div>
-                        <div className="noir-display text-2xl font-semibold text-white">
-                          {priceText(v)}
-                        </div>
-                      </div>
-                      <div className="mt-2 text-[11px] uppercase tracking-[0.18em] text-zinc-500">
-                        {v.durationLabel}
-                      </div>
-                      <h3 className="noir-display mt-1 text-xl font-semibold text-white">
-                        {v.name.replace("Euphoria ", "")}
-                      </h3>
-                      <p className="mt-2 text-sm leading-relaxed text-zinc-400">{v.tagline}</p>
-                      <ul className="mt-5 space-y-2 text-sm text-zinc-300/90">
-                        {v.bullets.slice(0, 3).map((b) => (
-                          <li key={b} className="flex items-start gap-2">
-                            <span className="mt-1 inline-flex h-3.5 w-3.5 items-center justify-center rounded-full bg-purple-500/20 text-[9px] text-purple-200">
-                              <Check className="h-3 w-3" strokeWidth={2.8} />
-                            </span>
-                            <span className="leading-snug">{b}</span>
-                          </li>
-                        ))}
-                      </ul>
-                      <div className="mt-5 flex flex-wrap gap-1.5">
-                        {v.suggestedFor.map((k) => (
-                          <span
-                            key={k}
-                            className="rounded-full border border-white/5 bg-white/[0.03] px-2.5 py-1 text-[11px] text-zinc-400"
-                          >
-                            {k}
-                          </span>
-                        ))}
-                      </div>
-                      <NoirAnchor
-                        className="mt-6 w-full"
-                        href="/voucher"
-                        size="sm"
-                        variant={isFeatured ? "primary" : "ghost"}
-                      >
-                        {v.slug === "custom"
-                          ? "Personalizza"
-                          : `Regala · ${priceText(v)}`}
-                      </NoirAnchor>
-                    </article>
-                  );
-                })}
-              </div>
+  return (
+    <section id="voucher" data-ambient="noir" aria-labelledby="voucher-heading" className="relative z-10 overflow-clip bg-[#080609] py-20 sm:py-28">
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_80%_40%,rgba(135,64,113,.16),transparent_55%)]" aria-hidden="true" />
+      <div className="noir-container relative">
+        <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16 xl:gap-24">
+          <div>
+            <p className="mb-6 flex items-center gap-3 text-[10px] uppercase tracking-[.26em] text-noir-champagne sm:text-xs"><span className="h-px w-8 bg-noir-champagne/50" /><Gift className="h-4 w-4" strokeWidth={1.4} />Il regalo è un momento.</p>
+            <h2 id="voucher-heading" className="font-display text-[clamp(2.8rem,5.6vw,5.5rem)] leading-[1.03] tracking-tight text-noir-mist">
+              Ci sono regali<br />che diventano<br /><span className="italic text-noir-champagne">ricordi.</span>
+            </h2>
+            <p className="mt-7 max-w-md text-base leading-8 text-noir-muted sm:text-lg">Tre ore da dedicarsi. Una notte da ricordare. Regala una suite con jacuzzi e sauna private, e aggiungi le parole che la rendono speciale.</p>
+            <div className="mt-8 flex items-baseline gap-3"><span className="text-xs uppercase tracking-[.18em] text-noir-muted">Un’esperienza per due, da</span><span className="font-display text-4xl text-noir-mist">€{startingPrice}</span></div>
+            <div className="mt-8 flex flex-col items-start gap-4">
+              <NoirAnchor href="/voucher#dedica" size="lg" variant="primary" className="w-full justify-between gap-7 sm:w-auto" track={{ name: "voucher_home_create_click" }}>Crea il tuo regalo<ArrowUpRight className="h-5 w-5" strokeWidth={1.5} /></NoirAnchor>
+              <NoirAnchor href="/voucher#scegli" size="sm" className="min-h-11 border-transparent bg-transparent px-0 text-noir-muted shadow-none">Esplora tutte le formule<ArrowUpRight className="h-4 w-4" /></NoirAnchor>
             </div>
           </div>
-        </Reveal>
+
+          <div className="relative isolate px-3 pb-5 pt-4 sm:px-10 sm:py-8 lg:px-5">
+            <div className="pointer-events-none absolute inset-[8%] -z-10 rounded-full bg-[#aa548b]/15 blur-[65px]" aria-hidden="true" />
+            <div className="pointer-events-none absolute inset-x-5 bottom-1 top-9 -z-10 rotate-[-5deg] rounded-sm border border-[#d5a5ac]/20 bg-gradient-to-br from-[#271623] to-[#110c12] sm:inset-x-12 lg:inset-x-7" aria-hidden="true" />
+            <article aria-label="Esempio del biglietto regalo Euphoria" className="relative mx-auto max-w-[470px] rotate-[2deg] overflow-hidden border border-[#d5a5ac]/40 bg-[#080808] shadow-[0_35px_75px_-20px_rgba(0,0,0,.85)]">
+              <div className="pointer-events-none absolute inset-3 z-10 border border-[#d5a5ac]/25 sm:inset-4" aria-hidden="true" />
+              <div className="relative aspect-[16/10]">
+                <Image src="/passion-letto-jacuzzi-sauna.jpg" alt="Luci soffuse nella suite Passion, sul biglietto regalo Euphoria" fill sizes="(max-width: 640px) 90vw, 470px" className="object-cover" />
+                <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/15 to-[#080808]" />
+                <div className="absolute inset-x-0 top-7 text-center sm:top-9"><p className="font-display text-3xl text-[#fff3ed] sm:text-4xl">Euphoria</p><p className="mt-1 text-[7px] uppercase tracking-[.35em] text-[#fff3ed]/75 sm:text-[9px]">Luxury Suite · Gift Collection</p></div>
+              </div>
+              <div className="relative -mt-3 px-7 pb-9 text-center sm:px-10 sm:pb-12">
+                <span className="mx-auto mb-5 block h-8 w-px bg-[#d5a5ac]/70" aria-hidden="true" />
+                <p className="text-[8px] uppercase tracking-[.28em] text-[#d5a5ac] sm:text-[10px]">Un regalo, solo per te</p>
+                <p className="mt-3 font-display text-4xl text-[#fff3ed] sm:text-5xl">Il nostro tempo.</p>
+                <blockquote className="mx-auto mt-6 max-w-xs font-display text-lg italic leading-relaxed text-[#fff3ed]/90 sm:text-[23px]">“Il mondo può aspettare.<br />Tu ed io, no.”</blockquote>
+                <p className="mt-5 text-[9px] uppercase tracking-[.2em] text-[#d5a5ac]">Con amore.</p>
+                <div className="mx-auto mt-7 max-w-xs border-t border-[#d5a5ac]/25 pt-4"><p className="text-[8px] uppercase tracking-[.2em] text-[#fff3ed]/65 sm:text-[10px]">Una suite. Due persone. Solo voi.</p></div>
+              </div>
+            </article>
+            <p className="mt-8 text-center text-[10px] uppercase tracking-[.18em] text-noir-muted/65">Il tuo biglietto, le tue parole.</p>
+          </div>
+        </div>
+
+        <div className="mt-14 grid gap-6 border-t border-[#d5a5ac]/15 pt-7 sm:mt-16 sm:grid-cols-3 sm:gap-8 sm:pt-9">
+          {[
+            { icon: PenLine, title: "La dedica è tua", text: "Nomi, parole e un’atmosfera da scegliere." },
+            { icon: Printer, title: "Bello da consegnare", text: "Un PDF da stampare o regalare in digitale." },
+            { icon: CalendarHeart, title: "Il momento lo scelgono loro", text: "12 mesi di validità, per due persone." },
+          ].map(({ icon: Icon, title, text }) => <div key={title} className="flex items-start gap-4"><Icon className="mt-1 h-5 w-5 shrink-0 text-noir-champagne" strokeWidth={1.3} /><div><h3 className="text-sm font-medium text-noir-mist">{title}</h3><p className="mt-2 text-sm leading-6 text-noir-muted/75">{text}</p></div></div>)}
+        </div>
+        <p className="mt-8 text-sm text-noir-muted/60">Un pensiero anche per il tuo team? <Link href="/collabora" className="inline-flex min-h-11 items-center gap-1 text-noir-muted underline decoration-noir-champagne/30 underline-offset-4 transition hover:text-noir-champagne focus-visible:outline-2 focus-visible:outline-noir-champagne">Scopri i regali aziendali<ArrowUpRight className="h-3.5 w-3.5" /></Link></p>
       </div>
     </section>
   );

@@ -14,7 +14,7 @@ import { FooterSection } from "@/components/sections/footer";
 import { StickyCta } from "@/components/sticky-cta";
 import { OccasionsSection } from "@/components/sections/occasions";
 import { VoucherSection } from "@/components/sections/voucher";
-import { InstagramSection } from "@/components/sections/instagram";
+// import { InstagramSection } from "@/components/sections/instagram"; // feed nascosto per ora — token non attivo
 import { OCCASIONS } from "@/lib/occasions";
 import { noir } from "@/lib/noir";
 
@@ -132,7 +132,7 @@ export default function Home() {
         <SuitesSection />
         <RomanticPackagesSection />
         <VoucherSection />
-        <InstagramSection />
+        {/* InstagramSection nascosto per ora — token non attivo */}
         <GallerySection />
         <ImagineSection />
         <FaqSection faqs={homeFaqs} />

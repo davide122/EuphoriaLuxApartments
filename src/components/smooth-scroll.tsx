@@ -1,6 +1,7 @@
 "use client";
 
 import Lenis from "lenis";
+import "lenis/dist/lenis.css";
 import { type ReactNode, useEffect, useRef } from "react";
 
 export function SmoothScroll({ children }: { children: ReactNode }) {
@@ -21,6 +22,8 @@ export function SmoothScroll({ children }: { children: ReactNode }) {
       wheelMultiplier: 0.9,
       touchMultiplier: 0.95,
       smoothWheel: true,
+      anchors: { offset: -88 },
+      allowNestedScroll: true,
     });
 
     lenisRef.current = lenis;

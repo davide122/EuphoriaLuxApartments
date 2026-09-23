@@ -2,8 +2,8 @@
 
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { ScrollReveal } from "@/components/motion/scroll-reveal";
 import type { ReactNode } from "react";
+import { CheckCircle2, XCircle } from "lucide-react";
 
 const STEPS = [
   {
@@ -28,21 +28,22 @@ const STEPS = [
 
 export function PremiumVoucherSteps() {
   return (
-    <section className="relative z-10 border-t border-white/5 bg-zinc-950/50 py-16 sm:py-24">
+    <section
+      className="relative z-10 border-t border-white/5 bg-zinc-950/50 py-16 sm:py-24"
+      style={{ position: "relative" }}
+    >
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute inset-0 bg-[radial-gradient(800px_circle_at_50%_0%,rgba(168,85,247,0.14),transparent_58%)]" />
       </div>
       <div className="noir-container relative">
-        <ScrollReveal y={12}>
-          <div className="mx-auto max-w-2xl text-center">
-            <div className="mb-3 text-xs uppercase tracking-[0.2em] text-purple-200/70">
-              Come funziona
-            </div>
-            <h2 className="noir-display text-3xl font-semibold leading-tight text-white sm:text-4xl md:text-5xl">
-              Tre passi. Poi un PDF in casella.
-            </h2>
+        <div className="mx-auto max-w-2xl text-center">
+          <div className="mb-3 text-xs uppercase tracking-[0.2em] text-purple-200/70">
+            Come funziona
           </div>
-        </ScrollReveal>
+          <h2 className="noir-display text-3xl font-semibold leading-tight text-white sm:text-4xl md:text-5xl">
+            Tre passi. Poi un PDF in casella.
+          </h2>
+        </div>
 
         <div className="mt-16 grid gap-10 md:grid-cols-3">
           {STEPS.map((s, i) => (
@@ -68,7 +69,7 @@ function StepCard({
   i: number;
 }) {
   const ref = useRef<HTMLLIElement | null>(null);
-  const inView = useInView(ref, { once: true, amount: 0.4, margin: "-10% 0px" });
+  const inView = useInView(ref, { once: true, amount: 0.2 });
 
   return (
     <motion.li
@@ -76,14 +77,16 @@ function StepCard({
       initial="hidden"
       animate={inView ? "show" : "hidden"}
       variants={{
-        hidden: { opacity: 0, y: 22 },
+        hidden: { opacity: 0, y: 22, color: "rgb(161 161 170)" },
         show: (custom: number) => ({
           opacity: 1,
           y: 0,
+          color: "rgb(255 255 255)",
           transition: {
             delay: 0.08 * custom,
             duration: 0.65,
             ease: [0.22, 1, 0.36, 1],
+            color: { duration: 0.55, ease: "easeOut", delay: 0.1 + 0.06 * custom },
           },
         }),
       }}
@@ -96,14 +99,12 @@ function StepCard({
         <div className="mt-5 text-[11px] font-semibold uppercase tracking-[0.22em] text-purple-200/85">
           {eyebrow}
         </div>
-        <ScrollReveal tint="color-shift" y={6} delay={0.06 + i * 0.08}>
-          <h3 className="noir-display mt-2 text-2xl font-semibold leading-tight text-white sm:text-3xl">
-            {title}
-          </h3>
-        </ScrollReveal>
-        <ScrollReveal tint="color-shift" y={4} delay={0.18 + i * 0.08}>
-          <p className="mt-4 text-sm leading-relaxed sm:text-base sm:leading-7">{body}</p>
-        </ScrollReveal>
+        <h3 className="noir-display mt-2 text-2xl font-semibold leading-tight text-white sm:text-3xl">
+          {title}
+        </h3>
+        <p className="mt-4 text-sm leading-relaxed text-zinc-400 sm:text-base sm:leading-7">
+          {body}
+        </p>
       </div>
     </motion.li>
   );
@@ -138,3 +139,8 @@ function StepNumberLabel({
     </div>
   );
 }
+
+// teniamo import alias per evitare tree-shake warnings rimasti
+type _R = ReactNode;
+const _ = { CheckCircle2, XCircle };
+void _;

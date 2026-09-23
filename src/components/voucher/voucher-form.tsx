@@ -1,10 +1,12 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import { CheckCircle2, Gift, Mail, MessageCircle, Sparkles, UserPlus, Users, type LucideIcon } from "lucide-react";
 import { noir, vouchers, type VoucherSlug } from "@/lib/noir";
 import { NoirAnchor } from "@/components/ui/noir-anchor";
+import { GiftPreview } from "@/components/voucher/gift-preview";
+import { giftThemes, type GiftDetails } from "@/lib/voucher/render-gift";
 import { trackEvent } from "@/lib/analytics";
 
 function isVoucherSlug(s: unknown): s is VoucherSlug {
@@ -17,20 +19,35 @@ function priceText(v: (typeof vouchers)[number]) {
 }
 
 export function VoucherForm() {
+  const [theme, setTheme] = useState<GiftDetails["theme"]>("romance");
   const [voucher, setVoucher] = useState<VoucherSlug>("medium");
   const [fromName, setFromName] = useState("");
   const [toName, setToName] = useState("");
   const [toEmail, setToEmail] = useState("");
   const [dedica, setDedica] = useState(
-    "Perché hai passato settimane intere senza fermarti. Prendi queste 3 ore — o questa notte — e non pensarci. Da me a te."
+    "A noi, al tempo che non basta mai e a quello che scegliamo di regalarci. Il mondo può aspettare. Tu ed io, no."
   );
-  const [senderEmail, setSenderEmail] = useState("");
+  const [senderEmail] = useState("");
   const [senderPhone, setSenderPhone] = useState("");
   const [notes, setNotes] = useState("");
   const voucherObj = useMemo(
     () => vouchers.find((v) => v.slug === voucher) ?? vouchers[1],
     [voucher]
   );
+
+  useEffect(() => {
+    const select = (event: Event) => {
+      const slug = (event as CustomEvent<unknown>).detail;
+      if (isVoucherSlug(slug)) setVoucher(slug);
+    };
+    window.addEventListener("voucher-select", select);
+    return () => window.removeEventListener("voucher-select", select);
+  }, []);
+
+  const giftDetails = useMemo<GiftDetails>(() => ({
+    from: fromName, to: toName, message: dedica, theme,
+    experience: voucherObj.name, duration: voucherObj.durationLabel,
+  }), [fromName, toName, dedica, theme, voucherObj]);
 
   const canSend =
     fromName.trim().length >= 2 &&
@@ -62,11 +79,12 @@ Grazie!`;
   };
 
   return (
-    <div className="mx-auto mt-10 grid gap-8 lg:grid-cols-5">
+    <div className="request-form mx-auto mt-10 grid gap-8 lg:grid-cols-5">
       <div className="lg:col-span-3">
         <form
           onSubmit={(e) => {
             e.preventDefault();
+            if (!canSend) return;
             onWhatsApp();
             const url =
               noir.contacts.whatsapp + `?text=${encodeURIComponent(whatsappMsg)}`;
@@ -136,6 +154,9 @@ Grazie!`;
               </span>
               <input
                 type="text"
+                required
+                minLength={2}
+                maxLength={60}
                 value={fromName}
                 onChange={(e) => setFromName(e.target.value)}
                 placeholder="Tuo nome"
@@ -148,6 +169,9 @@ Grazie!`;
               </span>
               <input
                 type="text"
+                required
+                minLength={2}
+                maxLength={60}
                 value={toName}
                 onChange={(e) => setToName(e.target.value)}
                 placeholder="Nome persona che riceve"
@@ -180,11 +204,18 @@ Grazie!`;
             </label>
           </div>
 
+          <fieldset className="mt-8">
+            <legend className="mb-3 text-sm text-zinc-400">2 · Scegli l’atmosfera del regalo</legend>
+            <div className="flex flex-wrap gap-2">
+              {Object.entries(giftThemes).map(([key, option]) => <button key={key} type="button" aria-pressed={theme === key} onClick={() => setTheme(key as GiftDetails["theme"])} className={`min-h-11 rounded-full border px-4 py-2 text-sm transition focus-visible:outline-2 focus-visible:outline-purple-300 ${theme === key ? "border-[#d6b8a7] bg-[#d6b8a7]/15 text-[#f1d6c8]" : "border-white/10 text-zinc-400 hover:border-white/30"}`}>{option.label}</button>)}
+            </div>
+          </fieldset>
           <label className="mt-5 block">
             <span className="mb-1.5 block text-xs uppercase tracking-[0.15em] text-zinc-500">
               Dedica (quella che leggerà nel PDF)
             </span>
             <textarea
+              maxLength={400}
               value={dedica}
               onChange={(e) => setDedica(e.target.value)}
               rows={4}
@@ -193,11 +224,18 @@ Grazie!`;
             />
           </label>
 
+          <div className="mt-2 flex flex-wrap items-center justify-between gap-3">
+            <button type="button" className="min-h-11 text-sm text-purple-200 underline decoration-purple-300/30 underline-offset-4" onClick={() => setDedica(theme === "romance" ? "A noi, al tempo che non basta mai e a quello che scegliamo di regalarci. Il mondo può aspettare. Tu ed io, no." : theme === "celebrate" ? "Per tutto quello che sei e per i sorrisi che regali. Oggi lascia che sia qualcuno a prendersi cura di te. Questo momento è tuo." : "Metti in pausa i pensieri, dimentica l’orologio e respira. Ti regalo un po’ di tempo per te: non devi fare altro che viverlo.")}>Ispirami con una dedica</button>
+            <span className="text-xs text-zinc-500">{dedica.length}/400 caratteri</span>
+          </div>
+
           <label className="mt-5 block">
             <span className="mb-1.5 block text-xs uppercase tracking-[0.15em] text-zinc-500">
-              Note (opzionale) — importo custom, dati particolari, giorno preferibile
+              Note {voucher === "custom" ? "(obbligatorie, almeno 5 caratteri)" : "(opzionale)"} — importo custom, dati particolari, giorno preferibile
             </span>
             <textarea
+              required={voucher === "custom"}
+              minLength={voucher === "custom" ? 5 : undefined}
               value={notes}
               onChange={(e) => setNotes(e.target.value)}
               rows={2}
@@ -205,6 +243,10 @@ Grazie!`;
               className="mt-1 w-full rounded-xl border border-white/5 bg-zinc-950/60 px-4 py-3 text-sm text-white outline-none transition placeholder:text-zinc-600 focus:border-purple-500/40 focus:ring-2 focus:ring-purple-500/10"
             />
           </label>
+
+          <a href="#voucher-preview" className="mt-6 flex min-h-12 items-center justify-center rounded-xl border border-[#d6b8a7]/30 px-4 py-3 text-sm text-[#f1d6c8] lg:hidden">Guarda il regalo e genera il PDF di test ↓</a>
+
+          {!canSend && <p className="mt-6 text-sm text-zinc-400">Inserisci il tuo nome e quello del destinatario (almeno 2 caratteri). Per un voucher custom, aggiungi almeno 5 caratteri nelle note. Controlla le email eventualmente inserite.</p>}
 
           <motion.button
             whileTap={{ scale: 0.99 }}
@@ -221,56 +263,9 @@ Grazie!`;
         </form>
       </div>
 
-      <aside className="lg:col-span-2">
-        <div className="sticky top-28 space-y-4">
-          <div className="overflow-hidden rounded-3xl border border-white/5 bg-white/[0.02] p-6">
-            <div className="mb-3 text-xs uppercase tracking-[0.2em] text-purple-200/70">Riepilogo</div>
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                {(() => {
-                  const Icon = voucherObj.icon as LucideIcon;
-                  return (
-                    <div
-                      className={`flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-white/[0.04] backdrop-blur ${voucherObj.iconAccent}`}
-                    >
-                      <Icon className="h-5 w-5" strokeWidth={1.7} />
-                    </div>
-                  );
-                })()}
-                <div>
-                  <div className="text-xs uppercase tracking-[0.15em] text-zinc-500">
-                    {voucherObj.name.replace("Euphoria ", "")}
-                  </div>
-                  <div className="noir-display text-lg font-semibold text-white">{voucherObj.name}</div>
-                </div>
-              </div>
-              <div className="noir-display text-2xl font-semibold text-white">{priceText(voucherObj)}</div>
-            </div>
-            <dl className="mt-6 space-y-3 text-sm">
-              <div className="flex justify-between">
-                <dt className="text-zinc-500">Da</dt>
-                <dd className="text-zinc-200">{fromName || <span className="text-zinc-600">—</span>}</dd>
-              </div>
-              <div className="flex justify-between">
-                <dt className="text-zinc-500">Per</dt>
-                <dd className="text-zinc-200">{toName || <span className="text-zinc-600">—</span>}</dd>
-              </div>
-              <div className="flex justify-between">
-                <dt className="text-zinc-500">Valido</dt>
-                <dd className="text-zinc-200">12 mesi · 2 persone incluse</dd>
-              </div>
-              <div className="flex justify-between">
-                <dt className="text-zinc-500">Invio PDF</dt>
-                <dd className="text-zinc-200">{toEmail || "Stampabile e consegnabile a mano"}</dd>
-              </div>
-            </dl>
-          </div>
-          <div className="rounded-3xl border border-purple-500/15 bg-purple-500/[0.04] p-6 text-sm leading-relaxed text-zinc-300">
-            <div className="mb-2 text-xs uppercase tracking-[0.2em] text-purple-200/80">Pagamento</div>
-            Link Stripe, bonifico o Satispay — come preferisiti.
-            Dopo il pagamento ricevi un PDF con: nome, dedica, codice QR e istruzioni per prenotare
-            via WhatsApp. Tutto in 15 minuti, lavorativi.
-          </div>
+      <aside id="voucher-preview" className="lg:col-span-2">
+        <div className="space-y-6">
+          <GiftPreview details={giftDetails} />
           <NoirAnchor
             href={`${noir.contacts.whatsapp}?text=${encodeURIComponent(
               "Ciao, vorrei info per un voucher Euphoria: taglie, tempi di invio e metodi di pagamento."

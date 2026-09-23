@@ -26,6 +26,7 @@ export function PremiumVoucherHero() {
       ref={ref}
       data-ambient="noir"
       className="relative isolate z-10 min-h-[100svh] overflow-hidden pb-24 pt-8 sm:min-h-[98svh] sm:pt-14"
+      style={{ position: "relative" }}
     >
       <motion.div
         style={{ y: bgY, scale: scaleFade, opacity: opacityFade }}
@@ -59,15 +60,9 @@ export function PremiumVoucherHero() {
               <h1 className="noir-display max-w-[15ch] text-4xl font-semibold leading-[0.98] text-white sm:text-6xl sm:leading-[0.9] md:text-7xl">
                 Regala un momento.
                 <br />
-                <motion.span
-                  initial={{ backgroundPosition: "0% 50%" }}
-                  whileInView={{ backgroundPosition: "100% 50%" }}
-                  viewport={{ once: true, amount: 0.3 }}
-                  transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
-                  className="inline-block bg-[length:200%_auto] bg-gradient-to-r from-purple-200 via-fuchsia-300 to-purple-500 bg-clip-text text-transparent"
-                >
+                <span className="inline-block bg-gradient-to-r from-purple-200 via-fuchsia-300 to-purple-500 bg-clip-text text-transparent">
                   Non un oggetto.
-                </motion.span>
+                </span>
               </h1>
             </ScrollReveal>
 
@@ -152,23 +147,19 @@ export function PremiumVoucherHero() {
                 <p className="mt-4 text-sm leading-relaxed text-zinc-200/95">
                   {featured.tagline}
                 </p>
-                <ul className="mt-6 space-y-2.5 text-sm text-zinc-100/90">
-                  {featured.bullets.map((b, i) => (
-                    <motion.li
-                      key={b}
-                      initial={{ opacity: 0, x: -8 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true, amount: 0.4 }}
-                      transition={{ duration: 0.4, delay: 0.04 * i, ease: "easeOut" }}
-                      className="flex items-start gap-3"
-                    >
-                      <span className="mt-1 inline-flex h-4 w-4 flex-none items-center justify-center rounded-full bg-purple-500/20 text-[10px] text-purple-100">
-                        ✓
-                      </span>
-                      <span className="leading-snug">{b}</span>
-                    </motion.li>
-                  ))}
-                </ul>
+                <ul className="mt-6 space-y-2.5 text-sm text-zinc-100/95">
+                    {featured.bullets.map((b) => (
+                      <li
+                        key={b}
+                        className="flex items-start gap-3"
+                      >
+                        <span className="mt-1 inline-flex h-4 w-4 flex-none items-center justify-center rounded-full bg-purple-500/20 text-[10px] text-purple-100">
+                          ✓
+                        </span>
+                        <span className="leading-snug">{b}</span>
+                      </li>
+                    ))}
+                  </ul>
                 <div className="mt-6 flex flex-wrap gap-1.5">
                   {featured.suggestedFor.map((k) => (
                     <span
