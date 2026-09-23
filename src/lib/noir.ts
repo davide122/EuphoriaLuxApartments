@@ -1,4 +1,4 @@
-import { Heart, Hotel, Sun } from "lucide-react";
+import { Box, Heart, Hotel, Sun } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
 export const noir = {
@@ -22,6 +22,41 @@ export const noir = {
     phone: "+39 379 281 0506",
   },
 } as const;
+
+/** Add-on opzionali acquistabili con qualsiasi pacchetto / voucher */
+export type EuphoriaAddonSlug = "3d-print";
+export type EuphoriaAddon = {
+  slug: EuphoriaAddonSlug;
+  name: string;
+  tagline: string;
+  price: number;
+  icon: LucideIcon;
+  iconAccent: string;
+  bullets: readonly [string, string, string];
+  /** Idee di incisione / personalizzazione che compaiono come esempio */
+  examples: readonly [string, string, string, string];
+};
+export const euphoriaAddons: readonly EuphoriaAddon[] = [
+  {
+    slug: "3d-print",
+    name: "Stampa 3D Personalizzata",
+    tagline: "Il ricordo di Euphoria, che porti a casa.",
+    price: 25,
+    icon: Box,
+    iconAccent: "text-sky-200",
+    bullets: [
+      "Stampa 3D in resina · 7x7cm circa",
+      "Incisione laser: nomi, data, frase",
+      "Consegnata in suite — spedita se è un regalo",
+    ] as const,
+    examples: [
+      "1 anno di noi · 12.09.2026",
+      "Sofia & Marco · Euphoria",
+      "Perché l'abbiamo fatta. Infinito.",
+      "Mamma, grazie di tutto.",
+    ] as const,
+  },
+] as const;
 
 /** 3 pacchetti UFFICIALI: SKU fissi, icone Lucide, prezzi base */
 export type PackageSlug = "dayuse" | "pernotto" | "romantic";

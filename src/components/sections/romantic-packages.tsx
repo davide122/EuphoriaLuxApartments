@@ -1,9 +1,11 @@
-import { Check } from "lucide-react";
+import { Box, Check } from "lucide-react";
 import { Reveal } from "@/components/motion/reveal";
 import { NoirAnchor } from "@/components/ui/noir-anchor";
 import { SectionHeader } from "@/components/ui/section-header";
-import { noir, romanticPackages, type EuphoriaPackage } from "@/lib/noir";
+import { euphoriaAddons, noir, romanticPackages, type EuphoriaPackage } from "@/lib/noir";
 import type { LucideIcon } from "lucide-react";
+
+const ADDON_3D = euphoriaAddons[0]!;
 
 const CARD_GRADIENTS: Record<EuphoriaPackage["slug"], string> = {
   dayuse: "bg-[linear-gradient(145deg,rgba(217,119,6,.34),rgba(23,8,31,.92)_55%)]",
@@ -103,14 +105,23 @@ export function RomanticPackagesSection() {
                     ))}
                   </div>
 
-                  <div className="relative mt-auto flex items-end justify-between gap-4 border-t border-white/15 pt-7">
-                    <div>
-                      <div className="text-xs tracking-[0.18em] uppercase text-white/70">
-                        Prezzo base · 2 persone
+                  <div className="relative mt-auto flex flex-col gap-3 border-t border-white/15 pt-6">
+                    <div className="flex items-end justify-between gap-4">
+                      <div>
+                        <div className="text-xs tracking-[0.18em] uppercase text-white/70">
+                          Prezzo base · 2 persone
+                        </div>
+                        <div className="noir-display mt-1 text-3xl font-semibold text-noir-mist">
+                          {price}
+                        </div>
                       </div>
-                      <div className="noir-display mt-1 text-3xl font-semibold text-noir-mist">
-                        {price}
-                      </div>
+                    </div>
+                    <div className="flex items-center justify-between rounded-xl border border-sky-400/20 bg-sky-500/[0.08] px-3 py-2 text-[11px] text-sky-100 sm:text-xs">
+                      <span className="inline-flex items-center gap-1.5">
+                        <Box className="h-3.5 w-3.5 text-sky-200" strokeWidth={1.9} />
+                        {ADDON_3D.name} disponibile
+                      </span>
+                      <span className="font-semibold">+€{ADDON_3D.price}</span>
                     </div>
                   </div>
 

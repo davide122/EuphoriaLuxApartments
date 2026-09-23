@@ -2,24 +2,27 @@
 
 import { motion } from "framer-motion";
 import {
+  Bath,
+  Box,
   CalendarCheck,
   Check,
+  Flame,
   Mail,
   Phone,
   Sparkles,
   User,
   Users,
-  Bath,
-  Flame,
 } from "lucide-react";
 import Image from "next/image";
 import { useMemo, useRef, useState } from "react";
 import { BookingCalendar } from "@/components/booking/calendar";
-import { noir, suites } from "@/lib/noir";
+import { euphoriaAddons, noir, suites } from "@/lib/noir";
 import { NoirAnchor } from "@/components/ui/noir-anchor";
 import { utcDateFromISO } from "@/lib/booking/date";
 import { type SuiteSlug } from "@/lib/booking/types";
 import { trackEvent } from "@/lib/analytics";
+
+const ADDON_3D = euphoriaAddons[0]!;
 
 function nightsBetween(checkIn: string, checkOut: string) {
   const a = utcDateFromISO(checkIn);
@@ -49,6 +52,8 @@ export function BookingWidget({
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [notes, setNotes] = useState("");
+  const [addon3d, setAddon3d] = useState(false);
+  const [addon3dText, setAddon3dText] = useState("");
 
   const [submitting, setSubmitting] = useState(false);
   const [result, setResult] = useState<{ ok: true; id: string } | { ok: false; error: string } | null>(null);
@@ -60,9 +65,12 @@ export function BookingWidget({
     const base = noir.contacts.whatsapp;
     const ci = dates.checkIn ?? "__/__/__";
     const co = dates.checkOut ?? "__/__/__";
-    const message = `Ciao, vorrei verificare disponibilità per ${suiteObj.name}. Date: ${ci} → ${co}. Siamo in ${guests}. Grazie.`;
+    const addon = addon3d
+      ? ` + Stampa3D (${addon3dText.trim() || "incisione da definire"})`
+      : "";
+    const message = `Ciao, vorrei verificare disponibilità per ${suiteObj.name}. Date: ${ci} → ${co}. Siamo in ${guests}.${addon} Grazie.`;
     return base + `?text=${encodeURIComponent(message)}`;
-  }, [dates.checkIn, dates.checkOut, guests, suiteObj.name]);
+  }, [dates.checkIn, dates.checkOut, guests, suiteObj.name, addon3d, addon3dText]);
   const canSubmit =
     !!dates.checkIn &&
     !!dates.checkOut &&
@@ -92,6 +100,8 @@ export function BookingWidget({
         email,
         phone,
         notes,
+        addon3d,
+        addon3dText,
       }),
     }).catch(() => null);
     if (!res) {
@@ -267,6 +277,15 @@ export function BookingWidget({
                     <span>{guests} ospiti · {nights || "—"} notti</span>
                   </div>
                 </div>
+                {addon3d ? (
+                  <div className="mt-3 flex items-center justify-between rounded-2xl border border-sky-500/20 bg-sky-500/[0.06] px-3 py-2 text-[11px] text-sky-100 sm:text-xs">
+                    <span className="inline-flex items-center gap-1.5">
+                      <Box className="h-3.5 w-3.5 text-sky-200" strokeWidth={1.9} />
+                      Stampa 3D personalizzata
+                    </span>
+                    <span className="font-semibold">+€{ADDON_3D.price}</span>
+                  </div>
+                ) : null}
               </div>
             </div>
           </div>
@@ -350,6 +369,84 @@ export function BookingWidget({
                   placeholder="Es. orario di arrivo…"
                 />
               </label>
+
+              {/* ADD-ON STAMPA 3D PERSONALIZZATA */}
+              <div>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setAddon3d((prev) => !prev);
+                    if (!addon3d) {
+                      trackEvent({ name: "booking_addon_3d_toggle_on", params: { suite } });
+                    }
+                  }}
+                  className={`relative grid w-full grid-cols-[auto_1fr_auto] items-center gap-3 rounded-2xl border p-3.5 text-left transition sm:p-4 ${
+                    addon3d
+                      ? "border-sky-500/35 bg-sky-500/[0.07]"
+                      : "border-white/10 bg-white/[0.02] hover:border-sky-500/25 hover:bg-sky-500/[0.03]"
+                  }`}
+                >
+                  <span
+                    className={`inline-flex h-10 w-10 flex-none items-center justify-center rounded-xl border border-white/10 backdrop-blur sm:h-11 sm:w-11 ${ADDON_3D.iconAccent} bg-white/[0.04]`}
+                  >
+                    <Box className="h-5 w-5" strokeWidth={1.7} />
+                  </span>
+                  <span className="min-w-0">
+                    <span className="flex items-center gap-2">
+                      <span className="noir-display truncate text-sm font-semibold text-white sm:text-base">
+                        {ADDON_3D.name}
+                      </span>
+                      <span className="inline-flex h-5 items-center rounded-full bg-sky-500/15 px-2 text-[10px] font-semibold text-sky-100">
+                        +€{ADDON_3D.price}
+                      </span>
+                    </span>
+                    <span className="mt-0.5 block truncate text-[11px] text-zinc-400 sm:text-xs">
+                      {ADDON_3D.tagline}
+                    </span>
+                  </span>
+                  <span
+                    className={`inline-flex h-6 w-6 flex-none items-center justify-center rounded-full border transition ${
+                      addon3d
+                        ? "border-sky-300 bg-sky-500 text-white"
+                        : "border-white/15 bg-white/[0.03] text-transparent"
+                    }`}
+                  >
+                    <Check className="h-3.5 w-3.5" strokeWidth={2.8} />
+                  </span>
+                </button>
+
+                {addon3d ? (
+                  <div className="mt-3 rounded-2xl border border-sky-500/15 bg-sky-500/[0.025] p-3.5 sm:p-4">
+                    <label className="block">
+                      <span className="mb-1.5 flex items-center justify-between">
+                        <span className="text-[11px] font-medium uppercase tracking-[0.16em] text-sky-100/80">
+                          Cosa scriviamo sulla stampa?
+                        </span>
+                        <span className="text-[10px] text-zinc-500">{addon3dText.length}/50</span>
+                      </span>
+                      <input
+                        value={addon3dText}
+                        onChange={(e) => setAddon3dText(e.target.value.slice(0, 50))}
+                        maxLength={50}
+                        placeholder={ADDON_3D.examples[0]}
+                        className="h-11 w-full rounded-full border border-white/10 bg-black/30 px-4 text-sm text-white placeholder:text-zinc-600 outline-none transition focus:border-sky-500/40 focus:ring-2 focus:ring-sky-500/15"
+                      />
+                    </label>
+                    <div className="mt-3 flex flex-wrap gap-1.5">
+                      {ADDON_3D.examples.map((ex) => (
+                        <button
+                          key={ex}
+                          type="button"
+                          onClick={() => setAddon3dText(ex)}
+                          className="min-h-8 shrink-0 rounded-full border border-white/10 bg-white/[0.03] px-3 text-[11px] text-zinc-300 transition hover:border-sky-500/30 hover:bg-sky-500/[0.05] hover:text-white"
+                        >
+                          {ex}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                ) : null}
+              </div>
             </div>
 
             {/* BOTTONI */}

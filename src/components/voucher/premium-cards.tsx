@@ -2,9 +2,11 @@
 
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { Check, type LucideIcon } from "lucide-react";
-import { vouchers } from "@/lib/noir";
+import { Box, Check, type LucideIcon } from "lucide-react";
+import { euphoriaAddons, vouchers } from "@/lib/noir";
 import { NoirAnchor } from "@/components/ui/noir-anchor";
+
+const ADDON_3D = euphoriaAddons[0]!;
 
 export function PremiumVoucherCards() {
   return (
@@ -138,7 +140,15 @@ function Card({
           ))}
         </div>
 
-        <div className="mt-8">
+        <div className="mt-6 flex items-center justify-between rounded-xl border border-sky-400/20 bg-sky-500/[0.07] px-3 py-2 text-[11px] text-sky-100 sm:text-xs">
+          <span className="inline-flex items-center gap-1.5">
+            <Box className="h-3.5 w-3.5 text-sky-200" strokeWidth={1.9} />
+            {ADDON_3D.name} disponibile
+          </span>
+          <span className="font-semibold">+€{ADDON_3D.price}</span>
+        </div>
+
+        <div className="mt-5">
           <NoirAnchor
             href="#dedica"
             onClick={() => window.dispatchEvent(new CustomEvent("voucher-select", { detail: v.slug }))}

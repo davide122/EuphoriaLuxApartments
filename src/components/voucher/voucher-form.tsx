@@ -2,12 +2,25 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
-import { CheckCircle2, Gift, Mail, MessageCircle, Sparkles, UserPlus, Users, type LucideIcon } from "lucide-react";
-import { noir, vouchers, type VoucherSlug } from "@/lib/noir";
+import {
+  Box,
+  Check,
+  CheckCircle2,
+  Gift,
+  Mail,
+  MessageCircle,
+  Sparkles,
+  UserPlus,
+  Users,
+  type LucideIcon,
+} from "lucide-react";
+import { euphoriaAddons, noir, vouchers, type VoucherSlug } from "@/lib/noir";
 import { NoirAnchor } from "@/components/ui/noir-anchor";
 import { GiftPreview } from "@/components/voucher/gift-preview";
 import { giftThemes, type GiftDetails } from "@/lib/voucher/render-gift";
 import { trackEvent } from "@/lib/analytics";
+
+const ADDON_3D = euphoriaAddons[0]!;
 
 function isVoucherSlug(s: unknown): s is VoucherSlug {
   return vouchers.some((v) => v.slug === s);
@@ -30,6 +43,8 @@ export function VoucherForm() {
   const [senderEmail] = useState("");
   const [senderPhone, setSenderPhone] = useState("");
   const [notes, setNotes] = useState("");
+  const [addon3d, setAddon3d] = useState(false);
+  const [addon3dText, setAddon3dText] = useState("");
   const voucherObj = useMemo(
     () => vouchers.find((v) => v.slug === voucher) ?? vouchers[1],
     [voucher]
@@ -59,7 +74,10 @@ export function VoucherForm() {
   const whatsappMsg = useMemo(() => {
     const price = priceText(voucherObj);
     const d = dedica.trim().length ? dedica.trim() : "— nessuna dedica —";
-    return `Ciao Euphoria, vorrei un voucher ${voucherObj.name} (${price}).
+    const a3d = addon3d
+      ? ` + Stampa3D (${addon3dText.trim() || "incisione da definire"})`
+      : "";
+    return `Ciao Euphoria, vorrei un voucher ${voucherObj.name} (${price})${a3d}.
 — Da: ${fromName || "__"}
 — A: ${toName || "__"}
 — Email destinatario: ${toEmail || "__"}
@@ -69,12 +87,12 @@ export function VoucherForm() {
 ${d}
 Note: ${notes || "—"}
 Grazie!`;
-  }, [voucherObj, fromName, toName, toEmail, dedica, senderEmail, senderPhone, notes]);
+  }, [voucherObj, fromName, toName, toEmail, dedica, senderEmail, senderPhone, notes, addon3d, addon3dText]);
 
   const onWhatsApp = () => {
     trackEvent({
       name: "voucher_whatsapp_click",
-      params: { voucher: voucherObj.slug, from: fromName.length ? "filled" : "empty" },
+      params: { voucher: voucherObj.slug, from: fromName.length ? "filled" : "empty", addon3d },
     });
   };
 
@@ -244,6 +262,81 @@ Grazie!`;
             />
           </label>
 
+          {/* ADD-ON STAMPA 3D */}
+          <div className="mt-7">
+            <button
+              type="button"
+              onClick={() => {
+                setAddon3d((prev) => !prev);
+                if (!addon3d) trackEvent({ name: "voucher_addon_3d_toggle_on", params: { voucher: voucherObj.slug } });
+              }}
+              className={`relative grid w-full grid-cols-[auto_1fr_auto] items-center gap-3 rounded-2xl border p-3.5 text-left transition sm:p-4 ${
+                addon3d
+                  ? "border-sky-500/35 bg-sky-500/[0.07]"
+                  : "border-white/10 bg-white/[0.02] hover:border-sky-500/25 hover:bg-sky-500/[0.03]"
+              }`}
+            >
+              <span
+                className={`inline-flex h-10 w-10 flex-none items-center justify-center rounded-xl border border-white/10 backdrop-blur sm:h-11 sm:w-11 ${ADDON_3D.iconAccent} bg-white/[0.04]`}
+              >
+                <Box className="h-5 w-5" strokeWidth={1.7} />
+              </span>
+              <span className="min-w-0">
+                <span className="flex flex-wrap items-center gap-2">
+                  <span className="noir-display truncate text-sm font-semibold text-white sm:text-base">
+                    + {ADDON_3D.name}
+                  </span>
+                  <span className="inline-flex h-5 items-center rounded-full bg-sky-500/15 px-2 text-[10px] font-semibold text-sky-100">
+                    +€{ADDON_3D.price}
+                  </span>
+                </span>
+                <span className="mt-0.5 block truncate text-[11px] text-zinc-400 sm:text-xs">
+                  {ADDON_3D.tagline}
+                </span>
+              </span>
+              <span
+                className={`inline-flex h-6 w-6 flex-none items-center justify-center rounded-full border transition ${
+                  addon3d
+                    ? "border-sky-300 bg-sky-500 text-white"
+                    : "border-white/15 bg-white/[0.03] text-transparent"
+                }`}
+              >
+                <Check className="h-3.5 w-3.5" strokeWidth={2.8} />
+              </span>
+            </button>
+            {addon3d ? (
+              <div className="mt-3 rounded-2xl border border-sky-500/15 bg-sky-500/[0.025] p-3.5 sm:p-4">
+                <label className="block">
+                  <span className="mb-1.5 flex items-center justify-between">
+                    <span className="text-[11px] font-medium uppercase tracking-[0.16em] text-sky-100/80">
+                      Cosa scriviamo sulla stampa?
+                    </span>
+                    <span className="text-[10px] text-zinc-500">{addon3dText.length}/50</span>
+                  </span>
+                  <input
+                    value={addon3dText}
+                    onChange={(e) => setAddon3dText(e.target.value.slice(0, 50))}
+                    maxLength={50}
+                    placeholder={ADDON_3D.examples[0]}
+                    className="h-11 w-full rounded-full border border-white/10 bg-black/30 px-4 text-sm text-white placeholder:text-zinc-600 outline-none transition focus:border-sky-500/40 focus:ring-2 focus:ring-sky-500/15"
+                  />
+                </label>
+                <div className="mt-3 flex flex-wrap gap-1.5">
+                  {ADDON_3D.examples.map((ex) => (
+                    <button
+                      key={ex}
+                      type="button"
+                      onClick={() => setAddon3dText(ex)}
+                      className="min-h-8 shrink-0 rounded-full border border-white/10 bg-white/[0.03] px-3 text-[11px] text-zinc-300 transition hover:border-sky-500/30 hover:bg-sky-500/[0.05] hover:text-white"
+                    >
+                      {ex}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            ) : null}
+          </div>
+
           <a href="#voucher-preview" className="mt-6 flex min-h-12 items-center justify-center rounded-xl border border-[#d6b8a7]/30 px-4 py-3 text-sm text-[#f1d6c8] lg:hidden">Guarda il regalo e genera il PDF di test ↓</a>
 
           {!canSend && <p className="mt-6 text-sm text-zinc-400">Inserisci il tuo nome e quello del destinatario (almeno 2 caratteri). Per un voucher custom, aggiungi almeno 5 caratteri nelle note. Controlla le email eventualmente inserite.</p>}
@@ -266,6 +359,28 @@ Grazie!`;
       <aside id="voucher-preview" className="lg:col-span-2">
         <div className="space-y-6">
           <GiftPreview details={giftDetails} />
+
+          {/* RIEPILOGO COMPATTO */}
+          <div className="rounded-2xl border border-white/5 bg-white/[0.02] p-5 sm:p-6">
+            <div className="flex items-center justify-between">
+              <div className="noir-display text-base font-semibold text-white">{voucherObj.name}</div>
+              <div className="text-xs font-medium text-zinc-400">{priceText(voucherObj)}</div>
+            </div>
+            <div className="mt-1 text-[11px] uppercase tracking-[0.16em] text-zinc-500">
+              {voucherObj.durationLabel} · Da {fromName || "—"} a {toName || "—"}
+            </div>
+            <div className="mt-3 h-px w-full bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+            {addon3d ? (
+              <div className="mt-3 flex items-center justify-between rounded-xl border border-sky-500/20 bg-sky-500/[0.06] px-3 py-2 text-[11px] text-sky-100 sm:text-xs">
+                <span className="inline-flex items-center gap-1.5">
+                  <Box className="h-3.5 w-3.5 text-sky-200" strokeWidth={1.9} />
+                  Stampa 3D · {addon3dText.trim() || "incisione a scelta"}
+                </span>
+                <span className="font-semibold">+€{ADDON_3D.price}</span>
+              </div>
+            ) : null}
+          </div>
+
           <NoirAnchor
             href={`${noir.contacts.whatsapp}?text=${encodeURIComponent(
               "Ciao, vorrei info per un voucher Euphoria: taglie, tempi di invio e metodi di pagamento."
