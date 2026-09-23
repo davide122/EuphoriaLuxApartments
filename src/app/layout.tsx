@@ -37,7 +37,6 @@ export const metadata: Metadata = {
   description:
     "Due suite romantiche con jacuzzi e sauna private a Porto Empedocle, vicino Agrigento. Self check-in, cucina, Netflix e aperitivo. Da 150€ a coppia.",
   applicationName: "Euphoria",
-  alternates: { canonical: "/" },
   robots: "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1",
   manifest: "/site.webmanifest",
   icons: {

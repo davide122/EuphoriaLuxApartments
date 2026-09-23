@@ -1,196 +1,77 @@
 "use client";
 
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { Flower2, Mic, MicOff, PencilLine, Send, Sparkles, Volume2, VolumeX, Waves, Wine } from "lucide-react";
+import {
+  CheckCircle2,
+  PencilLine,
+  Send,
+  Sparkles,
+  XCircle,
+  Wand2,
+  Hotel,
+  MessageCircle,
+  RefreshCcw,
+} from "lucide-react";
 import Image from "next/image";
 import { FormEvent, useEffect, useMemo, useRef, useState } from "react";
 import { NoirAnchor } from "@/components/ui/noir-anchor";
 import { type ImagineScene } from "@/lib/imagine";
 import { noir } from "@/lib/noir";
 
-type SpeechResultEvent = {
-  results: ArrayLike<{ 0: { transcript: string }; isFinal: boolean }>;
-};
+const EXAMPLES = [
+  "Anniversario, luce viola e prosecco",
+  "Compleanno con torta e petali",
+] as const;
 
-type SpeechRecognitionLike = {
-  lang: string;
-  continuous: boolean;
-  interimResults: boolean;
-  start: () => void;
-  stop: () => void;
-  onresult: ((event: SpeechResultEvent) => void) | null;
-  onend: (() => void) | null;
-  onerror: (() => void) | null;
-};
+const YES = [
+  { icon: Hotel, label: "Sceglie suite e atmosfera" },
+  { icon: Sparkles, label: "Aggiunge oggetti reali" },
+  { icon: MessageCircle, label: "Genera messaggio per WhatsApp" },
+] as const;
 
-type BrowserWithSpeech = Window & {
-  SpeechRecognition?: new () => SpeechRecognitionLike;
-  webkitSpeechRecognition?: new () => SpeechRecognitionLike;
-  AudioContext?: typeof AudioContext;
-  webkitAudioContext?: typeof AudioContext;
-};
+const NO = [
+  { label: "Non disegna suite nuove" },
+  { label: "Non aggiunge persone" },
+  { label: "Non sostituisce la foto vera" },
+] as const;
 
-type AmbientAudio = {
-  context: AudioContext;
-  gain: GainNode;
-  oscillators: OscillatorNode[];
-};
-
-const DEFAULT_SCENE: ImagineScene = {
-  suite: "Passion",
-  occasion: "Serata speciale",
-  atmosphere: "noir",
-  jacuzzi: false,
-  prosecco: false,
-  flowers: false,
-  petals: false,
-  music: false,
-  objects: [],
-  setupTitle: "La vostra idea",
-  headline: "Immaginatela. Poi lasciate fare a noi.",
-  details: [],
-};
-
-const ATMOSPHERES = {
-  purple: "rgba(110, 31, 255, .48)",
-  rose: "rgba(237, 63, 166, .42)",
-  warm: "rgba(255, 126, 45, .34)",
-  noir: "rgba(20, 5, 29, .18)",
+const PHASES = {
+  idle: { label: "Pronto", tone: "border-white/10" },
+  imagining: { label: "In lavorazione", tone: "border-fuchsia-500/35" },
+  ready: { label: "Pronta", tone: "border-emerald-400/25" },
 } as const;
-
-const EXAMPLE = "È il nostro anniversario. Vorrei qualcosa di romantico, viola, con prosecco, ma non troppo sdolcinato.";
-const IDEA_STARTERS = [
-  "Anniversario intimo, luce viola e prosecco",
-  "Compleanno elegante con torta e petali",
-  "Una proposta semplice, calda e senza eccessi",
-] as const;
-const LOADING_COPY = [
-  "Leggo la vostra idea",
-  "Preparo luci e dettagli",
-  "Creo la fotografia",
-] as const;
 
 export function ImagineSection() {
   const reduceMotion = useReducedMotion();
-  const recognitionRef = useRef<SpeechRecognitionLike | null>(null);
-  const audioRef = useRef<AmbientAudio | null>(null);
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
   const [idea, setIdea] = useState("");
   const [scene, setScene] = useState<ImagineScene | null>(null);
-  const [generatedImage, setGeneratedImage] = useState<string | null>(null);
-  const [phase, setPhase] = useState<"idle" | "imagining" | "ready">("idle");
+  const [image, setImage] = useState<string | null>(null);
+  const [phase, setPhase] = useState<keyof typeof PHASES>("idle");
   const [error, setError] = useState("");
-  const [canListen, setCanListen] = useState(false);
-  const [listening, setListening] = useState(false);
-  const [soundOn, setSoundOn] = useState(false);
-  const [loadingStep, setLoadingStep] = useState(0);
-
-  const visual = scene ?? DEFAULT_SCENE;
-  const video = visual.suite === "Infinity" ? "/videos/infinity-dove.mp4" : "/videos/passion-invito.mp4";
-  const poster = visual.suite === "Infinity"
+  const visual = scene ?? null;
+  const poster = visual?.suite === "Infinity"
     ? "/infinity/WhatsApp Image 2026-08-16 at 21.29.23 (2).jpeg"
     : "/passion/WhatsApp Image 2026-08-16 at 21.29.22.jpeg";
 
   const whatsappHref = useMemo(() => {
     const detail = scene?.details.join(" · ") || "";
-    return noir.contacts.whatsapp + `?text=${encodeURIComponent(
-      `Ciao, vorrei vivere questa esperienza Euphoria. ${scene ? `${scene.suite} · ${scene.setupTitle}. ${detail}. ` : ""}La mia idea: ${idea}`
-    )}`;
+    return (
+      noir.contacts.whatsapp +
+      `?text=${encodeURIComponent(
+        `Ciao, vorrei questa Euphoria: ${scene ? `${scene.suite} · ${scene.setupTitle}. ${detail}. ` : ""}La mia idea: ${idea || "—"}`
+      )}`
+    );
   }, [idea, scene]);
 
-  useEffect(() => {
-    const browser = window as BrowserWithSpeech;
-    const Recognition = browser.SpeechRecognition || browser.webkitSpeechRecognition;
-    setCanListen(Boolean(Recognition));
-    if (!Recognition) return;
-
-    const recognition = new Recognition();
-    recognition.lang = "it-IT";
-    recognition.continuous = false;
-    recognition.interimResults = true;
-    recognition.onresult = (event) => {
-      const transcript = Array.from(event.results).map((result) => result[0].transcript).join(" ");
-      setIdea(transcript);
-    };
-    recognition.onend = () => setListening(false);
-    recognition.onerror = () => setListening(false);
-    recognitionRef.current = recognition;
-
-    return () => {
-      recognition.stop();
-      recognitionRef.current = null;
-    };
-  }, []);
-
-  useEffect(() => {
-    return () => {
-      const audio = audioRef.current;
-      audio?.oscillators.forEach((oscillator) => oscillator.stop());
-      void audio?.context.close();
-    };
-  }, []);
-
-  useEffect(() => {
-    if (phase !== "imagining") {
-      setLoadingStep(0);
-      return;
-    }
-    const interval = window.setInterval(() => {
-      setLoadingStep((step) => (step + 1) % LOADING_COPY.length);
-    }, 4200);
-    return () => window.clearInterval(interval);
-  }, [phase]);
-
-  const primeAmbient = () => {
-    if (audioRef.current) {
-      void audioRef.current.context.resume();
-      return audioRef.current;
-    }
-
-    const browser = window as BrowserWithSpeech;
-    const AudioContextConstructor = browser.AudioContext || browser.webkitAudioContext;
-    if (!AudioContextConstructor) return null;
-
-    const context = new AudioContextConstructor();
-    const gain = context.createGain();
-    gain.gain.value = 0;
-    gain.connect(context.destination);
-    const oscillators = [110, 164.81, 220].map((frequency, index) => {
-      const oscillator = context.createOscillator();
-      const voiceGain = context.createGain();
-      oscillator.type = "sine";
-      oscillator.frequency.value = frequency;
-      voiceGain.gain.value = index === 0 ? 0.38 : 0.16;
-      oscillator.connect(voiceGain).connect(gain);
-      oscillator.start();
-      return oscillator;
-    });
-    audioRef.current = { context, gain, oscillators };
-    return audioRef.current;
-  };
-
-  const setAmbientVolume = (enabled: boolean) => {
-    const audio = primeAmbient();
-    if (!audio) return;
-    const now = audio.context.currentTime;
-    audio.gain.gain.cancelScheduledValues(now);
-    audio.gain.gain.linearRampToValueAtTime(enabled ? 0.035 : 0, now + 0.8);
-    setSoundOn(enabled);
-  };
-
-  const submit = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+  const submit = async (e: FormEvent) => {
+    e.preventDefault();
     const cleanIdea = idea.trim();
-    if (cleanIdea.length < 8 || phase === "imagining") {
-      setError("Raccontaci qualche dettaglio in più.");
-      return;
-    }
-
-    primeAmbient();
-    if (audioRef.current) setAmbientVolume(false);
+    if (cleanIdea.length < 8 || phase === "imagining") return;
     if (document.activeElement instanceof HTMLElement) document.activeElement.blur();
     setError("");
-    setGeneratedImage(null);
+    setScene(null);
+    setImage(null);
     setPhase("imagining");
     try {
       const [response] = await Promise.all([
@@ -199,361 +80,279 @@ export function ImagineSection() {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ idea: cleanIdea }),
         }),
-        new Promise((resolve) => window.setTimeout(resolve, reduceMotion ? 0 : 1200)),
+        new Promise<void>((r) => setTimeout(r, reduceMotion ? 0 : 900)),
       ]);
-      const payload = (await response.json()) as {
+      const p = (await response.json().catch(() => ({}))) as {
         scene?: ImagineScene;
         image?: string | null;
-        imageGenerated?: boolean;
         error?: string;
       };
-      if (!response.ok || !payload.scene) throw new Error(payload.error || "Non riesco a immaginare la scena.");
-
-      setScene(payload.scene);
-      setGeneratedImage(payload.image || null);
+      if (!response.ok || !p.scene) throw new Error(p.error || "Riprova tra un attimo.");
+      setScene(p.scene);
+      setImage(p.image || null);
       setPhase("ready");
-      if (!payload.imageGenerated) setError("La scena è pronta, ma la fotografia non è stata generata. Puoi riprovare.");
-      if (payload.scene.music) setAmbientVolume(true);
     } catch (caught) {
       setPhase("idle");
-      setError(caught instanceof Error ? caught.message : "Riprova tra un momento.");
+      setError(caught instanceof Error ? caught.message : "Riprova tra un attimo.");
     }
-  };
-
-  const toggleListening = () => {
-    const recognition = recognitionRef.current;
-    if (!recognition) return;
-    if (listening) {
-      recognition.stop();
-      setListening(false);
-      return;
-    }
-    setIdea("");
-    setListening(true);
-    recognition.start();
-  };
-
-  const editIdea = () => {
-    setError("");
-    setPhase("idle");
-    window.setTimeout(() => textareaRef.current?.focus(), reduceMotion ? 0 : 350);
-  };
-
-  const chooseStarter = (starter: string) => {
-    setIdea(starter);
-    setError("");
-    window.setTimeout(() => textareaRef.current?.focus(), reduceMotion ? 0 : 150);
   };
 
   return (
     <section
       id="imagine"
       data-ambient="spa"
-      className="relative z-10 min-h-[100svh] overflow-hidden bg-[#050207] text-white supports-[height:100dvh]:min-h-[100dvh]"
+      className="relative z-10 overflow-hidden bg-zinc-950 py-14 sm:py-20"
     >
-      <AnimatePresence mode="wait">
-        {generatedImage ? (
-          <motion.div
-            key={generatedImage.slice(-48)}
-            initial={reduceMotion ? false : { opacity: 0, scale: 1.025, filter: "blur(10px)" }}
-            animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: reduceMotion ? 0 : 1.35, ease: [0.22, 1, 0.36, 1] }}
-            className="absolute inset-0"
-          >
-            <Image
-              fill
-              unoptimized
-              priority
-              sizes="100vw"
-              src={generatedImage}
-              alt={`Euphoria ${visual.suite} allestita per ${visual.occasion.toLocaleLowerCase("it")}`}
-              className="object-cover object-center"
-            />
-          </motion.div>
-        ) : (
-          <motion.video
-            key={video}
-            initial={false}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 1.015 }}
-            transition={{ duration: reduceMotion ? 0 : 1.1, ease: [0.22, 1, 0.36, 1] }}
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="metadata"
-            poster={poster}
-            className="absolute inset-0 h-full w-full object-cover object-center"
-          >
-            <source src={video} type="video/mp4" />
-          </motion.video>
-        )}
-      </AnimatePresence>
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute inset-0 bg-[radial-gradient(900px_circle_at_10%_0%,rgba(217,70,239,0.20),transparent_58%),radial-gradient(700px_circle_at_90%_100%,rgba(168,85,247,0.22),transparent_58%)]" />
+      </div>
 
-      <motion.div
-        animate={{ backgroundColor: ATMOSPHERES[visual.atmosphere], opacity: generatedImage ? 0.08 : 1 }}
-        transition={{ duration: reduceMotion ? 0 : 1.2 }}
-        className="pointer-events-none absolute inset-0 mix-blend-color"
-      />
-      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(4,1,6,.5)_0%,transparent_34%,rgba(4,1,6,.18)_52%,rgba(4,1,6,.94)_100%)]" />
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_110%,rgba(184,44,255,.24),transparent_56%)]" />
-
-      <AnimatePresence>
-        {visual.jacuzzi && !generatedImage ? (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="pointer-events-none absolute bottom-[28%] left-[8%] h-40 w-64 rounded-full bg-cyan-300/16 blur-[60px] sm:h-60 sm:w-[30rem]"
-          >
-            {!reduceMotion ? (
-              <motion.span
-                animate={{ scale: [0.7, 1.4], opacity: [0.6, 0] }}
-                transition={{ duration: 2.8, repeat: Infinity, ease: "easeOut" }}
-                className="absolute inset-6 rounded-full border border-cyan-100/50"
-              />
-            ) : null}
-          </motion.div>
-        ) : null}
-      </AnimatePresence>
-
-      <AnimatePresence>
-        {phase === "imagining" ? (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            role="status"
-            aria-live="polite"
-            className="pointer-events-none absolute inset-x-5 top-[32%] z-10 flex flex-col items-center text-center sm:top-[34%]"
-          >
-            <div className="relative flex h-14 w-14 items-center justify-center">
-              <span className="absolute inset-0 rounded-full border border-white/18" />
-              {!reduceMotion ? (
-                <motion.span
-                  animate={{ rotate: 360 }}
-                  transition={{ duration: 2.2, repeat: Infinity, ease: "linear" }}
-                  className="absolute inset-0 rounded-full border border-transparent border-t-fuchsia-200/90"
-                />
-              ) : null}
-              <Sparkles className="h-4 w-4 text-fuchsia-100" />
-            </div>
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={loadingStep}
-                initial={reduceMotion ? false : { opacity: 0, y: 6 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={reduceMotion ? undefined : { opacity: 0, y: -6 }}
-                className="mt-5 text-[10px] font-semibold uppercase tracking-[0.3em] text-white/86"
-              >
-                {LOADING_COPY[loadingStep]}
-              </motion.div>
-            </AnimatePresence>
-            <div className="mt-2 max-w-[30ch] text-sm leading-5 text-white/58">
-              La suite resta autentica. Cambiano soltanto atmosfera e dettagli.
-            </div>
-          </motion.div>
-        ) : null}
-      </AnimatePresence>
-
-      <div className="relative flex min-h-[100svh] flex-col justify-between gap-10 px-5 pb-[max(1.5rem,env(safe-area-inset-bottom))] pt-[max(5.75rem,env(safe-area-inset-top))] supports-[height:100dvh]:min-h-[100dvh] sm:px-8 sm:pb-8 sm:pt-28 lg:px-12">
-        <div>
-          <div className="flex items-center justify-between gap-5">
-            <div className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-black/30 px-3 py-2 text-[9px] font-semibold uppercase tracking-[0.28em] text-white/82 backdrop-blur-xl">
-              <Sparkles className="h-3 w-3 text-fuchsia-200" aria-hidden="true" />
-              Euphoria Imagine · esperienza AI
-            </div>
-          {phase === "ready" && visual.music ? (
-            <button
-              type="button"
-              onClick={() => setAmbientVolume(!soundOn)}
-              className="inline-flex h-12 w-12 cursor-pointer items-center justify-center rounded-full border border-white/24 bg-black/35 backdrop-blur-xl transition-colors hover:bg-black/55 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fuchsia-200/80"
-              aria-label={soundOn ? "Disattiva atmosfera sonora" : "Attiva atmosfera sonora"}
-            >
-              {soundOn ? <Volume2 className="h-4 w-4" /> : <VolumeX className="h-4 w-4" />}
-            </button>
-          ) : null}
+      <div className="noir-container relative">
+        {/* HEADER — POCO TESTO */}
+        <div className="mx-auto max-w-2xl text-center">
+          <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-fuchsia-500/25 bg-fuchsia-500/[0.06] px-3 py-1 text-[10px] font-medium uppercase tracking-[0.22em] text-fuchsia-100/90">
+            <Sparkles className="h-3 w-3 text-fuchsia-200" />
+            Anteprima AI
           </div>
-
-          <AnimatePresence mode="wait">
-            {phase === "idle" ? (
-              <motion.div
-                key="imagine-intro"
-                initial={reduceMotion ? false : { opacity: 0, y: 18 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: reduceMotion ? 0 : 0.55, ease: [0.22, 1, 0.36, 1] }}
-                className="mt-7 max-w-3xl sm:mt-10"
-              >
-                <div className="text-[10px] font-semibold uppercase tracking-[0.26em] text-fuchsia-100/85">La vostra idea, dentro Euphoria</div>
-                <h2 className="noir-h1 mt-3 max-w-[13ch] text-[2.55rem] leading-[0.94] text-white sm:text-6xl lg:text-7xl">
-                  Raccontatela.<br /><span className="text-white/55">Noi ve la mostriamo.</span>
-                </h2>
-                <p id="imagine-explanation" className="mt-4 max-w-2xl text-sm leading-6 text-white/78 sm:text-base sm:leading-7">
-                  Descrivete la serata che avete in mente. L’intelligenza artificiale parte da una fotografia reale di Passion o Infinity e crea un’anteprima con luci e dettagli ispirati alle vostre parole.
-                </p>
-                <div className="mt-5 grid max-w-2xl grid-cols-3 gap-2" aria-label="Come funziona">
-                  {["Raccontate", "La vedete", "La organizziamo"].map((step, index) => (
-                    <div key={step} className="border-t border-white/22 pt-2.5">
-                      <span className="text-[9px] font-semibold tracking-[0.2em] text-fuchsia-200">0{index + 1}</span>
-                      <div className="mt-1 text-[11px] leading-4 text-white/72 sm:text-sm">{step}</div>
-                    </div>
-                  ))}
-                </div>
-              </motion.div>
-            ) : null}
-          </AnimatePresence>
+          <h2 className="noir-display text-[1.9rem] font-semibold leading-[1.04] text-white sm:text-4xl md:text-5xl">
+            Immagina la serata.
+            <br />
+            <span className="text-white/60">Noi te la mostriamo.</span>
+          </h2>
+          <p className="mt-3 text-sm leading-6 text-zinc-400 sm:text-base">
+            Scrivi in italiano 1 riga: partiamo da una foto vera della suite.
+          </p>
         </div>
 
-        <div className="mx-auto w-full max-w-3xl">
-          <AnimatePresence mode="wait">
-            {phase === "ready" && scene ? (
-              <motion.div
-                key="result"
-                initial={reduceMotion ? false : { opacity: 0, y: 32, filter: "blur(10px)" }}
-                animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                transition={{ duration: reduceMotion ? 0 : 0.7, ease: [0.22, 1, 0.36, 1] }}
-                className="max-h-[68dvh] overflow-y-auto overscroll-contain rounded-2xl border border-white/18 bg-black/58 p-5 shadow-[0_24px_80px_rgba(0,0,0,.42)] backdrop-blur-2xl sm:p-7"
-              >
-                <div className="text-[9px] font-semibold uppercase tracking-[0.26em] text-fuchsia-100/82">
-                  Ho immaginato questa Euphoria per voi
-                </div>
-                <h2 className="noir-h1 mt-2.5 max-w-[17ch] text-[2rem] leading-[0.98] sm:text-5xl">{scene.headline}</h2>
-                <div className="mt-4 text-[10px] font-semibold uppercase tracking-[0.22em] text-white/84">
-                  {scene.suite} · {scene.setupTitle}
-                </div>
-                <div className="mt-3 flex flex-wrap gap-2">
-                  {scene.details.slice(0, 4).map((detail) => (
-                    <span key={detail} className="border border-white/15 bg-white/[0.07] px-2.5 py-1.5 text-[11px] leading-none text-white/72">
-                      {detail}
-                    </span>
-                  ))}
-                </div>
-                <p className="mt-4 max-w-xl text-sm leading-6 text-white/68">
-                  Questa è una visualizzazione della vostra idea nella suite reale. Se vi rappresenta, inviatela: verifichiamo insieme cosa preparare davvero.
-                </p>
-                <div className="mt-5 grid grid-cols-[1fr_auto] gap-2">
-                  <NoirAnchor
-                    href={whatsappHref}
-                    target="_blank"
-                    rel="noreferrer"
-                    variant="primary"
-                    className="min-h-12 w-full justify-center"
-                  >
-                    Portala su WhatsApp
-                    <Sparkles className="h-4 w-4" />
-                  </NoirAnchor>
-                  <button
-                    type="button"
-                    onClick={editIdea}
-                    className="inline-flex h-12 w-12 cursor-pointer items-center justify-center border border-white/18 bg-white/[0.06] text-white/72 transition-colors hover:bg-white/12 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fuchsia-200/80"
-                    aria-label="Modifica la tua idea"
-                  >
-                    <PencilLine className="h-4 w-4" />
-                  </button>
-                </div>
-                <div className="mt-3 flex items-center justify-between gap-3">
-                  <p className={`text-[10px] leading-4 ${error ? "text-rose-200/78" : "text-white/42"}`}>
-                    {error || "Anteprima indicativa. Confermeremo con voi ogni dettaglio."}
-                  </p>
-                  <div className="flex shrink-0 items-center gap-2.5 text-white/45" aria-hidden="true">
-                    {scene.jacuzzi ? <Waves className="h-3.5 w-3.5" /> : null}
-                    {scene.prosecco ? <Wine className="h-3.5 w-3.5" /> : null}
-                    {scene.flowers || scene.petals ? <Flower2 className="h-3.5 w-3.5" /> : null}
+        {/* SI / NO — CAPIRE SUBITO COSA PUOI / NON PUOI FARE */}
+        <div className="mx-auto mt-10 grid max-w-3xl gap-3 sm:grid-cols-2">
+          <div className="rounded-2xl border border-emerald-500/15 bg-emerald-500/[0.035] p-5 sm:p-6">
+            <div className="mb-3 flex items-center gap-2">
+              <CheckCircle2 className="h-4 w-4 text-emerald-300" />
+              <div className="text-[11px] font-semibold uppercase tracking-[0.18em] text-emerald-200/85">
+                Cosa fa
+              </div>
+            </div>
+            <ul className="grid gap-2.5">
+              {YES.map(({ icon: Icon, label }) => (
+                <li key={label} className="flex items-center gap-3 text-sm text-zinc-200">
+                  <span className="inline-flex h-7 w-7 flex-none items-center justify-center rounded-lg border border-white/10 bg-white/[0.03]">
+                    <Icon className="h-3.5 w-3.5 text-emerald-200" strokeWidth={1.8} />
+                  </span>
+                  <span>{label}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="rounded-2xl border border-rose-500/15 bg-rose-500/[0.035] p-5 sm:p-6">
+            <div className="mb-3 flex items-center gap-2">
+              <XCircle className="h-4 w-4 text-rose-300" />
+              <div className="text-[11px] font-semibold uppercase tracking-[0.18em] text-rose-200/85">
+                Cosa non fa
+              </div>
+            </div>
+            <ul className="grid gap-2.5">
+              {NO.map(({ label }) => (
+                <li key={label} className="flex items-center gap-3 text-sm text-zinc-300">
+                  <span className="inline-flex h-7 w-7 flex-none items-center justify-center rounded-lg border border-white/10 bg-white/[0.03] text-rose-200">
+                    ✕
+                  </span>
+                  <span>{label}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        {/* FORM + RISULTATO — SINGOLA CARD */}
+        <div className="mx-auto mt-10 max-w-2xl">
+          <motion.div
+            layout
+            transition={{ duration: reduceMotion ? 0 : 0.45, ease: [0.22, 1, 0.36, 1] }}
+            className={`overflow-hidden rounded-3xl border bg-black/40 backdrop-blur-xl ${PHASES[phase].tone} shadow-[0_30px_110px_-30px_rgba(168,85,247,0.35)]`}
+          >
+            <AnimatePresence mode="wait">
+              {phase === "ready" && scene ? (
+                <motion.div
+                  key="ready"
+                  initial={reduceMotion ? false : { opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                  className="grid gap-0 sm:grid-cols-[36%_1fr]"
+                >
+                  {/* Immagine o foto vera in miniatura */}
+                  <div className="relative h-60 w-full sm:h-auto sm:min-h-[280px]">
+                    <Image
+                      src={image || poster}
+                      fill
+                      sizes="(max-width: 640px) 100vw, 360px"
+                      className="object-cover"
+                      unoptimized={Boolean(image)}
+                      alt={`Anteprima ${scene.suite} — ${scene.occasion}`}
+                    />
+                    <div className="absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-black/40 to-transparent" />
+                    <div className="absolute left-3 top-3 inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-black/45 px-2.5 py-1 text-[10px] font-medium uppercase tracking-[0.16em] text-white backdrop-blur">
+                      <Wand2 className="h-3 w-3 text-fuchsia-200" />
+                      {image ? "Foto modificata" : "Foto reale"}
+                    </div>
                   </div>
-                </div>
-              </motion.div>
-            ) : phase === "idle" ? (
-              <motion.div
-                key="composer"
-                initial={false}
-                animate={{ opacity: 1, y: 0 }}
-                className="rounded-2xl border border-white/18 bg-black/58 p-5 shadow-[0_24px_80px_rgba(0,0,0,.42)] backdrop-blur-2xl sm:p-7"
-              >
-                <div className="flex items-start gap-3">
-                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-fuchsia-200/35 bg-fuchsia-300/10 text-[10px] font-semibold text-fuchsia-100">01</span>
+
+                  <div className="p-5 sm:p-6">
+                    <div className="flex items-start justify-between gap-3">
+                      <div>
+                        <div className="text-[10px] font-semibold uppercase tracking-[0.2em] text-fuchsia-100/80">
+                          {scene.suite} · {scene.occasion}
+                        </div>
+                        <h3 className="noir-display mt-2 text-xl font-semibold leading-tight text-white sm:text-2xl">
+                          {scene.headline}
+                        </h3>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setPhase("idle");
+                          setError("");
+                          setImage(null);
+                          setTimeout(() => textareaRef.current?.focus(), 200);
+                        }}
+                        className="inline-flex h-9 w-9 flex-none items-center justify-center rounded-xl border border-white/10 bg-white/[0.04] text-zinc-300 transition hover:bg-white/[0.08] hover:text-white"
+                        aria-label="Modifica idea"
+                      >
+                        <PencilLine className="h-3.5 w-3.5" />
+                      </button>
+                    </div>
+
+                    <div className="mt-4 flex flex-wrap gap-1.5">
+                      {scene.details.slice(0, 4).map((d) => (
+                        <span
+                          key={d}
+                          className="rounded-full border border-white/10 bg-white/[0.04] px-2.5 py-1 text-[11px] text-zinc-200"
+                        >
+                          {d}
+                        </span>
+                      ))}
+                    </div>
+
+                    <div className="mt-6 grid gap-2.5 sm:flex sm:items-center">
+                      <NoirAnchor
+                        href={whatsappHref}
+                        target="_blank"
+                        rel="noreferrer"
+                        variant="primary"
+                        size="md"
+                        className="flex-1 justify-center"
+                      >
+                        Portala su WhatsApp
+                      </NoirAnchor>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setIdea("");
+                          setScene(null);
+                          setImage(null);
+                          setPhase("idle");
+                          setError("");
+                        }}
+                        className="inline-flex h-11 items-center justify-center gap-2 rounded-2xl border border-white/10 bg-white/[0.03] px-4 text-sm text-zinc-200 transition hover:bg-white/[0.07]"
+                      >
+                        <RefreshCcw className="h-3.5 w-3.5" />
+                        Ricomincia
+                      </button>
+                    </div>
+                  </div>
+                </motion.div>
+              ) : phase === "imagining" ? (
+                <motion.div
+                  key="loading"
+                  initial={reduceMotion ? false : { opacity: 0, y: 6 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0 }}
+                  className="flex flex-col items-center justify-center gap-4 py-14 px-5 text-center"
+                >
+                  <motion.span
+                    animate={reduceMotion ? {} : { rotate: 360 }}
+                    transition={{ duration: 1.6, repeat: Infinity, ease: "linear" }}
+                    className="inline-flex h-12 w-12 items-center justify-center rounded-2xl border border-fuchsia-500/30 bg-fuchsia-500/10"
+                  >
+                    <Wand2 className="h-5 w-5 text-fuchsia-200" strokeWidth={1.8} />
+                  </motion.span>
                   <div>
-                    <label htmlFor="euphoria-idea" className="noir-h1 block text-[1.55rem] leading-[1.05] sm:text-3xl">
-                      Come vorreste trovarla?
-                    </label>
-                    <p className="mt-1.5 text-xs leading-5 text-white/60">Occasione, atmosfera, colori e piccoli dettagli: scrivete liberamente.</p>
+                    <div className="noir-display text-lg font-semibold text-white sm:text-xl">
+                      Creo la scena…
+                    </div>
+                    <div className="mt-1 text-xs text-zinc-400">
+                      Leggo la foto, costruisco atmosfera e dettagli.
+                    </div>
                   </div>
-                </div>
+                </motion.div>
+              ) : (
+                <motion.form
+                  key="form"
+                  initial={reduceMotion ? false : { opacity: 0, y: 6 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0 }}
+                  onSubmit={submit}
+                  className="p-5 sm:p-7"
+                >
+                  <div className="flex flex-wrap gap-2 pb-3">
+                    {EXAMPLES.map((ex) => (
+                      <button
+                        key={ex}
+                        type="button"
+                        onClick={() => {
+                          setIdea(ex);
+                          setError("");
+                          setTimeout(() => textareaRef.current?.focus(), 100);
+                        }}
+                        className="min-h-9 shrink-0 rounded-full border border-white/10 bg-white/[0.03] px-3.5 text-[11px] text-zinc-300 transition hover:border-fuchsia-500/40 hover:bg-fuchsia-500/[0.06] hover:text-white"
+                      >
+                        {ex}
+                      </button>
+                    ))}
+                  </div>
 
-                <div className="mt-4 flex gap-2 overflow-x-auto pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden" aria-label="Idee di esempio">
-                  {IDEA_STARTERS.map((starter) => (
-                    <button
-                      key={starter}
-                      type="button"
-                      onClick={() => chooseStarter(starter)}
-                      className="min-h-11 shrink-0 cursor-pointer rounded-full border border-white/16 bg-white/[.06] px-3.5 text-left text-[11px] text-white/72 transition-colors hover:border-fuchsia-200/50 hover:bg-white/10 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fuchsia-200/80"
-                    >
-                      {starter}
-                    </button>
-                  ))}
-                </div>
-
-                <form onSubmit={submit} className="mt-4">
-                  <div className="rounded-xl border border-white/20 bg-black/28 p-3.5 transition-colors focus-within:border-fuchsia-200/80 focus-within:bg-black/40">
+                  <label className="block">
+                    <span className="mb-2 flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-zinc-400">
+                      <Wand2 className="h-3.5 w-3.5 text-fuchsia-200" />
+                      La tua idea (1 riga)
+                    </span>
                     <textarea
                       ref={textareaRef}
-                      id="euphoria-idea"
                       value={idea}
-                      onChange={(event) => setIdea(event.target.value)}
-                      rows={2}
-                      maxLength={600}
-                      enterKeyHint="send"
-                      aria-describedby="imagine-explanation imagine-help"
-                      placeholder={EXAMPLE}
-                      className="block min-h-16 w-full resize-none bg-transparent text-base leading-6 text-white outline-none placeholder:text-white/38"
+                      onChange={(e) => setIdea(e.target.value.slice(0, 280))}
+                      rows={3}
+                      placeholder="Es. anniversario, luce viola, prosecco, petali — ma non troppo sdolcinato"
+                      className="mt-1 w-full resize-none rounded-2xl border border-white/10 bg-black/30 p-4 text-sm text-white placeholder:text-zinc-600 outline-none transition focus:border-fuchsia-500/50 focus:ring-2 focus:ring-fuchsia-500/15"
                     />
-                    <div className="mt-2 flex items-center justify-between gap-3 border-t border-white/10 pt-2">
-                      <span id="imagine-help" className="text-[10px] text-white/42">La foto richiede qualche istante.</span>
-                      <span className="text-[10px] tabular-nums text-white/42">{idea.length}/600</span>
+                    <div className="mt-1.5 flex items-center justify-between text-[10px] text-zinc-500">
+                      <span>Minimo 8 caratteri · italiano o dialetto è uguale.</span>
+                      <span>{idea.length}/280</span>
                     </div>
-                  </div>
-                  <div className="mt-3 flex min-h-12 items-center gap-3">
-                    <div
-                      className="min-w-0 flex-1 text-[10px] uppercase tracking-[0.16em] text-white/58"
-                      aria-live="polite"
-                    >
-                      <span className={error ? "normal-case tracking-normal text-rose-200/85" : ""}>
-                        {error || (listening ? "Ti ascolto…" : canListen ? "Puoi anche dettare la tua idea" : "Scrivi almeno qualche dettaglio")}
-                      </span>
-                    </div>
-                    <button
-                      type="button"
-                      onClick={toggleListening}
-                      disabled={!canListen}
-                      className="inline-flex h-12 w-12 shrink-0 cursor-pointer items-center justify-center rounded-full text-white/72 transition-colors hover:bg-white/10 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fuchsia-200/80 disabled:cursor-default disabled:opacity-30"
-                      aria-label={listening ? "Ferma dettatura" : "Detta la tua idea"}
-                    >
-                      {listening ? <MicOff className="h-5 w-5 text-fuchsia-300" /> : <Mic className="h-5 w-5" />}
-                    </button>
+                  </label>
+
+                  <div className="mt-5 grid gap-2.5 sm:grid-cols-[1fr_auto] sm:items-center">
                     <button
                       type="submit"
                       disabled={idea.trim().length < 8}
-                      className="inline-flex min-h-12 shrink-0 cursor-pointer items-center justify-center gap-2 rounded-full bg-white px-5 text-sm font-medium text-[#110717] transition-transform hover:scale-[1.02] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fuchsia-200/80 focus-visible:ring-offset-2 focus-visible:ring-offset-black disabled:cursor-default disabled:opacity-35"
-                      aria-label="Immagina questa esperienza"
+                      className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-br from-fuchsia-500 to-purple-600 px-5 text-sm font-semibold text-white shadow-[0_10px_40px_-14px_rgba(217,70,239,0.70)] transition disabled:cursor-not-allowed disabled:opacity-40 disabled:shadow-none sm:w-auto sm:min-w-[220px]"
                     >
-                      Crea l’anteprima
                       <Send className="h-4 w-4" />
+                      Crea anteprima
                     </button>
+                    {error ? (
+                      <span className="text-xs text-rose-300/85">{error}</span>
+                    ) : (
+                      <span className="hidden sm:block text-[11px] text-zinc-500">
+                        1 tentativo ogni ~30 secondi · 4 per mezz'ora.
+                      </span>
+                    )}
                   </div>
-                </form>
-              </motion.div>
-            ) : (
-              <motion.div
-                key="waiting-note"
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="mx-auto mb-1 max-h-14 max-w-sm overflow-hidden border-t border-white/18 bg-black/28 px-4 pt-3 text-center text-xs leading-5 text-white/52 backdrop-blur-md"
-              >
-                “{idea}”
-              </motion.div>
-            )}
-          </AnimatePresence>
+                </motion.form>
+              )}
+            </AnimatePresence>
+          </motion.div>
         </div>
       </div>
     </section>

@@ -127,16 +127,17 @@ export function HeroSection() {
         </motion.div>
 
         <motion.div
-          className="mt-5 flex flex-col gap-3 sm:mt-8 sm:flex-row sm:items-center"
+          className="mt-5 flex flex-col gap-3 sm:mt-7 sm:flex-row sm:items-center"
           initial={reduced ? false : { opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.28 }}
+          transition={{ duration: 0.7, delay: 0.4 }}
         >
           <NoirAnchor
             href={whatsappHref}
             target="_blank"
             rel="noreferrer"
             variant="primary"
+            size="md"
             className="group"
           >
             Chiedi le tue date

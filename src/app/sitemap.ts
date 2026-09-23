@@ -51,6 +51,22 @@ export default function sitemap(): MetadataRoute.Sitemap {
   });
 
   push({
+    url: `${base}/voucher`,
+    lastModified: now,
+    changeFrequency: "weekly",
+    priority: 0.82,
+    images: [abs("/passion-letto-jacuzzi-sauna.jpg")],
+  });
+
+  push({
+    url: `${base}/collabora`,
+    lastModified: now,
+    changeFrequency: "monthly",
+    priority: 0.72,
+    images: [abs("/infinity-letto.jpg")],
+  });
+
+  push({
     url: `${base}/ospiti`,
     lastModified: now,
     changeFrequency: "monthly",

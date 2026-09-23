@@ -13,6 +13,8 @@ import { FinalCtaSection } from "@/components/sections/final-cta";
 import { FooterSection } from "@/components/sections/footer";
 import { StickyCta } from "@/components/sticky-cta";
 import { OccasionsSection } from "@/components/sections/occasions";
+import { VoucherSection } from "@/components/sections/voucher";
+import { InstagramSection } from "@/components/sections/instagram";
 import { OCCASIONS } from "@/lib/occasions";
 import { noir } from "@/lib/noir";
 
@@ -129,6 +131,8 @@ export default function Home() {
         <CinematicScrollSection />
         <SuitesSection />
         <RomanticPackagesSection />
+        <VoucherSection />
+        <InstagramSection />
         <GallerySection />
         <ImagineSection />
         <FaqSection faqs={homeFaqs} />
